@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300&display=swap');
+:root{
+    --navbarHeight:70px;
+}
+.navbar{
+    width: 100dvw;
+    height: var(--navbarHeight);
+    background: rgb(156 203 227);
+    z-index: 2;
+    box-shadow: 5px 5px 5px rgb(207, 217, 230);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* justify-content: center; */
+}
+.logo{
+    position: relative;
+    left: 6%;
+}
+.logo img{
+    
+    width: 80px;
+    height: 60px;
+
+}
+.titale{
+    position: absolute;
+    /* border: 1px solid; */
+    left: 40%;
+    transform: translate(-40%);
+    width: fit-content;
+    height:var(--navbarHeight);
+    display: flex;
+    align-items: center;
+}
+.titale h1{
+    
+    font-size: 50px;
+    font-family: 'Pacifico', cursive;
+    color: rgb(15, 141, 11);
+}
+.nav-link-div{
+    /* border: 1px solid; */
+    width: 37%;
+    position: absolute;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+}
+.nav-link-div a{
+    text-decoration: none;
+    color: rgb(7, 2, 58);
+    font-size: 1.6rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+
+}
+.nav-link-div .icon{
+   
+    font-size: 1.5rem;
+
+    margin-right: 5px;
+    
+   
+}
+.home-ico{
+    background: white;
+    color: rgb(9, 157, 108);
+   
+    /* font-size: 1.4; */
+}
+.about-ico{
+    background: blue;
+    color: white;
+    border: 2px solid black;
+}
+.contact-ico{
+    color: rgb(35, 40, 40);
+    font-weight: 600;
+}
+.cart-ico{
+    color: rgb(38, 47, 38);
+    font-weight: 600;
+}
+.nav-link-div a:hover
+{
+    color: blue;
+    font-weight: 700;
+}
+
+.signin{
+    font-family: 'Space Grotesk', sans-serif;
+    /* border: 1px solid black; */
+    margin-left: 30px;
+    box-shadow: 0px 10px 5px gray;
+    padding: 3px;
+}
