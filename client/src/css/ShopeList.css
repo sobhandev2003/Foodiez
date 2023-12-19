@@ -1,0 +1,54 @@
+
+
+.shope-list{
+    /* border: 1px solid; */
+    position: static;
+  margin: 20px;
+  margin-left: 95px;
+  margin-right: 100px;
+    border-radius: 10px;
+    width: 300px;
+    height: 350px;
+    padding: 5px;
+    display: flex;
+    background: rgb(246, 248, 252);
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: pointer;
+}
+.shope-list:hover{
+    /* z-index: -1; */
+    /* width: 315px; */
+    /* height: 360px; */
+  box-shadow: 10px 15px 10px rgb(171, 171, 171);
+
+}
+.shope-list img{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    width: 95%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+
+.shope-list p{
+    font-size: 18px;
+    color: rgb(87 86 86);
+
+}
+.ratting-div{
+    display: flex;
+}
+.ratting-div h3{
+    font-size: 1.3rem;  
+    font-weight: 300;
+}
+.ratting-icon{
+color: orange;
+font-size: 1.5rem;
+
+}
+
+

@@ -13,22 +13,28 @@
     display: flex;
     align-items: center;
     text-align: center;
-    /* justify-content: center; */
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+   z-index: 50;
 }
 .logo{
-    position: relative;
-    left: 6%;
+    /* position: relative; */
+    /* left: 6%; */
+   
 }
 .logo img{
     
     width: 80px;
     height: 60px;
+   
 
 }
 .titale{
-    position: absolute;
+    /* position: absolute; */
     /* border: 1px solid; */
-    left: 40%;
+    /* left: 40%; */
+    overflow: hidden;
     transform: translate(-40%);
     width: fit-content;
     height:var(--navbarHeight);
@@ -44,8 +50,8 @@
 .nav-link-div{
     /* border: 1px solid; */
     width: 37%;
-    position: absolute;
-    right: 70px;
+    /* position: absolute; */
+    /* right: 70px; */
     display: flex;
     justify-content: space-between;
     align-items: center;

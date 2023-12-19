@@ -23,8 +23,8 @@ function Navbar() {
         <h1>Zomato</h1>
     </div>
     <div className='nav-link-div'>
-    <Link className='home' to="/"><HomeOutlinedIcon className='icon home-ico'/>Home</Link>
-    <Link className='abou' to="/about"><InfoOutlinedIcon  className='icon about-ico'/>About </Link>
+    <Link  to="/"><HomeOutlinedIcon className='icon home-ico'/>Home</Link>
+    <Link className='about' to="/about"><InfoOutlinedIcon  className='icon about-ico'/>About </Link>
     <Link className='contact' to="/contact"><ContactPhoneOutlinedIcon className='icon contact-ico'/>Contact</Link>
     <Link className='cart' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico'/>Carts</Link>
     
