@@ -4,22 +4,24 @@
     /* border: 1px solid; */
     position: static;
   margin: 20px;
-  margin-left: 95px;
-  margin-right: 100px;
+  /* margin-left: ; */
+  /* margin-left: 95px; */
+  /* margin-right: 100px; */
     border-radius: 10px;
     width: 300px;
     height: 350px;
-    padding: 5px;
+    padding: 15px;
     display: flex;
     background: rgb(246, 248, 252);
     flex-direction: column;
     justify-content: space-around;
     cursor: pointer;
+    transition: width 0.3s;
 }
 .shope-list:hover{
-    /* z-index: -1; */
-    /* width: 315px; */
-    /* height: 360px; */
+    
+    width: 315px;
+    
   box-shadow: 10px 15px 10px rgb(171, 171, 171);
 
 }

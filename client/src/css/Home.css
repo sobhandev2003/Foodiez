@@ -30,11 +30,12 @@ height: 25%;
 
 }
 .shope-list-div{
-    background: rgb(218, 234, 249);
+background: rgb(218, 234, 249);
 width: 99vw;
 display: flex;
-/* justify-content: space-around; */
-/* padding: 15px; */
+justify-content: space-evenly;
+padding-top: 30px;
 flex-wrap: wrap;
 overflow-x: hidden;
+padding-bottom: 100px;
 }
