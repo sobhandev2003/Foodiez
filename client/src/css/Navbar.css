@@ -9,7 +9,7 @@
     height: var(--navbarHeight);
     background: rgb(156 203 227);
     z-index: 2;
-    box-shadow: 5px 5px 5px rgb(207, 217, 230);
+    box-shadow: 5px 8px 5px rgb(207, 217, 230);
     display: flex;
     align-items: center;
     text-align: center;
@@ -97,6 +97,7 @@
 .signin{
     font-family: 'Space Grotesk', sans-serif;
     /* border: 1px solid black; */
+    border-radius: 10px;
     margin-left: 30px;
     box-shadow: 0px 10px 5px gray;
     padding: 3px;

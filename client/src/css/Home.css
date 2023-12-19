@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300&family=Ubuntu&display=swap');
+
+
+
+.home-above-div{
+display: flex;
+align-items: center;
+width: 100dvw;
+height: 45dvh;
+background: rgb(247, 250, 253);
+/* border: 1px solid; */
+}
+.home-above-div h3{
+    position: absolute;
+    left: 15%;
+    width: 20%;
+    font-size: 3rem;
+    font-weight: 400;
+    font-family: 'Ubuntu', sans-serif;
+}
+.home-above-div img{
+    position: absolute;
+right: 15%;
+width: 20%;
+height: 25%;
+
+}
