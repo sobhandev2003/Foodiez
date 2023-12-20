@@ -26,7 +26,7 @@ background: rgb(247, 250, 253);
     position: absolute;
 right: 15%;
 width: 20%;
-height: 20%;
+height: 15%;
 
 }
 .shope-list-div{
@@ -39,6 +39,6 @@ flex-wrap: wrap;
 overflow-x: hidden;
 padding-bottom: 100px;
 }
-.home-bottom-img{
+/* .home-bottom-img{
     height: fit-content;
-}
+} */
