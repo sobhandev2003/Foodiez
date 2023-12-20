@@ -1,0 +1,101 @@
+.footer-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer-top-div{
+    width: 100vw;
+    height: 70px;
+   border-top: 2px solid white;
+   border-bottom: 2px solid white;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.footer-top-div p{
+    color: white;
+    font-size: 1.4rem;
+}
+.footer-top-div div{
+    /* border: 1px solid; */
+    width: 20%;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+}
+.footer-top-div a{
+ display: flex;
+ align-items: center;  
+   
+}
+.footer-top-div .icon{
+    color: white;  
+}
+.footer-bootm-div{
+    width: 100vw;
+    height: 270px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.I-div{
+    width: 24.5%;
+    height: 95%;
+   display: flex;
+   flex-direction: column;
+   /* justify-content: center; */
+   align-items: center;
+   padding-top: 5px;
+}
+.I-div div{
+    display: flex;
+    align-items: center;
+   
+   
+    width: 95%;
+}
+.I-div p{
+    padding-top: 10px;
+    padding-left:5px;
+    color: white;
+    width: 85%;
+    font-size: 1.2rem;
+}
+.I-div div img{
+    width:20% ;
+}
+.I-div div h2{
+    width: 30%;
+    color: white;
+    margin-left: 5px;
+}
+.footer-bootm-div .II-div,
+.footer-bootm-div .III-div,
+.footer-bootm-div .IV-div{
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    color: white;
+}
+
+.II-div span,
+.III-div span,
+.IV-div span{
+    padding-left: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.footer-end-line{
+   margin-bottom: 40px;
+   margin-top: 40px;
+   width: 100vw;
+   text-align: center;
+}
+.footer-end-line span{
+    margin-left: 5px;
+    color: white;
+    font-size: 1rem;
+}
+

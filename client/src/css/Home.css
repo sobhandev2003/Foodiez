@@ -2,9 +2,9 @@
 
 
 .home{
-    overflow-x: hidden;
+    /* overflow-x: hidden;
     position: absolute;
-    top: 70px;
+    top: 70px; */
 }
 .home-above-div{
 display: flex;
@@ -26,7 +26,7 @@ background: rgb(247, 250, 253);
     position: absolute;
 right: 15%;
 width: 20%;
-height: 25%;
+height: 20%;
 
 }
 .shope-list-div{
