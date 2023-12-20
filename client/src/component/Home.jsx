@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/Home.css';
 import photo1 from '../photo/photo1.png';
 import ShopeList from './ShopeList';
-
+import photo2 from '../photo/photo2.png';
 function Home() {
   return (
     <div className='home'>
@@ -18,7 +18,9 @@ function Home() {
 <ShopeList/>
 <ShopeList/>
 </div>
-
+<div>
+  <img src={photo2} alt='photo2'/>
+</div>
     </div>
   )
 }

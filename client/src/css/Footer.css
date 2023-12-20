@@ -6,7 +6,6 @@
 .footer-top-div{
     width: 100vw;
     height: 70px;
-   border-top: 2px solid white;
    border-bottom: 2px solid white;
    display: flex;
    align-items: center;
