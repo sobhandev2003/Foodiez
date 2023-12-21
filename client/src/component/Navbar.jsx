@@ -26,7 +26,7 @@ function Navbar() {
     <Link  to="/"><HomeOutlinedIcon className='icon home-ico'/>Home</Link>
     <Link className='about' to="/about"><InfoOutlinedIcon  className='icon about-ico'/>About </Link>
     <Link className='contact' to="/contact"><ContactPhoneOutlinedIcon className='icon contact-ico'/>Contact</Link>
-    <Link className='cart' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico'/>Carts</Link>
+    <Link className='cart' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico'/>Carts <span className='cart-count'>0</span> </Link>
     
     <Link className='signin' to="/signin">Sign in</Link>
 

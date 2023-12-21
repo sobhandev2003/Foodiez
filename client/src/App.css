@@ -4,7 +4,12 @@
     height: fit-content;
 }
 header{
-    
+   
+    background: rgb(156 203 227);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     box-shadow: 5px 8px 5px rgb(207, 217, 230);

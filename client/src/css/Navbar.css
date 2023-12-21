@@ -1,31 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Pacifico&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300&display=swap'); */
+@keyframes float {
+	0% {
+		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+		transform: translatey(5px);
+	}
+	50% {
+		/* box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2); */
+		transform: translatey(-5px);
+	}
+	100% {
+		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+		transform: translatey(5px);
+	}
+}
 :root{
     --navbarHeight:70px;
 }
 .navbar{
-    width: 100dvw;
+    overflow: hidden;
+    width: 90%;
+    height: 100%;
     height: var(--navbarHeight);
-    background: rgb(156 203 227);
+    /* background: rgb(156 203 227); */
     /* z-index: 2; */
     
     display: flex;
     align-items: center;
     text-align: center;
-    justify-content: space-around;
+    justify-content: space-between;
     /* position: fixed;
     top: 0;
    z-index: 50; */
 }
 .logo{
-    /* position: relative; */
-    /* left: 6%; */
+    /* border: 1px solid; */
+    width: 10%;
+   /* height: 100%; */
    
 }
 .logo img{
     
-    width: 80px;
+    width: 70%;
     height: 60px;
    
 
@@ -34,6 +52,7 @@
     /* position: absolute; */
     /* border: 1px solid; */
     /* left: 40%; */
+    width: 18%;
     overflow: hidden;
     transform: translate(-40%);
     width: fit-content;
@@ -43,13 +62,14 @@
 }
 .titale h1{
     
-    font-size: 50px;
+    font-size: 3rem;
     font-family: 'Pacifico', cursive;
     color: rgb(141, 22, 11);
 }
 .nav-link-div{
     /* border: 1px solid; */
-    width: 37%;
+    width: 50%;
+    height: 100%;
     /* position: absolute; */
     /* right: 70px; */
     display: flex;
@@ -58,13 +78,15 @@
   
 }
 .nav-link-div a{
+    /* border: 1px solid; */
+    height: 90%;
     text-decoration: none;
     color: rgb(7, 2, 58);
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 400;
     display: flex;
     align-items: center;
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Lato', sans-serif;
 
 }
 .nav-link-div .icon{
@@ -99,12 +121,46 @@
     color: blue;
     font-weight: 700;
 }
-
+.cart-count{
+    margin-left:5px;
+    background-color: blue;
+    color: white;
+    padding: 0px 4px 0px 4px;
+    border-radius: 70%;
+    animation: float 6s ease-in-out infinite;
+}
 .signin{
     font-family: 'Space Grotesk', sans-serif;
-    /* border: 1px solid black; */
+    border: 1px solid black;
     border-radius: 10px;
     margin-left: 30px;
     box-shadow: 0px 10px 5px gray;
     padding: 3px;
+}
+@media screen and (max-width:1050px) {
+   
+    .navbar{
+        width: 100%;
+    }
+    .nav-link-div{
+        width: 55%;
+    }
+    .signin{
+        margin-right: 5px;
+        margin-left: 10px;
+    }
+}
+@media screen and (max-width: 768px){
+    .titale h1{
+        font-size: 2rem;
+    }
+    .nav-link-div{
+        width: 60%;
+    }
+    .nav-link-div a{
+        font-size: 1rem;
+    }
+    .signin{
+        margin-left: 5px;
+    }
 }
