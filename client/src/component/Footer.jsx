@@ -30,10 +30,10 @@ function Footer() {
             <div>
 
               <img src={logo} alt='logo'></img>
-              <h2>ZOMATO</h2>
+              <h2>FOOD</h2>
             </div>
             <p>
-            Here you can order you favourite food. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Here you can order you favourite food. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatem neque necessitatibus nemo dignissimos inventore, sed accusantium error in autem.
             </p>
           </div>
           <div className='II-div'>

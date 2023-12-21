@@ -20,7 +20,7 @@ function Navbar() {
         <img src={logo} alt='Logo' />
     </div>
     <div className='titale'>
-        <h1>Zomato</h1>
+        <h1>FOOD</h1>
     </div>
     <div className='nav-link-div'>
     <Link  to="/"><HomeOutlinedIcon className='icon home-ico'/>Home</Link>

@@ -18,7 +18,7 @@ function Home() {
 <ShopeList/>
 <ShopeList/>
 </div>
-<div>
+<div className='home-bottom-img'>
   <img src={photo2} alt='photo2'/>
 </div>
     </div>

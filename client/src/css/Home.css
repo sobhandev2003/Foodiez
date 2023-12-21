@@ -9,8 +9,8 @@
 .home-above-div{
 display: flex;
 align-items: center;
-width: 100dvw;
-height: 45dvh;
+width: 100vw;
+height: 45vh;
 background: rgb(247, 250, 253);
 /* border: 1px solid; */
 }
@@ -25,8 +25,8 @@ background: rgb(247, 250, 253);
 .home-above-div img{
     position: absolute;
 right: 15%;
-width: 20%;
-height: 15%;
+width: 20rem;
+height: 12rem;
 
 }
 .shope-list-div{
