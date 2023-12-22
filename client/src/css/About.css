@@ -53,13 +53,13 @@
     /* text-align: center; */
     /* justify-content: s; */
 }
-.text-div h2{
+.about-page .text-div h2{
     width: 100%;
     margin: 10px;
     font-size:1.7rem ;
     font-family: 'Kanit', sans-serif;
 }
-.text-div p{
+.about-page .text-div p{
     width: 100%;
     margin: 10px;
 

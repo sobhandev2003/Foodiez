@@ -1,19 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Pacifico&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300&display=swap'); */
 @keyframes float {
 	0% {
-		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
-		transform: translatey(5px);
+		transform: translatey(-2px);
 	}
 	50% {
-		/* box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2); */
-		transform: translatey(-5px);
+		transform: translatey(-8px);
 	}
 	100% {
-		/* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
-		transform: translatey(5px);
+		transform: translatey(-2px);
 	}
 }
 :root{
@@ -127,15 +122,34 @@
     color: white;
     padding: 0px 4px 0px 4px;
     border-radius: 70%;
-    animation: float 6s ease-in-out infinite;
+    animation: float 1.5s ease-in-out infinite;
 }
 .signin{
+    
+    /* border: 1px solid black; */
+    width: 12%;
     font-family: 'Space Grotesk', sans-serif;
-    border: 1px solid black;
-    border-radius: 10px;
     margin-left: 30px;
-    box-shadow: 0px 10px 5px gray;
-    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+}
+.signin span{
+    /* border: 1px solid rgb(196, 15, 15); */
+    width: 85%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.signin span:hover{
+  /* width: 100%; */
+ /* text-shadow: 5px 10px 5px grey; */
+  background-color: aqua;
+  box-shadow: 5px 10px 5px grey;
+  border-radius:30px ;
 }
 @media screen and (max-width:1050px) {
    
