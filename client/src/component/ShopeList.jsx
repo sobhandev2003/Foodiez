@@ -8,7 +8,7 @@ function ShopeList() {
     // for demo
     const food="Bakery, Beverages, Maharashtrian, Snacks, Street Food, South Indian, Punjabi, Chaat, Indian, American, North Indian, Fast Food, Desserts, Cafe, Healthy Food, Home Food"
   return (
-    <div className='shope-list' onClick={()=>{navigate(`/shope/123`)}}>
+    <div className='shope-list' onClick={()=>{navigate(`/shope/shope-id`)}}>
         <img className='shope-photo overflow-hidden' src={demoPhoto} alt='shope-phot'/>
         <h2 className='shope-name overflow-hidden'>Chai Point</h2>
         <div className='ratting-div overflow-hidden'>

@@ -6,6 +6,7 @@ import Home from './component/Home';
 import Footer from './component/Footer';
 import About from './component/About';
 import Contact from './component/Contact';
+import Shope from './component/Shope';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route exact path='/' element={<Home/>} />
       <Route exact path='/about' element={<About/>} />
       <Route exact path='/contact' element={<Contact/>}/>
+      <Route  path='/shope/shope-id' element={<Shope/>}/>
     </Routes>
     </div>
     <div className='footer'>
