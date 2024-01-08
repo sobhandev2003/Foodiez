@@ -33,7 +33,7 @@ function Navbar() {
     <Link className='contact' to="/contact"><ContactPhoneOutlinedIcon className='icon contact-ico'/>Contact</Link>
     <Link className='cart' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico'/>Carts <span className='cart-count'>{cartsProducts.length}</span> </Link>
     
-    <Link className='signin' to="/signin"><span>Sign in</span></Link>
+    {/* <Link className='signin' to="/signin"><span>Sign in</span></Link> */}
 
     </div>
    </div>

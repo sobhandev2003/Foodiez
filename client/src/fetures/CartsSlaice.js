@@ -10,10 +10,13 @@ export const CartsSlaice=createSlice({
     reducers:{
         addToCarts:(state,action)=>{
             // console.log(action.payload);
+            const {name,des,price,photo}=action.payload;
             const product={
                 
-                name:action.payload.name,
-                price:action.payload.price
+                name:name,
+                des:des,
+                price:price,
+                photo:photo
             }
             state.ToCarts.push(product);
         },

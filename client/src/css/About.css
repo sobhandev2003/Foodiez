@@ -78,6 +78,7 @@
     }
     .about-page .text-div{
         width: 70%;
-        /* height: 100vh; */
+        margin-bottom: 40px;
+       
     }
   }

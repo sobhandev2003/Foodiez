@@ -2,8 +2,33 @@ import '../css/Shope.css'
 import React from 'react'
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import MenuItem from './MenuItem';
+import food1 from '../photo/abouPhoto3.png';
+import food2 from '../photo/food2.png';
+import food3 from '../photo/food3.png';
 function Shope() {
+  const menuItems=[
+    {
+      name: "coffe",
+      des:"jhftfhjkgugkjk",
+      img:food2,
+      price:200
+    },
+    {
+      name: "barger",
+      des:"jhftfhjkgugkjk",
+      img:food1,
+      price:300
+    }, {
+      name: "biriani",
+      des:"jhftfhjkgugkjkhghghgkki",
+      img:food3,
+      price:500
+    },
+  ]
   return (
+    //demo meno arr
+
+
     <div className='shope-page'>
         <div className='shope-details'>
             <div>
@@ -17,13 +42,14 @@ function Shope() {
             {/* <hr/> */}
         </div>
         <div className='menu-card'>
-         <MenuItem/>
-         <MenuItem/>
-         <MenuItem/>
-         <MenuItem/>
-         <MenuItem/>
-         <MenuItem/>
-         <MenuItem/>
+          {
+            menuItems && menuItems.map((item)=>{
+              return <MenuItem item={item}/>
+            })
+          }
+
+         
+        
         </div>
 
 

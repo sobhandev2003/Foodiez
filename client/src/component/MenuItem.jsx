@@ -1,21 +1,27 @@
 import React, { useRef } from 'react'
 import '../css/Shope.css';
-import food1 from '../photo/abouPhoto3.png';
+
 import {useDispatch} from 'react-redux';
 import { addToCarts } from '../fetures/CartsSlaice';
-// import {  toast } from 'react-toastify';
+
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Alert from './Alert';
-function MenuItem() {
-  // const notify = () => toast("Wow so easy!");
+function MenuItem(props) {
+const {name,des,img,price}=props.item;
   const productNameRef=useRef();
   const priceRef=useRef();
+  const desRef=useRef();
+const imgRef=useRef();
+
   const dispatch=useDispatch();
 const addTocart=()=>{
 const name=productNameRef.current.innerText;
 const price=priceRef.current.innerText;
+const des=desRef.current.innerText;
+const photo=imgRef.current.src;
+// console.log(photo);
 
-dispatch(addToCarts({name,price}));
+dispatch(addToCarts({name,des,price,photo}));
 // toast(<div>  Add to cart <ShoppingCartOutlinedIcon/> </div>);
 Alert('success' ,<div>Add to cart  <ShoppingCartOutlinedIcon/> </div>)
 }
@@ -23,12 +29,12 @@ Alert('success' ,<div>Add to cart  <ShoppingCartOutlinedIcon/> </div>)
     <div className='menu-item'>
             <div>
 
-            <h2 ref={productNameRef}>Lorem ipsum dolor sit amet.</h2>
-            <h3 ref={priceRef}>100</h3>
-            <p>description</p>
+            <h2 ref={productNameRef}>{name}</h2>
+            <h3 ref={priceRef}>{price}</h3>
+            <p ref={desRef}>{des}</p>
             </div>
             <div className='right-div'>
-            <img src={food1} alt='loded'/>
+            <img src={img} alt='loded' ref={imgRef}/>
                <button onClick={addTocart}>ADD+</button>
                {/* <ToastContainer /> */}
             </div>
