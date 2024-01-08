@@ -6,6 +6,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 // mail
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import Alert from './Alert';
 function Contact() {
     return (
         <div className='contact-page'>
@@ -50,7 +51,7 @@ function Contact() {
                     <input type="email" name="email" placeholder="Your Email" required />
                     <input type="tel" name="phone" placeholder="Your Phone Number" required />
                     <textarea name="message" placeholder="Write your message here" rows="4" required></textarea>
-                    <input type="submit" value="Send Message" />
+                    <input type="submit" value="Send Message" onClick={()=>{Alert("success","Message sended")}} />
                 </form>
 
             </div>

@@ -16,7 +16,8 @@ export const CartsSlaice=createSlice({
                 price:action.payload.price
             }
             state.ToCarts.push(product);
-        }
+        },
+        
     }
 })
 export const {addToCarts}=CartsSlaice.actions;

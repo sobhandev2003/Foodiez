@@ -1,3 +1,4 @@
+import '../css/Shope.css'
 import React from 'react'
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import MenuItem from './MenuItem';
@@ -9,11 +10,11 @@ function Shope() {
             <h2>Shope Name</h2>
             <p>Ava label food </p>
             </div>
-            <div>
-<StarOutlinedIcon/>
-                <span>rating</span>
+            <div className='shope-rating'>
+                <StarOutlinedIcon className='ratting-icon'/>
+                <span>4.3 rating</span>
             </div>
-            <hr/>
+            {/* <hr/> */}
         </div>
         <div className='menu-card'>
          <MenuItem/>
