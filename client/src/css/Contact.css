@@ -105,7 +105,7 @@ resize: none;
     }
 }
  /* *** CSS For TBLET            ****/
- @media screen and (max-width: 768px){
+ @media screen and (max-width: 1023px){
     .contact-page{
         flex-direction: column;
     }
@@ -115,4 +115,14 @@ resize: none;
        padding-left: 60px;
     }  
 
+ }
+ @media screen and (max-width: 767px) {
+    .contact-page-left, .contact-page-right {
+        /* text-align: center; */
+        width: 95%;
+        padding-left:10px;
+    }
+    .contact-page-right form{
+        width: 99%;
+    }
  }

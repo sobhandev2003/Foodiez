@@ -69,7 +69,7 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and  (max-width:1023px){
     .about-page{
         flex-direction: column;
     }
@@ -80,5 +80,14 @@
         width: 70%;
         margin-bottom: 40px;
        
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .about-page .image-div{
+        margin-top: 1px;
+        height: 50vh;
+    }
+    .image-div div{
+        height: 50%;
     }
   }
