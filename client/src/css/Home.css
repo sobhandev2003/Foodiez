@@ -29,6 +29,9 @@ width: 20rem;
 height: 12rem;
 
 }
+.home-bottom-img img{
+    width: 100vw;
+} 
 .shope-list-div{
 /* background: rgb(218, 234, 249); */
 width: 100%;
@@ -91,7 +94,8 @@ justify-content: space-evenly;
     width: 10rem;
     height: 10rem;
 }
-    .search-div{
+
+.search-div{
         flex-direction: column;
         height: 120px;
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/ShopeList.css';
 // import demoPhoto from '../photo/images.jpg';
 import { useNavigate } from 'react-router-dom';
-import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
+import Rating from '@mui/material/Rating';
 function ShopeList(props) {
   const {name,photo,rating,  foods,offer, delevery_time}=props.shope;
     const navigate=useNavigate();
@@ -14,8 +14,7 @@ function ShopeList(props) {
         <img className='shope-photo overflow-hidden' src={photo} alt='shope-phot'/>
         <h2 className='shope-name overflow-hidden'>{name}</h2>
         <div className='ratting-div overflow-hidden'>
-            <h3>{rating}</h3>
-            <StarOutlinedIcon className='ratting-icon'/>
+            <p ><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></p>
         </div>
         <p className='food overflow-hidden'>{foods.slice(0,35)}...</p>
         <p className='offer overflow-hidden'>{offer}</p>

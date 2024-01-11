@@ -1,12 +1,14 @@
 import '../css/Shope.css'
 import React from 'react'
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
-import MenuItem from './MenuItem';
+import {MenuCatagory,MenuItem} from './MenuItem';
 
 import menu from '../demoDataFile/menu.json'
 function Shope() {
   
-  const menuItems=menu.menu;
+  const menuCatagory=menu.catagory;
+  // const {menu,setMenu}=useState();
+ 
  
   return (
     //demo meno arr
@@ -22,14 +24,44 @@ function Shope() {
                 <StarOutlinedIcon className='ratting-icon'/>
                 <span>4.3 rating</span>
             </div>
-            {/* <hr/> */}
+           
         </div>
         <div className='menu-card'>
+          <div className='menu-catagory'>
+            {
+              menuCatagory && menuCatagory.map((catagory)=>{
+                return <MenuCatagory catagory={catagory}/>
+              })
+            }
+          </div>
+          <div className='menu-food'>
+
           {
-            menuItems && menuItems.map((item)=>{
-              return <MenuItem item={item}/>
+            menuCatagory && menuCatagory.map((catagory)=>{
+              const {menu}=catagory
+              console.log("menu: ");
+              console.log(menu);
+              // setMenu(menu);
+             
+             return <div>
+              
+              <h3>{catagory.name}</h3>
+              {
+                
+              menu && menu.map(
+              
+              (item)=>{
+                // console.log(menu);
+                return <MenuItem item={item}/>
+              }
+            )
+          }
+          <hr/>
+          </div>
+              
             })
           }
+          </div>
 
          
         
