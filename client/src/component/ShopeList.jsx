@@ -9,7 +9,8 @@ function ShopeList(props) {
     // for demo
     // const food="Bakery, Beverages, Maharashtrian, Snacks, Street Food, South Indian, Punjabi, Chaat, Indian, American, North Indian, Fast Food, Desserts, Cafe, Healthy Food, Home Food"
   return (
-    <div className='shope-list' onClick={()=>{navigate(`/shope/shope-id`)}}>
+    <div className='shope-list-item'>
+      <div className='shope-list' onClick={()=>{navigate(`/shope/shope-id`)}}>
         <img className='shope-photo overflow-hidden' src={photo} alt='shope-phot'/>
         <h2 className='shope-name overflow-hidden'>{name}</h2>
         <div className='ratting-div overflow-hidden'>
@@ -21,7 +22,7 @@ function ShopeList(props) {
         <h3 className='delivery-time overflow-hidden'>
        {delevery_time}
         </h3>
-
+        </div>
     </div>
   )
 }

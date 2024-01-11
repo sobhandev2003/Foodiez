@@ -1,29 +1,40 @@
 
+.shope-list-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 350px;
+    height: 400px;
 
-.shope-list{
-    /* border: 1px solid; */
-    position: static;
-  margin: 20px;
-  /* margin-left: ; */
-  /* margin-left: 95px; */
-  /* margin-right: 100px; */
+    margin: 20px;
     border-radius: 10px;
-    width: 300px;
-    height: 350px;
+}
+.shope-list{
+   
+    position: static;
+ 
+    border-radius: 10px;
+   
+    width: 100%;
+    height: 100%;
     padding: 15px;
     display: flex;
     background: rgb(246, 248, 252);
     flex-direction: column;
     justify-content: space-around;
     cursor: pointer;
-    transition: width 0.3s;
+    transition: width  0.3s;
+    transition: hight  0.3s;
 }
-.shope-list:hover{
+.shope-list:hover
+{
     
-    width: 315px;
+   
+    width: 80%;
+    height: 80%;
     
-  box-shadow: 10px 15px 10px rgb(171, 171, 171);
-
+ 
 }
 .shope-list img{
     position: relative;

@@ -30,7 +30,7 @@ Alert('success' ,<div>Add to cart  <ShoppingCartOutlinedIcon/> </div>)
             <div>
 
             <h2 ref={productNameRef}>{name}</h2>
-            <h3 ref={priceRef}>{price}</h3>
+            <h3 ref={priceRef}><strong>&#8377; </strong>{price}</h3>
             <p ref={desRef}>{des}</p>
             </div>
             <div className='right-div'>

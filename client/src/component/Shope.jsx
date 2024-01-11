@@ -2,29 +2,12 @@ import '../css/Shope.css'
 import React from 'react'
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import MenuItem from './MenuItem';
-import food1 from '../photo/abouPhoto3.png';
-import food2 from '../photo/food2.png';
-import food3 from '../photo/food3.png';
+
+import menu from '../demoDataFile/menu.json'
 function Shope() {
-  const menuItems=[
-    {
-      name: "coffe",
-      des:"jhftfhjkgugkjk",
-      img:food2,
-      price:200
-    },
-    {
-      name: "barger",
-      des:"jhftfhjkgugkjk",
-      img:food1,
-      price:300
-    }, {
-      name: "biriani",
-      des:"jhftfhjkgugkjkhghghgkki",
-      img:food3,
-      price:500
-    },
-  ]
+  
+  const menuItems=menu.menu;
+ 
   return (
     //demo meno arr
 
