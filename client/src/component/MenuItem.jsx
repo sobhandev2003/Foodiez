@@ -6,20 +6,32 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Alert from './Alert';
 
 import Rating from '@mui/material/Rating';
+import { Link } from 'react-scroll';
 //--------------------MenuCatagory-------------
 export const MenuCatagory = (props) => {
-  const { name } = props.catagory;
-
+  const { id, name } = props.catagory;
+  
+  
   return (
     <>
-      <p>{name}</p>
+      <Link  activeClass='active'
+        to={`${id}`}
+        spy={true} 
+        smooth={true}
+        offset={-170}
+        duration={100}
+       
+        >
+        {name}
+      </Link>
+      {/* <p>{name}</p> */}
     </>
   )
 }
 //-----------MenuItems----------------------
 export const MenuItem = (props) => {
 
-  const { name,ratting, des, img, price } = props.item;
+  const { name, ratting, des, img, price } = props.item;
   // console.log("typeOf: "+typeof(ratting));
   const productNameRef = useRef();
   const priceRef = useRef();
@@ -52,7 +64,7 @@ export const MenuItem = (props) => {
         <h4 ref={priceRef}><strong>&#8377; </strong>{price}</h4>
         <p ref={desRef}>{des}</p>
       </div>
-      
+
     </div>
   )
 }

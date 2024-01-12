@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300&display=swap');
 .shope-page {
     width: 100vw;
     display: flex;
@@ -8,13 +9,13 @@
 .shope-details {
     background: white;
     position: fixed;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid rgb(193, 187, 187);
     padding: 10px 15px 0px 15px;
-    width: 80vw;
+    width: 98vw;
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     z-index: 10;
 
 }
@@ -29,34 +30,60 @@
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
-    /* flex-direction:column; */
+
     justify-content: flex-end;
     align-items: flex-start;
     z-index: 1;
+    /* max-height: calc(100vh - 200px); */
+    margin-bottom: 60px;
 }
 
 .menu-catagory {
     /* overflow: hidden; */
     position: fixed;
+    /* top: 10px; */
     left: 10px;
     width: 25%;
     scroll-behavior: auto;
-    height: 68vh;
+    height: 100%;
+    max-height: calc(100vh - 200px);
     font-size: 1.5rem;
     padding-right: 5px;
-    text-align:center;
-   
+    /* text-align: end; */
+    z-index: -10;
+    background: white;
+  opacity: 1;
+  
+ 
     /* border: 1px solid rgb(38, 186, 83); */
 }
-.menu-catagory p{
+
+.menu-catagory a {
     margin-top: 10px;
+    display: block;
+    cursor: pointer;
+    width: 80%;
+    margin-left: 25%;
+    text-align: start;
+    font-family: 'Inconsolata', monospace;
+    font-size: inherit;
+    font-weight: 300;
+    color: rgb(67, 66, 66);
+    /* border: 1px solid; */
+
 }
-.menu-catagory::-webkit-scrollbar{
-   width: 2px; 
+.menu-catagory .active{
+    color:red;
+    background: linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 237, 239));
 }
-.menu-catagory::-webkit-scrollbar-thumb{
-    background-color:red;
+.menu-catagory::-webkit-scrollbar {
+    width: 2px;
 }
+
+.menu-catagory::-webkit-scrollbar-thumb {
+    background-color: red;
+}
+
 .menu-food {
     margin-right: 15px;
     padding-left: 5px;
@@ -65,14 +92,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
 }
-.menu-food h3{
+
+.menu-food h3 {
     margin-top: 30px;
     margin-bottom: 20px;
     color: rgb(10, 1, 49);
     font-size: 2rem;
 }
-.menu-food div{
+
+.menu-food div {
     width: 90%;
 }
 
@@ -84,10 +114,11 @@
     width: 95%;
     height: 150px;
     display: flex;
-    
+
 }
-.menu-food .menu-item .left-div{
-   
+
+.menu-food .menu-item .left-div {
+
     width: 30%;
     height: 100%;
     display: flex;
@@ -98,8 +129,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
+
 .menu-food .menu-item .right-div {
     width: 65%;
     padding-left: 2px;
@@ -125,7 +157,7 @@
 .left-div button {
     position: absolute;
     z-index: 10;
-  
+
     background-color: blue;
     color: white;
     padding: .5rem 1rem .5rem 1rem;
@@ -134,8 +166,9 @@
     margin-top: 7rem;
     border-radius: 7rem;
     cursor: pointer;
-   
+
 }
+
 /* .right-div .rating-p{
     font-size: 1.5rem;
 }
@@ -147,22 +180,26 @@
 .left-div button:hover {
     padding: .6rem 1.1rem .6rem 1.1rem;
 }
-@media screen and (max-width:767px){
-    .shope-details{
+
+@media screen and (max-width:767px) {
+    .shope-details {
         width: 100vw;
         justify-content: space-around;
     }
-    .menu-catagory{
+
+    .menu-catagory {
         display: none;
     }
-    .menu-food{
+
+    .menu-food {
         width: 99%;
     }
-    .menu-food div{
+
+    .menu-food div {
         width: 100%;
     }
-    
-    .menu-food .menu-item .left-div{
+
+    .menu-food .menu-item .left-div {
         width: 45%;
     }
 }
