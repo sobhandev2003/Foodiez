@@ -89,8 +89,7 @@ font-weight: bold;
     height: 80%;
     border-radius: 10px;
     position: relative;
-    /* top: 50%;
-    transform: translate(-50% -50%) */
+  
 }
 .add-cart .cart-product div{
     height: 100%;
@@ -132,8 +131,7 @@ font-weight: bold;
     flex-direction: column;
     width: 90%;
     align-items: center;
-    /* margin-left: 20px; */
-    /* overflow: hidden; */
+    
 }
 .add-cart .cart-products-bill .payment-mode-div label{
 

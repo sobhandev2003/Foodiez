@@ -22,7 +22,7 @@ import { useSelector } from 'react-redux';
 function Navbar() {
 const navbarRef=useRef();
     const cartsProducts=useSelector(state=>state.cart.ToCarts);
-    console.log(cartsProducts);
+    // console.log(cartsProducts);
     const [height,setHeight]=useState('120px');
     const toggoleHeight=()=>{
         navbarRef.current.style.height=height;

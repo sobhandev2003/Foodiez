@@ -40,8 +40,7 @@ function Shope() {
           {
             menuCatagory && menuCatagory.map((catagory) => {
               const { menu } = catagory
-              console.log("menu: ");
-              console.log(menu);
+              
               // setMenu(menu);
 
               return <div name={`${catagory.id}`}>

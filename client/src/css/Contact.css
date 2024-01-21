@@ -1,7 +1,6 @@
 .contact-page{
 /* border: 1px solid red; */
 width: 100vw;
-/* height: 95vh; */
 display: flex;
 justify-content:space-evenly;
 
@@ -9,14 +8,12 @@ justify-content:space-evenly;
 .contact-page-left{
     /* border: 2px solid rgb(51, 235, 9); */
 width: 40%;
-/* height: 90%; */
 margin: 50px 0px 100px 0px;
 padding: 30px;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
 color: rgb(10 10 82);
-/* justify-content: space-around; */
 }
 .contact-page-left h3{
     margin-bottom:10px ;
@@ -28,10 +25,8 @@ color: rgb(10 10 82);
 .contact-page-left .contact-details{
     /* border: 1px solid; */
     width: 95%;
-    /* height: 50%; */
     margin-top: 70px;
 }
-/* contact-details-I */
 .contact-page-left  .contact-details .contact-details-I,
 .contact-page-left  .contact-details .contact-details-II,
 .contact-page-left  .contact-details .contact-details-III{
@@ -52,7 +47,6 @@ color: rgb(10 10 82);
 .contact-page-right{
     /* border: 2px solid rgb(51, 235, 9); */
     width: 40%;
-    /* height: 90%; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,7 +57,7 @@ color: rgb(10 10 82);
     background-color: rgb(213 249 237);
     border-radius: 20px;
     box-shadow: 5px 10px 5px #9e9c9c;
-    /* height: 75%; */
+   
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -98,13 +92,13 @@ box-sizing: content-box;
 /* box-sizing: border-box; */
 resize: none;
  }
-/* Small Lptop */
+/*SECTION -  Small Lptop */
 @media screen and (max-width:1050px){
     .contact-page-right{
         width: 50%;
     }
 }
- /* *** CSS For TBLET            ****/
+ /*SECTION -  *** CSS For TBLET            ****/
  @media screen and (max-width: 1023px){
     .contact-page{
         flex-direction: column;
@@ -118,7 +112,7 @@ resize: none;
  }
  @media screen and (max-width: 767px) {
     .contact-page-left, .contact-page-right {
-        /* text-align: center; */
+        
         width: 95%;
         padding-left:10px;
     }

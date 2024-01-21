@@ -34,14 +34,14 @@
     justify-content: flex-end;
     align-items: flex-start;
     z-index: 1;
-    /* max-height: calc(100vh - 200px); */
+    
     margin-bottom: 60px;
 }
 
 .menu-catagory {
-    /* overflow: hidden; */
+    
     position: fixed;
-    /* top: 10px; */
+   
     left: 10px;
     width: 25%;
     scroll-behavior: auto;
@@ -49,7 +49,7 @@
     max-height: calc(100vh - 200px);
     font-size: 1.5rem;
     padding-right: 5px;
-    /* text-align: end; */
+
     z-index: -10;
     background: white;
   opacity: 1;
@@ -169,13 +169,7 @@
 
 }
 
-/* .right-div .rating-p{
-    font-size: 1.5rem;
-}
-.home-bottom-img img{
-    width: 100vw;
-}  
-*/
+
 
 .left-div button:hover {
     padding: .6rem 1.1rem .6rem 1.1rem;

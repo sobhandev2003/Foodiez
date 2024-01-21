@@ -17,18 +17,14 @@
 .navbar{
     overflow: hidden;
     width: 90%;
-    /* height: 100%; */
     height: var(--navbarHeight);
    
-    /* z-index: 2; */
     
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: space-between;
-    /* position: fixed;
-    top: 0;
-   z-index: 50; */
+    
 }
 .toggole-btn{
     display: none;
@@ -36,7 +32,6 @@
 .logo{
     /* border: 1px solid; */
     width: 10%;
-   /* height: 100%; */
    
 }
 .logo img{
@@ -47,9 +42,7 @@
 
 }
 .titale{
-    /* position: absolute; */
-    /* border: 1px solid; */
-    /* left: 40%; */
+    
     width: 18%;
     overflow: hidden;
     transform: translate(-40%);
@@ -68,15 +61,13 @@
     /* border: 1px solid; */
     width: 50%;
     height: 100%;
-    /* position: absolute; */
-    /* right: 70px; */
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
   
 }
 .nav-link-div a{
-    /* border: 1px solid; */
     height: 90%;
     text-decoration: none;
     color: rgb(7, 2, 58);
@@ -99,7 +90,7 @@
     background: white;
     color: rgb(9, 157, 108);
    
-    /* font-size: 1.4; */
+    
 }
 .about-ico{
     background: blue;
@@ -129,7 +120,7 @@
 }
 .signin{
     
-    /* border: 1px solid black; */
+
     width: 17%;
     font-family: 'Space Grotesk', sans-serif;
     margin-left: 30px;
@@ -140,7 +131,7 @@
    
 }
 .signin span{
-    /* border: 1px solid rgb(196, 15, 15); */
+
     width: 85%;
     height: 40px;
     display: flex;
@@ -148,8 +139,7 @@
     justify-content: center;
 }
 .signin span:hover{
-  /* width: 100%; */
- /* text-shadow: 5px 10px 5px grey; */
+ 
   background-color: aqua;
   box-shadow: 5px 10px 5px grey;
   border-radius:30px ;
@@ -189,16 +179,16 @@
         display: block;
     }
     .navbar{
-        /* justify-content:; */
+       
         flex-wrap: wrap;
-        /* height: 20vh;  */
+       
     }
     .titale{
         transform: translate(0);
     }
     .nav-link-div {
         height: 40%;
-        /* border: 1px solid red; */
+
        flex-direction: column;
        width: 100%;
        flex-direction: row;

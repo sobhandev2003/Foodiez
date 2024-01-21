@@ -7,7 +7,7 @@ import photo2 from '../photo/photo2.png';
 import jsonData from '../demoDataFile/shope.json'
 function Home() {
 const shopes=jsonData.shopes;
-  // For search a shope
+  //SECTION -  For search a shope
 const [filterShope,setFilterShope]=useState(shopes);
 const filterByName=(e)=>{
   setFilterShope(shopes.filter((shope)=>{

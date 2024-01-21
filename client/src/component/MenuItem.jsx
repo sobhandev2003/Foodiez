@@ -7,7 +7,7 @@ import Alert from './Alert';
 
 import Rating from '@mui/material/Rating';
 import { Link } from 'react-scroll';
-//--------------------MenuCatagory-------------
+//SECTION - --------------------MenuCatagory-------------
 export const MenuCatagory = (props) => {
   const { id, name } = props.catagory;
   
@@ -28,7 +28,8 @@ export const MenuCatagory = (props) => {
     </>
   )
 }
-//-----------MenuItems----------------------
+
+//SECTION - -----------MenuItems----------------------
 export const MenuItem = (props) => {
 
   const { name, ratting, des, img, price } = props.item;
@@ -47,7 +48,7 @@ export const MenuItem = (props) => {
     // console.log(photo);
 
     dispatch(addToCarts({ name, des, price, photo }));
-    // toast(<div>  Add to cart <ShoppingCartOutlinedIcon/> </div>);
+    
     Alert('success', <div>Add to cart  <ShoppingCartOutlinedIcon /> </div>)
   }
   return (
