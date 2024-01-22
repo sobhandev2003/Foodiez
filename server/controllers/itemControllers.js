@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-
+const fs=require('fs')
 const Category=require('../models/categoryModel')
 
 //NOTE - Get all item
@@ -37,6 +37,7 @@ const getItem = asyncHandler(
             res.status(404);
             throw new Error("Not found");
         }
+      
         res.status(200).json(item)
     }
 )
@@ -50,15 +51,27 @@ const createItem = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Not found");
     }
-
+            // console.log(req.body);
+    const {buffer,mimetype,size}=  req.file;      
     const { name, description, price } = req.body;
     if (!name || !description || !price) {
         console.log("data is not valid");
         res.status(401);
         throw new Error("data is not valid");
     }
-
-     category.item.push(req.body);
+    if (size > (2 * 1024 * 1024)) {
+        res.status(403)
+        throw new Error("photo must be less than 2mb")
+      }
+      //SECTION - create a new item
+const item={
+        name:name,
+        description:description,
+        price:price,
+        photo:buffer,
+        photoType:mimetype
+}
+     category.item.push(item);
     await category.save();
     res.status(200).json({msg:"Sucessfuly added"});
 }

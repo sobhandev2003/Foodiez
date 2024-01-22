@@ -31,7 +31,12 @@ const sellerSchema = mongoose.Schema(
                 },
                 unique:[true,"this mobile number already register"]
         },
-       
+       img:{
+        type:Buffer
+       },
+       imgType:{
+            type:String
+       },
         password:{
                 type:String,
                 minLength:6,
