@@ -12,7 +12,7 @@ const registerSeller = asyncHandler(async (req, res) => {
 
   const { restaurantName, ownerName, emil, mobile, special_food, password } = req.body;
   const { buffer, mimetype, size } = req.file
-  // console.log(restaurantName);
+  // console.log(req.body);
   //NOTE - check inputs are valid or not
   if (!restaurantName || !ownerName || !emil || !mobile || !password || !special_food || !buffer || !mimetype) {
     res.status(403)
@@ -200,9 +200,24 @@ const deletetSeller = asyncHandler(async (req, res) => {
 
 //NOTE - Get all seller account
 const getAllSeller = asyncHandler(async (req, res) => {
-  const data = await Seller.find();
+  // console.log(req.query);
+  
+  const {restaurantName,rating}=req.query;
+  
+  const queryObject={}
+  if(restaurantName){
+    
+    queryObject.restaurantName={$regex: restaurantName , $options:'i'}
+  }
+  if(rating){
+    queryObject.rating={$gt:rating}
+  }
+  // console.log(queryObject);
+  const data = await Seller.find(queryObject);
+ 
   const sellers = data.map((d) => {
     const seller = {
+      id:d.id,
       restaurantName: d.restaurantName,
       special_food: d.special_food,
       rating:d.rating,

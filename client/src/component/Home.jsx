@@ -3,45 +3,30 @@ import '../css/Home.css';
 import photo1 from '../photo/photo1.png';
 import ShopeList from './ShopeList';
 import photo2 from '../photo/photo2.png';
-
-import jsonData from '../demoDataFile/shope.json'
+import { useSelector, useDispatch } from 'react-redux';
+import { searchSeller } from '../reducers/searchSellerReducers';
+// import { searchSeller } from '../../reducers/searchSellerReducers';
 function Home() {
-  const shopes = jsonData.shopes;
-  const [seller, setSeller] = useState();
-  const [filterShope, setFilterShope] = useState(shopes);
-  //TODO - fetch seller from backend ---------
-  const fetchSeller = async () => {
-    try {
-      const response = await fetch("http://localhost:5001/food/user/seller/")
-      // const parseSellersJson=await JSON.parse()
-      const data = await response.json();
+  console.log("ch");
+  const dispatch = useDispatch()
+  const [sellers, setSellers] = useState([]);
+  const allSllerdata = useSelector(state => state.allSeller.allSeller)
 
-      setSeller(data);
-      // setFilterShope(data)
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  //SECTION -  For search a shope
-
+  //SECTION -  For search a seller
   const filterByName = (e) => {
-    setFilterShope(shopes.filter((shope) => {
-      return shope.name.toLowerCase().includes(e.target.value)
-    }));
+    dispatch(searchSeller({ restaurantName: e.target.value }));
+
   }
   const filterByRating = (rating) => {
-
-    setFilterShope(shopes.filter((shope) => {
-      return shope.rating >= rating;
-    }));
+    dispatch(searchSeller({ rating }));
+    // setFilterSeller(sellers.filter((seller) => {
+    //   return seller.rating >= rating;
+    // }));
   }
   //NOTE - call useEffect -----
   useEffect(() => {
-    fetchSeller();
-    // console.log(seller);
-  }, [])
+    setSellers(allSllerdata);
+  }, [allSllerdata])
   return (
     <div className='home'>
       <div className='home-above-div'>
@@ -61,9 +46,11 @@ function Home() {
         </div>
         <div className='shope-list-div'>
           {
-            seller && filterShope.length > 0 ? seller.map((seller) => {
-                // console.log(seller);
-              return <ShopeList seller={seller} />
+            //TODO - 
+            sellers && sellers.length > 0 ? sellers.map((seller) => {
+
+              //  console.log(sellers);
+              return <ShopeList key={seller.id} seller={seller} />
             }) : <h2>No shope found</h2>
           }
         </div>
