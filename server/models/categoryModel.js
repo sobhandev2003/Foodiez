@@ -16,7 +16,7 @@ const itemSchema=new mongoose.Schema(
             required:[true,"Give the item price"]
         },
         photo:{
-                    type:Buffer
+                    type:String
         },
         photoType:{
                 type:String

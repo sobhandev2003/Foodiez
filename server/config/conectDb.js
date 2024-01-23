@@ -6,7 +6,7 @@ const connectDb=async()=>{
     try{
                 const connect=await mongoose.connect(process.env.CONECTION_STRING);
                 const database=connect.connection;
-                    storage = new GridFsStorage({ db: database });
+                storage = new GridFsStorage({ db: database });
                 console.log( connect.connection.name , connect.connection.host);
                 // return connect;
     }
@@ -14,5 +14,5 @@ const connectDb=async()=>{
         console.log(err);
     }
 }
-upload = multer({ storage });
+const upload = multer({ storage });
 module.exports={connectDb,upload}

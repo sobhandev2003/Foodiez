@@ -1,6 +1,6 @@
 const express=require('express');
+const cors=require('cors')
 const fs=require('fs')
-
 const mongodb=require('mongodb')
 const errorHandler = require('./middilware/errorHandaler');
 const {connectDb} = require('./config/conectDb');
@@ -12,7 +12,7 @@ const port=process.env.PORT||5000;
 
 connectDb()
   
-
+app.use(cors());
 app.use(express.json());
 
 app.use('/food/category',require('./routers/categoryRouters'));

@@ -14,7 +14,13 @@
 //SECTION - validate password
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d#@$!%*?&]{6,}$/;
 const validatePassword=(password)=>{
-  // console.log(password);
+ 
 return passwordRegex.test(password);
 }
-module.exports={validateEmail,validatePhoneNumber,validatePassword}
+
+const validateImgType=(imgType)=>{
+  
+const imgTypes=["image/jpeg","image/png"];
+return imgTypes.includes(imgType);
+}
+module.exports={validateEmail,validatePhoneNumber,validatePassword,validateImgType}

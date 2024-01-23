@@ -31,19 +31,40 @@ const sellerSchema = mongoose.Schema(
                 },
                 unique:[true,"this mobile number already register"]
         },
+        special_food:{
+            type:String,
+            required:[true,"one special food mandatory"],
+            minLength: 3,
+           },
        img:{
-        type:Buffer
+        type:String,
+        required:[true,"photo  mandatory"],
        },
        imgType:{
             type:String
        },
+      
         password:{
                 type:String,
                 minLength:6,
                
                 required:[true,"password mandatory"],
+        },
+        rating:{
+            type:Number,
+            default:0
+        },
+        offer:{
+            type:Boolean,
+            default:false
+        },
+        offerDetails:{
+            type:String,            
         }
 
+    },
+    {
+        timestamps:true
     }
 )
 

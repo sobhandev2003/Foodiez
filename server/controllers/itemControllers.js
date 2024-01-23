@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const fs=require('fs')
-const Category=require('../models/categoryModel')
+const Category=require('../models/categoryModel');
+const { validateImgType } = require('../validator');
 
 //NOTE - Get all item
 //route('/:id/item')
@@ -59,16 +60,26 @@ const createItem = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error("data is not valid");
     }
-    if (size > (2 * 1024 * 1024)) {
+    if(!validateImgType(mimetype)){
+        res.status(403)
+        throw new Error("Except only jpeg or png type image");
+    }
+    if (size > (2 * 1024 * 1024) ) {
         res.status(403)
         throw new Error("photo must be less than 2mb")
       }
-      //SECTION - create a new item
+      
+//SECTION - create a new item
+//NOTE - convert buffer to base64
+  
+const bufferData = Buffer.from(buffer, 'binary');
+const photoString = bufferData.toString('base64');
+
 const item={
         name:name,
         description:description,
         price:price,
-        photo:buffer,
+        photo:photoString,
         photoType:mimetype
 }
      category.item.push(item);
