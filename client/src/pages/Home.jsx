@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import '../css/Home.css';
 import photo1 from '../photo/photo1.png';
-import ShopeList from './ShopeList';
+import ShopeList from '../component/ShopeList';
 import photo2 from '../photo/photo2.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { searchSeller } from '../reducers/searchSellerReducers';
-// import { searchSeller } from '../../reducers/searchSellerReducers';
+import { searchSeller } from '../reducersControlers/searchSellerReducers';
+
 function Home() {
-  console.log("ch");
+  window.scrollTo(0,0);
   const dispatch = useDispatch()
   const [sellers, setSellers] = useState([]);
   const allSllerdata = useSelector(state => state.allSeller.allSeller)
 
-  //SECTION -  For search a seller
+  //NOTE  -   Search a seller
   const filterByName = (e) => {
     dispatch(searchSeller({ restaurantName: e.target.value }));
-
   }
+
   const filterByRating = (rating) => {
     dispatch(searchSeller({ rating }));
-    // setFilterSeller(sellers.filter((seller) => {
-    //   return seller.rating >= rating;
-    // }));
   }
+
   //NOTE - call useEffect -----
   useEffect(() => {
     setSellers(allSllerdata);
@@ -46,12 +44,10 @@ function Home() {
         </div>
         <div className='shope-list-div'>
           {
-            //TODO - 
+            //TODO - fixed not restaurant found style
             sellers && sellers.length > 0 ? sellers.map((seller) => {
-
-              //  console.log(sellers);
               return <ShopeList key={seller.id} seller={seller} />
-            }) : <h2>No shope found</h2>
+            }) : <h2>No restaurant found</h2>
           }
         </div>
 

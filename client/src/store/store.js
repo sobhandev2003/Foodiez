@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import cartReduser from '../fetures/CartsSlaice';
-import getAllSeller from '../fetures/seller';
+import allSellerReducer from '../fetures/seller';
+import categoryReducer from '../fetures/category';
 export const store =configureStore({
     reducer:{
         cart:cartReduser,
-        allSeller:getAllSeller
+        allSeller:allSellerReducer,
+        catagory:categoryReducer
       }
 });

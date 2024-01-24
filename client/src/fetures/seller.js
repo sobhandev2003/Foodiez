@@ -3,29 +3,29 @@ const fetchSeller = async (quary) => {
   try {
     console.log("check");
     const response = await fetch(`http://localhost:5001/food/user/seller?restaurantName=${quary}`)
-    
     const data = await response.json();
-
     return data;
-
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
   }
 }
+
 const initialState = {
   allSeller: await fetchSeller("")
 };
-export const getAllSellerSlice = createSlice({
-  name: "fetchAllseller",
+
+export const SellerSlice = createSlice({
+  name: "seller",
   initialState,
+  //NOTE - search seller use restaurantName or based on ratting use query
   reducers: {
     setSeller: (state, action) => {
     state.allSeller=action.payload
     }
   }
 })
-export const {setSeller}=getAllSellerSlice.actions;
 
-//SECTION - search by resturent name
+export const {setSeller}=SellerSlice.actions;
 
-export default getAllSellerSlice.reducer;
+export default SellerSlice.reducer;

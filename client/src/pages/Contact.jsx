@@ -6,8 +6,9 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 // mail
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import Alert from './Alert';
+import Alert from '../component/Alert';
 function Contact() {
+    window.scrollTo(0,0);
     return (
         <div className='contact-page'>
             <div className='contact-page-left'>

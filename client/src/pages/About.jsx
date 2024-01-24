@@ -4,6 +4,7 @@ import photo1 from '../photo/abouPhoto1.png';
 import photo2 from '../photo/abouPhoto2.png';
 import photo3 from '../photo/abouPhoto3.png';
 function About() {
+    window.scrollTo(0,0);
     return (
         <div className='about-page'>
             <div className='image-div'>

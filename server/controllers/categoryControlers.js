@@ -3,8 +3,18 @@ const Category=require('../models/categoryModel');
 //NOTE - get all category and iteams
 // route('/')
 const getCategories=asyncHandler(async(req,res)=>{
-    
-    const categories=await Category.find({seller_Id:req.params.seller_id});
+    // console.log(req.params.seller_id);
+    const responce=await Category.find({seller_Id:req.params.seller_id});
+    // console.log(responce);
+    const categories= responce.map((data)=>{
+       const category= {
+        id:data.id,
+        categoryname:data.categoryname,
+        item:data.item
+        }
+        return category;
+    })
+    // console.log(categories);
     res.status(200).json(categories)
 })
 
@@ -23,7 +33,7 @@ const getCategory=asyncHandler(async(req,res)=>{
 // route('/')
 const createCategory=asyncHandler(async(req,res)=>{
  const {categoryname,item}=req.body;
- console.log(categoryname);
+//  console.log(categoryname);
  if(!categoryname){
     res.status(401)
     throw new Error("categoryname Give mandatory")

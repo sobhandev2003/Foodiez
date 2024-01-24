@@ -3,9 +3,10 @@ import '../css/Cart.css';
 import cartImg from '../photo/cartimag.jpg';
 import { useSelector } from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import CartProducts from './CartProducts';
+import CartProducts from '../component/CartProducts';
 
 function Cart() {
+  window.scrollTo(0,0);
   const navigate=useNavigate();
     const cartProducts=useSelector(state=>state.cart.ToCarts);
     let totalPrice=0;
