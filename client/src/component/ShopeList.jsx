@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { fetchCatagory } from '../reducersControlers/getCatagoryControlers';
 
 function ShopeList(props) {
-  const { id, restaurantName, img, imgType, special_food, rating } = props.seller;
+  const { id, restaurantName, img, imgType, rating } = props.seller;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ function ShopeList(props) {
         <div className='ratting-div overflow-hidden'>
           <p ><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></p>
         </div>
-        <p className='food overflow-hidden'>{special_food.slice(0, 35)}...</p>
+        {/* <p className='food overflow-hidden'>{special_food.slice(0, 35)}...</p> */}
         {/*
         <p className='offer overflow-hidden'>{offer}</p>
         <h3 className='delivery-time overflow-hidden'>

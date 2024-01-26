@@ -3,6 +3,10 @@ const { validateEmail, validatePhoneNumber, validatePassword } = require('../val
 
 const sellerSchema = mongoose.Schema(
     {
+        user_role:{
+                type:String,
+                default:"seller",
+        },
         restaurantName: {
             type: String,
             minLength: 4,
@@ -13,9 +17,9 @@ const sellerSchema = mongoose.Schema(
             minLength: 4,
             required: [true, "ownerName is mandatory"]
         },
-        emil: {
+        email: {
             type: String,
-            required: [true, "emil mandatory"], 
+            required: [true, "email mandatory"], 
             validate: {
                 validator: validateEmail,
                 message: 'Invalid email address format'
@@ -31,7 +35,7 @@ const sellerSchema = mongoose.Schema(
                 },
                 unique:[true,"this mobile number already register"]
         },
-        special_food:{
+        address:{
             type:String,
             required:[true,"one special food mandatory"],
             minLength: 3,

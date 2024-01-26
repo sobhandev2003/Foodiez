@@ -9,56 +9,71 @@ const Category = require('../models/categoryModel');
 // Router.post('/register',)
 
 const registerSeller = asyncHandler(async (req, res) => {
-
-  const { restaurantName, ownerName, emil, mobile, special_food, password } = req.body;
+//console.log(req.body);
+//console.log(req.file);
+  const { restaurantName, ownerName, email, mobile, address, password } = req.body;
   const { buffer, mimetype, size } = req.file
-  // console.log(req.body);
+  // //console.log(req.body);
   //NOTE - check inputs are valid or not
-  if (!restaurantName || !ownerName || !emil || !mobile || !password || !special_food || !buffer || !mimetype) {
+  if (!restaurantName || !ownerName || !email || !mobile || !password || !address || !buffer || !mimetype) {
     res.status(403)
     throw new Error("input format is not valid")
   }
 
-
-  if (restaurantName.length < 4 || ownerName.length < 4 || special_food.length < 3 || !validateEmail(emil) || !validatePhoneNumber(mobile) || !validatePassword(password)) {
+//console.log("ch");
+  if (restaurantName.length < 4 || ownerName.length < 4 || address.length < 3 || !validateEmail(email) || !validatePhoneNumber(mobile) || !validatePassword(password)) {
     res.status(403)
     throw new Error("input format is not valid")
   }
+//console.log("ch1");
+const isAvailableMail=await Seller.findOne({email});
+// console.log(data);
+if(isAvailableMail){
+  res.status(401);
+  throw new Error("All ready register this email")
+}
+const isAvailableMobile=await Seller.findOne({mobile});
+// console.log(data);
+if(isAvailableMobile){
+  res.status(401);
+  throw new Error("All ready register this number")
+}
 
   if (!validateImgType(mimetype)) {
     res.status(403)
     throw new Error("Except only jpeg or png type image");
   }
-
+//console.log("ch2");
 
   if (size > (2 * 1024 * 1024)) {
     res.status(403)
     throw new Error("photo must be less than 2mb")
   }
-
+//console.log("ch3");
   //
   // SECTION - create a new seller
   //NOTE - convert buffer to base64
 
   const bufferData = Buffer.from(buffer, 'binary');
   const imgString = bufferData.toString('base64');
-  // console.log(base64String);
-
+  // //console.log(base64String);
+//console.log("ch4");
   //NOTE - add salt with password and hash
   const passwordWithSalt = password + process.env.PASSWORD_SALT;
   const hashPassword = await bcrypt.hash(passwordWithSalt, 10)
-
+//console.log("ch5");
   try {
     const seller = await Seller.create(
       {
-        restaurantName, ownerName, emil, mobile, special_food,
+        restaurantName, ownerName, email, mobile, address,
         img: imgString, imgType: mimetype, password: hashPassword
 
       }
     )
-
+//console.log(seller);
     res.status(200).json(seller)
   } catch (error) {
+    //console.log(error);
     res.status(403).json(error)
   }
 
@@ -67,22 +82,23 @@ const registerSeller = asyncHandler(async (req, res) => {
 //SECTION -  for Login a saller
 // Router.post('/login',)
 const loginSeller = asyncHandler(async (req, res) => {
-  const { emil, password } = req.body;
-  if (!emil || !password) {
+  const { email, password } = req.body;
+  if (!email || !password) {
     res.status(403);
-    throw new Error("Emil and password not valid");
+    throw new Error("email and password not valid");
   }
   const passwordWithSalt = password + process.env.PASSWORD_SALT;
-  const seller = await Seller.findOne({ emil });
+  const seller = await Seller.findOne({ email });
 
   if (seller && (await bcrypt.compare(passwordWithSalt, seller.password))) {
 
     const jsonToken = jwt.sign(
       {
         seller: {
+          rolle:seller.rolle,
           ownerName: seller.ownerName,
           restaurantName: seller.restaurantName,
-          emil: seller.emil,
+          email: seller.email,
           id: seller.id
         }
       },
@@ -92,12 +108,13 @@ const loginSeller = asyncHandler(async (req, res) => {
         expiresIn: "10d"
       }
     )
+    // console.log(jsonToken);
     res.status(200).json(jsonToken)
   }
   else {
 
     res.status(403);
-    throw new Error("Emil and password not valid");
+    throw new Error("email and password not valid");
   }
 
 })
@@ -151,18 +168,18 @@ const updateImage = asyncHandler(async (req, res) => {
 //NOTE - for forgot password  saller account
 // Router.get('/forgotpassword',)
 const forgotpassword = asyncHandler(async (req, res) => {
-  const { emil, password } = req.body;
-  if (!emil || !password) {
+  const { email, password } = req.body;
+  if (!email || !password) {
     res.status(403);
-    throw new Error("Emil and password not valid");
+    throw new Error("email and password not valid");
   }
   const passwordWithSalt = password + process.env.PASSWORD_SALT;
-  const seller = await Seller.findOne({ emil });
+  const seller = await Seller.findOne({ email });
   if (!seller) {
     res.status(403);
-    throw new Error("Emil and password not valid");
+    throw new Error("email and password not valid");
   }
-  // console.log(seller);
+  // //console.log(seller);
   const hashPassword = await bcrypt.hash(passwordWithSalt, 10)
   seller.password = hashPassword;
   await seller.save();
@@ -174,6 +191,7 @@ const forgotpassword = asyncHandler(async (req, res) => {
 //NOTE - for current  saller details
 // Router.get('/current',)
 const currentSeller = asyncHandler(async (req, res) => {
+  // //console.log(req.seller);
   res.status(200).json(req.seller)
 })
 
@@ -200,7 +218,7 @@ const deletetSeller = asyncHandler(async (req, res) => {
 
 //NOTE - Get all seller account
 const getAllSeller = asyncHandler(async (req, res) => {
-  // console.log(req.query);
+  // //console.log(req.query);
   
   const {restaurantName,rating}=req.query;
   
@@ -212,14 +230,14 @@ const getAllSeller = asyncHandler(async (req, res) => {
   if(rating){
     queryObject.rating={$gt:rating}
   }
-  // console.log(queryObject);
+  // //console.log(queryObject);
   const data = await Seller.find(queryObject);
  
   const sellers = data.map((d) => {
     const seller = {
       id:d.id,
       restaurantName: d.restaurantName,
-      special_food: d.special_food,
+      address: d.address,
       rating:d.rating,
       img: d.img,
       imgType: d.imgType
@@ -227,7 +245,7 @@ const getAllSeller = asyncHandler(async (req, res) => {
     }
     return seller;
   })
-  // console.log(sellers);
+  // //console.log(sellers);
   res.status(200).json(sellers);
 })
 

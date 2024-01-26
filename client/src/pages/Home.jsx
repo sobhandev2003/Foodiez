@@ -10,7 +10,7 @@ function Home() {
   window.scrollTo(0,0);
   const dispatch = useDispatch()
   const [sellers, setSellers] = useState([]);
-  const allSllerdata = useSelector(state => state.allSeller.allSeller)
+  const allSllerdata = useSelector(state => state.Seller.allSeller)
 
   //NOTE  -   Search a seller
   const filterByName = (e) => {

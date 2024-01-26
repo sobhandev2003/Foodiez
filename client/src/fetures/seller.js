@@ -12,7 +12,10 @@ const fetchSeller = async (quary) => {
 }
 
 const initialState = {
-  allSeller: await fetchSeller("")
+  allSeller: await fetchSeller(""),
+  createSllerAccout:false,
+  
+
 };
 
 export const SellerSlice = createSlice({
@@ -22,10 +25,15 @@ export const SellerSlice = createSlice({
   reducers: {
     setSeller: (state, action) => {
     state.allSeller=action.payload
-    }
+    },
+    createSller:(state,action)=>{  
+      state.createSllerAccout=action.payload.success;
+    },
+
+    
   }
 })
 
-export const {setSeller}=SellerSlice.actions;
+export const {setSeller,createSller}=SellerSlice.actions;
 
 export default SellerSlice.reducer;

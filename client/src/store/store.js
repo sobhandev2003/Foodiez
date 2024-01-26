@@ -5,7 +5,8 @@ import categoryReducer from '../fetures/category';
 export const store =configureStore({
     reducer:{
         cart:cartReduser,
-        allSeller:allSellerReducer,
-        catagory:categoryReducer
+        Seller:allSellerReducer,
+        // createSllerAccout:createSller
+        catagory:categoryReducer,
       }
 });

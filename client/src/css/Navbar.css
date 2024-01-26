@@ -17,14 +17,26 @@
 .navbar{
     overflow: hidden;
     width: 90%;
-    height: var(--navbarHeight);
-   
-    
+    height: var(--navbarHeight);     
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: space-between;
+    /* background: none; */
     
+}
+/* -------        login and register link style   --------------- */
+.login,.register{ 
+    margin-right: 20px;
+    font-size: 20px;
+  color: white;
+}
+.login{
+    text-decoration: none;
+    /* color: #0707f5; */
+}
+.register{
+    /* color: #0707f5; */
 }
 .toggole-btn{
     display: none;
