@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Seller = require('../models/sellerModel');
-const { validateEmail, validatePhoneNumber, validatePassword, validateImgType } = require('../validator');
+const { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator } = require('../validator');
 const Category = require('../models/categoryModel');
 
 //NOTE - for register a saller
@@ -21,7 +21,7 @@ const registerSeller = asyncHandler(async (req, res) => {
   }
 
 //console.log("ch");
-  if (restaurantName.length < 4 || ownerName.length < 4 || address.length < 3 || !validateEmail(email) || !validatePhoneNumber(mobile) || !validatePassword(password)) {
+  if (restaurantName.length < 4 || ownerName.length < 4 || !wordsValidator(address) || !validateEmail(email) || !validatePhoneNumber(mobile) || !validatePassword(password)) {
     res.status(403)
     throw new Error("input format is not valid")
   }
@@ -49,7 +49,7 @@ if(isAvailableMobile){
     res.status(403)
     throw new Error("photo must be less than 2mb")
   }
-//console.log("ch3");
+// console.log("ch3");
   //
   // SECTION - create a new seller
   //NOTE - convert buffer to base64
@@ -95,7 +95,7 @@ const loginSeller = asyncHandler(async (req, res) => {
     const jsonToken = jwt.sign(
       {
         seller: {
-          rolle:seller.rolle,
+          user_role:seller.user_role,
           ownerName: seller.ownerName,
           restaurantName: seller.restaurantName,
           email: seller.email,

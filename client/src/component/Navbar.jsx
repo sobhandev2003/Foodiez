@@ -6,27 +6,41 @@ import { Link } from 'react-router-dom';
 //import MUI icon
 //user Acount icon
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
-
 //Help icon
 import SupportIcon from '@mui/icons-material/Support';
 //cart icon
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+//Add icon
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 //toggole buuton
 import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentSeller } from '../reducersControlers/currentSellerReducers';
 
 function Navbar() {
     const authToken = localStorage.getItem("authToken");
     const navbarRef = useRef();
+    const dispatch = useDispatch()
     const cartsProducts = useSelector(state => state.cart.ToCarts);
+    const currentSellerDetails = useSelector(state => state.Seller.currentSellerDetails)
     const [height, setHeight] = useState('120px');
+    const [currentSeller, setCurrentSeller] = useState();
     const toggoleHeight = () => {
         navbarRef.current.style.height = height;
         height === '70px' ? setHeight('120px') : setHeight('70px');
     }
-    useEffect(()=>{},[authToken])
+    useEffect(() => {
+        setCurrentSeller(currentSellerDetails)
+        // console.log(currentSellerDetails)
+    }, [currentSellerDetails])
+    useEffect(() => {
+        if (authToken) {
+            dispatch(fetchCurrentSeller(authToken));
+        }
+    }, [authToken, dispatch])
     return (
         <div ref={navbarRef} className='navbar'>
             <div className='logo'>
@@ -37,16 +51,29 @@ function Navbar() {
                     <ViewListIcon />
                 </ToggleButton>
             </div>
-            {authToken ?
-        //NOTE - if user log in     
+            {currentSeller ?
+                //NOTE - if user log in     
                 <div className='nav-link-div'>
-                    <Link className='contact' to="/help"><SupportIcon className='icon contact-ico' />Help</Link>
-                    <Link className='cart' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico' />Carts <span className='cart-count'>{cartsProducts.length}</span> </Link>
-                    <Link to="/mangeacount"><ManageAccountsOutlinedIcon /> userName</Link>
+                  
+                    {currentSeller.user_role === "seller" ?
+                       //NOTE - Navabar link for Seller account *
+                        <div className='seller-nav-link'>
+                            <Link to='/add-category' ><AddBoxIcon className='icon'/>Add Category</Link>
+                            <Link to='/add-item' ><AddCircleIcon className='icon'/>Add Item</Link>
+                            <Link className='help color-white' to="/help"><SupportIcon className='icon help-ico' />Help</Link>
+                            <Link className='mange-account color-white' to="/mangeacount"><ManageAccountsOutlinedIcon className='icon' /> {currentSeller.ownerName.split(" ")[0] || currentSeller.buyerName.split(" ")[0]}</Link>
+                        </div>
+                        :
+                        //NOTE - Navabar link for buyer account
+                        <div className='buyer-nav-link'>
+                            <Link className='cart color-white' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico' />Carts <span className='cart-count'>{cartsProducts.length}</span> </Link>
+
+                        </div>}
+
 
                 </div>
                 :
-         //NOTE - if user not login
+                //NOTE - if user not login
                 <div>
                     <Link className='login' to="/login"><span>Sign in</span></Link>
                     <Link className='register' to="/register"><>Sign up</></Link>

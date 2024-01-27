@@ -33,7 +33,7 @@ const getCategory=asyncHandler(async(req,res)=>{
 // route('/')
 const createCategory=asyncHandler(async(req,res)=>{
  const {categoryname,item}=req.body;
-//  console.log(categoryname);
+ console.log(categoryname);
  if(!categoryname){
     res.status(401)
     throw new Error("categoryname Give mandatory")

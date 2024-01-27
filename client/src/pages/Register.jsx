@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../css/Register.css'
-import { validateEmail, validatePassword, validatePhoneNumber } from '../component/inputValidator';
+import { validateEmail, validatePassword, validatePhoneNumber, validateWords } from '../component/inputValidator';
 import Alert from '../component/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerSeller } from '../reducersControlers/registerSeller';
@@ -43,13 +43,13 @@ function Register() {
             mobile,
             photo,
             password, } = formData;
-            console.log(photo);
+            // console.log(photo);
             const maxSize = 2 * 1024 * 1024; // 2 MB
-        if (!validateEmail(email) || !validatePhoneNumber(mobile) || !validatePassword(password)) {
+        if (!validateEmail(email) || !validatePhoneNumber(mobile)||!validateWords(address) || !validatePassword(password) ) {
             Alert("error", <div>inputs are not valid</div>)
         }
         else if (photo.size > maxSize) {
-         Alert("warning",<p>File size must be les then 2 MB</p>)
+         Alert("warning",<p>File size must be less then 2 MB</p>)
         }
         else {
             if (user_role.toLowerCase() === "seller") {

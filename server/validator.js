@@ -23,4 +23,11 @@ const validateImgType=(imgType)=>{
 const imgTypes=["image/jpeg","image/png"];
 return imgTypes.includes(imgType);
 }
-module.exports={validateEmail,validatePhoneNumber,validatePassword,validateImgType}
+//NOTE -  fixed number of words validate
+const wordsValidator=(value,numberOfWord=2)=>{
+  // Split the address into words
+  const words = value.trim().split(/\s+/);
+  // Check if the address has exactly two words
+  return words.length <= numberOfWord;
+}
+module.exports={validateEmail,validatePhoneNumber,validatePassword,validateImgType,wordsValidator}

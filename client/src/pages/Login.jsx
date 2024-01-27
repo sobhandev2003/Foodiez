@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import '../css/Login.css'
 import Alert from '../component/Alert';
 import { validateEmail, validatePassword } from '../component/inputValidator';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 import { loginSeller } from '../reducersControlers/loginSeller';
+import { fetchCurrentSeller } from '../reducersControlers/currentSellerReducers';
 function Login() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // const authorizeSeller = useSelector(state => state.Seller.authorizeSeller)
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ function Login() {
         const authData = await loginSeller(sellerData);
         if (authData) {
           localStorage.setItem("authToken", authData);
-          window.location.reload();
+          dispatch(fetchCurrentSeller(authData));
           navigate('/')
         }
       }

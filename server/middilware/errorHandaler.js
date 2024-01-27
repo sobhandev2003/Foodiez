@@ -1,6 +1,6 @@
 const {httperrors}=require('../httpError');
 const errorHandler=(err,req,res,next)=>{
-   
+//    console.log("ch");
     const statusCode=res.statusCode ? res.statusCode : 500;  
     switch (statusCode) {
         case httperrors.Not_Found:

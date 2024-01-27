@@ -17,10 +17,17 @@ export const validatePassword=(password)=>{
 
 return passwordRegex.test(password);
 }
-
+//NOTE - validate image type
 export const validateImgType=(imgType)=>{
  
 const imgTypes=["image/jpeg","image/png"];
 return imgTypes.includes(imgType);
+}
+//NOTE - validate maximum words
+export const validateWords=(value,numberOfWord=2)=>{
+  // Split the address into words
+  const words = value.trim().split(/\s+/);
+  // Check if the address has exactly two words
+  return words.length <= numberOfWord;
 }
 // module.exports={validateEmail,validatePhoneNumber,validatePassword,validateImgType}

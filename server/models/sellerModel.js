@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { validateEmail, validatePhoneNumber, validatePassword } = require('../validator');
+const { validateEmail, validatePhoneNumber, validatePassword, wordsValidator } = require('../validator');
 
 const sellerSchema = mongoose.Schema(
     {
@@ -38,7 +38,10 @@ const sellerSchema = mongoose.Schema(
         address:{
             type:String,
             required:[true,"one special food mandatory"],
-            minLength: 3,
+           validate:{
+            validator:wordsValidator,
+            message:"Address content only 2 words"
+           }
            },
        img:{
         type:String,

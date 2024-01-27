@@ -16,7 +16,7 @@ export const loginSeller=async(sellerData)=>{
         if(response.ok){
             const data=await response.json()
             // localStorage.setItem("authToken",data);
-            Alert("success",<p>"Successfully login your account"</p>)
+            Alert("success",<p>Successfully login your account</p>)
          return data;
          
         }
