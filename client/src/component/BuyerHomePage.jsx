@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../css/Home.css';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { searchSeller } from '../reducersControlers/searchSellerReducers';
+import { searchSeller } from '../conectWithBackend/searchSellerReducers';
 import photo1 from '../photo/photo1.png';
 import ShopeList from '../component/ShopeList';
 import photo2 from '../photo/photo2.png';
@@ -10,7 +10,7 @@ function BuyerHomePage() {
     const dispatch = useDispatch()
     const [sellers, setSellers] = useState([]);
     const allSllerdata = useSelector(state => state.Seller.allSeller)
-  
+    
     //NOTE  -   Search a seller
     const filterByName = (e) => {
       dispatch(searchSeller({ restaurantName: e.target.value }));
@@ -25,7 +25,7 @@ function BuyerHomePage() {
       setSellers(allSllerdata);
     }, [allSllerdata])
   return (
-    <div>
+    <div className='buyer-home-page'>
           <div className='home-above-div'>
         <h3>Order food online in your home</h3>
 

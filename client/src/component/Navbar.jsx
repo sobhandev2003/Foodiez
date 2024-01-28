@@ -11,14 +11,14 @@ import SupportIcon from '@mui/icons-material/Support';
 //cart icon
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 //Add icon
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 import AddBoxIcon from '@mui/icons-material/AddBox';
 //toggole buuton
 import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentSeller } from '../reducersControlers/currentSellerReducers';
+import { fetchCurrentSeller } from '../conectWithBackend/currentSellerReducers';
 
 function Navbar() {
     const authToken = localStorage.getItem("authToken");
@@ -59,7 +59,6 @@ function Navbar() {
                        //NOTE - Navabar link for Seller account *
                         <div className='seller-nav-link'>
                             <Link to='/add-category' ><AddBoxIcon className='icon'/>Add Category</Link>
-                            <Link to='/add-item' ><AddCircleIcon className='icon'/>Add Item</Link>
                             <Link className='help color-white' to="/help"><SupportIcon className='icon help-ico' />Help</Link>
                             <Link className='mange-account color-white' to="/mangeacount"><ManageAccountsOutlinedIcon className='icon' /> {currentSeller.ownerName.split(" ")[0] || currentSeller.buyerName.split(" ")[0]}</Link>
                         </div>

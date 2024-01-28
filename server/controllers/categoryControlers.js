@@ -20,7 +20,7 @@ const getCategories=asyncHandler(async(req,res)=>{
 
 //NOTE - get a category and items by id
 const getCategory=asyncHandler(async(req,res)=>{
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const category=await Category.findById(req.params.id);
     if(!category){
         res.status(404)
@@ -33,7 +33,7 @@ const getCategory=asyncHandler(async(req,res)=>{
 // route('/')
 const createCategory=asyncHandler(async(req,res)=>{
  const {categoryname,item}=req.body;
- console.log(categoryname);
+//  console.log(categoryname);
  if(!categoryname){
     res.status(401)
     throw new Error("categoryname Give mandatory")

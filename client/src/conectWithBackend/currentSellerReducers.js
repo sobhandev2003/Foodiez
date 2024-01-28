@@ -1,5 +1,6 @@
 import Alert from "../component/Alert";
-import { currentSeller } from "../fetures/seller";
+import { currentSeller} from "../fetures/seller";
+import { fetchCurrentSellerCategory } from "./curentSellerCategory";
 
 export const fetchCurrentSeller = (authToken) => async (dispatch) => {
     try {
@@ -14,6 +15,7 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
         if(response.ok){
             const data= await response.json();
         // console.log(data);
+        dispatch(fetchCurrentSellerCategory(data));
         dispatch(currentSeller(data))
     }
     else{

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../css/AddCategory.css'
-import { CreateNewCategory } from '../reducersControlers/CreateCatagory';
+import { CreateNewCategory } from '../conectWithBackend/CreateCatagory';
+
 function AddCategory() {
     const [formDta,setFormData]=useState();
     //NOTE - handel form submit

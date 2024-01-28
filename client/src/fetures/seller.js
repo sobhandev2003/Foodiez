@@ -14,7 +14,8 @@ const fetchSeller = async (quary) => {
 const initialState = {
   allSeller: await fetchSeller(""),
   createSllerAccout:false,
-  currentSellerDetails:null
+  currentSellerDetails:null,
+  currentSellerCategory:null,
   
 
 };
@@ -33,12 +34,15 @@ export const SellerSlice = createSlice({
     currentSeller:(state,action)=>{
         state.currentSellerDetails=action.payload
         // console.log("current: ",state.currentSellerDetails);
+    },
+    currentSellerCategory:(state,action)=>{
+      state.currentSellerCategory=action.payload
     }
 
     
   }
 })
 
-export const {setSeller,createSller,currentSeller}=SellerSlice.actions;
+export const {setSeller,createSller,currentSeller,currentSellerCategory}=SellerSlice.actions;
 
 export default SellerSlice.reducer;

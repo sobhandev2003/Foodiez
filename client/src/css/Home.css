@@ -14,7 +14,7 @@ height: 45vh;
 background: rgb(247, 250, 253);
 /* border: 1px solid; */
 }
-.home-above-div h3{
+ .buyer-home-page .home-above-div h3{
     position: absolute;
     left: 15%;
     width: 20%;
@@ -22,7 +22,7 @@ background: rgb(247, 250, 253);
     font-weight: 400;
     font-family: 'Ubuntu', sans-serif;
 }
-.home-above-div img{
+ .home-above-div img{
     position: absolute;
 right: 15%;
 width: 20rem;
@@ -32,7 +32,8 @@ height: 12rem;
 .home-bottom-img img{
     width: 100vw;
 } 
-.shope-list-div{
+.shope-list-div,
+.seller-home-page .categories {
 /* background: rgb(218, 234, 249); */
 width: 100%;
 display: flex;
@@ -42,7 +43,8 @@ flex-wrap: wrap;
 overflow-x: hidden;
 padding-bottom: 100px;
 }
-.shope-midile-div{
+.shope-midile-div,
+.seller-home-page .categories{
     background: rgb(218, 234, 249);
     width: 99vw;
 }
@@ -111,4 +113,52 @@ justify-content: space-evenly;
         width: 80%;
         padding: 10px 5px 10px 10px;
     }
+}
+
+
+/*------------------------// SECTION -Seller home page CSS -----------------------*/
+.seller-home-page .home-above-div h3{
+    position: absolute;
+    left: 15%;
+    width: 20%;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.seller-home-page .seller-category{
+ position: relative;
+width: 25vw;
+height:80px;
+overflow: hidden;
+}
+.seller-home-page .seller-category h2{
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    width: 92%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+.seller-home-page .seller-category .edit-fab{
+    background-color: blue;
+    width: 10%;
+    height: 10%;
+    border: none;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    color:white ;
+   display: none;
+   transition: all 2s ease ;
+}
+.seller-home-page .seller-category h2:hover + .edit-fab,
+.seller-category .edit-fab:hover{
+display: block;
 }
