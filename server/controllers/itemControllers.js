@@ -134,11 +134,16 @@ const updateItem = asyncHandler(  async (req, res) => {
             res.status(404);
             throw new Error("Not found");
         }
-
-        const{name,description,price}=req.body;
-        item.name=name;
-        item.description=description;
-        item.price=price;
+        // console.log(item);
+        const{description,price}=req.body;
+        // console.log(req.body);
+        if(description){
+            item.description=description;
+        }
+        if(price){
+            item.price=price;
+        }
+        
         await category.save();
         res.json(item)
     }

@@ -14,3 +14,9 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.vw-50{
+  width: 50vw;
+}
+.vh-10{
+  height:10vh ;
+}

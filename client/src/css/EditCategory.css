@@ -1,0 +1,41 @@
+.item-div{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* positio; */
+}
+.item-div .edit-item{
+    background-color: deepskyblue;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+}
+
+.item-div .delete-item{
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left:0;
+    color: white;
+    display: none;
+    
+}
+.item-div .shope-list-item:hover .edit-item,
+.item-div .edit-item:hover .edit-item,
+.item-div .shope-list-item:hover .delete-item,
+.item-div .delete-item:hover .delete-item{
+    display: block;
+    
+} 
+.item-div .edit-item:hover .edit-icon{
+    color: blue;
+}
+.item-div .delete-icon,
+.item-div .edit-icon{
+    transition: color 0.3s;
+}
+.item-div .delete-item:hover  .delete-icon{
+    color: red;
+}

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import photo1 from '../photo/photo1.png';
-import {  useSelector } from 'react-redux';
-
+import {  useDispatch, useSelector } from 'react-redux';
 import '../css/Home.css'
 import {  Fab } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { fetchItemByCategoryId } from '../conectWithBackend/item';
 function SellerHomePage() {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
   const currentSellerCategory = useSelector(state => state.Seller.currentSellerCategory);
   // const [currentSeller,setCurrentSeller]=useState();
@@ -15,7 +16,9 @@ function SellerHomePage() {
 
   const editCategory = (catagory) => {
     // dispatch(setEditCategory(catagory))
+    dispatch(fetchItemByCategoryId(catagory.id))
     localStorage.setItem("editCategory",JSON.stringify(catagory))
+
     navigate('/edit-category')
   }
 
