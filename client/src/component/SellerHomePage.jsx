@@ -17,7 +17,7 @@ function SellerHomePage() {
   const editCategory = (catagory) => {
     // dispatch(setEditCategory(catagory))
     dispatch(fetchItemByCategoryId(catagory.id))
-    localStorage.setItem("editCategory",JSON.stringify(catagory))
+    localStorage.setItem("editCategory",JSON.stringify({id:catagory.id,categoryname:catagory.categoryname}))
 
     navigate('/edit-category')
   }

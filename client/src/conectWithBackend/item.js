@@ -53,7 +53,7 @@ export const fetchItemByCategoryId =  (id)=>async(dispatch) => {
 //NOTE - udet a iteam
 
 export const updateItem = async (authToken, id, EditItem) => {
-    const { _id, name, description, price } = EditItem;
+    const { _id, description, price } = EditItem;
     // console.log(_id,name,description,price);
 
     try {
@@ -75,6 +75,35 @@ export const updateItem = async (authToken, id, EditItem) => {
         }
     } catch (error) {
         console.error(error)
+    }
+
+}
+
+//NOTE - delete item
+export const deleteItem=async(authToken,categoryId,itemId)=>{
+    try {
+        
+        const response = await fetch(`http://localhost:5001/food/category/${categoryId}/item/${itemId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + authToken,
+            },
+          
+        }
+      
+        )
+        const data=await response.json();
+        console.log(data);
+        if (response.ok) {
+            Alert("success",<p>Item Successfully deleted</p>)
+            
+        }
+        else{
+            Alert("error",<p>{data.message}</p>)
+        }
+
+    } catch (error) {
+        console.error(error);
     }
 
 }

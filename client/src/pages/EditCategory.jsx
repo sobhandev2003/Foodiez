@@ -9,12 +9,13 @@ import { Fab } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { createNewItem, fetchItemByCategoryId, updateItem } from '../conectWithBackend/item';
+import { createNewItem, deleteItem, fetchItemByCategoryId, updateItem } from '../conectWithBackend/item';
 import '../css/EditCategory.css'
 import { useDispatch, useSelector } from 'react-redux';
 function EditCategory() {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+    const authToken = localStorage.getItem("authToken");
     const category = JSON.parse(localStorage.getItem("editCategory"))
     const Items = useSelector(state => state.catagory.items)
     const [items, setItems] = useState();
@@ -24,7 +25,7 @@ function EditCategory() {
     //NOTE -  Add item A category
     const handelItemAdd = async (e) => {
         e.preventDefault();
-        const authToken = localStorage.getItem("authToken");
+     
         if (!authToken || !category || !formData) {
             Alert("error", <p>Something wrong</p>)
         }
@@ -34,11 +35,11 @@ function EditCategory() {
         }
         setIsAddIteam(false)
     }
-    //NOTE - handel edit item
-    const handelEditItem = async (e) => {
+    //NOTE - handel update item
+    const handelUpdateItem = async (e) => {
         e.preventDefault();
         //    console.log(editItem);
-        const authToken = localStorage.getItem("authToken");
+        // const authToken = localStorage.getItem("authToken");
         if (!authToken || !category || !editItem) {
             Alert("error", <p>Something wrong</p>)
         }
@@ -48,6 +49,16 @@ function EditCategory() {
         }
         setEditItem(null);
 
+    }
+    //NOTE - Handel DELETE item
+    const handelDeleteItem=async(item)=>{
+        if (!authToken || !category || !item) {
+            Alert("error", <p>Something wrong</p>)
+        }
+        else{
+            await deleteItem(authToken,category.id,item._id);
+            dispatch(fetchItemByCategoryId(category.id));
+        }
     }
 
     //NOTE - saved input data 
@@ -85,7 +96,7 @@ function EditCategory() {
     const editItemTemplet = (
         editItem && <Model>
             <CloseIcon className='cancel-model' onClick={() => { setEditItem(null) }} />
-            <form className='model-element' onSubmit={handelEditItem}>
+            <form className='model-element' onSubmit={handelUpdateItem}>
                 <label className='heading'>Edit item details </label>
                 <input type="text" name="name" value={editItem.name} onChange={handelEditItemInputChange} disabled />
                 <input type="text" name="description" value={editItem.description} onChange={handelEditItemInputChange} placeholder='Enter some about item' required />
@@ -106,8 +117,8 @@ function EditCategory() {
             navigate('/');
         }
         dispatch(fetchItemByCategoryId(category.id))
+        // eslint-disable-next-line
     }, [])
-
     useEffect(() => {
         setItems(Items);
     }, [Items])
@@ -127,7 +138,7 @@ function EditCategory() {
                                 <Fab aria-label="edit" className='edit-item' onClick={() => { setEditItem(item) }}>
                                     <EditIcon className='edit-icon' />
                                 </Fab>
-                                <Fab aria-label="delete" className='delete-item'>
+                                <Fab aria-label="delete" className='delete-item' onClick={()=>handelDeleteItem(item)}>
                                     <DeleteIcon className="delete-icon" />
                                 </Fab>
 
