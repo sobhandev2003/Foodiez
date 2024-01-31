@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../css/AddCategory.css'
-import { CreateNewCategory } from '../conectWithBackend/CreateCatagory';
+import { CreateNewCategory } from '../conectWithBackend/Catagory';
 
 function AddCategory() {
     const [formDta,setFormData]=useState();

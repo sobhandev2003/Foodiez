@@ -80,15 +80,17 @@ export const updateItem = async (authToken, id, EditItem) => {
 }
 
 //NOTE - delete item
-export const deleteItem=async(authToken,categoryId,itemId)=>{
+export const deleteItem=async(authToken,categoryId,itemId,password)=>{
     try {
         
         const response = await fetch(`http://localhost:5001/food/category/${categoryId}/item/${itemId}`, {
-            method: "DELETE",
+            method: "POST",
             headers: {
                 "Authorization": "Bearer " + authToken,
+                "Content-Type": "application/json"
+                
             },
-          
+            body: JSON.stringify(password)
         }
       
         )

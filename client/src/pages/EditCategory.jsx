@@ -22,6 +22,7 @@ function EditCategory() {
     const [isAddIteam, setIsAddIteam] = useState(false);
     const [editItem, setEditItem] = useState();
     const [formData, setFormData] = useState();
+    const [delete_item,setDeleteItem]=useState();
     //NOTE -  Add item A category
     const handelItemAdd = async (e) => {
         e.preventDefault();
@@ -51,14 +52,20 @@ function EditCategory() {
 
     }
     //NOTE - Handel DELETE item
-    const handelDeleteItem=async(item)=>{
-        if (!authToken || !category || !item) {
+    const handelDeleteItem=async(e)=>{
+        e.preventDefault()
+        console.log(formData.password);
+        console.log(delete_item);
+        if(delete_item){
+        if (!authToken || !category ) {
             Alert("error", <p>Something wrong</p>)
         }
         else{
-            await deleteItem(authToken,category.id,item._id);
+            await deleteItem(authToken,category.id,delete_item._id,formData);
             dispatch(fetchItemByCategoryId(category.id));
+            setDeleteItem(null)
         }
+    }
     }
 
     //NOTE - saved input data 
@@ -75,6 +82,9 @@ function EditCategory() {
     const handelEditItemInputChange = (e) => {
         setEditItem({ ...editItem, [e.target.name]: e.target.value })
     }
+    // const handeleInputChange = (e) => {
+    //     setPassword(e.target.value);
+    //   }
 
 
     //SECTION - pop-Up element
@@ -107,6 +117,20 @@ function EditCategory() {
         </Model>
     )
 
+    const deleteItemTeplet = (
+        delete_item && <Model>
+          <CloseIcon className='cancel-model' onClick={() => { setDeleteItem(null) }} />
+          
+          <form className='model-element' onSubmit={handelDeleteItem}>
+          <label className='delete-category-aller-p'>Are you sure?<br />You Want to delete <strong> {deleteItem.name} </strong>Category </label>
+            <label style={{ fontSize: "2rem" }}>Password:</label>
+            <input type='password' onChange={handelInputChange} name='password' placeholder='Enter your account password' required />
+          
+            <button type="submit" className='delete-btn'>Delete</button>
+          </form>
+        </Model>
+      )
+
     //NOTE - 
     const additem = () => {
         setIsAddIteam(true);
@@ -138,7 +162,7 @@ function EditCategory() {
                                 <Fab aria-label="edit" className='edit-item' onClick={() => { setEditItem(item) }}>
                                     <EditIcon className='edit-icon' />
                                 </Fab>
-                                <Fab aria-label="delete" className='delete-item' onClick={()=>handelDeleteItem(item)}>
+                                <Fab aria-label="delete" className='delete-item' onClick={()=>setDeleteItem(item)}>
                                     <DeleteIcon className="delete-icon" />
                                 </Fab>
 
@@ -155,6 +179,7 @@ function EditCategory() {
                     })
                 }
             </div>
+            {delete_item && deleteItemTeplet}
         </div>
     )
 }

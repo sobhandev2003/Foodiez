@@ -1,20 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Space+Grotesk:wght@300&family=Ubuntu&display=swap');
 
 
-.home{
+.home {
     /* overflow-x: hidden;
     position: absolute;
     top: 70px; */
 }
-.home-above-div{
-display: flex;
-align-items: center;
-width: 100vw;
-height: 45vh;
-background: rgb(247, 250, 253);
-/* border: 1px solid; */
+
+.home-above-div {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 45vh;
+    background: rgb(247, 250, 253);
+    /* border: 1px solid; */
 }
- .buyer-home-page .home-above-div h3{
+
+.buyer-home-page .home-above-div h3 {
     position: absolute;
     left: 15%;
     width: 20%;
@@ -22,94 +24,108 @@ background: rgb(247, 250, 253);
     font-weight: 400;
     font-family: 'Ubuntu', sans-serif;
 }
- .home-above-div img{
+
+.home-above-div img {
     position: absolute;
-right: 15%;
-width: 20rem;
-height: 12rem;
+    right: 15%;
+    width: 20rem;
+    height: 12rem;
 
 }
-.home-bottom-img img{
+
+.home-bottom-img img {
     width: 100vw;
-} 
+}
+
 .shope-list-div,
 .seller-home-page .categories {
-/* background: rgb(218, 234, 249); */
-width: 100%;
-display: flex;
-justify-content: space-evenly;
-padding-top: 30px;
-flex-wrap: wrap;
-overflow-x: hidden;
-padding-bottom: 100px;
+    /* background: rgb(218, 234, 249); */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    padding-bottom: 100px;
 }
+
 .shope-midile-div,
-.seller-home-page .categories{
+.seller-home-page .categories {
     background: rgb(218, 234, 249);
     width: 99vw;
 }
-.search-div{
-   
+
+.search-div {
+
     margin-top: 15px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.search-rating-div{
-/* border: 1px solid red; */
-width: 35%;
-display: flex;
-justify-content: space-evenly;
+
+.search-rating-div {
+    /* border: 1px solid red; */
+    width: 35%;
+    display: flex;
+    justify-content: space-evenly;
 }
-.search-rating-div .rating-search-btn{
+
+.search-rating-div .rating-search-btn {
     padding: 10px;
-    
+
     background-color: blue;
     color: white;
     border: none;
-    border-radius:10px ;
+    border-radius: 10px;
     cursor: pointer;
 
 }
-#search-input{
+
+#search-input {
     background-color: white;
     border: 1px solid white;
     outline: none;
     border-radius: 6px;
-    padding: 6px 5px 6px 5px ;
-}
-@media screen and (min-width: 768px) and (max-width:1023px) {
-    .search-rating-div{
-        width: 45%;
-    }
-    
-}
-@media screen and (max-width: 767px) {
-    
-.home-above-div h3{
-    font-size: 1.5rem;
-    width: 25%;
-}
-.home-above-div img{
-    right: 6%;
-    width: 10rem;
-    height: 10rem;
+    padding: 6px 5px 6px 5px;
 }
 
-.search-div{
+@media screen and (min-width: 768px) and (max-width:1023px) {
+    .search-rating-div {
+        width: 45%;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+
+    .home-above-div h3 {
+        font-size: 1.5rem;
+        width: 25%;
+    }
+
+    .home-above-div img {
+        right: 6%;
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .search-div {
         flex-direction: column;
         height: 120px;
     }
-    .search-rating-div{
+
+    .search-rating-div {
         width: 98%;
     }
+
     .search-rating-div .rating-search-btn {
         padding: 8px;
-        
-    
+
+
     }
-    #search-input{
+
+    #search-input {
         width: 80%;
         padding: 10px 5px 10px 10px;
     }
@@ -117,7 +133,7 @@ justify-content: space-evenly;
 
 
 /*------------------------// SECTION -Seller home page CSS -----------------------*/
-.seller-home-page .home-above-div h3{
+.seller-home-page .home-above-div h3 {
     position: absolute;
     left: 15%;
     width: 20%;
@@ -126,13 +142,15 @@ justify-content: space-evenly;
     letter-spacing: 2px;
     font-family: 'Ubuntu', sans-serif;
 }
-.seller-home-page .seller-category{
- position: relative;
-width: 25vw;
-height:80px;
-overflow: hidden;
+
+.seller-home-page .seller-category {
+    position: relative;
+    width: 25vw;
+    height: 80px;
+    overflow: hidden;
 }
-.seller-home-page .seller-category h2{
+
+.seller-home-page .seller-category h2 {
     text-align: center;
     font-size: 1.2rem;
     padding: 5px;
@@ -146,7 +164,8 @@ overflow: hidden;
     overflow: hidden;
     cursor: pointer;
 }
-.seller-home-page .seller-category .edit-fab{
+
+.seller-home-page .seller-category .edit-fab {
     background-color: blue;
     width: 10%;
     height: 10%;
@@ -154,11 +173,24 @@ overflow: hidden;
     position: absolute;
     top: 8px;
     right: 0;
-    color:white ;
-   display: none;
-   transition: all 2s ease ;
+    color: white;
+    display: none;
+    transition: all 2s ease;
 }
-.seller-home-page .seller-category h2:hover + .edit-fab,
+.seller-home-page .seller-category .delete-category-btn {
+    border: none;
+    background: none;
+    outline: none;
+    color: red;
+    position: absolute;
+    top: 9%;
+    left: -1%;
+    cursor: pointer;
+    display: none;
+}
+.seller-home-page .seller-category h2:hover+.edit-fab,
+.seller-home-page .seller-category:hover .delete-category-btn,
 .seller-category .edit-fab:hover{
-display: block;
+    display: block;
 }
+

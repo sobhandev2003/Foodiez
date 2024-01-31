@@ -81,3 +81,9 @@
     cursor: pointer;
     
 }
+.modal-container .delete-category-aller-p{
+    color: red;
+    width: 90%;
+    text-align: center;
+    font-size: 1.3rem;
+}

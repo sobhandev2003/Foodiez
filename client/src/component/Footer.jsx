@@ -43,7 +43,6 @@ function Footer() {
           <span>Burger</span>
           <span>Ice-Creams</span>
           <span>Chinese</span>
-
         </div>
         <div className='III-div'>
           <h3>USEFUL LINKS</h3>
@@ -60,10 +59,6 @@ function Footer() {
           <p><span><EmailIcon /></span><span>info@example.com</span></p>
 
           <p><span><LocalPhoneIcon /></span><span>+ 01 234 567 89</span></p>
-
-
-
-
 
         </div>
       </div>

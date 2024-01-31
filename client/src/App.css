@@ -3,7 +3,7 @@
     flex-direction: column;
     height: fit-content;
 }
-header{
+nav{
    
     background:  #042380;
     width: 100vw;
@@ -13,7 +13,7 @@ header{
     position: fixed;
     top: 0;
     /* box-shadow: 5px 8px 5px rgb(207, 217, 230); */
-    z-index: 50;
+    z-index: 10;
     /* flex: 1; */
 }
 .routes-component-div{
@@ -39,3 +39,5 @@ header{
 .color-white{
     color: white;
 }
+
+/* ------------------------ */

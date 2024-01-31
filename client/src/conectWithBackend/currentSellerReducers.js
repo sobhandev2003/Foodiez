@@ -1,6 +1,7 @@
 import Alert from "../component/Alert";
-import { currentSeller} from "../fetures/seller";
-import { fetchCurrentSellerCategory } from "./curentSellerCategory";
+import { currentSeller } from "../fetures/seller";
+// import { currentSeller} from "../fetures/seller";
+import { fetchCurrentSellerCategory } from "./Catagory";
 
 export const fetchCurrentSeller = (authToken) => async (dispatch) => {
     try {

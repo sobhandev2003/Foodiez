@@ -20,9 +20,9 @@ import EditCategory from './pages/EditCategory';
 function App() {
   return (
     <div className="App">
-      <header>
+      <nav>
         <Navbar />
-      </header>
+      </nav>
       <div className='routes-component-div'>
 
         <Routes>
