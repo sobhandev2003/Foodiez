@@ -74,12 +74,8 @@ export const fetchCatagory = (id) => async (dispatch) => {
 
 
 //NOTE - Dellete a category;
-export const deleteCategoryById = (authToken, password, category, currentSellerDetailes) => async (dispatch) => {
-    // console.log(category);
-    const deleteData = {
-        password
-    }
-    // console.log(deleteData);
+export const deleteCategoryById = (authToken, password, category, currentSellerDetailes,navigate) => async (dispatch) => {
+
     try {
         if (authToken) {
             try {
@@ -89,12 +85,13 @@ export const deleteCategoryById = (authToken, password, category, currentSellerD
                         'Authorization': 'Bearer ' + authToken,
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(deleteData)
+                    body: JSON.stringify(password)
                 })
                 if (response.ok) {
                     const data = await response.json();
                     dispatch(fetchCurrentSellerCategory(currentSellerDetailes))
                     Alert("success", <p>Successfully Delete category  \{data.categoryname}</p>)
+                    navigate('/')
                 } else {
                     const errorData = await response.json();
                     Alert("error", <p>{errorData.message}</p>)

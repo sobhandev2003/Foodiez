@@ -1,30 +1,26 @@
-.App{
+.App {
     display: flex;
     flex-direction: column;
-    height: fit-content;
-}
-
-.routes-component-section{
-
-    /* height: 80vh; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.footer{
-    /* margin-top: 40px; */
-    position: relative;
-    width: 100vw;
-    bottom: 0;
-    --tw-bg-opacity: 1;
-    background-color: rgba(3,105,161,var(--tw-bg-opacity));
-    z-index: 1;
-}
-.overflow-hidden{
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
-.color-white{
+
+.content-wrap {
+
+    flex: 1;
+    /* Make the content take up remaining space */
+}
+
+.routes-component-section {
+    padding-top: 5rem;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.color-white {
     color: white;
 }
 

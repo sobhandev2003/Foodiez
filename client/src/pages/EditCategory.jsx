@@ -8,25 +8,30 @@ import Rating from '@mui/material/Rating';
 import { Fab } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { deleteCategoryById } from '../conectWithBackend/Catagory';
 import { createNewItem, deleteItem, fetchItemByCategoryId, updateItem } from '../conectWithBackend/item';
 import '../css/EditCategory.css'
 import { useDispatch, useSelector } from 'react-redux';
 function EditCategory() {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
     const authToken = localStorage.getItem("authToken");
     const category = JSON.parse(localStorage.getItem("editCategory"))
+    const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
     const Items = useSelector(state => state.catagory.items)
+
     const [items, setItems] = useState();
     const [isAddIteam, setIsAddIteam] = useState(false);
     const [editItem, setEditItem] = useState();
     const [formData, setFormData] = useState();
-    const [delete_item,setDeleteItem]=useState();
+    const [delete_item, setDeleteItem] = useState();
+    const [isDeleteCategory, setIsDeleteCategory] = useState(false);
     //NOTE -  Add item A category
     const handelItemAdd = async (e) => {
         e.preventDefault();
-     
+
         if (!authToken || !category || !formData) {
             Alert("error", <p>Something wrong</p>)
         }
@@ -36,6 +41,7 @@ function EditCategory() {
         }
         setIsAddIteam(false)
     }
+
     //NOTE - handel update item
     const handelUpdateItem = async (e) => {
         e.preventDefault();
@@ -51,22 +57,37 @@ function EditCategory() {
         setEditItem(null);
 
     }
+
     //NOTE - Handel DELETE item
-    const handelDeleteItem=async(e)=>{
+    const handelDeleteItem = async (e) => {
         e.preventDefault()
         console.log(formData.password);
         console.log(delete_item);
-        if(delete_item){
-        if (!authToken || !category ) {
-            Alert("error", <p>Something wrong</p>)
-        }
-        else{
-            await deleteItem(authToken,category.id,delete_item._id,formData);
-            dispatch(fetchItemByCategoryId(category.id));
-            setDeleteItem(null)
+        if (delete_item) {
+            if (!authToken || !category) {
+                Alert("error", <p>Something wrong</p>)
+            }
+            else {
+                await deleteItem(authToken, category.id, delete_item._id, formData);
+                dispatch(fetchItemByCategoryId(category.id));
+                setDeleteItem(null)
+            }
         }
     }
+
+
+    //NOTE - handel delete category
+    const handelDeleteCategory = async (e) => {
+        e.preventDefault()
+        if (category) {
+            const authToken = localStorage.getItem("authToken")
+            dispatch(deleteCategoryById(authToken, formData, category, currentSellerDetailes, navigate))
+
+        }
+        setIsDeleteCategory(false)
+
     }
+
 
     //NOTE - saved input data 
     const handelInputChange = (e) => {
@@ -79,15 +100,15 @@ function EditCategory() {
         }))
 
     }
+
     const handelEditItemInputChange = (e) => {
         setEditItem({ ...editItem, [e.target.name]: e.target.value })
     }
-    // const handeleInputChange = (e) => {
-    //     setPassword(e.target.value);
-    //   }
+
 
 
     //SECTION - pop-Up element
+
     //NOTE - Pop - Up for fill add item details 
     const AddIteamTemplet = (
         <Model>
@@ -102,6 +123,7 @@ function EditCategory() {
             </form>
         </Model>
     )
+
     //NOTE -  Pop - Up for fill update item details  
     const editItemTemplet = (
         editItem && <Model>
@@ -117,24 +139,39 @@ function EditCategory() {
         </Model>
     )
 
+  //NOTE -  Pop - Up for fill Delete item details  
+
     const deleteItemTeplet = (
         delete_item && <Model>
-          <CloseIcon className='cancel-model' onClick={() => { setDeleteItem(null) }} />
-          
-          <form className='model-element' onSubmit={handelDeleteItem}>
-          <label className='delete-category-aller-p'>Are you sure?<br />You Want to delete <strong> {deleteItem.name} </strong>Category </label>
-            <label style={{ fontSize: "2rem" }}>Password:</label>
-            <input type='password' onChange={handelInputChange} name='password' placeholder='Enter your account password' required />
-          
-            <button type="submit" className='delete-btn'>Delete</button>
-          </form>
-        </Model>
-      )
+            <CloseIcon className='cancel-model' onClick={() => { setDeleteItem(null) }} />
 
-    //NOTE - 
-    const additem = () => {
-        setIsAddIteam(true);
-    }
+            <form className='model-element' onSubmit={handelDeleteItem}>
+                <label className='delete-category-aller-p'>Are you sure?<br />You Want to delete <strong> {deleteItem.name} </strong>Category </label>
+                <label style={{ fontSize: "2rem" }}>Password:</label>
+                <input type='password' onChange={handelInputChange} name='password' placeholder='Enter your account password' required />
+
+                <button type="submit" className='delete-btn'>Delete</button>
+            </form>
+        </Model>
+    )
+
+    //NOTE - pop up for delete category;
+
+    const deleteCategoryTeplet = (
+        <Model>
+            <CloseIcon className='cancel-model' onClick={() => { setIsDeleteCategory(false) }} />
+
+            <form className='model-element' onSubmit={handelDeleteCategory}>
+                <label className='delete-category-aller-p'>Are you sure?<br />You Want to delete <strong> {category.categoryname} </strong>Category </label>
+                <label style={{ fontSize: "2rem" }}>Password:</label>
+                <input type='password' name='password' onChange={handelInputChange} placeholder='Enter your account password' required />
+
+                <button type="submit" className='delete-btn'>Delete</button>
+            </form>
+        </Model>
+    )
+
+   
     //NOTE - 
     useEffect(() => {
         if (!category) {
@@ -143,13 +180,14 @@ function EditCategory() {
         dispatch(fetchItemByCategoryId(category.id))
         // eslint-disable-next-line
     }, [])
+    
     useEffect(() => {
         setItems(Items);
     }, [Items])
 
     return (
         <div>
-            <h3>Items<AddCircleIcon className='icon' onClick={additem} /> </h3>
+            <h3>Items<AddCircleIcon className='icon' onClick={()=>{ setIsAddIteam(true)}} /> </h3>
             {isAddIteam && AddIteamTemplet}
             {editItem && editItemTemplet}
             <div className='item-div'>
@@ -162,7 +200,7 @@ function EditCategory() {
                                 <Fab aria-label="edit" className='edit-item' onClick={() => { setEditItem(item) }}>
                                     <EditIcon className='edit-icon' />
                                 </Fab>
-                                <Fab aria-label="delete" className='delete-item' onClick={()=>setDeleteItem(item)}>
+                                <Fab aria-label="delete" className='delete-item' onClick={() => setDeleteItem(item)}>
                                     <DeleteIcon className="delete-icon" />
                                 </Fab>
 
@@ -178,8 +216,11 @@ function EditCategory() {
                         </div>
                     })
                 }
+
+                <button className='delete-category-btn' onClick={() => { setIsDeleteCategory(true) }} ><DeleteForeverIcon className='icon' /></button>
             </div>
             {delete_item && deleteItemTeplet}
+            {isDeleteCategory && deleteCategoryTeplet}
         </div>
     )
 }

@@ -20,7 +20,7 @@ function Shope() {
 
   useEffect(() => {
     dispatch(fetchCatagory(id));
-  }, [])
+  }, [dispatch,id])
 
   return (
     <div className='shope-page'>

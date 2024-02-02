@@ -90,46 +90,7 @@
     padding: 6px 5px 6px 5px;
 }
 
-@media screen and (min-width: 768px) and (max-width:1023px) {
-    .search-rating-div {
-        width: 45%;
-    }
 
-}
-
-@media screen and (max-width: 767px) {
-
-    .home-above-div h3 {
-        font-size: 1.5rem;
-        width: 25%;
-    }
-
-    .home-above-div img {
-        right: 6%;
-        width: 10rem;
-        height: 10rem;
-    }
-
-    .search-div {
-        flex-direction: column;
-        height: 120px;
-    }
-
-    .search-rating-div {
-        width: 98%;
-    }
-
-    .search-rating-div .rating-search-btn {
-        padding: 8px;
-
-
-    }
-
-    #search-input {
-        width: 80%;
-        padding: 10px 5px 10px 10px;
-    }
-}
 
 
 /*------------------------// SECTION -Seller home page CSS -----------------------*/
@@ -176,6 +137,7 @@
     color: white;
     display: none;
     transition: all 2s ease;
+    z-index: 5;
 }
  .seller-category .delete-category-btn {
     border: none;
@@ -194,3 +156,57 @@
     display: block;
 }
 
+/* responsive */
+@media screen and (min-width: 768px) and (max-width:1023px) {
+    .search-rating-div {
+        width: 45%;
+    }
+    .seller-category .edit-fab{
+        display: block;
+    }
+    .seller-category .edit-fab{
+        width: 15%;
+
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+
+    .home-above-div h3 {
+        font-size: 1.5rem;
+        width: 25%;
+    }
+
+    .home-above-div img {
+        right: 6%;
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .search-div {
+        flex-direction: column;
+        height: 120px;
+    }
+
+    .search-rating-div {
+        width: 98%;
+    }
+
+    .search-rating-div .rating-search-btn {
+        padding: 8px;
+
+
+    }
+
+    #search-input {
+        width: 80%;
+        padding: 10px 5px 10px 10px;
+    }
+    .seller-category{
+        width: 100vw;
+    }
+    .seller-category .edit-fab{
+        display: block;
+    }
+}

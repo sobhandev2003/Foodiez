@@ -1,5 +1,5 @@
 import '../css/Navbar.css';
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     FaListAlt
 } from "react-icons/fa";
@@ -11,7 +11,7 @@ import { fetchCurrentSeller } from '../conectWithBackend/currentSellerReducers';
 //Help icon
 import SupportIcon from '@mui/icons-material/Support';
 //cart icon
-import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+// import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 //Add icon
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -25,7 +25,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const authToken = localStorage.getItem("authToken");
     const dispatch = useDispatch()
-    const cartsProducts = useSelector(state => state.cart.ToCarts);
+    // const cartsProducts = useSelector(state => state.cart.ToCarts);
     const currentSellerDetails = useSelector(state => state.Seller.currentSellerDetails)
     const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
     const [currentSeller, setCurrentSeller] = useState();
@@ -74,7 +74,7 @@ const Navbar = () => {
                                                 <NavLink className="order" to='/order'><FaListAlt className='icon list-ico' /> Customer Order </NavLink>
                                             </li>
                                             {isMobile && <>
-                                              {  <li><button className='log-out-btn' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
+                                                {<li><button className='log-out-btn' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
                                                 </li>}
 
                                             </>}
@@ -86,14 +86,14 @@ const Navbar = () => {
 
                             </ul> :
                             <>
-                            {isMobile && <ul>
-                                <li><NavLink className='login' to="/login">Sign in</NavLink></li>
-                                        <li><NavLink className='register' to="/register">Sign up</NavLink></li>
-                            </ul>
+                                {isMobile && <ul>
+                                    <li><NavLink className='login' to="/login">Sign in</NavLink></li>
+                                    <li><NavLink className='register' to="/register">Sign up</NavLink></li>
+                                </ul>
 
-                            }
-                            
-                            
+                                }
+
+
                             </>
                     }
 

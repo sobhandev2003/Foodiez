@@ -21,8 +21,8 @@ function App() {
   return (
     <div className="App">
 
-        <Navbar />
-  
+      <Navbar />
+
       <section className='routes-component-section'>
 
         <Routes>
@@ -33,13 +33,15 @@ function App() {
           <Route path='/restaurant/:id' element={<Shope />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/add-category' element={<AddCategory />} />
-          <Route path='/edit-category' element={<EditCategory/>} />
+          <Route path='/edit-category' element={<EditCategory />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </section>
-      
-        <Footer />
-   
+
+
+      <Footer />
+
+
 
 
 

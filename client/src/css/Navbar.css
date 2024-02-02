@@ -1,46 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap");
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Jost", sans-serif;
-}
 
-html {
-    font-size: 62.5%;
-}
-
-a {
-    text-decoration: none;
-}
-
-li {
-    list-style: none;
-}
-
-/* 
- 
 
 /* navbar style start  */
 
 .main-nav {
     width: 100%;
-    height: 10rem;
-    display: grid;
-    grid-template-columns: 10rem 1fr 2fr 1fr 10rem;
+    height: 5rem;
+    display: flex;
     background-color: rgb(0, 0, 52);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
         rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     position: fixed;
     top: 0;
     z-index: 10;
+    align-items: center;
+    justify-content: space-around;
 
 }
 
 .logo {
     display: grid;
-    grid-column: 2/3;
     justify-content: start;
     align-items: center;
     width: 25%;
@@ -53,20 +33,21 @@ li {
 }
 
 .menu-link {
-    grid-column: 3/4;
+    width: 50%;
 }
 
 .menu-link ul {
-    height: 10rem;
+    height: max-content;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.user-account .icon {
+.menu-link .icon {
     color: white;
-    font-size: 3.5rem;
+    font-size: 1.5rem;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 .account-control {
@@ -76,37 +57,51 @@ li {
     align-items: center;
 }
 
+.account-control .icon {
+    font-size: 3rem;
+    color: white;
+}
+
 .account-control ul {
     position: fixed;
+    right: 5px;
     background: rgb(2, 121, 115);
     box-shadow: 3px 5px 1px rgb(139, 160, 162);
     border-radius: 5px;
-    width: 45rem;
+    width: max-content;
+    height: max-content;
     padding: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
     color: white;
     z-index: 99;
-    top: 6.5rem;   
+    top: 6.5rem;
     overflow: hidden;
 }
 
 .account-control ul li {
     padding-left: 10px;
     padding-bottom: 10px;
+    padding: 10px;
+    width: max-content;
+    display: flex;
+    align-items: center;
 
 }
+
 .menu-link ul li a,
-.account-control ul li a{
+.account-control ul li a {
+
+    height: max-content;
     color: white;
-}
-.account-control ul li:hover >a{
-    text-decoration: underline;
-    text-decoration-color: rgb(241, 230, 4);
+    width: 100%;
+    font-size: 1.5rem;
+    align-items: center;
 }
 
-.log-out-btn{
+.log-out-btn,
+.log-out-btn .icon {
     background: none;
     outline: none;
     border: none;
@@ -114,38 +109,29 @@ li {
     color: red;
     font-weight: 500;
     letter-spacing: 3px;
-}
-/* ----------- Grid part ends ----------------- */
-
-.logo h2 {
-    font-size: 2.5rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    background: -webkit-linear-gradient(#eee, rgb(69, 57, 248));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    cursor: pointer;
 }
 
-.logo h2 span {
-    font-size: 3.5rem;
-}
+
+
+
 
 .menu-link ul li {
-    font-size: 1.8rem;
+    padding-bottom: 10px;
+    height: max-content;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.menu-link ul li a {
-    text-transform: capitalize;
-    color: white;
-    transition: 0.5s;
-}
 
-.menu-link ul li:hover>a {
+
+.menu-link ul li:hover>a,
+.account-control ul li:hover>a,
+.account-control ul li:hover>button {
     transform-origin: left;
-    /* color: rgba(0, 0, 3, 1); */
     text-decoration: underline;
     text-decoration-color: rgb(241, 230, 4);
-    transition: 0.5s;
+
 }
 
 .account-control ul li {
@@ -160,14 +146,11 @@ li {
 
 /* responsive css style  */
 @media (max-width: 1080px) {
-    .main-nav {
-        height: 8rem;
-        grid-template-columns: 2rem 3fr 3fr 1fr 2rem;
+    .menu-link {
+        width: 55%;
     }
 
-    .logo,
-    .menu-link ul,
-    .account-control ul {
+    .logo {
         height: 8rem;
     }
 }
@@ -175,19 +158,14 @@ li {
 
 /* responsive css style  */
 @media screen and (min-width: 768px) and (max-width:1023px) {
-    .main-nav {
-        grid-template-columns: 2rem 3fr 5fr 1fr 0.5rem;
-    }
 
-    .menu-link {
-        /* border: 1px solid red; */
-        width: 95%;
-    }
 
-    .menu-link ul li {
+    .menu-link ul li a,
+    .menu-link .icon {
         color: white;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
+
 
 }
 
@@ -197,96 +175,56 @@ li {
     }
 
     .main-nav {
-        height: 6rem;
-        grid-template-columns: 1rem 2fr 1fr 1fr 1rem;
+        justify-content: space-between;
     }
 
-    .logo,
-    .account-control ul {
+    .logo {
         height: 6rem;
     }
 
     .account-control .hamburger-menu {
         display: block;
-        font-size: 2.5rem;
     }
 
+    .account-control .hamburger-menu button {
+        font-size: 2.5rem;
+        background: none;
+        color: white;
+        border: none;
+        outline: none;
+    }
+
+
     .mobile-menu-link {
-        grid-column: 2/4;
         position: fixed;
         z-index: 99;
         top: 6rem;
-        /* right: 1px; */
-        width: 40rem;
+        right: 1px;
+        width: max-content;
     }
 
     .mobile-menu-link {
         background-color: white;
-        height: 20rem;
         display: grid;
         grid-column: 2/5;
         align-items: center;
-        padding-left: 3rem;
-        transition: all 2s linear;
+        padding: 10px;
         transform-origin: top;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
             rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     }
 
     .mobile-menu-link ul {
-        height: 20rem;
         display: flex;
+        /* align-items: start; */
         justify-content: space-around;
         flex-direction: column;
-        align-items: start;
         z-index: 99;
 
     }
-}
 
-.mobile-menu-link ul li a {
-    color: darkblue;
-}
-
-.mobile-menu-link ul li:first-child {
-    transition-delay: 0.2s;
-}
-
-
-
-/* .account-control .hamburger-menu {
-    display: block;
-    font-size: 2.5rem;
-} */
-
-
-
-@media (max-width: 520px) {
-    .main-nav {
-        height: 6rem;
-        grid-template-columns: 1rem 4fr 1fr 1fr 1rem;
+    .mobile-menu-link ul li a,
+    .mobile-menu-link a .icon {
+        color: black;
     }
-
-    .logo,
-    .account-control ul {
-        height: 6rem;
-    }
-
-
-
-    .account-control {
-        height: 6rem;
-        display: flex;
-        justify-self: end;
-        align-items: center;
-    }
-
-    .account-control .hamburger-menu {
-        display: block;
-        font-size: 2.5rem;
-    }
-
-
-
-
 }
