@@ -22,7 +22,7 @@ useEffect(() => {
     }
 }, [authToken, dispatch])
   return (
-    <div className='home'>
+    <>
       {
          currentSeller && currentSeller.user_role==="seller"?
          <SellerHomePage/>
@@ -30,7 +30,7 @@ useEffect(() => {
          <BuyerHomePage/>
       }
    
-    </div>
+    </>
   )
 }
 

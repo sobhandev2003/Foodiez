@@ -1,36 +1,36 @@
 import '../css/Navbar.css';
-import React, { useEffect, useRef, useState } from 'react';
-// import logo from photp directory
+import React, { useEffect, useRef, useState } from "react";
+import {
+    FaListAlt
+} from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../photo/logo.jpg';
-import { Link, useNavigate } from 'react-router-dom';
-//import MUI icon
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentSeller } from '../conectWithBackend/currentSellerReducers';
 //Help icon
 import SupportIcon from '@mui/icons-material/Support';
 //cart icon
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 //Add icon
 import AddBoxIcon from '@mui/icons-material/AddBox';
-//toggole buuton
-// import ToggleButton from '@mui/material/ToggleButton';
-// import ViewListIcon from '@mui/icons-material/ViewList';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentSeller } from '../conectWithBackend/currentSellerReducers';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useMediaQuery } from 'react-responsive';
 
-function Navbar() {
+const Navbar = () => {
+    const [showMediaIcons, setShowMediaIcons] = useState(false);
+
+    //SECTION - 
     const navigate = useNavigate();
     const authToken = localStorage.getItem("authToken");
-
-    const navbarRef = useRef();
     const dispatch = useDispatch()
     const cartsProducts = useSelector(state => state.cart.ToCarts);
     const currentSellerDetails = useSelector(state => state.Seller.currentSellerDetails)
-    // const [height, setHeight] = useState('120px');
+    const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
     const [currentSeller, setCurrentSeller] = useState();
-    // const toggoleHeight = () => {
-    //     navbarRef.current.style.height = height;
-    //     height === '70px' ? setHeight('120px') : setHeight('70px');
-    // }
+    //react-responsive
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
     const logOutAccount = () => {
         localStorage.clear();
         navigate('/login')
@@ -47,47 +47,90 @@ function Navbar() {
     }, [authToken, dispatch])
     return (
         <>
-            <div ref={navbarRef} className='navbar'>
+            <nav className="main-nav">
+                {/* 1st logo part  */}
                 <div className="logo">
-                    <Link to="/"><img src={logo} alt='Logo' /></Link>
+                    <NavLink to="/"><img src={logo} alt='Logo' /></NavLink>
                 </div>
 
-                {currentSeller ?
-                    //NOTE - if user log in     
-                    <div className='nav-link-div'>
+                {/* 2nd menu part  */}
+                <div
+                    className={
+                        showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+                    }>
+                    {
+                        currentSeller ?
+                            <ul>
+                                {
+                                    currentSeller.user_role === "seller" ?
+                                        <>
+                                            <li>
+                                                <NavLink to='/add-category' ><AddBoxIcon className='icon' />Add Category</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink className='help color-white' to="/help"><SupportIcon className='icon help-ico' />Help</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink className="order" to='/order'><FaListAlt className='icon list-ico' /> Customer Order </NavLink>
+                                            </li>
+                                            {isMobile && <>
+                                              {  <li><button className='log-out-btn' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
+                                                </li>}
 
-                        {currentSeller.user_role === "seller" ?
-                            //NOTE - Navabar link for Seller account *
-                            <div className='seller-nav-link'>
-                                <Link to='/add-category' ><AddBoxIcon className='icon' />Add Category</Link>
-                                <Link className='help color-white' to="/help"><SupportIcon className='icon help-ico' />Help</Link>
+                                            </>}
 
-                            </div>
-                            :
-                            //NOTE - Navabar link for buyer account
-                            <div className='buyer-nav-link'>
-                                <Link className='cart color-white' to="/cart"><AddShoppingCartOutlinedIcon className='icon cart-ico' />Carts <span className='cart-count'>{cartsProducts.length}</span> </Link>
-                            </div>}
+                                        </> :
+                                        <>
+                                        </>
+                                }
 
-                        <button className='log-out-btn color-white' onClick={logOutAccount}><span>{currentSeller.ownerName.split(" ")[0]}</span>  <LogoutIcon className='icon logout-icon' /> </button>
+                            </ul> :
+                            <>
+                            {isMobile && <ul>
+                                <li><NavLink className='login' to="/login">Sign in</NavLink></li>
+                                        <li><NavLink className='register' to="/register">Sign up</NavLink></li>
+                            </ul>
 
+                            }
+                            
+                            
+                            </>
+                    }
+
+                </div>
+
+                {/* 3rd social media links */}
+                <div className="account-control">
+                    {!isMobile && <><div className='user-account'>
+                        <AccountCircleIcon className='icon' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)} />
                     </div>
-                    :
-                    //NOTE - if user not login
-                    <div>
-                        <Link className='login' to="/login"><span>Sign in</span></Link>
-                        <Link className='register' to="/register"><>Sign up</></Link>
+                        <ul style={{ display: isVisibaleAccounContor ? "block" : "none" }}>
+                            {
+                                currentSeller ?
+                                    <>
+                                        <li><span>{currentSeller.ownerName}</span></li>
+                                        <li><button className='log-out-btn color-white' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
+                                        </li>
+                                    </> : <>
+                                        <li><NavLink className='login' to="/login">Sign in</NavLink></li>
+                                        <li><NavLink className='register' to="/register">Sign up</NavLink></li>
+                                    </>
+                            }
+                        </ul>
+                    </>}
+
+
+                    {/* hamburget menu start  */}
+                    <div className="hamburger-menu">
+                        <button onClick={() => setShowMediaIcons(!showMediaIcons)}>
+                            <GiHamburgerMenu />
+                        </button>
                     </div>
-
-
-                }
-            </div>
-
-
+                </div>
+            </nav>
 
         </>
+    );
+};
 
-    )
-}
-
-export default Navbar
+export default Navbar;

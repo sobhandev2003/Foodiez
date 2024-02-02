@@ -1,243 +1,292 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap");
 
-@keyframes float {
-    0% {
-        transform: translatey(-2px);
-    }
-
-    50% {
-        transform: translatey(-8px);
-    }
-
-    100% {
-        transform: translatey(-2px);
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Jost", sans-serif;
 }
 
-:root {
-    --navbarHeight: 70px;
+html {
+    font-size: 62.5%;
 }
 
-.navbar {
-    overflow: hidden;
-    width: 90%;
-    height: var(--navbarHeight);
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    /* background: none; */
-   
-}
-
-/* -------        login and register link style   --------------- */
-.login,
-.register {
-    margin-right: 20px;
-    font-size: 20px;
-    color: white;
-}
-
-.login {
+a {
     text-decoration: none;
-    /* color: #0707f5; */
 }
 
-.register {
-    /* color: #0707f5; */
+li {
+    list-style: none;
 }
 
-.toggole-btn {
-    display: none;
+/* 
+ 
+
+/* navbar style start  */
+
+.main-nav {
+    width: 100%;
+    height: 10rem;
+    display: grid;
+    grid-template-columns: 10rem 1fr 2fr 1fr 10rem;
+    background-color: rgb(0, 0, 52);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
 }
 
 .logo {
-    /* border: 1px solid; */
-    width: 10%;
-
+    display: grid;
+    grid-column: 2/3;
+    justify-content: start;
+    align-items: center;
+    width: 25%;
 }
+
 
 .logo img {
-
     width: 70%;
     height: 60px;
-
-
 }
 
-.titale {
+.menu-link {
+    grid-column: 3/4;
+}
 
-    width: 18%;
-    overflow: hidden;
-    transform: translate(-40%);
-    width: fit-content;
-    height: var(--navbarHeight);
+.menu-link ul {
+    height: 10rem;
     display: flex;
+    justify-content: space-around;
     align-items: center;
 }
 
-.nav-link-div {
-    /* border: 1px solid; */
-    width: 70%;
-    /* height: 100%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+.user-account .icon {
+    color: white;
+    font-size: 3.5rem;
+    cursor: pointer;
 }
-.nav-link-div div{
-    /* border: 1px solid red; */
-    position: relative;
+
+.account-control {
     height: 100%;
     display: flex;
-    width: 80%;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
 }
 
-.nav-link-div a,
-.nav-link-div .log-out-btn {
-    height: 90%;
-    text-decoration: none;
-    color: white;
-    font-size: 1.3rem;
-    font-weight: 400;
+.account-control ul {
+    position: fixed;
+    background: rgb(2, 121, 115);
+    box-shadow: 3px 5px 1px rgb(139, 160, 162);
+    border-radius: 5px;
+    width: 45rem;
+    padding: 10px;
     display: flex;
     align-items: center;
-    font-family: 'Lato', sans-serif;
+    flex-direction: column;
+    color: white;
+    z-index: 99;
+    top: 6.5rem;   
+    overflow: hidden;
+}
+
+.account-control ul li {
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+}
+.menu-link ul li a,
+.account-control ul li a{
+    color: white;
+}
+.account-control ul li:hover >a{
+    text-decoration: underline;
+    text-decoration-color: rgb(241, 230, 4);
+}
+
+.log-out-btn{
     background: none;
-    border: none;
     outline: none;
-    cursor: pointer;
+    border: none;
+    font-size: 2rem;
+    color: red;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+/* ----------- Grid part ends ----------------- */
 
+.logo h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#eee, rgb(69, 57, 248));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.nav-link-div .icon {
-    font-size: 1.5rem;
-    margin-right: 5px;
-
+.logo h2 span {
+    font-size: 3.5rem;
 }
 
-
-.nav-link-div a:hover,
-.nav-link-div .icon:hover,
-.nav-link-div .log-out-btn:hover {
-    font-weight: 700;
-    text-decoration: underline yellow;
+.menu-link ul li {
+    font-size: 1.8rem;
 }
 
-.cart-count {
-    margin-left: 5px;
-    background-color: blue;
+.menu-link ul li a {
+    text-transform: capitalize;
     color: white;
-    padding: 0px 4px 0px 4px;
-    border-radius: 70%;
-    animation: float 1.5s ease-in-out infinite;
+    transition: 0.5s;
 }
 
-.signin {
-
-
-    width: 17%;
-    font-family: 'Space Grotesk', sans-serif;
-    margin-left: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
+.menu-link ul li:hover>a {
+    transform-origin: left;
+    /* color: rgba(0, 0, 3, 1); */
+    text-decoration: underline;
+    text-decoration-color: rgb(241, 230, 4);
+    transition: 0.5s;
 }
 
-.signin span {
-
-    width: 85%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.account-control ul li {
+    font-size: 1.8rem;
 }
 
-.signin span:hover {
-
-    background-color: aqua;
-    box-shadow: 5px 10px 5px grey;
-    border-radius: 30px;
-}
- .logout-icon{
-    margin-left: 5px;
+.account-control .hamburger-menu {
+    display: none;
 }
 
-  
-@media screen and (max-width:1050px) {
 
-    .navbar {
-        width: 100%;
+
+/* responsive css style  */
+@media (max-width: 1080px) {
+    .main-nav {
+        height: 8rem;
+        grid-template-columns: 2rem 3fr 3fr 1fr 2rem;
     }
 
-    .nav-link-div {
-        width: 80%;
-    }
-
-    .signin {
-        margin-right: 5px;
-        margin-left: 10px;
+    .logo,
+    .menu-link ul,
+    .account-control ul {
+        height: 8rem;
     }
 }
 
+
+/* responsive css style  */
 @media screen and (min-width: 768px) and (max-width:1023px) {
-    .titale h1 {
-        font-size: 2rem;
+    .main-nav {
+        grid-template-columns: 2rem 3fr 5fr 1fr 0.5rem;
     }
 
-    .nav-link-div {
-        width: 85%;
-        padding-right: 10px;
+    .menu-link {
+        /* border: 1px solid red; */
+        width: 95%;
     }
 
-    .nav-link-div a {
-        font-size: 1rem;
+    .menu-link ul li {
+        color: white;
+        font-size: 1.3rem;
     }
 
-    .signin {
-        margin-left: 5px;
-    }
 }
 
 @media screen and (max-width:767px) {
-    .logo {
-        /* border: 1px solid; */
-        width: 20%;
-    }    
-    .toggole-btn {
+    .menu-link {
+        display: none;
+    }
+
+    .main-nav {
+        height: 6rem;
+        grid-template-columns: 1rem 2fr 1fr 1fr 1rem;
+    }
+
+    .logo,
+    .account-control ul {
+        height: 6rem;
+    }
+
+    .account-control .hamburger-menu {
         display: block;
+        font-size: 2.5rem;
     }
 
-    .navbar {
-
-        flex-wrap: wrap;
-
+    .mobile-menu-link {
+        grid-column: 2/4;
+        position: fixed;
+        z-index: 99;
+        top: 6rem;
+        /* right: 1px; */
+        width: 40rem;
     }
 
-    .titale {
-        transform: translate(0);
+    .mobile-menu-link {
+        background-color: white;
+        height: 20rem;
+        display: grid;
+        grid-column: 2/5;
+        align-items: center;
+        padding-left: 3rem;
+        transition: all 2s linear;
+        transform-origin: top;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     }
 
-    .nav-link-div {
-        height: 40%;
+    .mobile-menu-link ul {
+        height: 20rem;
+        display: flex;
+        justify-content: space-around;
         flex-direction: column;
-        width: 100%;
-        flex-direction: row;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    .nav-link-div div{
-        width: 100%;
-    }
+        align-items: start;
+        z-index: 99;
 
-    .nav-link-div a,
-    .nav-link-div .icon {
-        font-size: .8rem;
     }
 }
 
+.mobile-menu-link ul li a {
+    color: darkblue;
+}
+
+.mobile-menu-link ul li:first-child {
+    transition-delay: 0.2s;
+}
+
+
+
+/* .account-control .hamburger-menu {
+    display: block;
+    font-size: 2.5rem;
+} */
+
+
+
+@media (max-width: 520px) {
+    .main-nav {
+        height: 6rem;
+        grid-template-columns: 1rem 4fr 1fr 1fr 1rem;
+    }
+
+    .logo,
+    .account-control ul {
+        height: 6rem;
+    }
+
+
+
+    .account-control {
+        height: 6rem;
+        display: flex;
+        justify-self: end;
+        align-items: center;
+    }
+
+    .account-control .hamburger-menu {
+        display: block;
+        font-size: 2.5rem;
+    }
+
+
+
+
+}

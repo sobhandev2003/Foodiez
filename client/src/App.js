@@ -20,10 +20,10 @@ import EditCategory from './pages/EditCategory';
 function App() {
   return (
     <div className="App">
-      <nav>
+
         <Navbar />
-      </nav>
-      <div className='routes-component-div'>
+  
+      <section className='routes-component-section'>
 
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -36,10 +36,10 @@ function App() {
           <Route path='/edit-category' element={<EditCategory/>} />
           <Route path="*" element={<Home />} />
         </Routes>
-      </div>
-      <div className='footer'>
+      </section>
+      
         <Footer />
-      </div>
+   
 
 
 

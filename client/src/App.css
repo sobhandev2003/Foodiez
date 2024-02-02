@@ -3,26 +3,14 @@
     flex-direction: column;
     height: fit-content;
 }
-nav{
-   
-    background:  #042380;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    /* box-shadow: 5px 8px 5px rgb(207, 217, 230); */
-    z-index: 10;
-    /* flex: 1; */
-}
-.routes-component-div{
- 
-     overflow-x: hidden;
-    position: relative; 
-    flex: 1;
-    padding-top: 70px;
-    z-index: 1;
+
+.routes-component-section{
+
+    /* height: 80vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .footer{
     /* margin-top: 40px; */

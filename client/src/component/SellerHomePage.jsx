@@ -65,7 +65,7 @@ function SellerHomePage() {
   }, [currentSellerDetailes, currentSellerCategory])
 
   return (
-    <div className='seller-home-page'>
+    <>
       <div className='home-above-div'>
         <h3>Start selling food online from your restaurant.</h3>
         <img src={photo1} alt='photo1' />
@@ -85,7 +85,7 @@ function SellerHomePage() {
         }
       </div>
       {deleteCategory && deleteCategoryTeplet}
-    </div>
+    </>
   )
 }
 

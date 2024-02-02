@@ -38,7 +38,7 @@
 }
 
 .shope-list-div,
-.seller-home-page .categories {
+ .categories {
     /* background: rgb(218, 234, 249); */
     width: 100%;
     display: flex;
@@ -50,7 +50,7 @@
 }
 
 .shope-midile-div,
-.seller-home-page .categories {
+ .categories {
     background: rgb(218, 234, 249);
     width: 99vw;
 }
@@ -133,7 +133,7 @@
 
 
 /*------------------------// SECTION -Seller home page CSS -----------------------*/
-.seller-home-page .home-above-div h3 {
+ .home-above-div h3 {
     position: absolute;
     left: 15%;
     width: 20%;
@@ -143,14 +143,14 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
-.seller-home-page .seller-category {
+ .seller-category {
     position: relative;
     width: 25vw;
     height: 80px;
     overflow: hidden;
 }
 
-.seller-home-page .seller-category h2 {
+ .seller-category h2 {
     text-align: center;
     font-size: 1.2rem;
     padding: 5px;
@@ -165,7 +165,7 @@
     cursor: pointer;
 }
 
-.seller-home-page .seller-category .edit-fab {
+ .seller-category .edit-fab {
     background-color: blue;
     width: 10%;
     height: 10%;
@@ -177,7 +177,7 @@
     display: none;
     transition: all 2s ease;
 }
-.seller-home-page .seller-category .delete-category-btn {
+ .seller-category .delete-category-btn {
     border: none;
     background: none;
     outline: none;
@@ -188,8 +188,8 @@
     cursor: pointer;
     display: none;
 }
-.seller-home-page .seller-category h2:hover+.edit-fab,
-.seller-home-page .seller-category:hover .delete-category-btn,
+ .seller-category h2:hover+.edit-fab,
+ .seller-category:hover .delete-category-btn,
 .seller-category .edit-fab:hover{
     display: block;
 }
