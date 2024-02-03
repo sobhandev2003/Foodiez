@@ -1,24 +1,25 @@
-.login-page{
-    width: 100vw;
-    height: 70vh;
-    border: 1px solid ;
-    border-radius: 10px;
+ .login-form {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    flex-direction: column;
+    gap: 10px;
 
-.login-page form{
-   
-    border: 1px solid red;
-    width: 40%;
-    height: 70%;
+    
+  }
+  
+  .login-form > div:nth-child(2){
+    /* border: 1px solid red; */
     display: flex;
+    width: 98%;
+    height: 70%;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-}
-.login-page form input{
-    width: 60%;
-    padding: 5px 5px 5px 5px;
-}
+  }
+  .login-form p{
+    overflow: hidden;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  .login-form p a{
+    font-size: 1.2rem;
+  }

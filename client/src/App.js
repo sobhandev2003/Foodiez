@@ -9,7 +9,7 @@ import Footer from './component/Footer';
 import Contact from './pages/Contact';
 import Shope from './pages/Shope';
 import Cart from './pages/Cart';
-import Login from './pages/Login';
+
 import Register from './pages/Register';
 
 import EditCategory from './pages/EditCategory';
@@ -27,7 +27,6 @@ function App() {
 
         <Routes>
           <Route exact path='/' element={<Home />} />
-          <Route exact path='/login' element={<Login />} />
           <Route exact path='/register' element={<Register />} />
           <Route exact path='/help' element={<Contact />} />
           <Route path='/restaurant/:id' element={<Shope />} />

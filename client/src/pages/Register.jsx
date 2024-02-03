@@ -68,16 +68,18 @@ function Register() {
     return (
         <div className='register-page'>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        <input type="radio" name="user_role" value="buyer" onChange={handleInputChange} defaultChecked />
-                        <span>Buyer</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="user_role" value="seller" onChange={handleInputChange} />
-                        <span>Seller</span>
-                    </label>
-                </div>
+            <div className="wrapper">
+          <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} checked />
+          <input type="radio" name="user_role" value="seller" id="option-2" onChange={handleInputChange}/>
+          <label htmlFor="option-1" className="option option-1">
+            <div className="dot"></div>
+            <span>Buyer</span>
+          </label>
+          <label htmlFor="option-2" className="option option-2">
+            <div className="dot"></div>
+            <span>Seller</span>
+          </label>
+        </div>
                 <div>
                     <input type="text" name="restaurantName" placeholder="Restaurant name" onChange={handleInputChange} required />
                     <input type="text" name="ownerName" placeholder="Owner name" onChange={handleInputChange} required />

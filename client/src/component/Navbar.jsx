@@ -20,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useMediaQuery } from 'react-responsive';
 import Model from './Model';
 import AddCategory from './AddCategory';
+import Login from '../component/Login';
 
 const Navbar = () => {
     const [showMediaIcons, setShowMediaIcons] = useState(false);
@@ -33,18 +34,29 @@ const Navbar = () => {
     const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
     const [currentSeller, setCurrentSeller] = useState();
     const [isCategoryAdd,setIsCategoryAdd]=useState(false)
+    const [isLogin,setIsLogin]=useState(false)
     //react-responsive
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
     const logOutAccount = () => {
         localStorage.clear();
-        navigate('/login')
+        navigate('/')
         window.location.reload()
+        setIsLogin(true);
     }
     //NOTE - pop - up Model for add a new category
     const addCategoryTemplet=(
         <Model>
             <CloseIcon className='cancel-model' onClick={() => { setIsCategoryAdd(false) }} />
             <AddCategory setIsCategoryAdd={setIsCategoryAdd}/>
+            
+        </Model>
+    )
+
+    //NOTE - sign in pop up model
+    const signInTemplet=(
+        <Model>
+             <CloseIcon className='cancel-model' onClick={() => { setIsLogin(false) }} />
+             <Login setIsLogin={setIsLogin}/>
         </Model>
     )
     useEffect(() => {
@@ -98,7 +110,7 @@ const Navbar = () => {
                             </ul> :
                             <>
                                 {isMobile && <ul>
-                                    <li><NavLink className='login' to="/login">Sign in</NavLink></li>
+                                    <li><NavLink className='login' to="/" onClick={()=>setIsLogin(true)}>Sign in</NavLink></li>
                                     <li><NavLink className='register' to="/register">Sign up</NavLink></li>
                                 </ul>
 
@@ -123,7 +135,7 @@ const Navbar = () => {
                                         <li><button className='log-out-btn color-white' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
                                         </li>
                                     </> : <>
-                                        <li><NavLink className='login' to="/login">Sign in</NavLink></li>
+                                        <li><NavLink className='login' to="/"  onClick={()=>setIsLogin(true)}>Sign in</NavLink></li>
                                         <li><NavLink className='register' to="/register">Sign up</NavLink></li>
                                     </>
                             }
@@ -140,6 +152,7 @@ const Navbar = () => {
                 </div>
             </nav>
                             {isCategoryAdd && addCategoryTemplet}
+                            {isLogin && signInTemplet}
         </>
     );
 };

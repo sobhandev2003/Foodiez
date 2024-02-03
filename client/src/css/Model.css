@@ -16,7 +16,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 30rem;
+    min-width: 40vw;
+    max-width: 95vw;
     height: 50vh;
     /* height: ; */
     color: rgb(2, 2, 2);

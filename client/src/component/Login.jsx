@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import '../css/Login.css'
-import Alert from '../component/Alert';
-import { validateEmail, validatePassword } from '../component/inputValidator';
+import Alert from './Alert';
+import { validateEmail, validatePassword } from './inputValidator';
 import { useDispatch } from 'react-redux';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginSeller } from '../conectWithBackend/loginSeller';
 import { fetchCurrentSeller } from '../conectWithBackend/currentSellerReducers';
-function Login() {
+function Login({ setIsLogin }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const authorizeSeller = useSelector(state => state.Seller.authorizeSeller)
@@ -43,6 +43,7 @@ function Login() {
         if (authData) {
           localStorage.setItem("authToken", authData);
           dispatch(fetchCurrentSeller(authData));
+          setIsLogin(false);
           navigate('/')
         }
       }
@@ -55,25 +56,30 @@ function Login() {
     }
   }, [navigate])
   return (
-    <div className='login-page'>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            <input type="radio" name="user_role" value="buyer" onChange={handleInputChange} defaultChecked />
+    <>
+      <form className='model-element login-form' onSubmit={handleSubmit}>
+        <div className="wrapper">
+          <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} checked />
+          <input type="radio" name="user_role" value="seller" id="option-2" onChange={handleInputChange}/>
+          <label htmlFor="option-1" className="option option-1">
+            <div className="dot"></div>
             <span>Buyer</span>
           </label>
-          <label>
-            <input type="radio" name="user_role" value="seller" onChange={handleInputChange} />
+          <label htmlFor="option-2" className="option option-2">
+            <div className="dot"></div>
             <span>Seller</span>
           </label>
         </div>
-        <div>
+        <div >
           <input type="email" name="email" placeholder="Email" onChange={handleInputChange} required />
           <input type="password" name="password" placeholder="Password" onChange={handleInputChange} required />
           <input type="submit" value="Submit" />
         </div>
+      <p>Need an account?
+      <Link to="/register" onClick={()=>setIsLogin(false)}> Sign up </Link>now!
+      </p>
       </form>
-    </div>
+    </>
   )
 }
 
