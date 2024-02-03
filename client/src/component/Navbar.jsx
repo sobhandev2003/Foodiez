@@ -16,7 +16,10 @@ import SupportIcon from '@mui/icons-material/Support';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CloseIcon from '@mui/icons-material/Close';
 import { useMediaQuery } from 'react-responsive';
+import Model from './Model';
+import AddCategory from './AddCategory';
 
 const Navbar = () => {
     const [showMediaIcons, setShowMediaIcons] = useState(false);
@@ -29,6 +32,7 @@ const Navbar = () => {
     const currentSellerDetails = useSelector(state => state.Seller.currentSellerDetails)
     const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
     const [currentSeller, setCurrentSeller] = useState();
+    const [isCategoryAdd,setIsCategoryAdd]=useState(false)
     //react-responsive
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
     const logOutAccount = () => {
@@ -36,6 +40,13 @@ const Navbar = () => {
         navigate('/login')
         window.location.reload()
     }
+    //NOTE - pop - up Model for add a new category
+    const addCategoryTemplet=(
+        <Model>
+            <CloseIcon className='cancel-model' onClick={() => { setIsCategoryAdd(false) }} />
+            <AddCategory setIsCategoryAdd={setIsCategoryAdd}/>
+        </Model>
+    )
     useEffect(() => {
         setCurrentSeller(currentSellerDetails)
         // console.log(currentSellerDetails)
@@ -65,7 +76,7 @@ const Navbar = () => {
                                     currentSeller.user_role === "seller" ?
                                         <>
                                             <li>
-                                                <NavLink to='/add-category' ><AddBoxIcon className='icon' />Add Category</NavLink>
+                                                <NavLink to='/' onClick={()=>setIsCategoryAdd(true)}><AddBoxIcon className='icon' />Add Category</NavLink>
                                             </li>
                                             <li>
                                                 <NavLink className='help color-white' to="/help"><SupportIcon className='icon help-ico' />Help</NavLink>
@@ -128,7 +139,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-
+                            {isCategoryAdd && addCategoryTemplet}
         </>
     );
 };

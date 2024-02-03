@@ -4,7 +4,8 @@ import { currentSellerCategory } from "../fetures/seller";
 //NOTE - fetch current seller category
 export const fetchCurrentSellerCategory = (sellerData) => async (dispatch) => {
     const id = sellerData.id;
-    console.log(id);
+    // console.log(id);
+    // console.log(id);
     try {
         const response = await fetch(`http://localhost:5001/food/category/${id}`, {
             method: "GET"
@@ -27,7 +28,7 @@ export const fetchCurrentSellerCategory = (sellerData) => async (dispatch) => {
 
 //NOTE - create new category
 
-export const CreateNewCategory = async (categoryData) => {
+export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(dispatch) => {
     const authToken = localStorage.getItem("authToken")
     if (authToken) {
         try {
@@ -42,6 +43,7 @@ export const CreateNewCategory = async (categoryData) => {
             if (response.ok) {
                 // const data = await response.json();  
                 Alert("success", <p>Successfully Create a new catagory</p>)
+                dispatch(fetchCurrentSellerCategory(currentSellerDetailes))
             } else {
                 const errorData = await response.json();
                 Alert("error", <p>{errorData.massage}</p>)

@@ -11,7 +11,7 @@ import Shope from './pages/Shope';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import AddCategory from './pages/AddCategory';
+
 import EditCategory from './pages/EditCategory';
 
 
@@ -32,7 +32,6 @@ function App() {
           <Route exact path='/help' element={<Contact />} />
           <Route path='/restaurant/:id' element={<Shope />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/add-category' element={<AddCategory />} />
           <Route path='/edit-category' element={<EditCategory />} />
           <Route path="*" element={<Home />} />
         </Routes>

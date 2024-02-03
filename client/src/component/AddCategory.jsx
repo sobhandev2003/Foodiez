@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import '../css/AddCategory.css'
 import { CreateNewCategory } from '../conectWithBackend/Catagory';
+import { useDispatch, useSelector } from 'react-redux';
 
-function AddCategory() {
+function AddCategory({setIsCategoryAdd}) {
+    const dispatch=useDispatch();
+    const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
     const [formDta,setFormData]=useState();
     //NOTE - handel form submit
     const handelSubmit=(e)=>{
         e.preventDefault();
-        // console.log(formDta);
-        CreateNewCategory(formDta);
+        dispatch(CreateNewCategory(formDta,currentSellerDetailes));
+        setIsCategoryAdd(false);
     }
 
     //NOTE - Handel input change
@@ -20,12 +23,12 @@ function AddCategory() {
         }))
     }
   return (
-    <div className='add-category-page'>
-        <form onSubmit={handelSubmit}>
+    <>
+        <form className='model-element' onSubmit={handelSubmit}>
         <input type="text" name="categoryname" onChange={handelInputChage} placeholder='Enter Category name'/>
-        <input type="submit" value="Submit" />
+        <button type="submit">Submit</button>
         </form>
-    </div>
+    </>
   )
 }
 
