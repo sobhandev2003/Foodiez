@@ -21,11 +21,11 @@
     background: rgb(246, 248, 252);
     flex-direction: column;
     justify-content: space-around;
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: width  0.3s;
     transition: hight  0.3s;
 }
-.shope-list:hover
+.shope-list-item:hover >.shope-list
 {
     
    

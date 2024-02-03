@@ -39,9 +39,9 @@ const categorySchema=new mongoose.Schema(
                 required:true,
                 ref:"Seller"
         },
-        categoryname:{
+        name:{
                 type:String,
-                required:[true,"categoryname mandatory"]
+                required:[true,"name mandatory"]
         },
         item:[itemSchema]
     },

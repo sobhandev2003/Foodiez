@@ -92,7 +92,7 @@ export const deleteCategoryById = (authToken, password, category, currentSellerD
                 if (response.ok) {
                     const data = await response.json();
                     dispatch(fetchCurrentSellerCategory(currentSellerDetailes))
-                    Alert("success", <p>Successfully Delete category  \{data.categoryname}</p>)
+                    Alert("success", <p>Successfully Delete category  {data.name}</p>)
                     navigate('/')
                 } else {
                     const errorData = await response.json();

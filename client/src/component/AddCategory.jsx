@@ -3,33 +3,35 @@ import '../css/AddCategory.css'
 import { CreateNewCategory } from '../conectWithBackend/Catagory';
 import { useDispatch, useSelector } from 'react-redux';
 
-function AddCategory({setIsCategoryAdd}) {
-    const dispatch=useDispatch();
+function AddCategory({ setIsCategoryAdd }) {
+    const dispatch = useDispatch();
     const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
-    const [formDta,setFormData]=useState();
+    const [formDta, setFormData] = useState();
     //NOTE - handel form submit
-    const handelSubmit=(e)=>{
+    const handelSubmit = (e) => {
         e.preventDefault();
-        dispatch(CreateNewCategory(formDta,currentSellerDetailes));
+        dispatch(CreateNewCategory(formDta, currentSellerDetailes));
         setIsCategoryAdd(false);
     }
 
     //NOTE - Handel input change
-    const handelInputChage=(e)=>{
-        const { name, value } = e.target;
-        setFormData((prevData)=>({
+    const handelInputChage = (e) => {
+        const { name, value, type } = e.target;
+        const inputValue = type === "text" ? value.charAt(0).toUpperCase() + value.slice(1) : value;
+        console.log(inputValue);
+        setFormData((prevData) => ({
             ...prevData,
-            [name]:value
+            [name]: inputValue
         }))
     }
-  return (
-    <>
-        <form className='model-element' onSubmit={handelSubmit}>
-        <input type="text" name="categoryname" onChange={handelInputChage} placeholder='Enter Category name'/>
-        <button type="submit">Submit</button>
-        </form>
-    </>
-  )
+    return (
+        <>
+            <form className='model-element' onSubmit={handelSubmit}>
+                <input type="text" name="name" onChange={handelInputChage} placeholder='Enter Category name' />
+                <button type="submit">Submit</button>
+            </form>
+        </>
+    )
 }
 
 export default AddCategory

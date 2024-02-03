@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import photo1 from '../photo/photo1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import '../css/Home.css'
-import { Fab } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import { FiEdit } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { fetchItemByCategoryId } from '../conectWithBackend/item';
 function SellerHomePage() {
@@ -15,7 +14,7 @@ function SellerHomePage() {
 
   const editCategory = (catagory) => {
     dispatch(fetchItemByCategoryId(catagory.id))
-    localStorage.setItem("editCategory", JSON.stringify({ id: catagory.id, categoryname: catagory.categoryname }))
+    localStorage.setItem("editCategory", JSON.stringify({ id: catagory.id, name: catagory.name }))
     navigate('/edit-category')
   }
 
@@ -36,10 +35,9 @@ function SellerHomePage() {
           categories && categories.length > 0 ? categories.map((catagory) => {
 
             return <div className='seller-category' key={catagory.id}>
-              <h2>{catagory.categoryname} </h2>
-              <Fab aria-label="edit" className='edit-fab' onClick={() => { editCategory(catagory) }}>
-                <Edit />
-              </Fab>
+              <h2>{catagory.name} </h2>
+              <FiEdit aria-label="edit" className='edit-fab' onClick={() => { editCategory(catagory) }} />
+
               
             </div>
           }) : <h1>loading</h1>

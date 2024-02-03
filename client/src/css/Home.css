@@ -127,17 +127,18 @@
 }
 
  .seller-category .edit-fab {
-    background-color: blue;
     width: 10%;
-    height: 10%;
+    height: 41%;
     border: none;
+    border-radius: 70%;
     position: absolute;
-    top: 8px;
-    right: 0;
-    color: white;
+    top: 19px;
+    right: 4px;
+    color: #1515d0;
     display: none;
     transition: all 2s ease;
     z-index: 5;
+    cursor: pointer;
 }
  .seller-category .delete-category-btn {
     border: none;

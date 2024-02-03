@@ -11,7 +11,7 @@ const getCategories = asyncHandler(async (req, res) => {
     const categories = responce.map((data) => {
         const category = {
             id: data.id,
-            categoryname: data.categoryname,
+            name: data.name,
             item: data.item
         }
         return category;
@@ -34,19 +34,19 @@ const getCategory = asyncHandler(async (req, res) => {
 //NOTE - create a category 
 // route('/')
 const createCategory = asyncHandler(async (req, res) => {
-    const { categoryname, item } = req.body;
-    //  console.log(categoryname);
-    if (!categoryname) {
+    const { name, item } = req.body;
+    //  console.log(name);
+    if (!name) {
         res.status(401)
-        throw new Error("categoryname Give mandatory")
+        throw new Error("Category name Give mandatory")
     }
     if (!item) {
-        const newCategory = await Category.create({ seller_Id: req.seller.id, categoryname });
+        const newCategory = await Category.create({ seller_Id: req.seller.id, name });
         res.status(200).json(newCategory);
     }
     else {
         const newCategory = await Category(
-            { categoryname, item }
+            { name, item }
         )
         const saveCategory = await newCategory.save()
         res.status(200).json(saveCategory)

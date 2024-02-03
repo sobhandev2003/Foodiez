@@ -14,6 +14,9 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+input[type=text]{
+  text-transform:capitalize;
+}
 a {
   text-decoration: none;
 }
@@ -28,5 +31,8 @@ li {
   height:10vh ;
 }
 button{
-  
+  background: none;
+  border: none;
+  outline: none;
 }
+
