@@ -1,24 +1,80 @@
 .register-page{
+    /* position: relative; */
     width: 100vw;
-    height: 70vh;
+    /* height: 70vh; */
     border: 1px solid ;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.register-page form{
+.register-page .account-register-form{
    
-    border: 1px solid red;
-    width: 40%;
-    height: 70%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px  gray;
+    margin: 5rem 1rem 5rem 0.5rem;
+    
 }
-.register-page form input{
-    width: 60%;
-    padding: 5px 5px 5px 5px;
+.register-page .account-register-form > div:nth-child(2){
+    /* border: 1px solid red; */
+    width: 95%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+.register-page form input,
+.register-page .input{
+    width: 90%;
+    padding: 6px 5px 6px 5px;
+    margin: 5px 5px 5px 5px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.register-page .account-register-form button{
+    width: 50%;
+    border: 2px solid green;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: green;
+    padding: 7px 2px 7px 3px;
+}
+.account-register-form button:hover{
+    background-color: green;
+    color: white;
+    box-shadow: 5px 5px 5px grey;
+}
+/* responsive */
+@media screen and (max-width:1000px){
+    .register-page{
+        flex-direction: column;
+    }
+    .register-page .account-register-form{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:580px){
+    .register-page .account-register-form{
+        width: 80%;
+    }
+}
+
+
+ @media screen and (max-width:426px){
+ 
+    .register-page .account-register-form{
+        width: 90%;
+    }
 }

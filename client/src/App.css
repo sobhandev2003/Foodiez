@@ -97,3 +97,13 @@
   #option-2:checked:checked ~ .option-2 span{
     color: #fff;
   }
+ .App .invalid-input {
+    border-color: red;
+    outline-color: red;
+  }
+  .App .valid-input{
+    border-color: green;
+    outline-color: green;
+  }
+  
+  

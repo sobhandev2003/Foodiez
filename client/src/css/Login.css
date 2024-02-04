@@ -1,7 +1,8 @@
+ 
  .login-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+   /* height: max-content; */
 
     
   }
@@ -18,8 +19,15 @@
   .login-form p{
     overflow: hidden;
     font-size: 1rem;
+    height: 30px;
     margin-bottom: 15px;
   }
   .login-form p a{
     font-size: 1.2rem;
+  }
+  .forgot-password-link{
+   
+    font-size:1.2rem ;
+    height: 30px;
+    overflow: hidden;
   }

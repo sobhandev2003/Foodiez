@@ -18,8 +18,9 @@
     transform: translate(-50%, -50%);
     min-width: 40vw;
     max-width: 95vw;
-    height: 50vh;
-    /* height: ; */
+   height: 50vh;
+   max-height: 60vh;
+    
     color: rgb(2, 2, 2);
     z-index: 202;
     display: flex;
