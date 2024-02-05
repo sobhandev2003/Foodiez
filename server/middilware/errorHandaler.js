@@ -14,12 +14,18 @@ const errorHandler=(err,req,res,next)=>{
             break; 
         case httperrors.InvalidFormat:
             res.json({titale:"InvalidFormat" ,message:err.message, stackTrace:err.stack});
+            break;
+              case httperrors.Conflict:
+            res.json({titale:"Conflict" ,message:err.message, stackTrace:err.stack});
+            break;
+            case httperrors.Invalid_input:
+            res.json({titale:"Invalid input" ,message:err.message, stackTrace:err.stack});
             break;  
         case httperrors.Server_Error:
             res.json({titale:"Server Error" ,message:err.message, stackTrace:err.stack});
             break;      
         default:
-            res.json("No error, all god");
+            res.json({message:err.message});
             break;
     }
 

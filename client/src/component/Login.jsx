@@ -62,8 +62,8 @@ function Login({ setIsLogin }) {
   }, [navigate])
   return (
     <>
-    {!isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px front-size-2rem'>Login Account</h2>}
-      {isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px reset-password-h2'>Reset Account Password</h2>}   
+    {!isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px front-size-2rem height-40'>Login Account</h2>}
+      {isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px reset-password-h2 front-size-2rem'>Reset Account Password</h2>}   
       <form className='model-element login-form' onSubmit={handleSubmit}>
         <div className="wrapper">
           <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} defaultChecked />
@@ -80,7 +80,7 @@ function Login({ setIsLogin }) {
         <div >
           <input type="email" name="email" placeholder="Email" onChange={handleInputChange} required />
           <input type="password" name="password" placeholder={isForgotPassword?"Enter new Password":"Password"} onChange={handleInputChange} required />
-          <input type="submit" value="Submit" />
+          <button type="submit">Submit</button>
         </div>
         <Link to="/" className='forgot-password-link'
         onClick={()=>{

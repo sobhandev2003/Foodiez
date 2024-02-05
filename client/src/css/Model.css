@@ -11,7 +11,8 @@
 
 .modal-container {
     padding-top: 10px;
-   
+   background-color: white;
+   border-radius: 10px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -72,13 +73,15 @@
     cursor: pointer;
 }
 .modal-container form button:hover{
-    border: 1px solid black;
+    border: 1px solid rgb(4, 249, 8);
     background: none;
+    color: green;
+    box-shadow: 5px 5px 5px grey;
 }
 .cancel-model{
     position: fixed;
-    top: -2px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
     color: red;
     cursor: pointer;
     

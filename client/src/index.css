@@ -52,3 +52,10 @@ letter-spacing: 5px;
 .front-size-2rem{
   font-size: 2rem;
 }
+.height-40{
+height: 40px;
+}
+.text-center{
+  text-align: center;
+}
+

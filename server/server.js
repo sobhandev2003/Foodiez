@@ -22,6 +22,8 @@ app.use('/food/category',require('./routers/categoryRouters'));
 
 app.use('/food/user/seller',require('./routers/sellerRouters'));
 
+app.use('/food/user/buyer',require('./routers/buyerRouters'))
+
 app.use(errorHandler);
 
 app.listen(port,()=>{

@@ -156,7 +156,7 @@ const Navbar = () => {
                             {
                                 currentSeller ?
                                     <>
-                                        <li><span>{currentSeller.ownerName}</span></li>
+                                        <li className='text-center' style={{width:"100%"}}><span className='front-size-2rem' style={{width:"100%"}} >{currentSeller.ownerName}</span></li>
                                         <li><button className='change-profile-photo' onClick={()=>setIsProfilePhotoUpdate(true)}>Change profile photoT <FaCloudUploadAlt/></button></li>
                                         <li><button className='log-out-btn color-white' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
                                         </li>

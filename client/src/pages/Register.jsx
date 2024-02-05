@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerSeller } from '../conectWithBackend/Seller';
 import { useNavigate } from 'react-router-dom';
 import { createSller } from '../fetures/seller';
-import 'react-inputs-validation/lib/react-inputs-validation.min.css';
+import registerPageGif from '../photo/register-page-gif.gif'
 function Register() {
     window.scrollTo(0, 50)
     const dispatch = useDispatch();
@@ -74,6 +74,11 @@ function Register() {
     }, [createSllerAccout, dispatch, navigate])
     return (
         <div className='register-page'>
+            <div className='gif-div'>
+                <img src={registerPageGif} alt='GIF'/>
+            </div>
+            <div>
+                <h3>Create a new Account</h3>
             <form className="account-register-form" onSubmit={handleSubmit}>
                 <div className="wrapper">
                     <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} defaultChecked />
@@ -106,6 +111,7 @@ function Register() {
                     </div>}
                 <button >Submit</button>
             </form>
+            </div>
         </div>
     )
 }

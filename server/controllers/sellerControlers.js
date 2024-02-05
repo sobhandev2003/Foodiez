@@ -29,7 +29,7 @@ const registerSeller = asyncHandler(async (req, res) => {
   const isAvailableMail = await Seller.findOne({ email });
   // console.log(data);
   if (isAvailableMail) {
-    res.status(401);
+    res.status(409);
     throw new Error("All ready register this email")
   }
   const isAvailableMobile = await Seller.findOne({ mobile });
@@ -97,7 +97,6 @@ const loginSeller = asyncHandler(async (req, res) => {
         seller: {
           user_role: seller.user_role,
           ownerName: seller.ownerName,
-
           restaurantName: seller.restaurantName,
           email: seller.email,
 
@@ -137,7 +136,7 @@ const updateImage = asyncHandler(async (req, res) => {
 
   if (!seller) {
     res.status(404);
-    throw new Error("seller not found")
+    throw new Error("Account not found")
   }
   //SECTION -  - check all inputs are valid or not
   if (!buffer || !mimetype || !size) {
@@ -150,7 +149,7 @@ const updateImage = asyncHandler(async (req, res) => {
     throw new Error("Except only jpeg or png type image");
   }
 
-  if (size > (2 * 1024 * 1024)) {
+  if (size > (3 * 1024 * 1024)) {
     res.status(403)
     throw new Error("photo must be less than 2mb")
   }

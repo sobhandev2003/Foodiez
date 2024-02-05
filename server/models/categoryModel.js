@@ -43,6 +43,7 @@ const categorySchema=new mongoose.Schema(
                 type:String,
                 required:[true,"name mandatory"]
         },
+        
         item:[itemSchema]
     },
     {

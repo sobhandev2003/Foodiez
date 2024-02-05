@@ -13,7 +13,10 @@ const jwt=require('jsonwebtoken');
                         res.status(401);
                     throw new Error("Seller not authorized");
                     }
+                    if(decode.seller)
                     req.seller=decode.seller;
+                    if(decode.buyer)
+                    req.buyer=decode.buyer;
                     next();
                 })
 
