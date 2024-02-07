@@ -12,13 +12,14 @@ import { createNewItem, fetchItemByCategoryId, updateItem } from '../services/it
 import '../css/EditCategory.css'
 import { useDispatch, useSelector } from 'react-redux';
 import Delete from '../component/Delete';
+import loadingSpinner from '../photo/loading-spinner.gif'
 function EditCategory() {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const authToken = localStorage.getItem("authToken");
     const category = JSON.parse(localStorage.getItem("editCategory"))
     const Items = useSelector(state => state.catagory.items)
-    const [items, setItems] = useState();
+    const [items, setItems] = useState(null);
     const [isAddIteam, setIsAddIteam] = useState(false);
     const [editItem, setEditItem] = useState();
     const [formData, setFormData] = useState();
@@ -141,7 +142,7 @@ function EditCategory() {
 
             <div className='item-div'>
                 {
-                    items && items.map((item) => {
+                    items? <> {items.length!==0? <> {items.map((item) => {
                         const { name, description, price, photo, photoType, rating } = item;
                         // console.log(item._id);
                         return <div key={item._id} className='shope-list-item'>
@@ -160,7 +161,7 @@ function EditCategory() {
 
                             </div>
                         </div>
-                    })
+                    })}</>:<p style={{fontSize:"1.5rem"}}>No Item Present for this category</p>}</>:<><img src={loadingSpinner} alt='loading...'/> </>
                 }
 
             </div>

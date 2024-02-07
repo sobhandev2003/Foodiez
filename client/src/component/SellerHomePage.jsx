@@ -5,12 +5,13 @@ import '../css/Home.css'
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { fetchItemByCategoryId } from '../services/item';
+import loadingSpinner from '../photo/loading-spinner.gif'
 function SellerHomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
   const currentSellerCategory = useSelector(state => state.Seller.currentSellerCategory);
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState(null);
 
   const editCategory = (catagory) => {
     dispatch(fetchItemByCategoryId(catagory.id))
@@ -32,7 +33,7 @@ function SellerHomePage() {
       </div>
       <div className='categories'>
         {
-          categories && categories.length > 0 ? categories.map((catagory) => {
+          categories?<>{ categories.length > 0 ? categories.map((catagory) => {
 
             return <div className='seller-category' key={catagory.id}>
               <h2>{catagory.name} </h2>
@@ -40,8 +41,9 @@ function SellerHomePage() {
 
               
             </div>
-          }) : <h1>loading</h1>
+          }) : <h1>Don't have any category</h1>}</> :<><img src={loadingSpinner} alt='Loading..'/></>
         }
+        {/* <img src={loadingSpinner} alt='Loading..'/> */}
       </div>
   
     </>
