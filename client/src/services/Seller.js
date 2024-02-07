@@ -2,6 +2,7 @@ import Alert from "../component/Alert";
 import { createSller } from "../fetures/seller";
 import { currentSeller } from "../fetures/seller";
 import { fetchCurrentSellerCategory } from "./Catagory";
+import { baseUrl } from "./baseUrl";
 
 //NOTE - register a new Seller
 
@@ -20,7 +21,7 @@ export const registerSeller = (sellerData) => async (dispatch) => {
         formData.append('photo', photo);
         formData.append('password', password);
 
-        const response = await fetch('http://localhost:5001/food/user/seller/register', {
+        const response = await fetch(`${baseUrl}/food/user/seller/register`, {
             method: 'POST',
             headers: {
                 // Add any additional headers if needed
@@ -51,7 +52,7 @@ export const registerSeller = (sellerData) => async (dispatch) => {
 export const loginSeller=async(sellerData)=>{
 
     try {
-        const response=await fetch('http://localhost:5001/food/user/seller/login',{
+        const response=await fetch(`${baseUrl}/food/user/seller/login`,{
             method: 'POST',
             headers: {
                 "Content-Type":"application/json"
@@ -84,7 +85,7 @@ export const loginSeller=async(sellerData)=>{
 
 export const fetchCurrentSeller = (authToken) => async (dispatch) => {
     try {
-        const response = await fetch('http://localhost:5001/food/user/seller/current', {
+        const response = await fetch(`${baseUrl}/food/user/seller/current`, {
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + authToken,
@@ -112,7 +113,7 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
 export const forgotPassword=async(sellerData,setIsForgotPassword)=>{
     console.log(sellerData);
     try {
-        const response = await fetch('http://localhost:5001/food/user/seller/forgotpassword',{
+        const response = await fetch(`${baseUrl}/food/user/seller/forgotpassword`,{
             method:"PUT",
             headers:{
                 "Content-Type":"application/json"
@@ -140,7 +141,7 @@ export const updateProfilePhoto=(authToken,photo,setIsProfilePhotoUpdate)=>async
     try {
         const formData=new FormData();
         formData.append("photo",photo);
-        const response=await fetch("http://localhost:5001/food/user/seller/updateimage",{
+        const response=await fetch(`${baseUrl}/food/user/seller/updateimage`,{
         method:"POST",
         headers: {
             'Authorization': 'Bearer ' + authToken,

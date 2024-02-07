@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from 'react';
 import '../css/Home.css';
 import BuyerHomePage from '../component/BuyerHomePage';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentSeller } from '../conectWithBackend/Seller';
+import { fetchCurrentSeller } from '../services/Seller';
 import SellerHomePage from '../component/SellerHomePage';
 
 function Home() {

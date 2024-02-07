@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../css/AddCategory.css'
-import { CreateNewCategory } from '../conectWithBackend/Catagory';
+import { CreateNewCategory } from '../services/Catagory';
 import { useDispatch, useSelector } from 'react-redux';
 
 function AddCategory({ setIsCategoryAdd }) {

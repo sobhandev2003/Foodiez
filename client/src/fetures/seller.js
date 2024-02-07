@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../services/baseUrl";
 const fetchSeller = async (quary) => {
   try {
     console.log("check");
-    const response = await fetch(`http://localhost:5001/food/user/seller?restaurantName=${quary}`)
+    const response = await fetch(`${baseUrl}/food/user/seller?restaurantName=${quary}`)
     const data = await response.json();
     return data;
   } 

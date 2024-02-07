@@ -4,36 +4,35 @@ const jwt = require('jsonwebtoken');
 const Seller = require('../models/sellerModel');
 const { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator } = require('../validator');
 const Category = require('../models/categoryModel');
-
+const DeliveryAddress = require('../models/deliveryAddressModel');
+const Order = require('../models/orderModel')
+const Buyer = require('../models/buyerModel');
+const DeliveryAddressa = require('../models/deliveryAddressModel')
 //NOTE - for register a saller
 // Router.post('/register',)
-
 const registerSeller = asyncHandler(async (req, res) => {
-  //console.log(req.body);
-  //console.log(req.file);
+
   const { restaurantName, ownerName, email, mobile, address, password } = req.body;
   const { buffer, mimetype, size } = req.file
-  // //console.log(req.body);
   //NOTE - check inputs are valid or not
   if (!restaurantName || !ownerName || !email || !mobile || !password || !address || !buffer || !mimetype) {
     res.status(403)
     throw new Error("input format is not valid")
   }
 
-  //console.log("ch");
   if (restaurantName.length < 4 || ownerName.length < 4 || !wordsValidator(address) || !validateEmail(email) || !validatePhoneNumber(mobile) || !validatePassword(password)) {
     res.status(403)
     throw new Error("input format is not valid")
   }
-  //console.log("ch1");
+
   const isAvailableMail = await Seller.findOne({ email });
-  // console.log(data);
+
   if (isAvailableMail) {
     res.status(409);
     throw new Error("All ready register this email")
   }
   const isAvailableMobile = await Seller.findOne({ mobile });
-  // console.log(data);
+
   if (isAvailableMobile) {
     res.status(401);
     throw new Error("All ready register this number")
@@ -43,25 +42,24 @@ const registerSeller = asyncHandler(async (req, res) => {
     res.status(403)
     throw new Error("Except only jpeg or png type image");
   }
-  //console.log("ch2");
+
 
   if (size > (2 * 1024 * 1024)) {
     res.status(403)
     throw new Error("photo must be less than 2mb")
   }
-  // console.log("ch3");
+
   //
   // SECTION - create a new seller
   //NOTE - convert buffer to base64
 
   const bufferData = Buffer.from(buffer, 'binary');
   const imgString = bufferData.toString('base64');
-  // //console.log(base64String);
-  //console.log("ch4");
+
   //NOTE - add salt with password and hash
   const passwordWithSalt = password + process.env.PASSWORD_SALT;
   const hashPassword = await bcrypt.hash(passwordWithSalt, 10)
-  //console.log("ch5");
+
   try {
     const seller = await Seller.create(
       {
@@ -70,10 +68,9 @@ const registerSeller = asyncHandler(async (req, res) => {
 
       }
     )
-    //console.log(seller);
+
     res.status(200).json(seller)
   } catch (error) {
-    //console.log(error);
     res.status(403).json(error)
   }
 
@@ -109,7 +106,7 @@ const loginSeller = asyncHandler(async (req, res) => {
         expiresIn: "10d"
       }
     )
-    // console.log(jsonToken);
+
     res.status(200).json(jsonToken)
   }
   else {
@@ -122,7 +119,6 @@ const loginSeller = asyncHandler(async (req, res) => {
 
 //NOTE -  - for resturent photo  saller account
 // Router.get('/updateimage',)
-
 const updateImage = asyncHandler(async (req, res) => {
   const { buffer, mimetype, size } = req.file;
   const { id } = req.seller;
@@ -165,7 +161,6 @@ const updateImage = asyncHandler(async (req, res) => {
 
 })
 
-
 //NOTE - for forgot password  saller account
 // Router.get('/forgotpassword',)
 const forgotpassword = asyncHandler(async (req, res) => {
@@ -199,7 +194,7 @@ const currentSeller = asyncHandler(async (req, res) => {
     restaurantName: seller.restaurantName,
     email: seller.email,
     profile_photo: seller.img,
-    profile_photoType:seller.imgType,
+    profile_photoType: seller.imgType,
     id: seller.id
   }
   res.status(200).json(sellerGivenData)
@@ -228,8 +223,6 @@ const deletetSeller = asyncHandler(async (req, res) => {
 
 //NOTE - Get all seller account
 const getAllSeller = asyncHandler(async (req, res) => {
-  // //console.log(req.query);
-
   const { restaurantName, rating } = req.query;
 
   const queryObject = {}
@@ -258,6 +251,91 @@ const getAllSeller = asyncHandler(async (req, res) => {
   // //console.log(sellers);
   res.status(200).json(sellers);
 })
+//NOTE - get seller order item
+const getSellerOrder = asyncHandler(async (req, res) => {
+  // Buyer_Id
+  const Seller_Id = req.seller.id;
+  if (!Seller_Id) {
+    res.status(401);
+    throw new Error("Unauthorize")
+  }
+  const orders = await Order.find({ Seller_Id, Order_Cancel: false })
 
+  const orderItems = await Promise.all(orders.map(async ({
+    Seller_Id,
+    Category_Id,
+    Item_Id,
+    DeliveryAddress_id,
+    Contact_Number,
+    Buyer_Id,
+    Payment_methods,
+    Payment_Done,
+    Payment_Time,
+    createdAt }) => {
+    const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
+    const item = await category.item.id(Item_Id);
+    const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
 
-module.exports = { registerSeller, loginSeller, updateImage, forgotpassword, currentSeller, deletetSeller, getAllSeller }
+    const orderTime = createdAt.toLocaleString()
+    const buyerDetails = await Buyer.findById(Buyer_Id);
+
+    //SECTION -  - Manage which data passed with frontend 
+    const { id: itemId, name: itemName, description, price, photoType,photo} = item;
+    const orderItem = { itemId, itemName, description, price,photoType,photo };
+
+    const { id: addressId, street, city, state, postalCode, country } = address;
+    const deliveryAddress = { addressId, street, city, state, postalCode, country };
+    const { name, email, mobileNumber } = buyerDetails;
+    const buyer = { Buyer_Id, name, email, mobileNumber }
+    const payment={Payment_methods,Payment_Done,Payment_Time}
+    return {
+      orderItem,
+      deliveryAddress,
+      Contact_Number,
+      buyer,
+      orderTime,
+      payment
+    };
+  }))
+  res.status(200).json(orderItems);
+})
+
+//NOTE - cancel seller order item
+const cancelOrderBySeller = asyncHandler(async (req, res) => {
+  const Seller_Id = req.seller.id;
+  const Order_Id = req.params.id;
+  const { reason } = req.body;
+  if (!Seller_Id) {
+      res.status(401);
+      throw new Error("Unauthorize")
+  }
+  if (!Order_Id || !reason) {
+      res.status(422);
+      throw new Error("Request not valid")
+  }
+  const order = await Order.findOne({ _id: Order_Id, Seller_Id,Order_Cancel:false  });
+  if (!order) {
+      res.status(404);
+      throw new Error("Order Not found")
+  }
+  const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Seller_Id,Order_Cancel:false },
+      {
+          Order_Cancel: true,
+          Order_Cancel_Reason: reason,
+      },
+      { new: true }
+  );
+
+  res.status(200).json({ msg: "Order Cancel", updatedOrder })
+})
+module.exports = {
+  registerSeller,
+  loginSeller,
+  updateImage,
+  forgotpassword,
+  currentSeller,
+  deletetSeller,
+  getAllSeller,
+  getSellerOrder,
+  cancelOrderBySeller
+}

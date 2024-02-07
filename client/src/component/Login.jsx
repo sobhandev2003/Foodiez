@@ -5,7 +5,7 @@ import { validateEmail, validatePassword } from './inputValidator';
 import { useDispatch } from 'react-redux';
 
 import { Link, useNavigate } from 'react-router-dom';
-import { loginSeller,fetchCurrentSeller, forgotPassword } from '../conectWithBackend/Seller';
+import { loginSeller,fetchCurrentSeller, forgotPassword } from '../services/Seller';
 function Login({ setIsLogin }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();

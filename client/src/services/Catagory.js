@@ -1,13 +1,13 @@
 import Alert from "../component/Alert";
 import { getCatagory } from "../fetures/category";
 import { currentSellerCategory } from "../fetures/seller";
+import { baseUrl } from "./baseUrl";
 //NOTE - fetch current seller category
 export const fetchCurrentSellerCategory = (sellerData) => async (dispatch) => {
     const id = sellerData.id;
-    // console.log(id);
-    // console.log(id);
+
     try {
-        const response = await fetch(`http://localhost:5001/food/category/${id}`, {
+        const response = await fetch(`${baseUrl}/food/category/${id}`, {
             method: "GET"
         });
 
@@ -17,8 +17,6 @@ export const fetchCurrentSellerCategory = (sellerData) => async (dispatch) => {
         } else {
             console.error("Something wrong");
         }
-
-        // console.log(data);
 
     } catch (error) {
         console.error(error);
@@ -32,7 +30,7 @@ export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(di
     const authToken = localStorage.getItem("authToken")
     if (authToken) {
         try {
-            const response = await fetch('http://localhost:5001/food/category', {
+            const response = await fetch(`${baseUrl}/food/category`, {
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + authToken,
@@ -41,15 +39,13 @@ export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(di
                 body: JSON.stringify(categoryData)
             })
             if (response.ok) {
-                // const data = await response.json();  
+                 
                 Alert("success", <p>Successfully Create a new catagory</p>)
                 dispatch(fetchCurrentSellerCategory(currentSellerDetailes))
             } else {
                 const errorData = await response.json();
                 Alert("error", <p>{errorData.massage}</p>)
             }
-
-            // console.log(data);
 
 
         } catch (error) {
@@ -63,10 +59,10 @@ export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(di
 
 //NOTE - fetch category
 export const fetchCatagory = (id) => async (dispatch) => {
-    // console.log(id);
+ 
     try {
         console.log(id);
-        const response = await fetch(`http://localhost:5001/food/category/${id}`);
+        const response = await fetch(`${baseUrl}/food/category/${id}`);
         const data = await response.json();
         dispatch(getCatagory(data));
     } catch (error) {
@@ -81,7 +77,7 @@ export const deleteCategoryById = (authToken, password, category, currentSellerD
     try {
         if (authToken) {
             try {
-                const response = await fetch(`http://localhost:5001/food/category/${category.id}`, {
+                const response = await fetch(`${baseUrl}/food/category/${category.id}`, {
                     method: "POST",
                     headers: {
                         'Authorization': 'Bearer ' + authToken,

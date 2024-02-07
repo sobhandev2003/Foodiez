@@ -3,7 +3,7 @@ import '../css/Register.css'
 import { validateEmail, validatePassword, validatePhoneNumber, validateWords } from '../component/inputValidator';
 import Alert from '../component/Alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerSeller } from '../conectWithBackend/Seller';
+import { registerSeller } from '../services/Seller';
 import { useNavigate } from 'react-router-dom';
 import { createSller } from '../fetures/seller';
 import registerPageGif from '../photo/register-page-gif.gif'

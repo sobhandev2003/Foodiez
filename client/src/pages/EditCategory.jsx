@@ -8,7 +8,7 @@ import Rating from '@mui/material/Rating';
 import { Fab } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { MdDeleteForever, MdDelete } from "react-icons/md";
-import { createNewItem, fetchItemByCategoryId, updateItem } from '../conectWithBackend/item';
+import { createNewItem, fetchItemByCategoryId, updateItem } from '../services/item';
 import '../css/EditCategory.css'
 import { useDispatch, useSelector } from 'react-redux';
 import Delete from '../component/Delete';

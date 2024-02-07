@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../css/Home.css'
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
-import { fetchItemByCategoryId } from '../conectWithBackend/item';
+import { fetchItemByCategoryId } from '../services/item';
 function SellerHomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch()

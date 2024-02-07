@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import { MenuCatagory, MenuItem } from '../component/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCatagory } from '../conectWithBackend/Catagory';
+import { fetchCatagory } from '../services/Catagory';
 import { useParams } from 'react-router-dom';
 
 function Shope() {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteItem, fetchItemByCategoryId } from '../conectWithBackend/item';
+import { deleteItem, fetchItemByCategoryId } from '../services/item';
 import Alert from './Alert';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
-import { deleteCategoryById } from '../conectWithBackend/Catagory';
+import { deleteCategoryById } from '../services/Catagory';
 function Delete(props) {
     const { type, deleteData, additionalData,closeModel , } = props
     const [formData, setFormData] = useState();

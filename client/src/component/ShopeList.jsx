@@ -3,7 +3,7 @@ import '../css/ShopeList.css';
 import { useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import { useDispatch } from 'react-redux';
-import { fetchCatagory } from '../conectWithBackend/Catagory';
+import { fetchCatagory } from '../services/Catagory';
 
 function ShopeList(props) {
   const { id, restaurantName, img, imgType, rating,address } = props.seller;

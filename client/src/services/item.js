@@ -1,5 +1,6 @@
 import Alert from "../component/Alert";
 import { setItem } from "../fetures/category";
+import { baseUrl } from "./baseUrl";
 export const createNewItem = async (authToken, id, itemDetails) => {
     const formData = new FormData();
     formData.append("name", itemDetails.name);
@@ -7,7 +8,7 @@ export const createNewItem = async (authToken, id, itemDetails) => {
     formData.append("photo", itemDetails.photo);
     formData.append("price", itemDetails.price);
     try {
-        const response = await fetch(`http://localhost:5001/food/category/${id}/item`, {
+        const response = await fetch(`${baseUrl}/food/category/${id}/item`, {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + authToken,
@@ -34,7 +35,7 @@ export const createNewItem = async (authToken, id, itemDetails) => {
 export const fetchItemByCategoryId =  (id)=>async(dispatch) => {
     try {
 
-        const response = await fetch(`http://localhost:5001/food/category/${id}/item`, {
+        const response = await fetch(`${baseUrl}/food/category/${id}/item`, {
             method: "GET",
         })
         const data = await response.json();
@@ -57,7 +58,7 @@ export const updateItem = async (authToken, id, EditItem) => {
     // console.log(_id,name,description,price);
 
     try {
-        const response = await fetch(`http://localhost:5001/food/category/${id}/item/${_id}`, {
+        const response = await fetch(`${baseUrl}/food/category/${id}/item/${_id}`, {
             method: "PUT",
             headers: {
                 "Authorization": "Bearer " + authToken,
@@ -83,7 +84,7 @@ export const updateItem = async (authToken, id, EditItem) => {
 export const deleteItem=async(authToken,categoryId,itemId,password)=>{
     try {
         
-        const response = await fetch(`http://localhost:5001/food/category/${categoryId}/item/${itemId}`, {
+        const response = await fetch(`${baseUrl}/food/category/${categoryId}/item/${itemId}`, {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + authToken,

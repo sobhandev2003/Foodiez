@@ -7,7 +7,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../photo/logo.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentSeller, updateProfilePhoto } from '../conectWithBackend/Seller';
+import { fetchCurrentSeller, updateProfilePhoto } from '../services/Seller';
 //Help icon
 import SupportIcon from '@mui/icons-material/Support';
 //cart icon
@@ -46,7 +46,7 @@ const Navbar = () => {
         setIsLogin(true);
     }
     const handelInputChange=(e)=>{
-        const {name,files,type}=e.target;
+        const {files}=e.target;
         setnewPhoto(files[0]);
 
     }
@@ -149,7 +149,7 @@ const Navbar = () => {
                     {!isMobile && <><div className='user-account'>
                        {!currentSeller && <AccountCircleIcon className='icon' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)} />}
                         {
-                           currentSeller && <button className='profile-photo' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)}><img src={`data:${currentSeller.profile_photoType};base64,${currentSeller.profile_photo}`}></img></button>
+                           currentSeller && <button className='profile-photo' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)}><img src={`data:${currentSeller.profile_photoType};base64,${currentSeller.profile_photo}`} alt='👤'></img></button>
                         }
                     </div>
                         <ul style={{ display: isVisibaleAccounContor ? "block" : "none" }}>
