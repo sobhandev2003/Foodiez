@@ -9,7 +9,7 @@ import loadingSpinner from '../photo/loading-spinner.gif'
 function SellerHomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
+  const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
   const currentSellerCategory = useSelector(state => state.Seller.currentSellerCategory);
   const [categories, setCategories] = useState(null);
 
@@ -23,7 +23,7 @@ function SellerHomePage() {
     //NOTE - fetch curent seller all catagory and
     setCategories(currentSellerCategory);
 
-  }, [currentSellerDetailes, currentSellerCategory])
+  }, [loginAccountDetails, currentSellerCategory])
 
   return (
     <>

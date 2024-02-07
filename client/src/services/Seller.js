@@ -1,6 +1,7 @@
 import Alert from "../component/Alert";
+import { setLoginAccountDetails } from "../fetures/loginFrtures";
 import { createSller } from "../fetures/seller";
-import { currentSeller } from "../fetures/seller";
+
 import { fetchCurrentSellerCategory } from "./Catagory";
 import { baseUrl } from "./baseUrl";
 
@@ -97,7 +98,7 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
             const data= await response.json();
         // console.log(data);
         dispatch(fetchCurrentSellerCategory(data));
-        dispatch(currentSeller(data))
+        dispatch(setLoginAccountDetails(data))
     }
     else{
         const errordata=response.json()

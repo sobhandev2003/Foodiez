@@ -3,13 +3,14 @@ import '../css/Login.css'
 import Alert from './Alert';
 import { validateEmail, validatePassword } from './inputValidator';
 import { useDispatch } from 'react-redux';
-
 import { Link, useNavigate } from 'react-router-dom';
-import { loginSeller,fetchCurrentSeller, forgotPassword } from '../services/Seller';
-function Login({ setIsLogin }) {
+import { loginSeller, fetchCurrentSeller, forgotPassword } from '../services/Seller';
+import { fetchLoginBuyerDetails, loginBuyerAccount } from '../services/Buyer';
+import { setIsLogin } from '../fetures/loginFrtures';
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isForgotPassword,setIsForgotPassword]=useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   // const authorizeSeller = useSelector(state => state.Seller.authorizeSeller)
   const [formData, setFormData] = useState({
     user_role: "buyer",
@@ -40,17 +41,34 @@ function Login({ setIsLogin }) {
           email: email,
           password: password
         }
-        if(isForgotPassword){
-         forgotPassword(sellerData,setIsForgotPassword)
-          // setIsForgotPassword(false);
+        if (isForgotPassword) {
+          forgotPassword(sellerData, setIsForgotPassword)
         }
-       else{ const authData = await loginSeller(sellerData);
-        if (authData) {
-          localStorage.setItem("authToken", authData);
-          dispatch(fetchCurrentSeller(authData));
-          setIsLogin(false);
-          navigate('/')
-        }}
+        else {
+          const authData = await loginSeller(sellerData);
+          if (authData) {
+            localStorage.setItem("authToken", authData);
+            dispatch(fetchCurrentSeller(authData));
+            dispatch()
+            navigate('/')
+          }
+        }
+      }
+      else {
+        if (isForgotPassword) {
+          console.log("forgot password");
+        }
+        else{
+
+          const authData=await loginBuyerAccount({email,password})
+          if(authData){
+            localStorage.setItem("authToken", authData);
+            dispatch(fetchLoginBuyerDetails(authData));
+           dispatch(setIsLogin(false))
+            navigate('/')
+          }
+        }
+
       }
     }
   };
@@ -62,12 +80,12 @@ function Login({ setIsLogin }) {
   }, [navigate])
   return (
     <>
-    {!isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px front-size-2rem height-40'>Login Account</h2>}
-      {isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px reset-password-h2 front-size-2rem'>Reset Account Password</h2>}   
+      {!isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px front-size-2rem height-40'>Login Account</h2>}
+      {isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px reset-password-h2 front-size-2rem'>Reset Account Password</h2>}
       <form className='model-element login-form' onSubmit={handleSubmit}>
         <div className="wrapper">
           <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} defaultChecked />
-          <input type="radio" name="user_role" value="seller" id="option-2" onChange={handleInputChange}/>
+          <input type="radio" name="user_role" value="seller" id="option-2" onChange={handleInputChange} />
           <label htmlFor="option-1" className="option option-1">
             <div className="dot"></div>
             <span>Buyer</span>
@@ -79,17 +97,17 @@ function Login({ setIsLogin }) {
         </div>
         <div >
           <input type="email" name="email" placeholder="Email" onChange={handleInputChange} required />
-          <input type="password" name="password" placeholder={isForgotPassword?"Enter new Password":"Password"} onChange={handleInputChange} required />
+          <input type="password" name="password" placeholder={isForgotPassword ? "Enter new Password" : "Password"} onChange={handleInputChange} required />
           <button type="submit">Submit</button>
         </div>
         <Link to="/" className='forgot-password-link'
-        onClick={()=>{
-          setIsForgotPassword(true);
-        }}
-        >Forgot Password</Link> 
-      <p>Need an account?
-      <Link to="/register" onClick={()=>setIsLogin(false)}> Sign up </Link>now!
-      </p>
+          onClick={() => {
+            setIsForgotPassword(true);
+          }}
+        >Forgot Password</Link>
+        <p>Need an account?
+          <Link to="/register" onClick={() => dispatch(setIsLogin(false))}> Sign up </Link>now!
+        </p>
       </form>
     </>
   )

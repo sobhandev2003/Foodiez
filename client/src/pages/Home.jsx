@@ -10,12 +10,12 @@ function Home() {
   const authToken = localStorage.getItem("authToken");
 
   const dispatch = useDispatch()
-  const currentSellerDetails = useSelector(state => state.Seller.currentSellerDetails)
-  const [currentSeller, setCurrentSeller] = useState();
+  const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
+  const [loginAccount,setLoginAccount]=useState(null);
   useEffect(() => {
-    setCurrentSeller(currentSellerDetails)
-    // console.log(currentSellerDetails)
-}, [currentSellerDetails])
+    setLoginAccount(loginAccountDetails)
+    // console.log(loginAccountDetails)
+}, [loginAccountDetails])
 useEffect(() => {
     if (authToken) {
         dispatch(fetchCurrentSeller(authToken));
@@ -24,7 +24,7 @@ useEffect(() => {
   return (
     <>
       {
-         currentSeller && currentSeller.user_role==="seller"?
+         loginAccount && loginAccount.user_role==="seller"?
          <SellerHomePage/>
          : 
          <BuyerHomePage/>

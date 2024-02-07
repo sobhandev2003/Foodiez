@@ -22,6 +22,8 @@ import Model from './Model';
 import AddCategory from './AddCategory';
 import Login from '../component/Login';
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { fetchLoginBuyerDetails } from '../services/Buyer';
+import { setIsLogin } from '../fetures/loginFrtures';
 const Navbar = () => {
     const [showMediaIcons, setShowMediaIcons] = useState(false);
 
@@ -30,30 +32,33 @@ const Navbar = () => {
     const authToken = localStorage.getItem("authToken");
     const dispatch = useDispatch()
     // const cartsProducts = useSelector(state => state.cart.ToCarts);
-    const currentSellerDetails = useSelector(state => state.Seller.currentSellerDetails)
+    const isLogin = useSelector(state => state.Login.isLogin);
+    const [isLoginTemplateVisible, setIsLoginTemplateVisible] = useState(false)
+    //NOTE - Login  Account details get
+    const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
+    const [loginAccount, setLoginAccount] = useState(null);
+    //NOTE - 
     const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
-    const [currentSeller, setCurrentSeller] = useState();
     const [isCategoryAdd, setIsCategoryAdd] = useState(false)
-    const [isLogin, setIsLogin] = useState(false)
-    const [isProfilePhotoUpdate,setIsProfilePhotoUpdate]=useState(false);
-    const [newPhoto,setnewPhoto]=useState();
+    const [isProfilePhotoUpdate, setIsProfilePhotoUpdate] = useState(false);
+    const [newPhoto, setnewPhoto] = useState();
     //react-responsive
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
     const logOutAccount = () => {
         localStorage.clear();
-        navigate('/')
-        window.location.reload()
-        setIsLogin(true);
-    }
-    const handelInputChange=(e)=>{
-        const {files}=e.target;
+        navigate('/');
+        window.location.reload();
+    };
+
+    const handelInputChange = (e) => {
+        const { files } = e.target;
         setnewPhoto(files[0]);
 
     }
-    const handelUpdateprofilePhoto=(e)=>{
+    const handelUpdateprofilePhoto = (e) => {
         e.preventDefault();
-        const authToken=localStorage.getItem("authToken");
-        dispatch(updateProfilePhoto(authToken,newPhoto,setIsProfilePhotoUpdate));
+        const authToken = localStorage.getItem("authToken");
+        dispatch(updateProfilePhoto(authToken, newPhoto, setIsProfilePhotoUpdate));
     }
     //NOTE - pop - up Model for add a new category
     const addCategoryTemplet = (
@@ -67,29 +72,35 @@ const Navbar = () => {
     //NOTE - sign in pop up model
     const signInTemplet = (
         <Model>
-            <CloseIcon className='cancel-model' onClick={() => { setIsLogin(false) }} />
-            <Login setIsLogin={setIsLogin} />
+            <CloseIcon className='cancel-model' onClick={() => { dispatch(setIsLogin(false)) }} />
+            <Login />
         </Model>
     )
     //NOTE - Update profile photo
-    const updateProfilePfotoTemplet=(
+    const updateProfilePfotoTemplet = (
         <Model>
-             <CloseIcon className='cancel-model' onClick={() => { setIsProfilePhotoUpdate(false) }} />
-             <form className='model-element' onSubmit={handelUpdateprofilePhoto}>
-                <input type="file" name="photo" accept="image/png, image/jpeg"  onChange={handelInputChange} />
+            <CloseIcon className='cancel-model' onClick={() => { setIsProfilePhotoUpdate(false) }} />
+            <form className='model-element' onSubmit={handelUpdateprofilePhoto}>
+                <input type="file" name="photo" accept="image/png, image/jpeg" onChange={handelInputChange} />
                 <button type="submit">Update</button>
-             </form>
+            </form>
         </Model>
     )
     useEffect(() => {
-        setCurrentSeller(currentSellerDetails)
-        // console.log(currentSellerDetails)
-    }, [currentSellerDetails])
+        setIsLoginTemplateVisible(isLogin)
+    }, [isLogin])
+    useEffect(() => {
+        console.log(loginAccountDetails);
+        setLoginAccount(loginAccountDetails)
+    }, [loginAccountDetails])
+
     useEffect(() => {
         if (authToken) {
             dispatch(fetchCurrentSeller(authToken));
+            dispatch(fetchLoginBuyerDetails(authToken))
         }
     }, [authToken, dispatch])
+
     return (
         <>
             <nav className="main-nav">
@@ -104,10 +115,10 @@ const Navbar = () => {
                         showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
                     }>
                     {
-                        currentSeller ?
+                        loginAccount ?
                             <ul>
                                 {
-                                    currentSeller.user_role === "seller" ?
+                                    loginAccount.user_role === "seller" ?
                                         <>
                                             <li>
                                                 <NavLink to='/' onClick={() => setIsCategoryAdd(true)}><AddBoxIcon className='icon' />Add Category</NavLink>
@@ -132,7 +143,7 @@ const Navbar = () => {
                             </ul> :
                             <>
                                 {isMobile && <ul>
-                                    <li><NavLink className='login' to="/" onClick={() => setIsLogin(true)}>Sign in</NavLink></li>
+                                    <li><NavLink className='login' to="/" onClick={() => dispatch(setIsLogin(true))}>Sign in</NavLink></li>
                                     <li><NavLink className='register' to="/register">Sign up</NavLink></li>
                                 </ul>
 
@@ -147,21 +158,21 @@ const Navbar = () => {
                 {/* 3rd social media links */}
                 <div className="account-control">
                     {!isMobile && <><div className='user-account'>
-                       {!currentSeller && <AccountCircleIcon className='icon' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)} />}
+                        {!loginAccount && <AccountCircleIcon className='icon' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)} />}
                         {
-                           currentSeller && <button className='profile-photo' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)}><img src={`data:${currentSeller.profile_photoType};base64,${currentSeller.profile_photo}`} alt='👤'></img></button>
+                            loginAccount && <button className='profile-photo' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)}><img src={`data:${loginAccount.profile_photoType};base64,${loginAccount.profile_photo}`} alt='👤'></img></button>
                         }
                     </div>
                         <ul style={{ display: isVisibaleAccounContor ? "block" : "none" }}>
                             {
-                                currentSeller ?
+                                loginAccount ?
                                     <>
-                                        <li className='text-center' style={{width:"100%"}}><span className='front-size-2rem' style={{width:"100%"}} >{currentSeller.ownerName}</span></li>
-                                        <li><button className='change-profile-photo' onClick={()=>setIsProfilePhotoUpdate(true)}>Change profile photoT <FaCloudUploadAlt/></button></li>
+                                        <li className='text-center' style={{ width: "100%" }}><span className='front-size-2rem' style={{ width: "100%" }} >{loginAccount.ownerName || loginAccount.name}</span></li>
+                                        <li><button className='change-profile-photo' onClick={() => setIsProfilePhotoUpdate(true)}>Change profile photoT <FaCloudUploadAlt /></button></li>
                                         <li><button className='log-out-btn color-white' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
                                         </li>
                                     </> : <>
-                                        <li><NavLink className='login' to="/" onClick={() => setIsLogin(true)}>Sign in</NavLink></li>
+                                        <li><NavLink className='login' to="/" onClick={() => dispatch(setIsLogin(true))}>Sign in</NavLink></li>
                                         <li><NavLink className='register' to="/register">Sign up</NavLink></li>
                                     </>
                             }
@@ -178,7 +189,7 @@ const Navbar = () => {
                 </div>
             </nav>
             {isCategoryAdd && addCategoryTemplet}
-            {isLogin && signInTemplet}
+            {isLoginTemplateVisible && signInTemplet}
             {isProfilePhotoUpdate && updateProfilePfotoTemplet}
         </>
     );

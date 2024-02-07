@@ -10,7 +10,7 @@ function Delete(props) {
     const [formData, setFormData] = useState();
     const dispatch = useDispatch();
     const authToken = localStorage.getItem("authToken");
-    const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
+    const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
     const navigate = useNavigate();
     // console.log(props);
     const handelDeleteItem = async () => {
@@ -31,7 +31,7 @@ function Delete(props) {
 
         if (deleteData) {
 
-            dispatch(deleteCategoryById(authToken, formData, deleteData, currentSellerDetailes, navigate))
+            dispatch(deleteCategoryById(authToken, formData, deleteData, loginAccountDetails, navigate))
 
         }
         closeModel(false)

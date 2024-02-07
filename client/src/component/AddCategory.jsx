@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function AddCategory({ setIsCategoryAdd }) {
     const dispatch = useDispatch();
-    const currentSellerDetailes = useSelector(state => state.Seller.currentSellerDetails);
+    const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
     const [formDta, setFormData] = useState();
     //NOTE - handel form submit
     const handelSubmit = (e) => {
         e.preventDefault();
-        dispatch(CreateNewCategory(formDta, currentSellerDetailes));
+        dispatch(CreateNewCategory(formDta, loginAccountDetails));
         setIsCategoryAdd(false);
     }
 

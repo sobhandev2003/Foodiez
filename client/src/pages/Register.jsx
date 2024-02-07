@@ -7,6 +7,7 @@ import { registerSeller } from '../services/Seller';
 import { useNavigate } from 'react-router-dom';
 import { createSller } from '../fetures/seller';
 import registerPageGif from '../photo/register-page-gif.gif'
+import { registerBuyerAccount } from '../services/Buyer';
 function Register() {
     window.scrollTo(0, 50)
     const dispatch = useDispatch();
@@ -60,7 +61,8 @@ function Register() {
                 dispatch(registerSeller({ restaurantName, ownerName, address, email, mobile, photo, password }));
             }
             else {
-                console.log(formData);
+                console.log("ch");
+                registerBuyerAccount({name,email,mobileNumber:mobile,password},navigate)
             }
 
         }
