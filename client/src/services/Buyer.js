@@ -2,7 +2,7 @@ import Alert from "../component/Alert";
 
 import { setLoginAccountDetails } from "../fetures/loginFrtures";
 import { baseUrl } from "./baseUrl";
-
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 //NOTE - register a new buyer account
 export const registerBuyerAccount = async (buyerData, navigate) => {
     try {
@@ -42,9 +42,11 @@ export const loginBuyerAccount = async (buyerDetails) => {
         });
         const data = await response.json();
         if (response.ok) {
+
             return data;
         }
         else {
+    
             Alert("error", <>{data.message}</>)
         }
 
@@ -52,6 +54,7 @@ export const loginBuyerAccount = async (buyerDetails) => {
         console.error(error);
     }
 }
+//NOTE - fetch Login Buyer Details
 
 export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
     // console.log(authToken);
@@ -77,5 +80,33 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
     } catch (error) {
         console.error(error);
     }
+}
+//NOTE - Add Cart Items
+export const addCartItems=(cartItemDetails,authToken)=>async(dispatch)=>{
 
+    try {
+       const response=await fetch(`${baseUrl}/food/user/buyer/cart-item`,{
+        method:"POST",
+        headers:{
+            "Authorization":"Bearer " +authToken,
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(cartItemDetails)
+       })
+
+       const data=response.json();
+       if(response.ok){
+        Alert('success', <div>Add to cart  <ShoppingCartOutlinedIcon /> </div>)
+        dispatch(fetchLoginBuyerDetails(authToken))
+       }
+       else{
+        Alert("error",<>{data.message}</>)
+       }
+
+
+
+
+    } catch (error) {
+        console.error(error);
+    }
 }

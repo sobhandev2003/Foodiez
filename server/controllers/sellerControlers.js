@@ -156,7 +156,7 @@ const updateImage = asyncHandler(async (req, res) => {
   seller.img = imgString;
   seller.imgType = mimetype;
   await seller.save();
-  res.status(200).json({ msg: "image update successfully" })
+  res.status(200).json({ message: "image update successfully" })
 
 
 })

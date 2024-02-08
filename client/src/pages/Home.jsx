@@ -14,7 +14,6 @@ function Home() {
   const [loginAccount,setLoginAccount]=useState(null);
   useEffect(() => {
     setLoginAccount(loginAccountDetails)
-    // console.log(loginAccountDetails)
 }, [loginAccountDetails])
 useEffect(() => {
     if (authToken) {

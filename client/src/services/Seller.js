@@ -138,30 +138,30 @@ export const forgotPassword=async(sellerData,setIsForgotPassword)=>{
 }
 
 //NOTE -  Update Profile Seller photo
-export const updateProfilePhoto=(authToken,photo,setIsProfilePhotoUpdate)=>async(dispatch)=>{
-    try {
-        const formData=new FormData();
-        formData.append("photo",photo);
-        const response=await fetch(`${baseUrl}/food/user/seller/updateimage`,{
-        method:"POST",
-        headers: {
-            'Authorization': 'Bearer ' + authToken,
+// export const updateProfilePhoto=(authToken,photo,setIsProfilePhotoUpdate)=>async(dispatch)=>{
+//     try {
+//         const formData=new FormData();
+//         formData.append("photo",photo);
+//         const response=await fetch(`${baseUrl}/food/user/seller/upload-profile-photo`,{
+//         method:"POST",
+//         headers: {
+//             'Authorization': 'Bearer ' + authToken,
 
-        },
-        body :formData
+//         },
+//         body :formData
 
-        })
-        const data=await response.json();
-        // console.log(data);
-        if(response.ok){
-            Alert('success',<p>{data.msg}</p>)
-            dispatch(fetchCurrentSeller(authToken));
-            setIsProfilePhotoUpdate(false);
-        }
-        else{
-            Alert('error',<p>{data.message}</p>)
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
+//         })
+//         const data=await response.json();
+//         // console.log(data);
+//         if(response.ok){
+//             Alert('success',<p>{data.msg}</p>)
+//             dispatch(fetchCurrentSeller(authToken));
+//             setIsProfilePhotoUpdate(false);
+//         }
+//         else{
+//             Alert('error',<p>{data.message}</p>)
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }

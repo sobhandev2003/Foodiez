@@ -1,30 +1,74 @@
 import '../css/Navbar.css';
 import React, { useEffect, useState } from "react";
-import {
-    FaListAlt
-} from "react-icons/fa";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../photo/logo.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentSeller, updateProfilePhoto } from '../services/Seller';
+import { fetchCurrentSeller } from '../services/Seller';
 //Help icon
 import SupportIcon from '@mui/icons-material/Support';
 //cart icon
 // import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 //Add icon
-import AddBoxIcon from '@mui/icons-material/AddBox';
+
 import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import { useMediaQuery } from 'react-responsive';
 import Model from './Model';
-import AddCategory from './AddCategory';
+
 import Login from '../component/Login';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { fetchLoginBuyerDetails } from '../services/Buyer';
 import { setIsLogin } from '../fetures/loginFrtures';
+import SellerNavItem from './SellerNavItem';
+import BuyerNavItem from './BuyerNavItem';
+import { updateProfilePhoto } from '../services/upadateProfilePhoto';
+
+//for MUI APP barr
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+
+
+const pages = ['Products', 'Pricing', 'Blog'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+//!SECTION
 const Navbar = () => {
+    //!SECTION
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+
+
+
+    //!SECTION
     const [showMediaIcons, setShowMediaIcons] = useState(false);
 
     //SECTION - 
@@ -39,7 +83,6 @@ const Navbar = () => {
     const [loginAccount, setLoginAccount] = useState(null);
     //NOTE - 
     const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
-    const [isCategoryAdd, setIsCategoryAdd] = useState(false)
     const [isProfilePhotoUpdate, setIsProfilePhotoUpdate] = useState(false);
     const [newPhoto, setnewPhoto] = useState();
     //react-responsive
@@ -57,17 +100,10 @@ const Navbar = () => {
     }
     const handelUpdateprofilePhoto = (e) => {
         e.preventDefault();
+        // console.log(loginAccount);
         const authToken = localStorage.getItem("authToken");
-        dispatch(updateProfilePhoto(authToken, newPhoto, setIsProfilePhotoUpdate));
+        dispatch(updateProfilePhoto(loginAccount.user_role, authToken, newPhoto, setIsProfilePhotoUpdate));
     }
-    //NOTE - pop - up Model for add a new category
-    const addCategoryTemplet = (
-        <Model>
-            <CloseIcon className='cancel-model' onClick={() => { setIsCategoryAdd(false) }} />
-            <AddCategory setIsCategoryAdd={setIsCategoryAdd} />
-
-        </Model>
-    )
 
     //NOTE - sign in pop up model
     const signInTemplet = (
@@ -76,6 +112,7 @@ const Navbar = () => {
             <Login />
         </Model>
     )
+
     //NOTE - Update profile photo
     const updateProfilePfotoTemplet = (
         <Model>
@@ -90,7 +127,6 @@ const Navbar = () => {
         setIsLoginTemplateVisible(isLogin)
     }, [isLogin])
     useEffect(() => {
-        console.log(loginAccountDetails);
         setLoginAccount(loginAccountDetails)
     }, [loginAccountDetails])
 
@@ -103,92 +139,142 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="main-nav">
-                {/* 1st logo part  */}
-                <div className="logo">
-                    <NavLink to="/"><img src={logo} alt='Logo' /></NavLink>
-                </div>
+            <AppBar position="static">
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters sx={{ justifyContent: { xs: "space-around" }, width: { xs: '100%' } }}>
+                        <Box >
+                            <NavLink to="/"><img src={logo} alt='Logo' className="logo" /></NavLink>
+                        </Box>
 
-                {/* 2nd menu part  */}
-                <div
-                    className={
-                        showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-                    }>
-                    {
-                        loginAccount ?
-                            <ul>
-                                {
-                                    loginAccount.user_role === "seller" ?
-                                        <>
-                                            <li>
-                                                <NavLink to='/' onClick={() => setIsCategoryAdd(true)}><AddBoxIcon className='icon' />Add Category</NavLink>
-                                            </li>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            {
+                                //TODO - 
+                                <div
+                                    className={
+                                        `menu-link ${!loginAccount && "auth-link"} `
+
+                                    }>
+                                    {loginAccount ?
+                                        <ul>
+                                            {
+                                                loginAccount.user_role === "seller" ?
+                                                    <>
+                                                        <SellerNavItem />
+                                                    </> :
+                                                    <>
+                                                        <BuyerNavItem />
+                                                    </>
+                                            }
                                             <li>
                                                 <NavLink className='help color-white' to="/help"><SupportIcon className='icon help-ico' />Help</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink className="order" to='/order'><FaListAlt className='icon list-ico' /> Customer Order </NavLink>
                                             </li>
                                             {isMobile && <>
                                                 {<li><button className='log-out-btn' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
                                                 </li>}
-
                                             </>}
 
-                                        </> :
+                                        </ul> :
                                         <>
-                                        </>
-                                }
-
-                            </ul> :
-                            <>
-                                {isMobile && <ul>
-                                    <li><NavLink className='login' to="/" onClick={() => dispatch(setIsLogin(true))}>Sign in</NavLink></li>
-                                    <li><NavLink className='register' to="/register">Sign up</NavLink></li>
-                                </ul>
-
-                                }
-
-
-                            </>
-                    }
-
-                </div>
-
-                {/* 3rd social media links */}
-                <div className="account-control">
-                    {!isMobile && <><div className='user-account'>
-                        {!loginAccount && <AccountCircleIcon className='icon' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)} />}
-                        {
-                            loginAccount && <button className='profile-photo' onClick={() => setIsVisibaleAccounContor(!isVisibaleAccounContor)}><img src={`data:${loginAccount.profile_photoType};base64,${loginAccount.profile_photo}`} alt='👤'></img></button>
-                        }
-                    </div>
-                        <ul style={{ display: isVisibaleAccounContor ? "block" : "none" }}>
-                            {
-                                loginAccount ?
-                                    <>
-                                        <li className='text-center' style={{ width: "100%" }}><span className='front-size-2rem' style={{ width: "100%" }} >{loginAccount.ownerName || loginAccount.name}</span></li>
-                                        <li><button className='change-profile-photo' onClick={() => setIsProfilePhotoUpdate(true)}>Change profile photoT <FaCloudUploadAlt /></button></li>
-                                        <li><button className='log-out-btn color-white' onClick={logOutAccount}>Log out  <LogoutIcon className='icon logout-icon' /> </button>
-                                        </li>
-                                    </> : <>
-                                        <li><NavLink className='login' to="/" onClick={() => dispatch(setIsLogin(true))}>Sign in</NavLink></li>
-                                        <li><NavLink className='register' to="/register">Sign up</NavLink></li>
-                                    </>
+                                        //TODO -
+                                            <ul className='auth-list'>
+                                                <li><NavLink className='login' to="/" onClick={() => dispatch(setIsLogin(true))}>Sign in</NavLink></li>
+                                                <li><NavLink className='register' to="/register">Sign up</NavLink></li>
+                                            </ul>
+                                        </>}
+                                </div>
                             }
-                        </ul>
-                    </>}
+
+                        </Box>
+
+                        <Box sx={{ flexGrow: 0 }}>
+                            {<Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    {<Avatar alt={"👤"} src={loginAccount && `data:${loginAccount.profile_photoType};base64,${loginAccount.profile_photo}`} />}
+
+                                </IconButton>
+                            </Tooltip>}
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {
+                                    loginAccount ? <>
+
+                                        <MenuItem key={loginAccount.id + "1w2"} >
+                                            <Typography textAlign="center" sx={{ color: "#2ce084" }}>{loginAccount.email}</Typography>
+                                        </MenuItem>
+                                        {loginAccount.restaurantName && <MenuItem key={loginAccount.id + "1w2"} >
+                                            <Typography textAlign="center" sx={{ color: "#2ce084" }}>{loginAccount.restaurantName}</Typography>
+                                        </MenuItem>}
+                                        <MenuItem key={loginAccount.id + "1w2"} >
+                                            <Typography textAlign="center" sx={{ color: "#2ce084" }}>{loginAccount.ownerName || loginAccount.name}</Typography>
+                                        </MenuItem>
+                                        {
+                                            isMobile && <>
+
+                                                <div
+                                                >
+                                                    {loginAccount ?
+                                                        <ul>
+                                                            {
+                                                                loginAccount.user_role === "seller" ?
+                                                                    <>
+
+                                                                        <SellerNavItem />
+
+                                                                    </> :
+                                                                    <>
+                                                                        <BuyerNavItem />
+                                                                    </>
+                                                            }
+
+                                                            <MenuItem onClick={() => { navigate('/help') }}>
+                                                                <Typography textAlign="center" className='nav-hover' >Help</Typography>
+                                                            </MenuItem>
+
+                                                        </ul> :
+                                                        <>
+
+                                                        </>}
+                                                </div>
+
+                                            </>
+                                        }
+                                        <MenuItem key={loginAccount.id + "12"} onClick={() => setIsProfilePhotoUpdate(true)}>
+                                            <Typography textAlign="center" sx={{ color: "green" }}>Change profile photoT <FaCloudUploadAlt /></Typography>
+                                        </MenuItem>
+
+                                        <MenuItem key={loginAccount.id + "rty"} onClick={logOutAccount}>
+                                            <Typography textAlign="center" sx={{ color: "red" }}>Log out</Typography>
+                                        </MenuItem>
 
 
-                    {/* hamburget menu start  */}
-                    <div className="hamburger-menu">
-                        <button onClick={() => setShowMediaIcons(!showMediaIcons)}>
-                            <GiHamburgerMenu />
-                        </button>
-                    </div>
-                </div>
-            </nav>
-            {isCategoryAdd && addCategoryTemplet}
+                                    </> : <>
+                                   //TODO -  
+                                        <ul className='auth-list'>
+                                            <li><NavLink className='login' to="/" onClick={() => dispatch(setIsLogin(true))}>Sign in</NavLink></li>
+                                            <li><NavLink className='register' to="/register">Sign up</NavLink></li>
+                                        </ul>
+                                    </>
+                                }
+
+                            </Menu>
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar>
             {isLoginTemplateVisible && signInTemplet}
             {isProfilePhotoUpdate && updateProfilePfotoTemplet}
         </>

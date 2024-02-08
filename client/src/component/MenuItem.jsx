@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import '../css/Shope.css';
-import { useDispatch } from 'react-redux';
-import { addToCarts } from '../fetures/CartsSlaice';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import Alert from './Alert';
 import Rating from '@mui/material/Rating';
 import { Link } from 'react-scroll';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addCartItems } from '../services/Buyer';
+import { setIsLogin } from '../fetures/loginFrtures';
 
 //SECTION - --------------------MenuCatagory-------------
 export const MenuCatagory = (props) => {
@@ -29,37 +29,36 @@ export const MenuCatagory = (props) => {
 
 //SECTION - -----------MenuItems----------------------
 export const MenuItem = (props) => {
+  const dispatch = useDispatch();
+  const Seller_Id = useParams().id;
+  const Category_Id = props.Category_Id;
 
   const { name, description, rating, photo, photoType, price, _id } = props.item;
-  const productNameRef = useRef();
-  const priceRef = useRef();
-  const desRef = useRef();
-  const imgRef = useRef();
 
-  const dispatch = useDispatch();
 
-  const addTocart = () => {
-    const name = productNameRef.current.innerText;
-    const price = priceRef.current.innerText;
-    const des = desRef.current.innerText;
-    const photo = imgRef.current.src;
-    dispatch(addToCarts({ name, des, price, photo, _id }));
-    Alert('success', <div>Add to cart  <ShoppingCartOutlinedIcon /> </div>)
+  const handelAddToCart = () => {
+    const Item_Id = _id;
+    const authToken = localStorage.getItem("authToken")
+    if (authToken) {
+      dispatch(addCartItems({ Seller_Id, Category_Id, Item_Id }, authToken))
+    }
+    else {
+      dispatch(setIsLogin(true));
+    }
   }
 
   return (
     <div className='menu-item'>
       <div className='left-div'>
-        <img src={`data:${photoType};base64,${photo}`} alt='loded' ref={imgRef} />
-        <button onClick={addTocart}>ADD+</button>
+        <img src={`data:${photoType};base64,${photo}`} alt='loded' />
+        <button onClick={() => handelAddToCart()}>ADD+</button>
       </div>
       <div className='right-div'>
-        <h2 ref={productNameRef}>{name}</h2>
+        <h2 >{name}</h2>
         <p ><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></p>
-        <h4 ref={priceRef}><strong>&#8377; </strong>{price}</h4>
-        <p ref={desRef}>{description}</p>
+        <h4 ><strong>&#8377; </strong>{price}</h4>
+        <p >{description}</p>
       </div>
-
     </div>
   )
 }

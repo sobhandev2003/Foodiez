@@ -42,7 +42,7 @@ const loginBuyerAccount = asyncHandler(async (req, res) => {
     }
 
     const buyer = await Buyer.findOne({ email })
-    if (password && await bcrypt.compare(password + process.env.PASSWORD_SALT, buyer.password)) {
+    if (buyer && await bcrypt.compare(password + process.env.PASSWORD_SALT, buyer.password)) {
         const jsonToken = jwt.sign(
             {
                 buyer: {
@@ -68,9 +68,9 @@ const loginBuyerAccount = asyncHandler(async (req, res) => {
 // route "/current"
 const currentBuyer = asyncHandler(async (req, res) => {
     const buyer = await Buyer.findById(req.buyer.id)
-    const { name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
+    const { user_role, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
 
-    res.status(200).json({ name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
+    res.status(200).json({ user_role,name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
 })
 
 //NOTE - upload profile photo

@@ -18,7 +18,7 @@ const Router = express.Router();
 
 Router.post('/register', upload.single('photo'), registerSeller);
 Router.post('/login', loginSeller)
-Router.post('/updateimage', validateToken, upload.single('photo'), updateImage)
+Router.post('/upload-profile-photo', validateToken, upload.single('photo'), updateImage)
 Router.put('/forgotpassword', forgotpassword)
 Router.get('/current', validateToken, currentSeller)
 Router.delete('/delete', validateToken, deletetSeller)

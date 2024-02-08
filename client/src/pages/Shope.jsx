@@ -14,7 +14,7 @@ function Shope() {
   const allCatagory = useSelector(state => state.catagory.catagory);
 
   useEffect(() => {
-    console.log(allCatagory);
+
     setCatagorys(allCatagory);
   }, [allCatagory])
 
@@ -56,7 +56,7 @@ function Shope() {
                 <h3 >{catagory.categoryname}</h3>
                 {
                  item && item.map((food) => {
-                    return <MenuItem key={food._id} item={food} />
+                    return <MenuItem key={food._id} item={food} Category_Id={catagory.id} />
                   }
                   )
                 }

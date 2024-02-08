@@ -49,7 +49,7 @@ function Login() {
           if (authData) {
             localStorage.setItem("authToken", authData);
             dispatch(fetchCurrentSeller(authData));
-            dispatch()
+            dispatch(setIsLogin(false))
             navigate('/')
           }
         }
