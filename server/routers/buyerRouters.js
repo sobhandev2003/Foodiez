@@ -12,8 +12,9 @@ const { registerBuyerAccount,
     getCancelOrder, 
     deleteCartItem,
     gateDeliveryAddress} = require('../controllers/buyerControlers');
-const validateToken = require('../middilware/validateJwtToken');
+
 const { upload } = require('../config/conectDb');
+const validateBuyerToken = require('../middilware/validateBuyerJwtToken');
 
 
 
@@ -26,28 +27,28 @@ Router.route("/register").post(registerBuyerAccount);
 Router.route("/login").post(loginBuyerAccount);
 
 //NOTE - gate details loge in buyer account
-Router.route("/current").get(validateToken, currentBuyer);
+Router.route("/current").get(validateBuyerToken, currentBuyer);
 
 //NOTE - upload profile photo log in buyer account
-Router.route("/upload-profile-photo").post(validateToken, upload.single('photo'), uploadProfilePhoto)
+Router.route("/upload-profile-photo").post(validateBuyerToken, upload.single('photo'), uploadProfilePhoto)
 
 //NOTE - add new cart item and get all cart item details log in buyer account
-Router.route("/cart-item").post(validateToken, addCartItem).get(validateToken, getCartItem)
+Router.route("/cart-item").post(validateBuyerToken, addCartItem).get(validateBuyerToken, getCartItem)
 
 //NOTE - Delete cart item 
-Router.route("/cart-item/:id").delete(validateToken,deleteCartItem)
+Router.route("/cart-item/:id").delete(validateBuyerToken,deleteCartItem)
 
 //NOTE - create new deliver address and get delivery address
-Router.route("/delivery-address").post(validateToken, createDeliveryAddress).get(validateToken,gateDeliveryAddress)
+Router.route("/delivery-address").post(validateBuyerToken, createDeliveryAddress).get(validateBuyerToken,gateDeliveryAddress)
 
 //NOTE - get login account order and Place new Order 
-Router.route("/order").get(validateToken, getOrder).post(validateToken, placeOrder)
+Router.route("/order").get(validateBuyerToken, getOrder).post(validateBuyerToken, placeOrder)
 
 //NOTE - cancel before order item 
-Router.route("/cancel/:id").put(validateToken, cancelOrder)
+Router.route("/cancel/:id").put(validateBuyerToken, cancelOrder)
 
 //NOTE - gate all cancel order
-Router.route("/order/cancel").get(validateToken, getCancelOrder);
+Router.route("/order/cancel").get(validateBuyerToken, getCancelOrder);
 
 
 

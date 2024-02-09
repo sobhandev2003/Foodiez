@@ -46,7 +46,7 @@ export const loginBuyerAccount = async (buyerDetails) => {
             return data;
         }
         else {
-    
+
             Alert("error", <>{data.message}</>)
         }
 
@@ -69,39 +69,41 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
         const data = await response.json();
 
         if (response.ok) {
-            // console.log(data);
-           dispatch(setLoginAccountDetails(data))
+            console.log("buyer", data);
+            dispatch(setLoginAccountDetails(data))
         }
         else {
+
             Alert("error", <>{data.message}</>)
         }
 
 
     } catch (error) {
+        console.log("data2");
         console.error(error);
     }
 }
 //NOTE - Add Cart Items
-export const addCartItems=(cartItemDetails,authToken)=>async(dispatch)=>{
+export const addCartItems = (cartItemDetails, authToken) => async (dispatch) => {
 
     try {
-       const response=await fetch(`${baseUrl}/food/user/buyer/cart-item`,{
-        method:"POST",
-        headers:{
-            "Authorization":"Bearer " +authToken,
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify(cartItemDetails)
-       })
+        const response = await fetch(`${baseUrl}/food/user/buyer/cart-item`, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + authToken,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(cartItemDetails)
+        })
 
-       const data=response.json();
-       if(response.ok){
-        Alert('success', <div>Add to cart  <ShoppingCartOutlinedIcon /> </div>)
-        dispatch(fetchLoginBuyerDetails(authToken))
-       }
-       else{
-        Alert("error",<>{data.message}</>)
-       }
+        const data = response.json();
+        if (response.ok) {
+            Alert('success', <div>Add to cart  <ShoppingCartOutlinedIcon /> </div>)
+            dispatch(fetchLoginBuyerDetails(authToken))
+        }
+        else {
+            Alert("error", <>{data.message}</>)
+        }
 
     } catch (error) {
         console.error(error);
@@ -110,49 +112,49 @@ export const addCartItems=(cartItemDetails,authToken)=>async(dispatch)=>{
 
 //NOTE - get cart item
 
-export const getCartItem=async(authToken)=>{
+export const getCartItem = async (authToken) => {
     try {
-        const response=await fetch(`${baseUrl}/food/user/buyer/cart-item`,{
-            method:"GET",
-            headers:{
-                "Authorization":"Bearer "+authToken
+        const response = await fetch(`${baseUrl}/food/user/buyer/cart-item`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + authToken
             }
         })
 
-        const data=await response.json();
-        if(response.ok){
+        const data = await response.json();
+        if (response.ok) {
             return data;
         }
-        else{
+        else {
             console.error(data.message);
         }
-        
+
     } catch (error) {
         console.error(error);
     }
 }
 
 //NOTE - Delete Cart item 
-export const deleteCartItem=(authToken,itemId)=>async(dispatch)=>{
-try {
-    const response=await fetch(`${baseUrl}/food/user/buyer/cart-item/${itemId}`,{
-        method:"DELETE",
-        headers:{
-            "Authorization":"Bearer "+authToken
+export const deleteCartItem = (authToken, itemId) => async (dispatch) => {
+    try {
+        const response = await fetch(`${baseUrl}/food/user/buyer/cart-item/${itemId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + authToken
+            }
+        })
+        const data = await response.json();
+        if (response.ok) {
+            console.log(data);
+            Alert("success", <>{data.message}</>)
+            dispatch(fetchLoginBuyerDetails(authToken))
         }
-    })
-    const data=await response.json();
-    if(response.ok){
-        console.log(data);
-        Alert("success",<>{data.message}</>)
-        dispatch(fetchLoginBuyerDetails(authToken))
-    }
-    else{
-        
-        Alert("error",<>{data.message}</>)
-    }
+        else {
 
-} catch (error) {
-    console.error(error);
-}
+            Alert("error", <>{data.message}</>)
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
 }

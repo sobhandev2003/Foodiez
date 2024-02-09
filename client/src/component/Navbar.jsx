@@ -42,14 +42,17 @@ const Navbar = () => {
 
     //SECTION - 
     const navigate = useNavigate();
-    const authToken = localStorage.getItem("authToken");
+    // const authToken = localStorage.getItem("authToken");
     const dispatch = useDispatch()
+    const sellerAuthToken = localStorage.getItem("sellerAuthToken");
+    const buyerAuthToken = localStorage.getItem("buyerAuthToken");
     // const cartsProducts = useSelector(state => state.cart.ToCarts);
     const isLogin = useSelector(state => state.Login.isLogin);
     const [isLoginTemplateVisible, setIsLoginTemplateVisible] = useState(false)
     //NOTE - Login  Account details get
     const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
     const [loginAccount, setLoginAccount] = useState(null);
+    const [avtarSrc, setAvterSrc] = useState(null)
     //NOTE - 
     // const [isVisibaleAccounContor, setIsVisibaleAccounContor] = useState(false)
     const [isProfilePhotoUpdate, setIsProfilePhotoUpdate] = useState(false);
@@ -70,7 +73,7 @@ const Navbar = () => {
     const handelUpdateprofilePhoto = (e) => {
         e.preventDefault();
         // console.log(loginAccount);
-        const authToken = localStorage.getItem("authToken");
+        const authToken = localStorage.getItem("sellerAuthToken") || localStorage.getItem("buyerAuthToken");
         dispatch(updateProfilePhoto(loginAccount.user_role, authToken, newPhoto, setIsProfilePhotoUpdate));
     }
 
@@ -92,19 +95,34 @@ const Navbar = () => {
             </form>
         </Model>
     )
+
+
+    useEffect(() => {
+        if (sellerAuthToken) {
+            dispatch(fetchCurrentSeller(sellerAuthToken));
+        }
+        if (buyerAuthToken) {
+            dispatch(fetchLoginBuyerDetails(buyerAuthToken));
+        }
+// eslint-disable-next-line
+    }, [dispatch])
     useEffect(() => {
         setIsLoginTemplateVisible(isLogin)
     }, [isLogin])
     useEffect(() => {
         setLoginAccount(loginAccountDetails)
-    }, [loginAccountDetails])
 
+    }, [loginAccountDetails])
     useEffect(() => {
-        if (authToken) {
-            dispatch(fetchCurrentSeller(authToken));
-            dispatch(fetchLoginBuyerDetails(authToken))
-        }
-    }, [authToken, dispatch])
+        loginAccount && setAvterSrc(`data:${loginAccount.profile_photoType};base64,${loginAccount.profile_photo}`)
+        // console.log(loginAccount);
+    }, [loginAccount])
+    // useEffect(() => {
+    //     if (authToken) {
+    //         dispatch(fetchCurrentSeller(authToken));
+    //         // dispatch(fetchLoginBuyerDetails(authToken))
+    //     }
+    // }, [])
 
     return (
         <>
@@ -142,7 +160,7 @@ const Navbar = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             {loginAccount ? <> {<Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    {<Avatar alt={"👤"} src={loginAccount && `data:${loginAccount.profile_photoType};base64,${loginAccount.profile_photo}`} />}
+                                    {<Avatar alt={"👤"} src={avtarSrc} />}
 
                                 </IconButton>
                             </Tooltip>}

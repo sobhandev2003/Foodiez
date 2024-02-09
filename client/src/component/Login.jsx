@@ -47,7 +47,7 @@ function Login() {
         else {
           const authData = await loginSeller(sellerData);
           if (authData) {
-            localStorage.setItem("authToken", authData);
+            localStorage.setItem("sellerAuthToken", authData);
             dispatch(fetchCurrentSeller(authData));
             dispatch(setIsLogin(false))
             navigate('/')
@@ -62,7 +62,7 @@ function Login() {
 
           const authData=await loginBuyerAccount({email,password})
           if(authData){
-            localStorage.setItem("authToken", authData);
+            localStorage.setItem("buyerAuthToken", authData);
             dispatch(fetchLoginBuyerDetails(authData));
            dispatch(setIsLogin(false))
             navigate('/')
@@ -73,7 +73,7 @@ function Login() {
     }
   };
   useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("sellerAuthToken")||localStorage.getItem("buyerAuthToken");
     if (authToken) {
       navigate('/')
     }

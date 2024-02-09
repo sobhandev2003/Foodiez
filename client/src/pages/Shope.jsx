@@ -52,8 +52,10 @@ function Shope() {
           {
             catagorys && catagorys.map((catagory) => {
               const { item } = catagory
+              
               return <div key={catagory.id} name={`${catagory.id}`}>
-                <h3 >{catagory.categoryname}</h3>
+                
+                <h3 >{catagory.name}</h3>
                 {
                  item && item.map((food) => {
                     return <MenuItem key={food._id} item={food} Category_Id={catagory.id} />

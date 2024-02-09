@@ -1,6 +1,6 @@
 const asyncHandler=require('express-async-handler');
 const jwt=require('jsonwebtoken');
- const validateToken=asyncHandler(
+ const validateSellerToken=asyncHandler(
     (req,res,next)=>{
         let token;
         let authHeader=req.headers.authorization || req.headers.Authorization
@@ -15,8 +15,7 @@ const jwt=require('jsonwebtoken');
                     }
                     if(decode.seller)
                     req.seller=decode.seller;
-                    if(decode.buyer)
-                    req.buyer=decode.buyer;
+
                     next();
                 })
 
@@ -28,4 +27,7 @@ const jwt=require('jsonwebtoken');
     }
  )
 
- module.exports=validateToken
+
+ 
+
+ module.exports=validateSellerToken

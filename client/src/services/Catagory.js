@@ -28,7 +28,7 @@ export const fetchCurrentSellerCategory = (sellerData) => async (dispatch) => {
 //NOTE - create new category
 
 export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(dispatch) => {
-    const authToken = localStorage.getItem("authToken")
+    const authToken = localStorage.getItem("sellerAuthToken")
     if (authToken) {
         try {
             const response = await fetch(`${baseUrl}/food/category`, {
@@ -50,7 +50,7 @@ export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(di
 
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
     else {
@@ -62,12 +62,12 @@ export const CreateNewCategory =  (categoryData,currentSellerDetailes)=>async(di
 export const fetchCatagory = (id) => async (dispatch) => {
  
     try {
-        console.log(id);
+        
         const response = await fetch(`${baseUrl}/food/category/${id}`);
         const data = await response.json();
         dispatch(getCatagory(data));
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

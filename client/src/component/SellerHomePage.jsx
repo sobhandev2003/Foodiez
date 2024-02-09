@@ -6,10 +6,12 @@ import { FiEdit } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { fetchItemByCategoryId } from '../services/item';
 import loadingSpinner from '../photo/loading-spinner.gif'
+import { fetchCurrentSeller } from '../services/Seller';
 function SellerHomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
+  // const authToken = localStorage.getItem("authToken");
+  const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
   const currentSellerCategory = useSelector(state => state.Seller.currentSellerCategory);
   const [categories, setCategories] = useState(null);
 
@@ -18,12 +20,15 @@ function SellerHomePage() {
     localStorage.setItem("editCategory", JSON.stringify({ id: catagory.id, name: catagory.name }))
     navigate('/edit-category')
   }
-
+  // useEffect(() => {
+  //   dispatch(fetchCurrentSeller(authToken));
+  // }, [authToken,dispatch])
   useEffect(() => {
     //NOTE - fetch curent seller all catagory and
     setCategories(currentSellerCategory);
+    
+  },[loginAccountDetails , currentSellerCategory])
 
-  }, [loginAccountDetails, currentSellerCategory])
 
   return (
     <>
@@ -33,19 +38,19 @@ function SellerHomePage() {
       </div>
       <div className='categories'>
         {
-          categories?<>{ categories.length > 0 ? categories.map((catagory) => {
+          categories ? <>{categories.length > 0 ? categories.map((catagory) => {
 
             return <div className='seller-category' key={catagory.id}>
               <h2>{catagory.name} </h2>
               <FiEdit aria-label="edit" className='edit-fab' onClick={() => { editCategory(catagory) }} />
 
-              
+
             </div>
-          }) : <h1>Don't have any category</h1>}</> :<><img src={loadingSpinner} alt='Loading..'/></>
+          }) : <h1>Don't have any category</h1>}</> : <><img src={loadingSpinner} alt='Loading..' /></>
         }
         {/* <img src={loadingSpinner} alt='Loading..'/> */}
       </div>
-  
+
     </>
   )
 }

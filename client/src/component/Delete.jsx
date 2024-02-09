@@ -9,7 +9,7 @@ function Delete(props) {
     const { type, deleteData, additionalData,closeModel , } = props
     const [formData, setFormData] = useState();
     const dispatch = useDispatch();
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("sellerAuthToken")||localStorage.getItem("buyerAuthToken");
     const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
     const navigate = useNavigate();
     // console.log(props);

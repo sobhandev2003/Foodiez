@@ -152,7 +152,7 @@ const getCartItem = asyncHandler(async (req, res) => {
 const deleteCartItem = asyncHandler(async (req, res) => {
     const itemId = req.params.id;
     const buyerId = req.buyer.id
-    console.log(itemId);
+
     if (!buyerId) {
         res.status(401);
         throw new Error("Unauthorize")
@@ -163,7 +163,7 @@ const deleteCartItem = asyncHandler(async (req, res) => {
         throw new Error("Buyer Account Not Found")
     }
     const index = buyer.cartItem.findIndex(item => item.Item_Id == itemId);
-    console.log(index);
+   
     if (index === -1) {
         res.status(404);
         throw new Error('Item not found in cart')

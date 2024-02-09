@@ -9,7 +9,7 @@ import { setIsLogin } from '../fetures/loginFrtures';
 
 //SECTION - --------------------MenuCatagory-------------
 export const MenuCatagory = (props) => {
-  const { categoryname, id } = props.catagory;
+  const { name, id } = props.catagory;
   return (
     <>
       <Link activeClass='active'
@@ -20,7 +20,7 @@ export const MenuCatagory = (props) => {
         duration={100}
 
       >
-        {categoryname}
+        {name}
       </Link>
       {/* <p>{name}</p> */}
     </>
@@ -38,7 +38,7 @@ export const MenuItem = (props) => {
 
   const handelAddToCart = () => {
     const Item_Id = _id;
-    const authToken = localStorage.getItem("authToken")
+    const authToken = localStorage.getItem("buyerAuthToken")
     if (authToken) {
       dispatch(addCartItems({ Seller_Id, Category_Id, Item_Id }, authToken))
     }

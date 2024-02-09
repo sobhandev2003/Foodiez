@@ -16,7 +16,7 @@ import loadingSpinner from '../photo/loading-spinner.gif'
 function EditCategory() {
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("sellerAuthToken");
     const category = JSON.parse(localStorage.getItem("editCategory"))
     const Items = useSelector(state => state.catagory.items)
     const [items, setItems] = useState(null);

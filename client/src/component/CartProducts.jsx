@@ -7,7 +7,7 @@ function CartProducts(props) {
   const dispatch=useDispatch();
     const {name,description,photo,photoType,price}=props.product;
     const handelRemoveToCart=()=>{
-      const authToken=localStorage.getItem("authToken")
+      const authToken=localStorage.getItem("buyerAuthToken")
       dispatch(deleteCartItem(authToken,props.product._id))
       // console.log(props.product._id);
     }

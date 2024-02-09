@@ -16,7 +16,7 @@ function Cart() {
     totalPrice += Number(product.price);
   });
 
-  const authToken=localStorage.getItem("authToken");
+  const authToken=localStorage.getItem("buyerAuthToken");
    
 
     const fetchCartItem=async()=>{

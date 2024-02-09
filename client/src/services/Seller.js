@@ -8,8 +8,7 @@ import { baseUrl } from "./baseUrl";
 //NOTE - register a new Seller
 
 export const registerSeller = (sellerData) => async (dispatch) => {
-    // console.log(sellerData);
-    // const {}
+    
  
     const { restaurantName, ownerName, address, email, mobile, photo, password, } = sellerData;
     try {
@@ -75,7 +74,7 @@ export const loginSeller=async(sellerData)=>{
         }
        
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return false
     }
 
@@ -96,7 +95,6 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
         )
         if(response.ok){
             const data= await response.json();
-        // console.log(data);
         dispatch(fetchCurrentSellerCategory(data));
         dispatch(setLoginAccountDetails(data))
     }
@@ -106,13 +104,12 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
     }
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
 
     }
 }
 //NOTE - Forgot account password use email 
 export const forgotPassword=async(sellerData,setIsForgotPassword)=>{
-    console.log(sellerData);
     try {
         const response = await fetch(`${baseUrl}/food/user/seller/forgotpassword`,{
             method:"PUT",
@@ -122,7 +119,6 @@ export const forgotPassword=async(sellerData,setIsForgotPassword)=>{
             body:JSON.stringify(sellerData)
         })
         const data=await response.json();
-        console.log(data);
         if(response.ok){
             Alert("success",<p>{data.massage}</p>)
             setIsForgotPassword(false)

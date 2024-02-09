@@ -1,7 +1,7 @@
 const express=require('express');
 const {getCategories,getCategory,createCategory,deleteCategory} = require('../controllers/categoryControlers');
 const { createItem, getItems, getItem, updateItem, deleteItem } = require('../controllers/itemControllers');
-const validateToken=require('../middilware/validateJwtToken');
+const validateToken=require('../middilware/validateSellerJwtToken');
 const { upload } = require('../config/conectDb');
 
 

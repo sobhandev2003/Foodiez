@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     FaListAlt
 } from "react-icons/fa";
@@ -8,8 +8,11 @@ import Model from './Model';
 import AddCategory from './AddCategory';
 import CloseIcon from '@mui/icons-material/Close';
 import { MenuItem, Typography } from '@mui/material';
+import { fetchCurrentSeller } from '../services/Seller';
+import { useDispatch } from 'react-redux';
 function SellerNavItem() {
     const navigate=useNavigate();
+    
     const [isCategoryAdd, setIsCategoryAdd] = useState(false)
     const addCategoryTemplet = (
         <Model>
@@ -18,6 +21,8 @@ function SellerNavItem() {
 
         </Model>
     )
+
+   
     return (
         <>
           

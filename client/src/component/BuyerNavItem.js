@@ -8,24 +8,10 @@ import { rollIn } from 'react-animations';
 
 import styled, { keyframes } from 'styled-components';
 import { addToCarts } from '../fetures/CartsSlaice';
-function BuyerNavItem() {
-    const navigate = useNavigate()
 
-    const dispatch=useDispatch()
-    const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
-    // console.log(loginAccountDetails);
-    const [numberOfCartProduct, setNumberOfCartProduct] = useState(0);
-    useEffect(() => {
-        if (loginAccountDetails.cartItem) {
-            
-            setNumberOfCartProduct(loginAccountDetails.cartItem.length)
-            dispatch(addToCarts(loginAccountDetails.cartItem))
-        }
-    }, [loginAccountDetails,dispatch])
-
-    //NOTE - for cart count bounce
-    const bounceAnimation = keyframes`${rollIn}`;
-    const BouncyDiv = styled.span`
+//NOTE - for cart count bounce
+const bounceAnimation = keyframes`${rollIn}`;
+const BouncyDiv = styled.span`
     display:inline-block;
     margin-left: 5px;
     background-color:#0aa928;
@@ -36,6 +22,24 @@ function BuyerNavItem() {
     position: relative;
       animation: 1.5s ${bounceAnimation} infinite alternate;
     `;
+
+function BuyerNavItem() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
+    // console.log(loginAccountDetails);
+    const [numberOfCartProduct, setNumberOfCartProduct] = useState(0);
+   
+    useEffect(() => {
+        if (loginAccountDetails.cartItem) {
+
+            setNumberOfCartProduct(loginAccountDetails.cartItem.length)
+            dispatch(addToCarts(loginAccountDetails.cartItem))
+        }
+    }, [loginAccountDetails, dispatch])
+
+   
+
     return (
         <>
             <MenuItem onClick={() => { navigate('/cart') }}>
