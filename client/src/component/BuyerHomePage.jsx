@@ -5,12 +5,10 @@ import { searchSeller } from '../services/searchSellerReducers';
 import photo1 from '../photo/photo1.png';
 import ShopeList from '../component/ShopeList';
 import photo2 from '../photo/photo2.png';
-import { fetchLoginBuyerDetails } from '../services/Buyer';
 function BuyerHomePage() {
     const dispatch = useDispatch()
     const [sellers, setSellers] = useState([]);
     const allSllerdata = useSelector(state => state.Seller.allSeller)
-    const authToken = localStorage.getItem("authToken");
     //NOTE  -   Search a seller
     const filterByName = (e) => {
       dispatch(searchSeller({ restaurantName: e.target.value }));
@@ -22,9 +20,7 @@ function BuyerHomePage() {
   
     //NOTE - call useEffect -----
 
-// useEffect(()=>{
-// dispatch(fetchLoginBuyerDetails(authToken));
-// },[])
+
 
     useEffect(() => {
       setSellers(allSllerdata);

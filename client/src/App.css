@@ -13,7 +13,7 @@
 }
 
 .routes-component-section {
-    padding-top: 5rem;
+    padding-top: 4rem;
 }
 
 .overflow-hidden {
@@ -105,5 +105,10 @@
     border-color: green;
     outline-color: green;
   }
-  
-  
+  .loading-container{
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

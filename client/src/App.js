@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import Register from './pages/Register';
 import EditCategory from './pages/EditCategory';
 import Order from './pages/Order';
+import PlaceOrder from './pages/PlaceOrder';
 
 
 
@@ -28,10 +29,11 @@ function App() {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/register' element={<Register />} />
           <Route exact path='/help' element={<Contact />} />
-          <Route path='/restaurant/:id' element={<Shope />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/edit-category' element={<EditCategory />} />
-          <Route path='/my-order' element={<Order />} />
+          <Route exact path='/restaurant/:id' element={<Shope />} />
+          <Route exact path='/cart' element={<Cart />} />
+          <Route exact path='/edit-category' element={<EditCategory />} />
+          <Route exact path='/place-order' element={<PlaceOrder />} />
+          <Route exact path='/my-order' element={<Order />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </section>

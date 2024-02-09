@@ -69,7 +69,6 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
         const data = await response.json();
 
         if (response.ok) {
-            console.log("buyer", data);
             dispatch(setLoginAccountDetails(data))
         }
         else {
@@ -79,7 +78,6 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
 
 
     } catch (error) {
-        console.log("data2");
         console.error(error);
     }
 }
@@ -145,7 +143,6 @@ export const deleteCartItem = (authToken, itemId) => async (dispatch) => {
         })
         const data = await response.json();
         if (response.ok) {
-            console.log(data);
             Alert("success", <>{data.message}</>)
             dispatch(fetchLoginBuyerDetails(authToken))
         }

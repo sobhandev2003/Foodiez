@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    catagory: [],
+    catagory: null,
     editCategory:null,
     items:null,
 }

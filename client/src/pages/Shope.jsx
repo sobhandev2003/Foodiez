@@ -5,22 +5,22 @@ import { MenuCatagory, MenuItem } from '../component/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCatagory } from '../services/Catagory';
 import { useParams } from 'react-router-dom';
+import loadingSpin from '../photo/loading-spinner.gif'
 
 function Shope() {
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [catagorys, setCatagorys] = useState();
+  const [catagorys, setCatagorys] = useState(null);
   const allCatagory = useSelector(state => state.catagory.catagory);
 
   useEffect(() => {
-
     setCatagorys(allCatagory);
   }, [allCatagory])
 
   useEffect(() => {
     dispatch(fetchCatagory(id));
-  }, [dispatch,id])
+  }, [dispatch, id])
 
   return (
     <div className='shope-page'>
@@ -35,32 +35,33 @@ function Shope() {
         </div>
 
       </div>
-      <div className='menu-card'>
+
+    {catagorys ? <div className='menu-card'>
         <div className='menu-catagory'>
           {
-            catagorys && catagorys.length>0? catagorys.map((catagory) => {
+          
+            catagorys.length > 0 ? catagorys.map((catagory) => {
               return <MenuCatagory key={catagory.id} catagory={catagory} />
-            }):<h1>loading</h1>
+            }) : <h1>No Food sell this restaurant </h1>
           }
-
-          {!catagorys && <h1>loding</h1>}
 
         </div>
 
         <div className='menu-food'>
 
           {
-            catagorys && catagorys.map((catagory) => {
+             catagorys.map((catagory) => {
               const { item } = catagory
-              
+
               return <div key={catagory.id} name={`${catagory.id}`}>
-                
+
                 <h3 >{catagory.name}</h3>
                 {
-                 item && item.map((food) => {
+                  item && item.length>0 ?<>{ item.map((food) => {
                     return <MenuItem key={food._id} item={food} Category_Id={catagory.id} />
                   }
-                  )
+                  )}
+                  </>:<h4 className='orange'>No item present for this category</h4>
                 }
                 <hr />
               </div>
@@ -71,7 +72,10 @@ function Shope() {
 
 
 
-      </div>
+      </div>:
+      <div className='loading-container'>
+          <img className='loading-spin' src={loadingSpin} alt="loading..." />
+          </div>}
 
 
     </div>

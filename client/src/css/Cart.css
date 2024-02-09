@@ -56,6 +56,7 @@ font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
 }
+
 .add-cart{
     width: 80vw;
     padding-top: 50px;
@@ -170,10 +171,10 @@ color: red;
     margin-top: 15px;
     cursor: pointer;
 }
-.add-cart .cart-products-bill .payment-mode-div .payment-mode{
+ .payment-mode-div .payment-mode{
     display: flex;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 10px;
     background-color: #bfe7f5;
     border: 1px solid #bfe7f5;
@@ -197,6 +198,11 @@ color: red;
     left: 50%;
     transform: translate(-50%);
     cursor: pointer;
+}
+.add-cart .cart-products-bill button:disabled{
+    cursor: default;
+    background-color: #5e5ef1;
+    border: 1px solid #5e5ef1;
 }
 @media screen and  (max-width:768px){
     .add-cart{
