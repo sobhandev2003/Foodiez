@@ -28,6 +28,7 @@
     height: 10rem;
     border-radius: 60%;
     margin-bottom: 60px;
+   
 }
 .crat-page .II .epmty-cart .txt-margin-bottom{
     margin-bottom: 20px;
@@ -82,13 +83,38 @@ font-weight: bold;
     /* justify-content: space-between; */
     align-items: center;
 }
+.add-cart .cart-product .left-div{
+    position: relative;
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* border: 1px solid blue; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-product .left-div  button{
+    position: absolute;
+    z-index: 10;
+    bottom: -6px;
+    cursor: pointer;
+}
+.cart-product .left-div  button .icon{
+font-size: 2.2rem;
+color: red;
+}
 .add-cart .cart-product img{
     margin-left: 10px;
     margin-right: 10px;
-    width: 25%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     border-radius: 10px;
-    position: relative;
+    position: absolute;
+    top: 0;
   
 }
 .add-cart .cart-product div{
@@ -137,7 +163,7 @@ font-weight: bold;
 
     overflow: hidden;
     width: 98%;
-    /* height: 30px; */
+
    
     border-radius: 10px;
     margin-bottom:10px ;
@@ -167,20 +193,21 @@ font-weight: bold;
     border-radius: 10px;
     background-color: navy;
     color: white;
-
     position: relative;
     left: 50%;
     transform: translate(-50%);
     cursor: pointer;
 }
-@media screen and (min-width:321px) and (max-width:768px){
+@media screen and  (max-width:768px){
     .add-cart{
         flex-direction: column;
     }
     .add-cart .cart-product{
         width: 70vw;
     }
-   
+    .add-cart .cart-product .left-div{
+        width: 50%;
+    }
     .add-cart .cart-products-bill{
         width: 70vw;
         padding-right: 20px;

@@ -162,15 +162,15 @@ const Navbar = () => {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                 >
-                                    <MenuItem key={loginAccount.id + "1w2"} >
+                                    <MenuItem key={loginAccount.id + "email"} >
                                         <Typography textAlign="center" sx={{ color: "#2ce084" }}>{loginAccount.email}</Typography>
                                     </MenuItem>
                                     {loginAccount.restaurantName &&
-                                        <MenuItem key={loginAccount.id + "1w2"} >
+                                        <MenuItem key={loginAccount.id + "restaurantName"} >
                                             <Typography textAlign="center" sx={{ color: "#2ce084" }}>{loginAccount.restaurantName}</Typography>
                                         </MenuItem>
                                     }
-                                    <MenuItem key={loginAccount.id + "1w2"} >
+                                    <MenuItem key={loginAccount.id + "name"} >
                                         <Typography textAlign="center" sx={{ color: "#2ce084" }}>{loginAccount.ownerName || loginAccount.name}</Typography>
                                     </MenuItem>
                                     {isVWLesThen900Px &&

@@ -103,10 +103,56 @@ export const addCartItems=(cartItemDetails,authToken)=>async(dispatch)=>{
         Alert("error",<>{data.message}</>)
        }
 
-
-
-
     } catch (error) {
         console.error(error);
     }
+}
+
+//NOTE - get cart item
+
+export const getCartItem=async(authToken)=>{
+    try {
+        const response=await fetch(`${baseUrl}/food/user/buyer/cart-item`,{
+            method:"GET",
+            headers:{
+                "Authorization":"Bearer "+authToken
+            }
+        })
+
+        const data=await response.json();
+        if(response.ok){
+            return data;
+        }
+        else{
+            console.error(data.message);
+        }
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//NOTE - Delete Cart item 
+export const deleteCartItem=(authToken,itemId)=>async(dispatch)=>{
+try {
+    const response=await fetch(`${baseUrl}/food/user/buyer/cart-item/${itemId}`,{
+        method:"DELETE",
+        headers:{
+            "Authorization":"Bearer "+authToken
+        }
+    })
+    const data=await response.json();
+    if(response.ok){
+        console.log(data);
+        Alert("success",<>{data.message}</>)
+        dispatch(fetchLoginBuyerDetails(authToken))
+    }
+    else{
+        
+        Alert("error",<>{data.message}</>)
+    }
+
+} catch (error) {
+    console.error(error);
+}
 }

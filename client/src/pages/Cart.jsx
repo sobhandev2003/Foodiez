@@ -4,36 +4,45 @@ import cartImg from '../photo/cartimag.jpg';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import CartProducts from '../component/CartProducts';
+import { getCartItem } from '../services/Buyer';
 
 function Cart() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
-  // const cartProducts=useSelector(state=>state.cart.ToCarts);
-  const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
-  const [cartProducts, setCartProducts] = useState();
+  const cartProductsDetail=useSelector(state=>state.cart.ToCarts);
+ const [cartProducts, setCartProducts]=useState([]);
   let totalPrice = 0;
   cartProducts && cartProducts.forEach(product => {
     totalPrice += Number(product.price);
   });
-  //FIXME - 
-  useEffect(() => {
-    console.log(loginAccountDetails);
-    loginAccountDetails && setCartProducts(loginAccountDetails.cartItem)
-  }, [loginAccountDetails])
-  useEffect(() => {
-    loginAccountDetails && setCartProducts(loginAccountDetails.cartItem)
-  }, [])
+
+  const authToken=localStorage.getItem("authToken");
+   
+
+    const fetchCartItem=async()=>{
+      if (authToken && cartProductsDetail) {
+        const data = await getCartItem(authToken);
+        console.log(data);
+        setCartProducts(data);
+      }
+    }
+ 
+    useEffect(() => {
+    fetchCartItem();
+    // eslint-disable-next-line
+  }, [cartProductsDetail])
+
   return (
     <div className='crat-page'>
       <div className='I'>
         <h1>Your Cart</h1>
       </div>
       <div className='II'>
-        {cartProducts && cartProducts.length > 0 ?
+        { cartProducts.length > 0 ?
           <div className='add-cart'>
             <div className='cart-products'>
-              {cartProducts.map((product) => { return <CartProducts product={product} /> }
-
+              {cartProducts.map((product,index) => { 
+                return <CartProducts key={product._id+index} product={product} /> }
               )}
             </div>
             <div className='cart-products-bill'>

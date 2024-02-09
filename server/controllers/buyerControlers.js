@@ -70,7 +70,7 @@ const currentBuyer = asyncHandler(async (req, res) => {
     const buyer = await Buyer.findById(req.buyer.id)
     const { user_role, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
 
-    res.status(200).json({ user_role,name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
+    res.status(200).json({ user_role, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
 })
 
 //NOTE - upload profile photo
@@ -150,8 +150,10 @@ const getCartItem = asyncHandler(async (req, res) => {
 //NOTE - Delete Cart Item
 //route "/cart-item/:id"
 const deleteCartItem = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    if (!req.buyer.id) {
+    const itemId = req.params.id;
+    const buyerId = req.buyer.id
+    console.log(itemId);
+    if (!buyerId) {
         res.status(401);
         throw new Error("Unauthorize")
     }
@@ -160,19 +162,17 @@ const deleteCartItem = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Buyer Account Not Found")
     }
-    const item = buyer.cartItem.id(id);
-    if (!item) {
+    const index = buyer.cartItem.findIndex(item => item.Item_Id == itemId);
+    console.log(index);
+    if (index === -1) {
         res.status(404);
-        throw new Error("Item Not Found")
+        throw new Error('Item not found in cart')
     }
-
-    const updatedData = await Buyer.findByIdAndUpdate(
-        req.buyer.id,
-        { $pull: { cartItem: { _id: id } } },
-        { new: true }
-    )
-
-    res.status(200).json({ message: "Item deleted form cart", updatedData })
+    // Remove the cart item from the array
+    buyer.cartItem.splice(index, 1);
+    // Save the updated buyer document
+    await buyer.save();
+    res.status(200).send({ message: 'CartItem deleted successfully' });
 })
 
 
@@ -286,12 +286,12 @@ const cancelOrder = asyncHandler(async (req, res) => {
         res.status(422);
         throw new Error("Request not valid")
     }
-    const order = await Order.findOne({ _id: Order_Id, Buyer_Id,Order_Cancel:false });
+    const order = await Order.findOne({ _id: Order_Id, Buyer_Id, Order_Cancel: false });
     if (!order) {
         res.status(404);
         throw new Error("Order Not found")
     }
-    const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Buyer_Id,Order_Cancel:false },
+    const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Buyer_Id, Order_Cancel: false },
         {
             Order_Cancel: true,
             Order_Cancel_Reason: reason,

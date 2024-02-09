@@ -8,17 +8,8 @@ export const CartsSlaice=createSlice({
     initialState,
     reducers:{
         addToCarts:(state,action)=>{
-            // console.log(action.payload);
-            const {name,des,price,photo}=action.payload;
-            // console.log(_id);
-            const product={
-                
-                name:name,
-                des:des,
-                price:price,
-                photo:photo
-            }
-            state.ToCarts.push(product);
+            state.ToCarts=action.payload;
+            // console.log(state.ToCarts);
         },
         
     }

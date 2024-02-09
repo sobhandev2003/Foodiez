@@ -114,11 +114,9 @@
     width: 95%;
     height: 150px;
     display: flex;
-
 }
 
 .menu-food .menu-item .left-div {
-
     width: 30%;
     height: 100%;
     display: flex;
@@ -154,7 +152,7 @@
 
 
 
-.left-div button {
+.menu-food .menu-item .left-div button {
     position: absolute;
     z-index: 10;
 
@@ -171,7 +169,7 @@
 
 
 
-.left-div button:hover {
+.menu-food .menu-item .left-div button:hover {
     padding: .6rem 1.1rem .6rem 1.1rem;
 }
 
