@@ -2,162 +2,67 @@
 
 
 @keyframes floatAnimation {
-	0% {
-		transform: translatey(-2px);
-	}
-	50% {
-		transform: translatey(-8px);
-	}
-	100% {
-		transform: translatey(-2px);
-	}
+    0% {
+        transform: translatey(-2px);
+    }
+
+    50% {
+        transform: translatey(-8px);
+    }
+
+    100% {
+        transform: translatey(-2px);
+    }
 }
-/* navbar style start  */
-.avatar {
-    width: 40px; /* Adjust the width and height as needed */
-    height: 40px;
-    background-color: #ccc; /* Default background color */
-    border-radius: 50%; /* Make it circular */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px; /* Adjust font size as needed */
-  }
-  
-  .avatar span {
-    color: #fff; /* Text color */
-  }
-  
-.main-nav {
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    background-color: rgb(0, 0, 52);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+header{
     position: fixed;
     top: 0;
     z-index: 10;
-    align-items: center;
-    justify-content: space-around;
-    overflow: hidden;
 }
-
 .logo {
-    display: grid;
-    justify-content: start;
-    align-items: center;
-    width: 25%;
-}
-
-
-.logo img {
     width: 70%;
     height: 60px;
 }
 
-.menu-link {  
+.menu-link {
     width: 50%;
 }
-.auth-link{
-display: flex;
-justify-content: flex-end;
+
+.auth-link {
+    display: flex;
+    justify-content: flex-end;
 }
+
 .menu-link ul,
-.auth-link ul{
-    
+.auth-link ul {
     height: max-content;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.auth-list{
-width: 30%;
+
+.auth-list {
+    width: 30%;
 }
+
 .menu-link .icon {
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
     margin-right: 5px;
 }
-.cart-count{
-    margin-left:5px;
-    background-color: blue;
-    color: white;
-    padding: 0px 4px 0px 4px;
-    border-radius: 70%;
-    position: relative;
-    animation: floatAnimation 1s infinite alternate;
-}
 
-.account-control {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
 
-.account-control .icon {
-    font-size: 3rem;
-    color: white;
-}
-
-.account-control ul {
-    position: fixed;
-    right: 5px;
-    background: rgb(2, 121, 115);
-    box-shadow: 3px 5px 1px rgb(139, 160, 162);
-    border-radius: 5px;
-    width: max-content;
-    height: max-content;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    z-index: 99;
-    top: 6.5rem;
-    overflow: hidden;
-}
-
-.account-control ul li {
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding: 10px;
-    width: max-content;
-    display: flex;
-    align-items: center;
-
-}
 
 .menu-link ul li a,
-.auth-link ul li a,
-.account-control ul li a {
-/* border: 1px solid red; */
+.auth-link ul li a {
+    /* border: 1px solid red; */
     height: max-content;
     color: white;
     width: 100%;
     font-size: 1.5rem;
     align-items: center;
 }
-.change-profile-photo{
-    color: rgb(188, 241, 10);
-    font-size: 1.5rem;
-}
-.log-out-btn,
-.log-out-btn .icon {
-   
-    font-size: 2rem;
-    color: red;
-    font-weight: 500;
-    letter-spacing: 3px;
-    cursor: pointer;
-}
-
-
-
-
 
 .menu-link ul li {
     padding-bottom: 10px;
@@ -166,38 +71,14 @@ width: 30%;
     margin-bottom: 5px;
 }
 
-
-
 .nav-hover:hover {
     transform-origin: left;
     text-decoration: underline;
     text-decoration-color: rgb(241, 230, 4);
 }
 
-.account-control ul li {
-    font-size: 1rem;
-}
-
-.account-control .hamburger-menu {
-    display: none;
-}
-
-.user-account{
+.auth-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.account-control .profile-photo{
-    width: 3rem;
-    height: 3rem;
-    border: 2px solid rgb(29, 215, 236);
-    border-radius: 80%;
-    overflow: hidden;
-}
-.account-control .profile-photo img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* responsive css style  */
@@ -207,22 +88,19 @@ width: 30%;
     }
 
     .logo {
-        height: 8rem;
+        width: 65%;
+        height: 60px;
     }
 }
 
 
 /* responsive css style  */
 @media screen and (min-width: 768px) and (max-width:1023px) {
-
-
     .menu-link ul li a,
     .menu-link .icon {
         color: white;
         font-size: 1.2rem;
     }
-
-
 }
 
 @media screen and (max-width:767px) {
@@ -230,57 +108,8 @@ width: 30%;
         display: none;
     }
 
-    .main-nav {
-        justify-content: space-between;
-    }
-
     .logo {
-        height: 6rem;
-    }
-
-    .account-control .hamburger-menu {
-        display: block;
-    }
-
-    .account-control .hamburger-menu button {
-        font-size: 2.5rem;
-        background: none;
-        color: white;
-        border: none;
-        outline: none;
-    }
-
-
-    .mobile-menu-link {
-        position: fixed;
-        z-index: 99;
-        top: 6rem;
-        right: 1px;
-        width: max-content;
-    }
-
-    .mobile-menu-link {
-        background-color: white;
-        display: grid;
-        grid-column: 2/5;
-        align-items: center;
-        padding: 10px;
-        transform-origin: top;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-    }
-
-    .mobile-menu-link ul {
-        display: flex;
-        /* align-items: start; */
-        justify-content: space-around;
-        flex-direction: column;
-        z-index: 99;
-
-    }
-
-    .mobile-menu-link ul li a,
-    .mobile-menu-link a .icon {
-        color: black;
-    }
+        width: 60%;
+        height: 60px;
+    }  
 }

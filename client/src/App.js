@@ -9,10 +9,9 @@ import Footer from './component/Footer';
 import Contact from './pages/Contact';
 import Shope from './pages/Shope';
 import Cart from './pages/Cart';
-
 import Register from './pages/Register';
-
 import EditCategory from './pages/EditCategory';
+import Order from './pages/Order';
 
 
 
@@ -32,6 +31,7 @@ function App() {
           <Route path='/restaurant/:id' element={<Shope />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/edit-category' element={<EditCategory />} />
+          <Route path='/my-order' element={<Order />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </section>

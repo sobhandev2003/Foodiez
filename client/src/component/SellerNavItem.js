@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
     FaListAlt
 } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import Model from './Model';
 import AddCategory from './AddCategory';
@@ -34,3 +34,4 @@ function SellerNavItem() {
 }
 
 export default SellerNavItem
+
