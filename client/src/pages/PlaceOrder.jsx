@@ -4,13 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBuyerSavedAddress, savedNewAddress } from '../services/Buyer';
 import { BiCurrentLocation } from "react-icons/bi";
 import { GrPowerReset } from "react-icons/gr";
+import PaymentForm from '../component/PaymentForm';
 function PlaceOrder() {
   const dispatch = useDispatch();
   const authToken = localStorage.getItem("buyerAuthToken");
   const cartProductsDetail = useSelector(state => state.cart.ToCarts);
   const addresses = useSelector(state => state.Buyer.addresses);
   const [cartProducts, setCartProducts] = useState(null);
+  const [buyerDetails, setBuyerDetails] = useState({
+    name: "",
+    Contact_Number: ""
+  })
   const [buyerAddress, setBuyerAddress] = useState(null);
+
   const [deliveryAddress, setDeliveryAddress] = useState(null);
   const [isAddNewAddress, setIsAddNewAddress] = useState(false)
   const [newAddress, setNewAddress] = useState({
@@ -23,11 +29,31 @@ function PlaceOrder() {
     additionalInfo: ""
   })
   const [currentAddress, setCurrentAddress] = useState(null);
-const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
-  const handelSelectDeliverAddress = (e) => {
-    console.log(e.target.value);
-    setDeliveryAddress(e.target.value);
+  const [isDeleverAddressSelected, setIsDeleverAddressSelected] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null)
+  const [isOnlinePayment, setIsOnlinePayment] = useState(false);
+  const [isPaymentDone, setIsPaymentDone] = useState(false)
+  const handePlaceOrder = () => {
+    console.log(cartProducts);
+    console.log(buyerDetails);
+    console.log(deliveryAddress);
+    console.log(paymentMethod);
+    console.log(isPaymentDone);
 
+
+  }
+
+  const handelBuyerDetails = (e) => {
+    const { name, value, type } = e.target;
+    const inputValue = type === "text" ? value.charAt(0).toUpperCase() + value.slice(1) : value;
+    // console.log(name,value);
+    setBuyerDetails((prevData) => ({
+      ...prevData,
+      [name]: inputValue
+    }))
+  }
+  const handelSelectDeliverAddress = (e) => {
+    setDeliveryAddress(e.target.value);
   }
   const handelNewAddressCreateFromSubmit = async (e) => {
     e.preventDefault()
@@ -35,7 +61,7 @@ const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
     setIsAddNewAddress(false)
   }
   const handelNewAdressInputChange = (e) => {
-    const { name, value,type } = e.target;
+    const { name, value, type } = e.target;
     const inputValue = type === "text" ? value.charAt(0).toUpperCase() + value.slice(1) : value;
     // console.log(name,value);
     setNewAddress((prevData) => ({
@@ -54,6 +80,17 @@ const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
     })
   }
 
+  const handelPaymentMethod = (e) => {
+    console.log(e.target.value);
+    setPaymentMethod(e.target.value)
+    if (e.target.value !== "Cash on delivery") {
+      setIsOnlinePayment(true)
+    }
+    else {
+      setIsOnlinePayment(false)
+    }
+  }
+
   const getCurrentAddress = async () => {
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
@@ -65,8 +102,6 @@ const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
       setCurrentAddress({ country, state, district: state_district, postCode: postcode, city: village, street: road })
 
     })
-
-
   }
 
   useEffect(() => {
@@ -99,11 +134,16 @@ const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
   }, [cartProductsDetail])
 
   return (
-    <>
-      <div className='place-order-address-div' style={{display: !isDeleverAddressSelected ? "block" : "none"}}>
+    <div className='place-order'>
+      <div className='place-order-address-div' style={{ display: !isDeleverAddressSelected ? "block" : "none" }}>
+        <div>
+          <input type="text" name="name" placeholder='name' onChange={handelBuyerDetails} value={buyerDetails.name} />
+          <input type="tel" name="Contact_Number" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile number" onChange={handelBuyerDetails} value={buyerDetails.Contact_Number} />
+        </div>
         <div className='address-list-container'>
+          <b>Select delivery address </b>
           {
-            buyerAddress && buyerAddress.length>0 ? <>{buyerAddress.map((address, index) => {
+            buyerAddress && buyerAddress.length > 0 ? <>{buyerAddress.map((address, index) => {
               // console.log(index,address);
               return <label key={address._id} >
                 <input type="radio" value={address._id} name="deliveryAddress" onChange={handelSelectDeliverAddress} />
@@ -115,8 +155,8 @@ const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
                 </p>
               </label>
             })}
-            </>:<>
-            <b style={{marginBottom:"10px"}}> Delivery address  not previously saved.</b>
+            </> : <>
+              <b style={{ marginBottom: "10px" }}> Delivery address  not previously saved.</b>
             </>
           }
         </div>
@@ -162,15 +202,41 @@ const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
         </div>
         <div className='btn-div'>
           <button className={`${isAddNewAddress ? "cancel-btn" : "add-address-btn"}`} onClick={() => setIsAddNewAddress(!isAddNewAddress)}>{isAddNewAddress ? "Cancel" : " New address"}</button>
-          {deliveryAddress && <button className='continue-btn' onClick={()=>setIsDeleverAddressSelected(true)}>Continue</button>}
-        </div>    
+          {(buyerDetails.name.length > 3 && buyerDetails.Contact_Number.length === 10 && deliveryAddress) && <button className='continue-btn' onClick={() => setIsDeleverAddressSelected(true)}>Continue</button>}
+        </div>
       </div>
-      <div style={{display: isDeleverAddressSelected ? "block" : "none"}}>
-        <h2>Make payment</h2>
+      <div className='payment-div' style={{ display: isDeleverAddressSelected ? "block" : "none" }}>
+        <h2>Select payment method</h2>
+        <div className='payment-method-div'>
+          <label className="particles-checkbox-container">
+            <input type="radio" className="particles-checkbox" name='payment-method' value="UPI" onClick={handelPaymentMethod} />
+            <span>UPI</span>
+          </label>
 
-        <button onClick={()=>setIsDeleverAddressSelected(false)}>Back</button>
+          <label className="particles-checkbox-container">
+            <input type="radio" className="particles-checkbox" name='payment-method' value="Credit Card" onClick={handelPaymentMethod} />
+            <span>Credit Card</span>
+          </label>
+
+          <label className="particles-checkbox-container">
+            <input type="radio" className="particles-checkbox" name='payment-method' value="Debit Card" onClick={handelPaymentMethod} />
+            <span>Debit Card</span>
+          </label>
+          <label className="particles-checkbox-container">
+            <input type="radio" className="particles-checkbox" name='payment-method' value="Cash on delivery" onClick={handelPaymentMethod} />
+            <span>Cash on delivery</span>
+          </label>
+        </div>
+        <div className='online-payment-details' style={{ display: isOnlinePayment ? "block" : "none" }}>
+          <PaymentForm isPaymentDone={isPaymentDone} setIsPaymentDone={setIsPaymentDone} />
+          {/* <button onClick={() => setIsPaymentDone(true)}>Pay</button> */}
+        </div>
+        <div className='btn-div'>
+          <button onClick={() => setIsDeleverAddressSelected(false)}>Back</button>
+          {(isPaymentDone || paymentMethod === "Cash on delivery") && <button onClick={handePlaceOrder}>Order</button>}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 export default PlaceOrder

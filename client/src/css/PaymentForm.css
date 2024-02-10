@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap'); 
+
+
+
+.payment-from-div { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 25px;
+    background: #d6eef1;
+    border-radius: 20px;
+    width: 80vw;
+} 
+
+.payment-from-div form { 
+    width: 80%;
+    height: 20rem;
+    border-radius: 20px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+} 
+
+.payment-from-div form .row { 
+	display: flex; 
+	flex-wrap: wrap; 
+	gap: 30px; 
+    height: 60%;
+} 
+
+.payment-from-div form .row .col { 
+	flex: 1 1 250px; 
+} 
+
+.col .title { 
+	font-size: 20px; 
+	color: rgb(237, 55, 23); 
+	padding-bottom: 5px; 
+} 
+
+.col .inputBox { 
+	margin: 15px 0; 
+} 
+
+.col .inputBox label { 
+	margin-bottom: 10px; 
+	display: block; 
+} 
+
+.col .inputBox input, 
+.col .inputBox select { 
+	width: 100%; 
+	border: 1px solid #ccc; 
+	padding: 10px 15px; 
+	font-size: 15px; 
+} 
+
+.col .inputBox input:focus, 
+.col .inputBox select:focus { 
+	border: 1px solid #000; 
+} 
+
+.col .flex { 
+	display: flex; 
+	gap: 15px; 
+} 
+
+.col .flex .inputBox { 
+	flex: 1 1; 
+	margin-top: 5px; 
+} 
+
+.col .inputBox img { 
+	height: 34px; 
+	margin-top: 5px; 
+	filter: drop-shadow(0 0 1px #000); 
+} 
+
+.payment-from-div form .submit_btn { 
+	width: 50%; 
+	padding: 10px; 
+	font-size: 1.5rem; 
+	background: rgb(1, 143, 34); 
+	color: #fff; 
+	margin-top: 5px; 
+	cursor: pointer; 
+	letter-spacing: 1px; 
+    border-radius: 10px;
+    margin-top: 20px;
+} 
+
+.payment-from-div form .submit_btn:hover { 
+	background: #3d17fb; 
+} 
+
+.payment-from-div input[type=text],
+.payment-from-div input[type=number],
+.payment-from-div select{
+    padding: 5px;
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+.payment-from-div select{
+    max-height: 300px;
+    overflow-y: auto;
+}
+.after-payment-div{
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.after-payment-div img{
+    width: 50%;
+    height: 50%;
+}
+.after-payment-div h4{
+    color: green;
+    letter-spacing: 2px;
+}
+

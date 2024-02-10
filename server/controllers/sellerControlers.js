@@ -14,7 +14,7 @@ const registerSeller = asyncHandler(async (req, res) => {
 
   const { restaurantName, ownerName, email, mobile, address, password } = req.body;
   const { buffer, mimetype, size } = req.file
-  console.log(req.body);
+
   //NOTE - check inputs are valid or not
   if (!restaurantName || !ownerName || !email || !mobile || !password || !address || !buffer || !mimetype) {
     res.status(403)
