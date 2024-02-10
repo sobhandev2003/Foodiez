@@ -155,3 +155,25 @@ export const deleteCartItem = (authToken, itemId) => async (dispatch) => {
         console.error(error);
     }
 }
+
+//NOTE - fetch buyer address
+export const fetchBuyerSavedAddress=async(authToken)=>{
+  try {
+    const response =await fetch(`${baseUrl}/food/user/buyer/delivery-address`,{
+        method:"GET",
+        headers:{
+            "Authorization": "Bearer " + authToken
+        }
+    })
+    const data=await response.json();
+    if(response.ok){
+       return data;
+  }
+  else{
+    Alert("error",<>{data.message}</>)
+  }
+    
+  } catch (error) {
+    console.error(error);
+  }
+}

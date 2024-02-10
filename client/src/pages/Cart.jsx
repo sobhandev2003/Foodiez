@@ -11,7 +11,6 @@ function Cart() {
   const navigate = useNavigate();
   const cartProductsDetail = useSelector(state => state.cart.ToCarts);
   const [cartProducts, setCartProducts] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState(null)
   let totalPrice = 0;
   cartProducts && cartProducts.forEach(product => {
     totalPrice += Number(product.price);
@@ -27,13 +26,9 @@ function Cart() {
     }
   }
   const handelPlaceOrder = () => {
-    console.log(paymentMethod);
-    console.log(cartProductsDetail);
     navigate("/place-order")
   }
- const handelPaymentMethod =(e)=>{
-setPaymentMethod(e.target.value)
- }
+
   useEffect(() => {
     fetchCartItem();
     // eslint-disable-next-line
@@ -59,23 +54,7 @@ setPaymentMethod(e.target.value)
                 <p><span>No of items</span><span> {cartProducts.length}</span></p>
                 <p><span>Total</span><span> &#8377;{totalPrice}</span></p>
                 <p><span>Shipping</span><span> &#8377;0.00</span></p>
-                <p>Select payment Mode</p>
-                <div className='payment-mode-div'>
-                  <label>
-                    <input type='radio' value="UPI" name='payment-mode'onClick={handelPaymentMethod} />
-                    <span className='payment-mode' >UPI</span>
-                  </label>
-                  <label>
-                    <input type='radio' value="Credit Card" name='payment-mode' onClick={handelPaymentMethod} />
-                    <span className='payment-mode' >Credit Card</span>
-                  </label>
-                  <label>
-                    <input type='radio' value="Cash on delivery" name='payment-mode' onClick={ handelPaymentMethod} />
-                    <span className='payment-mode' >Cash on delivery</span>
-                  </label>
-                </div>
-
-                <button disabled={!paymentMethod}  onClick={handelPlaceOrder}>Place Order</button>
+                <button   onClick={handelPlaceOrder}>Place Order</button>
               </div>
             </div> :
             <div className='epmty-cart'>

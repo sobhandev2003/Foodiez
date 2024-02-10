@@ -1,0 +1,215 @@
+.place-order-main-div {
+    min-height: 70vh;
+}
+
+.address-list-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.address-list-container label {
+    margin: 10px 5px 15px 5px;
+    height: 100px;
+    width: 50vw;
+}
+
+.address-list-container label p {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 1.2rem;
+}
+
+.address-list-container label input[type="radio"]:checked+p {
+    background-color: #e7dfdf;
+    border-color: rgb(12, 240, 12);
+}
+
+.new-address-details-from {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 50vw;
+    /* border: 1px solid red; */
+    padding-bottom: 5rem;
+}
+
+.new-address-details-from label {
+    width: 45%;
+    padding-top: 10px;
+}
+
+.custom-field {
+    position: relative;
+    margin-left: 10px;
+    font-size: 14px;
+    border-top: 20px solid transparent;
+    margin-bottom: 5px;
+    display: inline-block;
+    --field-padding: 12px;
+}
+
+.custom-field input {
+    border: none;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: var(--field-padding);
+    border-radius: 3px;
+    width: 88%;
+    outline: none;
+    font-size: 14px;
+}
+
+.custom-field .placeholder {
+    position: absolute;
+    font-size: 1.2rem;
+    left: var(--field-padding);
+    width: calc(100% - (var(--field-padding) * 2));
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 30px;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        color 0.3s ease,
+        font-size 0.3s ease;
+}
+
+
+
+/* ---------- */
+.custom-field.one input {
+    background: none;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+.custom-field.one input+.placeholder {
+    left: 8px;
+    padding: 0 5px;
+}
+
+.custom-field.one input.dirty,
+.custom-field.one input:not(:placeholder-shown),
+.custom-field.one input:focus {
+    border-color: #3ca3e8;
+    transition-delay: 0.1s
+}
+
+.custom-field.one input.dirty+.placeholder,
+.custom-field.one input:not(:placeholder-shown)+.placeholder,
+.custom-field.one input:focus+.placeholder {
+    top: 8px;
+    font-size: 1rem;
+    color: #3ca3e8;
+    background: #fff;
+    width: auto
+}
+
+.new-address-details-from .from-handel-btn {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+
+}
+.place-order-main-div .btn-div{
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+       margin-top: 30px;
+    margin-bottom: 50px;
+}
+.new-address-details-from .from-handel-btn button:nth-child(1),
+.place-order-main-div .cancel-btn,
+.place-order-main-div .add-address-btn,
+.place-order-main-div .continue-btn {
+    width: 40%;
+    padding: 7px;
+    border: 1px solid;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    cursor: pointer;
+}
+
+.place-order-main-div .continue-btn {
+    margin-left: 20px;
+    color: #1515ec;
+    border-color: #1515ec;
+}
+
+.place-order-main-div .continue-btn:hover {
+    color: white;
+    background-color: #1515ec;
+}
+
+.place-order-main-div .add-address-btn {
+    border-color: rgb(8, 170, 8);
+    color: green;
+    font-size: 1.1rem;
+}
+
+.place-order-main-div .add-address-btn:hover {
+    color: white;
+    background-color: rgb(8, 170, 8);
+}
+
+.place-order-main-div .cancel-btn {
+    border-color: red;
+    color: red;
+   
+}
+
+.place-order-main-div .cancel-btn:hover {
+    color: white;
+    background-color: red;
+    box-shadow: 5px 10px 5px gray;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(1) {
+    color: green;
+    border-color: green;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(1):hover {
+    color: white;
+    background-color: green;
+
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(2) {
+    color: #2b9daa;
+    font-size: 2rem;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(3) {
+    color: #1515ec;
+    font-size: 2rem;
+}
+
+
+@media screen and (max-width:999px) {
+    .new-address-details-from {
+        width: 70vw;
+        flex-direction: column;
+    }
+
+    .new-address-details-from label {
+        width: 60%;
+    }
+}

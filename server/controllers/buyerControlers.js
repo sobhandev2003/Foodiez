@@ -68,9 +68,9 @@ const loginBuyerAccount = asyncHandler(async (req, res) => {
 // route "/current"
 const currentBuyer = asyncHandler(async (req, res) => {
     const buyer = await Buyer.findById(req.buyer.id)
-    const { user_role, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
+    const { user_role,id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
 
-    res.status(200).json({ user_role, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
+    res.status(200).json({ user_role,id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
 })
 
 //NOTE - upload profile photo
@@ -180,8 +180,9 @@ const deleteCartItem = asyncHandler(async (req, res) => {
 //route "/delivery-address"
 const createDeliveryAddress = asyncHandler(async (req, res) => {
     const { street, city, state, postalCode, country, additionalInfo } = req.body;
+    // console.log(req.buyer);
     const { id } = req.buyer;
-    if (id) {
+    if (!id) {
         res.status(401);
         throw new Error("Unauthorize")
     }
