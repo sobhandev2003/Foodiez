@@ -179,7 +179,7 @@ const deleteCartItem = asyncHandler(async (req, res) => {
 //NOTE - create a new deliver address
 //route "/delivery-address"
 const createDeliveryAddress = asyncHandler(async (req, res) => {
-    const { street, city, state, postalCode, country, additionalInfo } = req.body;
+    const {  country, state,district, postCode, city,street, additionalInfo } = req.body;
     // console.log(req.buyer);
     const { id } = req.buyer;
     if (!id) {
@@ -187,17 +187,18 @@ const createDeliveryAddress = asyncHandler(async (req, res) => {
         throw new Error("Unauthorize")
     }
     //SECTION - check address valid or not
-    if (!street || !city || !state || !postalCode || !country) {
+    if (!street || !city || !state ||!district|| !postCode || !country) {
         res.status(422);
         throw new Error("Address not valid")
     }
     const countryCode = validateCountryName(country);
     const stateCode = validateState(state);
+    // console.log(countryCode);
     if (!countryCode || !stateCode) {
         res.status(422);
         throw new Error("Address not valid")
     }
-    const isValidPostalCode = validatePostalCode(countryCode, postalCode);
+    const isValidPostalCode = validatePostalCode(countryCode, postCode);
     if (isValidPostalCode != true) {
         res.status(422);
         throw new Error(isValidPostalCode)
@@ -205,10 +206,10 @@ const createDeliveryAddress = asyncHandler(async (req, res) => {
 
     const newAddrees = await DeliveryAddress.create(
         {
-            Buyer_Id: id, street, city, state, postalCode, country, additionalInfo
+            Buyer_Id: id, street, city, state,district, postCode, country, additionalInfo
         }
     )
-    res.json(newAddrees)
+    res.status(200).json({message:"Successfully added new address"})
 });
 //NOTE - get login account all delivery address
 //route  "/delivery-address"

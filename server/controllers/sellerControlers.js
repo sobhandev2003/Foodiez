@@ -14,6 +14,7 @@ const registerSeller = asyncHandler(async (req, res) => {
 
   const { restaurantName, ownerName, email, mobile, address, password } = req.body;
   const { buffer, mimetype, size } = req.file
+  console.log(req.body);
   //NOTE - check inputs are valid or not
   if (!restaurantName || !ownerName || !email || !mobile || !password || !address || !buffer || !mimetype) {
     res.status(403)
@@ -69,7 +70,7 @@ const registerSeller = asyncHandler(async (req, res) => {
       }
     )
 
-    res.status(200).json(seller)
+    res.status(200).json({message:"Successfully  register seller email"})
   } catch (error) {
     res.status(403).json(error)
   }
@@ -280,14 +281,14 @@ const getSellerOrder = asyncHandler(async (req, res) => {
     const buyerDetails = await Buyer.findById(Buyer_Id);
 
     //SECTION -  - Manage which data passed with frontend 
-    const { id: itemId, name: itemName, description, price, photoType,photo} = item;
-    const orderItem = { itemId, itemName, description, price,photoType,photo };
+    const { id: itemId, name: itemName, description, price, photoType, photo } = item;
+    const orderItem = { itemId, itemName, description, price, photoType, photo };
 
     const { id: addressId, street, city, state, postalCode, country } = address;
     const deliveryAddress = { addressId, street, city, state, postalCode, country };
     const { name, email, mobileNumber } = buyerDetails;
     const buyer = { Buyer_Id, name, email, mobileNumber }
-    const payment={Payment_methods,Payment_Done,Payment_Time}
+    const payment = { Payment_methods, Payment_Done, Payment_Time }
     return {
       orderItem,
       deliveryAddress,
@@ -306,24 +307,24 @@ const cancelOrderBySeller = asyncHandler(async (req, res) => {
   const Order_Id = req.params.id;
   const { reason } = req.body;
   if (!Seller_Id) {
-      res.status(401);
-      throw new Error("Unauthorize")
+    res.status(401);
+    throw new Error("Unauthorize")
   }
   if (!Order_Id || !reason) {
-      res.status(422);
-      throw new Error("Request not valid")
+    res.status(422);
+    throw new Error("Request not valid")
   }
-  const order = await Order.findOne({ _id: Order_Id, Seller_Id,Order_Cancel:false  });
+  const order = await Order.findOne({ _id: Order_Id, Seller_Id, Order_Cancel: false });
   if (!order) {
-      res.status(404);
-      throw new Error("Order Not found")
+    res.status(404);
+    throw new Error("Order Not found")
   }
-  const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Seller_Id,Order_Cancel:false },
-      {
-          Order_Cancel: true,
-          Order_Cancel_Reason: reason,
-      },
-      { new: true }
+  const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Seller_Id, Order_Cancel: false },
+    {
+      Order_Cancel: true,
+      Order_Cancel_Reason: reason,
+    },
+    { new: true }
   );
 
   res.status(200).json({ msg: "Order Cancel", updatedOrder })

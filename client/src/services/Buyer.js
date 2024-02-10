@@ -1,4 +1,5 @@
 import Alert from "../component/Alert";
+import { setAddresses } from "../fetures/buyer";
 
 import { setLoginAccountDetails } from "../fetures/loginFrtures";
 import { baseUrl } from "./baseUrl";
@@ -157,23 +158,50 @@ export const deleteCartItem = (authToken, itemId) => async (dispatch) => {
 }
 
 //NOTE - fetch buyer address
-export const fetchBuyerSavedAddress=async(authToken)=>{
-  try {
-    const response =await fetch(`${baseUrl}/food/user/buyer/delivery-address`,{
-        method:"GET",
-        headers:{
-            "Authorization": "Bearer " + authToken
+export const fetchBuyerSavedAddress = (authToken) => async (dispatch) => {
+    try {
+        const response = await fetch(`${baseUrl}/food/user/buyer/delivery-address`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + authToken
+            }
+        })
+        const data = await response.json();
+        if (response.ok) {
+            dispatch(setAddresses(data))
         }
-    })
-    const data=await response.json();
-    if(response.ok){
-       return data;
-  }
-  else{
-    Alert("error",<>{data.message}</>)
-  }
-    
-  } catch (error) {
-    console.error(error);
-  }
+        else {
+            Alert("error", <>{data.message}</>)
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//NOTE - saved new address
+export const savedNewAddress = (authToken, addressDetails) => async (dispatch) => {
+    try {
+        const response = await fetch(`${baseUrl}/food/user/buyer/delivery-address`, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + authToken,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(addressDetails)
+        })
+        const data = await response.json();
+        if (response.ok) {
+            Alert("success", <>{data.message}</>)
+            dispatch(fetchBuyerSavedAddress(authToken))
+            
+        }
+        else{
+            Alert("error",<>{data.message}</>)
+         
+        }
+    } catch (error) {
+        console.error(error);
+        
+    }
 }

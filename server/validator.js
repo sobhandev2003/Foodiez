@@ -41,7 +41,10 @@ const validateCountryName = (countryName) => {
     }
   })
   // console.log(countryCode);
-  return country.isoCode;
+  if (country) {
+    return country.isoCode
+  }
+  return null;
 }
 //NOTE - validate state name
 const validateState = (stateName) => {
@@ -50,12 +53,15 @@ const validateState = (stateName) => {
       return true;
     }
   })
-  return state.isoCode;
+  if (state) {
+    return state.isoCode
+  }
+  return null;
 }
 //NOTE - validate postal code
 const postalCodes = require('postal-codes-js');
-const validatePostalCode=(countryCode,postalcode)=>{
-return postalCodes.validate(countryCode, postalcode);
+const validatePostalCode = (countryCode, postalcode) => {
+  return postalCodes.validate(countryCode, postalcode);
 
 }
-module.exports = { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator, validateCountryName, validateState,validatePostalCode }
+module.exports = { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator, validateCountryName, validateState, validatePostalCode }

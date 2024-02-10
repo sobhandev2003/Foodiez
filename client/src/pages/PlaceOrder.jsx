@@ -1,45 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import '../css/PlaceOrder.css'
-import { useSelector } from 'react-redux';
-import { fetchBuyerSavedAddress } from '../services/Buyer';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBuyerSavedAddress, savedNewAddress } from '../services/Buyer';
 import { BiCurrentLocation } from "react-icons/bi";
 import { GrPowerReset } from "react-icons/gr";
 function PlaceOrder() {
+  const dispatch = useDispatch();
   const authToken = localStorage.getItem("buyerAuthToken");
   const cartProductsDetail = useSelector(state => state.cart.ToCarts);
+  const addresses = useSelector(state => state.Buyer.addresses);
   const [cartProducts, setCartProducts] = useState(null);
   const [buyerAddress, setBuyerAddress] = useState(null);
   const [deliveryAddress, setDeliveryAddress] = useState(null);
   const [isAddNewAddress, setIsAddNewAddress] = useState(false)
   const [newAddress, setNewAddress] = useState({
-    street: "",
-    city: "",
+    country: "",
     state: "",
+    district: "",
+    city: "",
     postCode: "",
-    country: ""
+    street: "",
+    additionalInfo: ""
   })
   const [currentAddress, setCurrentAddress] = useState(null);
-  const getBuyerSavedAddress = async () => {
-    if (authToken) {
-      const address = await fetchBuyerSavedAddress(authToken);
-      setBuyerAddress(address)
-    }
-  }
+const [isDeleverAddressSelected,setIsDeleverAddressSelected]=useState(false)
   const handelSelectDeliverAddress = (e) => {
     console.log(e.target.value);
     setDeliveryAddress(e.target.value);
 
   }
-  const handelNewAddressCreateFromSubmit = (e) => {
+  const handelNewAddressCreateFromSubmit = async (e) => {
     e.preventDefault()
-    console.log(newAddress);
+    dispatch(savedNewAddress(authToken, newAddress))
+    setIsAddNewAddress(false)
   }
   const handelNewAdressInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value,type } = e.target;
+    const inputValue = type === "text" ? value.charAt(0).toUpperCase() + value.slice(1) : value;
     // console.log(name,value);
     setNewAddress((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: inputValue
     }))
   }
   const handelNewAddressInputReset = () => {
@@ -52,6 +53,7 @@ function PlaceOrder() {
       country: ""
     })
   }
+
   const getCurrentAddress = async () => {
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
@@ -74,7 +76,6 @@ function PlaceOrder() {
       for (const key in currentAddress) {
         if (Object.hasOwnProperty.call(currentAddress, key)) {
           const value = currentAddress[key];
-          // console.log(`${key}: ${value}`);
           setNewAddress((prevData) => ({
             ...prevData,
             [key]: value || " "
@@ -84,11 +85,14 @@ function PlaceOrder() {
     }
   }, [currentAddress])
 
- 
+
   useEffect(() => {
-    getBuyerSavedAddress();
-    // eslint-disable-next-line
-  }, [authToken])
+    dispatch(fetchBuyerSavedAddress(authToken))
+  }, [authToken, dispatch])
+
+  useEffect(() => {
+    addresses && setBuyerAddress(addresses)
+  }, [addresses])
 
   useEffect(() => {
     setCartProducts(cartProductsDetail);
@@ -96,20 +100,24 @@ function PlaceOrder() {
 
   return (
     <>
-      <div className='place-order-main-div'>
+      <div className='place-order-address-div' style={{display: !isDeleverAddressSelected ? "block" : "none"}}>
         <div className='address-list-container'>
           {
-            buyerAddress && buyerAddress.map((address, index) => {
+            buyerAddress && buyerAddress.length>0 ? <>{buyerAddress.map((address, index) => {
               // console.log(index,address);
               return <label key={address._id} >
                 <input type="radio" value={address._id} name="deliveryAddress" onChange={handelSelectDeliverAddress} />
                 <p>
+                  {address.additionalInfo && <span>{address.additionalInfo}</span>}
                   <span>{address.street},{address.city}</span>
                   <span>{address.postCode}</span>
                   <span>{address.state},{address.country}</span>
                 </p>
               </label>
-            })
+            })}
+            </>:<>
+            <b style={{marginBottom:"10px"}}> Delivery address  not previously saved.</b>
+            </>
           }
         </div>
         <div style={{ display: isAddNewAddress ? "block" : "none" }}>
@@ -140,18 +148,27 @@ function PlaceOrder() {
               <input type="text" placeholder=" " name='street' onChange={handelNewAdressInputChange} value={newAddress.street} required />
               <span className="placeholder">Street name</span>
             </label>
+            <label className="custom-field one">
+              <input type="text" placeholder=" " name='additionalInfo' onChange={handelNewAdressInputChange} value={newAddress.additionalInfo} />
+              <span className="placeholder">Additional Info</span>
+            </label>
 
             <div className='from-handel-btn'>
-              <button type="submit">Add</button>
-              <button type="reset" onClick={handelNewAddressInputReset}><GrPowerReset /></button>
-              <button onClick={() => { getCurrentAddress(); }}><BiCurrentLocation /></button>
+              <button type="submit" >Add</button>
+              <button type="reset" onClick={handelNewAddressInputReset}><GrPowerReset /><span>Reset form</span></button>
+              <button type='button' onClick={() => { getCurrentAddress(); }}><BiCurrentLocation /><span>Use current location</span></button>
             </div>
           </form>
         </div>
         <div className='btn-div'>
           <button className={`${isAddNewAddress ? "cancel-btn" : "add-address-btn"}`} onClick={() => setIsAddNewAddress(!isAddNewAddress)}>{isAddNewAddress ? "Cancel" : " New address"}</button>
-          {deliveryAddress && <button className='continue-btn'>Continue</button>}
-        </div>
+          {deliveryAddress && <button className='continue-btn' onClick={()=>setIsDeleverAddressSelected(true)}>Continue</button>}
+        </div>    
+      </div>
+      <div style={{display: isDeleverAddressSelected ? "block" : "none"}}>
+        <h2>Make payment</h2>
+
+        <button onClick={()=>setIsDeleverAddressSelected(false)}>Back</button>
       </div>
     </>
   )

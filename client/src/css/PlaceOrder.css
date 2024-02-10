@@ -1,4 +1,4 @@
-.place-order-main-div {
+.place-order-address-div {
     min-height: 70vh;
 }
 
@@ -10,7 +10,7 @@
 
 .address-list-container label {
     margin: 10px 5px 15px 5px;
-    height: 100px;
+    height: max-content;
     width: 50vw;
 }
 
@@ -126,7 +126,7 @@
     justify-content: space-evenly;
 
 }
-.place-order-main-div .btn-div{
+.place-order-address-div .btn-div{
     width: 90%;
     display: flex;
     justify-content: space-evenly;
@@ -135,9 +135,10 @@
     margin-bottom: 50px;
 }
 .new-address-details-from .from-handel-btn button:nth-child(1),
-.place-order-main-div .cancel-btn,
-.place-order-main-div .add-address-btn,
-.place-order-main-div .continue-btn {
+.place-order-address-div .cancel-btn,
+.place-order-address-div .add-address-btn,
+.place-order-address-div .continue-btn {
+    min-width: max-content;
     width: 40%;
     padding: 7px;
     border: 1px solid;
@@ -146,36 +147,46 @@
     letter-spacing: 4px;
     cursor: pointer;
 }
-
-.place-order-main-div .continue-btn {
+.new-address-details-from .from-handel-btn button:nth-child(3),
+.new-address-details-from .from-handel-btn button:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.new-address-details-from .from-handel-btn button:nth-child(3) span,
+.new-address-details-from .from-handel-btn button:nth-child(2) span{
+    font-size: .6rem;
+    font-weight: 500;
+}
+.place-order-address-div .continue-btn {
     margin-left: 20px;
     color: #1515ec;
     border-color: #1515ec;
 }
 
-.place-order-main-div .continue-btn:hover {
+.place-order-address-div .continue-btn:hover {
     color: white;
     background-color: #1515ec;
 }
 
-.place-order-main-div .add-address-btn {
+.place-order-address-div .add-address-btn {
     border-color: rgb(8, 170, 8);
     color: green;
     font-size: 1.1rem;
 }
 
-.place-order-main-div .add-address-btn:hover {
+.place-order-address-div .add-address-btn:hover {
     color: white;
     background-color: rgb(8, 170, 8);
 }
 
-.place-order-main-div .cancel-btn {
+.place-order-address-div .cancel-btn {
     border-color: red;
     color: red;
    
 }
 
-.place-order-main-div .cancel-btn:hover {
+.place-order-address-div .cancel-btn:hover {
     color: white;
     background-color: red;
     box-shadow: 5px 10px 5px gray;

@@ -30,7 +30,7 @@ function Register() {
         // console.log(name);
         const { name, value, type, files } = e.target;
        
-        const inputValue = type === "file" ? files[0] : value;
+        const inputValue = type === "file" ? files[0] : (type === "text" ? value.charAt(0).toUpperCase() + value.slice(1) : value);
         setFormData((prevData) => ({
             ...prevData,
             [name]: inputValue,
