@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import EditCategory from './pages/EditCategory';
 import Order from './pages/Order';
 import PlaceOrder from './pages/PlaceOrder';
+import OrderDetails from './pages/OrderDetails';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route exact path='/edit-category' element={<EditCategory />} />
           <Route exact path='/place-order' element={<PlaceOrder />} />
           <Route exact path='/my-order' element={<Order />} />
+          <Route exact path="/order_details" element={<OrderDetails/>} />
           <Route path="*" element={<Home />} />
         </Routes>
       </section>

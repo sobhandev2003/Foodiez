@@ -6,16 +6,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 60vh;
+    min-height: 65vh;
     padding: 25px;
     background: #d6eef1;
     border-radius: 20px;
-    width: 80vw;
+    width: 50vw;
 } 
 
 .payment-from-div form { 
     width: 80%;
-    height: 20rem;
+    /* height: 20rem; */
     border-radius: 20px;
     padding: 20px;
     background: #fff;
@@ -33,53 +33,10 @@
     height: 60%;
 } 
 
-.payment-from-div form .row .col { 
-	flex: 1 1 250px; 
-} 
-
-.col .title { 
-	font-size: 20px; 
-	color: rgb(237, 55, 23); 
-	padding-bottom: 5px; 
-} 
-
-.col .inputBox { 
-	margin: 15px 0; 
-} 
-
-.col .inputBox label { 
-	margin-bottom: 10px; 
-	display: block; 
-} 
-
-.col .inputBox input, 
-.col .inputBox select { 
-	width: 100%; 
-	border: 1px solid #ccc; 
-	padding: 10px 15px; 
-	font-size: 15px; 
-} 
-
-.col .inputBox input:focus, 
-.col .inputBox select:focus { 
-	border: 1px solid #000; 
-} 
-
-.col .flex { 
-	display: flex; 
-	gap: 15px; 
-} 
-
-.col .flex .inputBox { 
-	flex: 1 1; 
-	margin-top: 5px; 
-} 
-
-.col .inputBox img { 
-	height: 34px; 
-	margin-top: 5px; 
-	filter: drop-shadow(0 0 1px #000); 
-} 
+.row .inputBox{
+    display: flex;
+    align-items: center;
+}
 
 .payment-from-div  .submit_btn { 
 	width: 50%; 
@@ -127,4 +84,24 @@
     color: green;
     letter-spacing: 2px;
 }
-
+@media screen and (max-width:700px) {
+    .payment-from-div {
+        padding: 10px;
+        width: 80vw;
+    }
+    .row .inputBox{
+        width: 90%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+@media screen and (max-width:450px){
+    .payment-from-div {
+        padding: 2px;
+        width: 90vw;
+    }
+    .payment-from-div input[type=text], .payment-from-div input[type=number]{
+        font-size: .8rem;
+    }
+}

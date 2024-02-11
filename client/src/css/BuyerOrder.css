@@ -2,7 +2,7 @@
     width: 100vw;
     min-height: 60vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     background: #f1f3f6;
     padding-top: 20px;

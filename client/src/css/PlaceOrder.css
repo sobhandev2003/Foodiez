@@ -18,8 +18,19 @@
     display: flex;
     /* align-items: center; */
     justify-content: center;
+    background: #f1f3f6;
 }
-
+.place-order-address-div div:nth-child(1){
+    display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.place-order-address-div div:nth-child(1) label{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    gap: 5px;
+}
 .address-list-container {
     display: flex;
     flex-direction: column;
@@ -44,6 +55,8 @@
     border-radius: 10px;
     background-color: white;
     font-size: 1.2rem;
+    cursor: pointer;
+    transition: .4s ease;
 }
 
 .address-list-container label input[type="radio"]:checked+p {
@@ -59,6 +72,8 @@
     width: 50vw;
     /* border: 1px solid red; */
     padding-bottom: 5rem;
+    background: white;
+    border-radius: 1rem;
 }
 
 .new-address-details-from label {
@@ -326,6 +341,7 @@
 
 
 .particles-checkbox-container {
+    background: white;
     display: inline-flex;
     margin: 20px;
     align-items: center;
@@ -342,7 +358,7 @@
         margin-left: 4px;
         padding: var(--innerPaddingSize);
         padding-left: calc(var(--cSize) + var(--innerPaddingSize) + 10px);
-        width: 300px;
+        width: 100%;
         color: var(--bg);
         transition: all var(--cTiming) var(--cEasing);
     }
@@ -366,7 +382,9 @@
     text-transform: uppercase;
     background-color: red;
 }
-
+.payment-div div:nth-child(2){
+    display: flex;
+}
 .payment-div .btn-div{
     /* border: 1px solid blue; */
     width: 90%;
@@ -383,14 +401,39 @@
     background-color: #3ca3e8;
     color: white;
 }
+.payment-div .btn-div button:nth-child(2){
+    color: green;
+    border-color: green;
+}
+.payment-div .btn-div button:nth-child(2):hover{
+    background-color: green;
+  color:white;
+}
 @media screen and (max-width:999px) {
+   
     .new-address-details-from {
         width: 70vw;
         flex-direction: column;
 
     }
-
     .new-address-details-from label {
         width: 60%;
     }
+}
+@media screen and (max-width:700px) {
+    .new-address-details-from .from-handel-btn button:nth-child(1),
+.place-order-address-div .cancel-btn,
+.place-order-address-div .add-address-btn,
+.place-order-address-div .continue-btn,
+.payment-div .btn-div button {
+    font-size: 1rem;
+}
+    .payment-div div:nth-child(2){
+        flex-direction: column;
+    }
+    .payment-method-div{
+        width: 90%;
+    }
+  
+    
 }

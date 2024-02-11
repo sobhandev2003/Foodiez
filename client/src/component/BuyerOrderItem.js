@@ -1,10 +1,14 @@
 import React from 'react'
 import CircleIcon from '@mui/icons-material/Circle';
+import { useNavigate } from 'react-router-dom';
 function BuyerOrderItem({ order }) {
     const { item, orderCancelTime, orderDeliverTime, orderTime, _id } = order;
     const { name, description, photo, photoType, price } = item;
+    const navigate=useNavigate();
     const handelOrderDetailsDisplay = () => {
+        //TODO - 
         console.log(_id);
+        navigate(`/order_details?order_id=${_id}`)
     }
     return (
         <div className='order-item-template' onClick={handelOrderDetailsDisplay}>

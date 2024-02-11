@@ -144,8 +144,12 @@ function PlaceOrder() {
     <div className='place-order'>
       <div className='place-order-address-div' style={{ display: !isDeleverAddressSelected ? "block" : "none" }}>
         <div>
-          <input type="text" name="name" placeholder='name' onChange={handelBuyerDetails} value={buyerDetails.name} />
-          <input type="tel" name="Contact_Number" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile number" onChange={handelBuyerDetails} value={buyerDetails.Contact_Number} />
+          <label htmlFor='buyer-name'><span>Name :</span>
+          <input type="text" id='buyer-name' name="name" placeholder='name' onChange={handelBuyerDetails} value={buyerDetails.name} />
+          </label>
+          <label htmlFor='cont-number'><span>Contact Number :</span>
+          <input type="tel" id='cont-number' name="Contact_Number" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile number" onChange={handelBuyerDetails} value={buyerDetails.Contact_Number} />
+          </label>
         </div>
         <div className='address-list-container'>
           <b>Select delivery address </b>
@@ -212,8 +216,10 @@ function PlaceOrder() {
           {(buyerDetails.name.length > 3 && buyerDetails.Contact_Number.length === 10 && deliveryAddress) && <button className='continue-btn' onClick={() => setIsDeleverAddressSelected(true)}>Continue</button>}
         </div>
       </div>
+
       <div className='payment-div' style={{ display: isDeleverAddressSelected ? "block" : "none" }}>
         <h2>Select payment method</h2>
+        <div >
         <div className='payment-method-div'>
           <label className="particles-checkbox-container">
             <input type="radio" className="particles-checkbox" name='payment-method' value="UPI" onClick={handelPaymentMethod} />
@@ -236,13 +242,15 @@ function PlaceOrder() {
         </div>
         <div className='online-payment-details' style={{ display: isOnlinePayment ? "block" : "none" }}>
            <PaymentForm isPaymentDone={isPaymentDone} setIsPaymentDone={setIsPaymentDone} paymentMethod={paymentMethod} />
-          {/* <button onClick={() => setIsPaymentDone(true)}>Pay</button> */}
         </div>
+        </div>
+
         <div className='btn-div'>
           <button onClick={() => setIsDeleverAddressSelected(false)}>Back</button>
           {(isPaymentDone || paymentMethod === "Cash on Delivery") && <button onClick={handePlaceOrder}>Order</button>}
         </div>
       </div>
+
     </div>
   )
 }

@@ -7,8 +7,10 @@ import BuyerOrderItem from './BuyerOrderItem';
 import emptyOrderImg from '../photo/empty-order.webp'
 import { useNavigate } from 'react-router-dom';
 function BuyerOrder() {
+  window.scrollTo(0, 0)
+
   const dispatch = useDispatch()
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const authToken = localStorage.getItem("buyerAuthToken");
   const loginAccountDetails = useSelector(state => state.Login.loginAccountDetails);
   const orders = useSelector(state => state.Buyer.orders);
@@ -30,7 +32,7 @@ function BuyerOrder() {
           </> :
           <div className='empty-order'>
             <img src={emptyOrderImg} alt="empty" />
-            <button onClick={()=>navigate('/')}>Order item</button>
+            <button onClick={() => navigate('/')}>Order item</button>
           </div>
         }
       </div> : <div className='loading-container'>
