@@ -23,6 +23,10 @@ const orderScheme = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             required: [true, "Delivery Id mandatory"]
         },
+        Buyer_Name:{
+            type: String,
+            required: [true,"Buyer name method mandatory"]
+        },
         Contact_Number: {
             type: Number,
             required: [true, "Contact Number mandatory"],
@@ -34,7 +38,7 @@ const orderScheme = new mongoose.Schema(
         Payment_methods: {
 
             type: String,
-            required: true,
+            required: [true,"Payment method mandatory"],
             enum: ['Credit Card', 'Debit Card', 'Cash on Delivery', 'UPI',]
 
         },

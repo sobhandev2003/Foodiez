@@ -1,5 +1,5 @@
 import Alert from "../component/Alert";
-import { setAddresses } from "../fetures/buyer";
+import { setAddresses, setOrders } from "../fetures/buyer";
 
 import { setLoginAccountDetails } from "../fetures/loginFrtures";
 import { baseUrl } from "./baseUrl";
@@ -194,6 +194,7 @@ export const savedNewAddress = (authToken, addressDetails) => async (dispatch) =
         if (response.ok) {
             Alert("success", <>{data.message}</>)
             dispatch(fetchBuyerSavedAddress(authToken))
+
             
         }
         else{
@@ -203,5 +204,53 @@ export const savedNewAddress = (authToken, addressDetails) => async (dispatch) =
     } catch (error) {
         console.error(error);
         
+    }
+}
+
+//NOTE - Place new order
+export const savePlaceOrderInDB=(authToken,orderDetails)=>async(dispatch)=>{
+    try {
+        const response=await fetch(`${baseUrl}/food/user/buyer/order`,{
+            method:"POST",
+            headers:{
+                "Authorization": "Bearer " + authToken,
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(orderDetails)
+        }   )
+        const data=await response.json();
+        if (response.ok) {
+            Alert('success',<>{data.message}</>)
+            dispatch(fetchLoginBuyerDetails(authToken))
+        }
+        else{
+            Alert('error',<>{data.message}</>)
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//NOTE - get buyer all order
+export const fetchOrderBuyerDetails=(authToken)=>async(dispatch)=>{
+    try {
+        const response=await fetch(`${baseUrl}/food/user/buyer/order`,{
+            method:"GET",
+            headers:{
+                "Authorization": "Bearer " + authToken, 
+            }
+        })
+        const data=await response.json();
+        if(response.ok){
+            console.log(data);
+            dispatch(setOrders(data))
+        }
+        else{
+            console.error(data.message);
+        }
+
+    } catch (error) {
+        console.error(error);
     }
 }

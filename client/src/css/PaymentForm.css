@@ -81,7 +81,7 @@
 	filter: drop-shadow(0 0 1px #000); 
 } 
 
-.payment-from-div form .submit_btn { 
+.payment-from-div  .submit_btn { 
 	width: 50%; 
 	padding: 10px; 
 	font-size: 1.5rem; 

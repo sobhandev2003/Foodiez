@@ -68,9 +68,9 @@ const loginBuyerAccount = asyncHandler(async (req, res) => {
 // route "/current"
 const currentBuyer = asyncHandler(async (req, res) => {
     const buyer = await Buyer.findById(req.buyer.id)
-    const { user_role,id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
+    const { user_role, id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem } = buyer
 
-    res.status(200).json({ user_role,id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
+    res.status(200).json({ user_role, id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
 })
 
 //NOTE - upload profile photo
@@ -163,7 +163,7 @@ const deleteCartItem = asyncHandler(async (req, res) => {
         throw new Error("Buyer Account Not Found")
     }
     const index = buyer.cartItem.findIndex(item => item.Item_Id == itemId);
-   
+
     if (index === -1) {
         res.status(404);
         throw new Error('Item not found in cart')
@@ -179,7 +179,7 @@ const deleteCartItem = asyncHandler(async (req, res) => {
 //NOTE - create a new deliver address
 //route "/delivery-address"
 const createDeliveryAddress = asyncHandler(async (req, res) => {
-    const {  country, state,district, postCode, city,street, additionalInfo } = req.body;
+    const { country, state, district, postCode, city, street, additionalInfo } = req.body;
     // console.log(req.buyer);
     const { id } = req.buyer;
     if (!id) {
@@ -187,7 +187,7 @@ const createDeliveryAddress = asyncHandler(async (req, res) => {
         throw new Error("Unauthorize")
     }
     //SECTION - check address valid or not
-    if (!street || !city || !state ||!district|| !postCode || !country) {
+    if (!street || !city || !state || !district || !postCode || !country) {
         res.status(422);
         throw new Error("Address not valid")
     }
@@ -206,10 +206,10 @@ const createDeliveryAddress = asyncHandler(async (req, res) => {
 
     const newAddrees = await DeliveryAddress.create(
         {
-            Buyer_Id: id, street, city, state,district, postCode, country, additionalInfo
+            Buyer_Id: id, street, city, state, district, postCode, country, additionalInfo
         }
     )
-    res.status(200).json({message:"Successfully added new address"})
+    res.status(200).json({ message: "Successfully added new address" })
 });
 //NOTE - get login account all delivery address
 //route  "/delivery-address"
@@ -226,11 +226,15 @@ const gateDeliveryAddress = asyncHandler(async (req, res) => {
 //NOTE - Place new order
 // route "/order" 
 const placeOrder = asyncHandler(async (req, res) => {
-    const { DeliveryAddress_id, OrderItems, Contact_Number, Payment_methods } = req.body;
+    const { DeliveryAddress_id, OrderItems, Contact_Number, Payment_methods, Buyer_Name, Payment_Done } = req.body;
     const Buyer_Id = req.buyer.id;
     if (!Buyer_Id) {
         res.status(401);
         throw new Error("Unauthorize")
+    }
+    if (!DeliveryAddress_id || !OrderItems || !Contact_Number || !Payment_methods || !Buyer_Name) {
+        res.status(422);
+        throw new Error("Input not valid")
     }
     if (OrderItems.length === 0) {
         res.status(422);
@@ -240,14 +244,22 @@ const placeOrder = asyncHandler(async (req, res) => {
         res.status(403);
         throw new Error("Contact number not valid")
     }
+
+
     await Promise.all(OrderItems.map(async ({ Seller_Id, Category_Id, Item_Id }) => {
         await Order.create(
-            { Buyer_Id, Seller_Id, Category_Id, Item_Id, DeliveryAddress_id, Contact_Number, Payment_methods }
+            { Buyer_Id, Seller_Id, Category_Id, Item_Id, DeliveryAddress_id, Contact_Number, Buyer_Name, Payment_methods, Payment_Done }
         )
-
-
     }))
-    res.status(200).json({ msg: "Ordered placed" });
+
+    const updatedBuyer = await Buyer.findOneAndUpdate({ _id: Buyer_Id },
+        {
+            cartItem: []
+        },
+        { new: true }
+    );
+    // console.log(updatedBuyer);
+    res.status(200).json({ message: "Ordered placed" });
 })
 
 //NOTE - get user  order 
@@ -259,17 +271,27 @@ const getOrder = asyncHandler(async (req, res) => {
         throw new Error("Unauthorize")
     }
     const orders = await Order.find({ Buyer_Id, Order_Cancel: false })
-    const orderItems = await Promise.all(orders.map(async ({ Seller_Id,
+    const orderItems = await Promise.all(orders.map(async ({
+        _id,
+         Seller_Id,
         Category_Id,
         Item_Id,
         DeliveryAddress_id,
         Contact_Number,
+        Buyer_Name,
         createdAt }) => {
         const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
         const item = await category.item.id(Item_Id);
         const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
         const orderTime = createdAt.toLocaleString()
-        return { item, address, Contact_Number, orderTime };
+        return {
+            _id,
+            item,
+            address,
+            Contact_Number,
+            Buyer_Name,
+            orderTime
+        };
     }))
     res.status(200).json(orderItems);
 })

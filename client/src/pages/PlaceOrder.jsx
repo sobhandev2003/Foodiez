@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../css/PlaceOrder.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBuyerSavedAddress, savedNewAddress } from '../services/Buyer';
+import { fetchBuyerSavedAddress, savePlaceOrderInDB, savedNewAddress } from '../services/Buyer';
 import { BiCurrentLocation } from "react-icons/bi";
 import { GrPowerReset } from "react-icons/gr";
 import PaymentForm from '../component/PaymentForm';
@@ -34,11 +34,21 @@ function PlaceOrder() {
   const [isOnlinePayment, setIsOnlinePayment] = useState(false);
   const [isPaymentDone, setIsPaymentDone] = useState(false)
   const handePlaceOrder = () => {
-    console.log(cartProducts);
-    console.log(buyerDetails);
-    console.log(deliveryAddress);
-    console.log(paymentMethod);
-    console.log(isPaymentDone);
+    // console.log(cartProducts);
+    // console.log(buyerDetails);
+    // console.log(deliveryAddress);
+    // console.log(paymentMethod);
+    // console.log(isPaymentDone);
+    const orderDetails={
+      DeliveryAddress_id:deliveryAddress,
+      Contact_Number:buyerDetails.Contact_Number,
+      Buyer_Name:buyerDetails.name,
+      OrderItems:cartProducts,
+      Payment_methods:paymentMethod,
+      Payment_Done:isPaymentDone,
+    }
+
+    dispatch(savePlaceOrderInDB(authToken,orderDetails))
 
 
   }
@@ -81,9 +91,8 @@ function PlaceOrder() {
   }
 
   const handelPaymentMethod = (e) => {
-    console.log(e.target.value);
     setPaymentMethod(e.target.value)
-    if (e.target.value !== "Cash on delivery") {
+    if (e.target.value !== "Cash on Delivery") {
       setIsOnlinePayment(true)
     }
     else {
@@ -223,17 +232,17 @@ function PlaceOrder() {
             <span>Debit Card</span>
           </label>
           <label className="particles-checkbox-container">
-            <input type="radio" className="particles-checkbox" name='payment-method' value="Cash on delivery" onClick={handelPaymentMethod} />
-            <span>Cash on delivery</span>
+            <input type="radio" className="particles-checkbox" name='payment-method' value="Cash on Delivery" onClick={handelPaymentMethod} />
+            <span>Cash on Delivery</span>
           </label>
         </div>
         <div className='online-payment-details' style={{ display: isOnlinePayment ? "block" : "none" }}>
-          <PaymentForm isPaymentDone={isPaymentDone} setIsPaymentDone={setIsPaymentDone} />
+           <PaymentForm isPaymentDone={isPaymentDone} setIsPaymentDone={setIsPaymentDone} paymentMethod={paymentMethod} />
           {/* <button onClick={() => setIsPaymentDone(true)}>Pay</button> */}
         </div>
         <div className='btn-div'>
           <button onClick={() => setIsDeleverAddressSelected(false)}>Back</button>
-          {(isPaymentDone || paymentMethod === "Cash on delivery") && <button onClick={handePlaceOrder}>Order</button>}
+          {(isPaymentDone || paymentMethod === "Cash on Delivery") && <button onClick={handePlaceOrder}>Order</button>}
         </div>
       </div>
     </div>
