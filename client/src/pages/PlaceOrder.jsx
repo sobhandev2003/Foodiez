@@ -5,8 +5,10 @@ import { fetchBuyerSavedAddress, savePlaceOrderInDB, savedNewAddress } from '../
 import { BiCurrentLocation } from "react-icons/bi";
 import { GrPowerReset } from "react-icons/gr";
 import PaymentForm from '../component/PaymentForm';
+import { useNavigate } from 'react-router-dom';
 function PlaceOrder() {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const authToken = localStorage.getItem("buyerAuthToken");
   const cartProductsDetail = useSelector(state => state.cart.ToCarts);
   const addresses = useSelector(state => state.Buyer.addresses);
@@ -34,11 +36,7 @@ function PlaceOrder() {
   const [isOnlinePayment, setIsOnlinePayment] = useState(false);
   const [isPaymentDone, setIsPaymentDone] = useState(false)
   const handePlaceOrder = () => {
-    // console.log(cartProducts);
-    // console.log(buyerDetails);
-    // console.log(deliveryAddress);
-    // console.log(paymentMethod);
-    // console.log(isPaymentDone);
+
     const orderDetails={
       DeliveryAddress_id:deliveryAddress,
       Contact_Number:buyerDetails.Contact_Number,
@@ -48,7 +46,7 @@ function PlaceOrder() {
       Payment_Done:isPaymentDone,
     }
 
-    dispatch(savePlaceOrderInDB(authToken,orderDetails))
+    dispatch(savePlaceOrderInDB(authToken,orderDetails,navigate))
 
 
   }

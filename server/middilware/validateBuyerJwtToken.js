@@ -12,7 +12,7 @@ const validateBuyerToken = asyncHandler(
             jwt.verify(token, process.env.ACCESS_TOKE_SECRET, (err, decode) => {
                 if (err) {
                     res.status(401);
-                    throw new Error("Seller not authorized");
+                    throw new Error("Buyer not authorized");
                 }
                 
                 req.buyer = decode.buyer;

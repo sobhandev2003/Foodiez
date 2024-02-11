@@ -12,7 +12,7 @@ import { useMediaQuery } from 'react-responsive';
 import Model from './Model';
 import Login from '../component/Login';
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { fetchLoginBuyerDetails, fetchOrderBuyerDetails } from '../services/Buyer';
+import { fetchLoginBuyerDetails } from '../services/Buyer';
 import { setIsLogin } from '../fetures/loginFrtures';
 import SellerNavItem from './SellerNavItem';
 import BuyerNavItem from './BuyerNavItem';
@@ -103,7 +103,6 @@ const Navbar = () => {
         }
         if (buyerAuthToken) {
             dispatch(fetchLoginBuyerDetails(buyerAuthToken));
-            dispatch(fetchOrderBuyerDetails(buyerAuthToken))
         }
 // eslint-disable-next-line
     }, [dispatch])

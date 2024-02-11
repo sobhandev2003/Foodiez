@@ -61,4 +61,7 @@ height: 40px;
 .orange{
   color: orange;
 }
+.display-flex{
+  display: flex;
+}
 

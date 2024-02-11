@@ -208,7 +208,7 @@ export const savedNewAddress = (authToken, addressDetails) => async (dispatch) =
 }
 
 //NOTE - Place new order
-export const savePlaceOrderInDB=(authToken,orderDetails)=>async(dispatch)=>{
+export const savePlaceOrderInDB=(authToken,orderDetails,navigate)=>async(dispatch)=>{
     try {
         const response=await fetch(`${baseUrl}/food/user/buyer/order`,{
             method:"POST",
@@ -222,6 +222,7 @@ export const savePlaceOrderInDB=(authToken,orderDetails)=>async(dispatch)=>{
         if (response.ok) {
             Alert('success',<>{data.message}</>)
             dispatch(fetchLoginBuyerDetails(authToken))
+            navigate("/my-order")
         }
         else{
             Alert('error',<>{data.message}</>)
@@ -243,7 +244,7 @@ export const fetchOrderBuyerDetails=(authToken)=>async(dispatch)=>{
         })
         const data=await response.json();
         if(response.ok){
-            console.log(data);
+            // console.log(data);
             dispatch(setOrders(data))
         }
         else{

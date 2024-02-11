@@ -266,34 +266,54 @@ const placeOrder = asyncHandler(async (req, res) => {
 //route '/order'
 const getOrder = asyncHandler(async (req, res) => {
     const Buyer_Id = req.buyer.id;
+    // console.log(Buyer_Id);
     if (!Buyer_Id) {
         res.status(401);
         throw new Error("Unauthorize")
     }
-    const orders = await Order.find({ Buyer_Id, Order_Cancel: false })
-    const orderItems = await Promise.all(orders.map(async ({
-        _id,
-         Seller_Id,
-        Category_Id,
-        Item_Id,
-        DeliveryAddress_id,
-        Contact_Number,
-        Buyer_Name,
-        createdAt }) => {
+    const { order_Id } = req.query;
+    if (order_Id) {
+        // console.log(order_Id);
+        const order = await Order.findById(order_Id);
+        if (!order) {
+            res.status(404);
+            throw new Error("Not found")
+        }
+        const { _id, Seller_Id, Category_Id, Item_Id, DeliveryAddress_id, Delivered_Time, Order_Cancel_Time, createdAt } = order
+        const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
         const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
         const item = await category.item.id(Item_Id);
-        const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
-        const orderTime = createdAt.toLocaleString()
-        return {
+        const orderTime = createdAt.toLocaleString();
+        const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
+        const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
+        res.status(200).json({item,address,orderTime,orderCancelTime,orderDeliverTime})
+    }
+    else {
+        const orders = await Order.find({ Buyer_Id })
+        const orderItems = await Promise.all(orders.map(async ({
             _id,
-            item,
-            address,
-            Contact_Number,
-            Buyer_Name,
-            orderTime
-        };
-    }))
-    res.status(200).json(orderItems);
+            Seller_Id,
+            Category_Id,
+            Item_Id,
+            Delivered_Time,
+            Order_Cancel_Time,
+            createdAt }) => {
+            const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
+            const item = await category.item.id(Item_Id);
+            // const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
+            const orderTime = createdAt.toLocaleString();
+            const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
+            const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
+            return {
+                _id,
+                item,
+                orderTime,
+                orderCancelTime,
+                orderDeliverTime
+            };
+        }))
+        res.status(200).json(orderItems);
+    }
 })
 
 //NOTE - Cancel Order

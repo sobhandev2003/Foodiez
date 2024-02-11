@@ -12,6 +12,7 @@ function Order() {
   return (
     <>{
       loginAccount && loginAccount.user_role==="seller"?
+      
       <><SellerOrder/></>
       :
       <><BuyerOrder/> </>
