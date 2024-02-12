@@ -11,7 +11,8 @@ const { registerBuyerAccount,
     getOrder,
     getCancelOrder, 
     deleteCartItem,
-    gateDeliveryAddress} = require('../controllers/buyerControlers');
+    gateDeliveryAddress,
+    giveRating} = require('../controllers/buyerControlers');
 
 const { upload } = require('../config/conectDb');
 const validateBuyerToken = require('../middilware/validateBuyerJwtToken');
@@ -49,6 +50,8 @@ Router.route("/cancel/:id").put(validateBuyerToken, cancelOrder)
 
 //NOTE - gate all cancel order
 Router.route("/order/cancel").get(validateBuyerToken, getCancelOrder);
+//NOTE - Give Rating in order Item
+Router.route("/rating/:id").put(validateBuyerToken, giveRating)
 
 
 

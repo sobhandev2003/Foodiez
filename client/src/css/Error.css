@@ -1,0 +1,40 @@
+.error-div {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    gap:20px;
+}
+.error-div img{
+    /* width:30vw; */
+    /* height: 40%; */
+    overflow-clip-margin: content-box;
+}
+.error-div h3{
+    font-size:1.2rem;
+}
+.error-div button{
+   background: #2874f0;
+    color: #fff;
+    box-shadow: 0 5px 4px 0 rgba(0,0,0,.2);
+    border: none;
+    font-size:1rem;
+    padding:10px;
+}
+@media screen and (max-width:500px) {
+    .error-div img{
+    width:60vw;
+}
+.error-div h3{
+    font-size:1rem;
+}
+}
+@media screen and (max-width:500px) {
+    .error-div img{
+    width:70vw;
+}
+.error-div h3{
+    font-size:.8rem;
+}
+}

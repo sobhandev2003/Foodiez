@@ -15,10 +15,12 @@ export const fetchOrderDetailsByOrderId = async (authToken, orderId) => {
         }
         else {
             Alert("error", <>{data.message}</>)
+            return null;
         }
 
     } catch (error) {
         console.error(error);
+        return null;
     }
 }
 
@@ -47,7 +49,36 @@ export const CancelOrder = async (authToken, orderId, reason) => {
     }
 
 }
+//NOTE - Give rating order Item
+export const giveRatingDeliveredItem = async(authToken, orderId, feedback,setIsFeedbackModelDisplay) => {
+    if (feedback.rating < 0 || feedback.rating > 5) {
+        Alert("warning", <>rating must be between <b>{"0 to 5"}</b> </>)
+    }
+    else {
+        try {
+            const response =await fetch(`${baseUrl}/food/user/buyer/rating/${orderId}`,{
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + authToken,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(feedback)
+            })
+            const data=await response.json();
+            if(response.ok){
+                Alert("success",<>{data.message}</>)
+                setIsFeedbackModelDisplay(false)
+            }
+            else{
+                console.log(data);
+                Alert("error",<>{data.message}</>) 
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
+}
 //SECTION -  Seller
 //NOTE - fetch seller all order
 export const fetchSellerOrderDetailsByOrderId = async (authToken, orderId) => {
@@ -66,10 +97,12 @@ export const fetchSellerOrderDetailsByOrderId = async (authToken, orderId) => {
         }
         else {
             Alert("error", <>{data.message}</>)
+            return null;
         }
 
     } catch (error) {
         console.error(error);
+        return null;
     }
 }
 //NOTE - cancel order by Seller

@@ -76,10 +76,7 @@
     transition: .3s ease-in-out;
 }
 
-.order-details-page .order-details section:nth-child(2) div:nth-child(2) button:hover {
-    font-size: 1.1rem;
-    color: red;
-}
+
 
 .confirm-cancel-div {
     width: 90%;
@@ -128,6 +125,19 @@
         color: blueviolet;
     }
 }
+.feedback-div button{
+    color: blue;
+}
+.feedback-Model textarea{
+    width: 80%;
+    border: .5px solid gray;
+    padding: 8px;
+    font-size: 1rem;
+}
+/* .feedback-Model span{
+    .feedback-Model
+border: 1px solid;
+} */
 @media screen and (max-width:520px) {
     .order-details-page .order-details section:nth-child(2){
         height: 22rem;

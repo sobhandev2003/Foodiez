@@ -64,4 +64,13 @@ const validatePostalCode = (countryCode, postalcode) => {
   return postalCodes.validate(countryCode, postalcode);
 
 }
-module.exports = { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator, validateCountryName, validateState, validatePostalCode }
+//NOTE - validate rating 
+const isValidRating=(rating)=>{
+  if(rating < -1 || rating>5){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+module.exports = { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator, validateCountryName, validateState, validatePostalCode,isValidRating }

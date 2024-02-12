@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Category = require('../models/categoryModel');
 const DeliveryAddress = require('../models/deliveryAddressModel');
-const Order = require('../models/orderModel')
+const Order = require('../models/orderModel');
+const { updateItemRating } = require('./itemControllers');
 //NOTE - Register a new buyer account
 // route "/register"
 const registerBuyerAccount = asyncHandler(async (req, res) => {
@@ -152,7 +153,6 @@ const getCartItem = asyncHandler(async (req, res) => {
 const deleteCartItem = asyncHandler(async (req, res) => {
     const itemId = req.params.id;
     const buyerId = req.buyer.id
-
     if (!buyerId) {
         res.status(401);
         throw new Error("Unauthorize")
@@ -162,8 +162,7 @@ const deleteCartItem = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Buyer Account Not Found")
     }
-    const index = buyer.cartItem.findIndex(item => item.Item_Id == itemId);
-
+    const index = await buyer.cartItem.findIndex(item => item.Item_Id == itemId);
     if (index === -1) {
         res.status(404);
         throw new Error('Item not found in cart')
@@ -283,14 +282,15 @@ const getOrder = asyncHandler(async (req, res) => {
             Buyer_Name,
             Contact_Number,
             Order_Cancel_By,
-            Order_Cancel_Reason } = order
+            Order_Cancel_Reason,
+            Rating } = order
         const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
         const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
         const item = await category.item.id(Item_Id);
         const orderTime = createdAt.toLocaleString();
         const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
         const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
-        res.status(200).json({id:_id,  Buyer_Name, Contact_Number,item, address, orderTime, orderCancelTime,Order_Cancel_By,Order_Cancel_Reason, orderDeliverTime })
+        res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime, Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime,Rating })
     }
     else {
         const orders = await Order.find({ Buyer_Id })
@@ -334,15 +334,15 @@ const cancelOrder = asyncHandler(async (req, res) => {
         res.status(422);
         throw new Error("Request not valid")
     }
-    const order = await Order.findOne({ _id: Order_Id, Buyer_Id, Order_Cancel: false });
+    const order = await Order.findOne({ _id: Order_Id, Buyer_Id, Order_Cancel: false, Delivered: false });
     if (!order) {
         res.status(404);
         throw new Error("Order Not found")
     }
-    const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Buyer_Id, Order_Cancel: false },
+    const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Buyer_Id, Order_Cancel: false, Delivered: false },
         {
             Order_Cancel: true,
-            Order_Cancel_By:"Buyer",
+            Order_Cancel_By: "Buyer",
             Order_Cancel_Reason: reason,
         },
         { new: true }
@@ -381,6 +381,48 @@ const getCancelOrder = asyncHandler(async (req, res) => {
     res.status(200).json(orderItems);
 })
 
+const giveRating = asyncHandler(async (req, res) => {
+    const Buyer_Id = req.buyer.id;
+    const order_Id = req.params.id;
+    const { rating, feedback } = req.body;
+    if (!Buyer_Id) {
+        res.status(401);
+        throw new Error("Unauthorize")
+    }
+    if (!rating || rating < 0 || rating > 5) {
+        res.status(422);
+        throw new Error("Rating not valid")
+    }
+    const order = await Order.findOne({ _id: order_Id, Delivered: true, Order_Cancel: false });
+    if (!order) {
+        res.status(404);
+        throw new Error("Not Found")
+    }
+    if (order.Rating > -1) {
+        res.status(409);
+        throw new Error("Rating already given")
+    }
+
+    await Order.findOneAndUpdate(
+        { _id: order_Id, Delivered: true, Order_Cancel: false },
+        {
+            Rating: rating,
+            Feedback: feedback
+        },
+        { new: true }
+    )
+    // console.log(order);
+    const message = updateItemRating({ categoryId: order.Category_Id, itemId: order.Item_Id, rating }).then(({ status, message }) => {
+        if (status !== 200) {
+            res.status(status)
+            throw new Error(message)
+        }
+        res.status(200).json({ message: "Successfully rating updated" })
+    })
+
+
+})
+
 module.exports = {
     registerBuyerAccount,
     loginBuyerAccount,
@@ -395,5 +437,6 @@ module.exports = {
     getOrder,
     cancelOrder,
     getCancelOrder,
+    giveRating
 
 }

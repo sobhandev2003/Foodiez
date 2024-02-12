@@ -7,7 +7,8 @@ const { registerSeller,
     getAllSeller,
     updateImage,
     getSellerOrder, 
-    cancelOrderBySeller} = require('../controllers/sellerControlers');
+    cancelOrderBySeller,
+    updateDeliveryStatus} = require('../controllers/sellerControlers');
 const validateSellerToken = require('../middilware/validateSellerJwtToken');
 const { upload } = require('../config/conectDb');
 
@@ -27,5 +28,7 @@ Router.get('/', getAllSeller)
 //NOTE - Get Order 
 Router.route("/order").get(validateSellerToken, getSellerOrder);
 Router.route("/order/cancel/:id").put(validateSellerToken, cancelOrderBySeller);
+Router.route("/order/deliver/:id").put(validateSellerToken,updateDeliveryStatus)
+
 
 module.exports = Router

@@ -166,4 +166,31 @@ const updateItem = asyncHandler(async (req, res) => {
 }
 )
 
-module.exports = { getItems, getItem, createItem, updateItem, deleteItem }
+//NOTE - update rating
+const updateItemRating =asyncHandler(async({categoryId,itemId,rating})=>{
+    if(rating<0 || rating>5){
+        return {status:422,message:"Rating not valid"}
+    }
+    // console.log(categoryId);
+    const category = await Category.findById(categoryId);
+    // console.log(category.categoryname);
+    if (!category) {
+        return {status:404,message:"Category not fond"}
+    }
+    //NOTE - find item 
+    const item = await category.item.id(itemId);
+    if (!item) {
+        return {status:404,message:"Not found"};
+    }
+//NOTE - Calculate rating;
+    const totalRating=item.rating * item.numberOfRating;
+    const newRating= (totalRating+rating)/(item.numberOfRating+1);
+    if (newRating>=0 && newRating<=5) {
+        item.rating = newRating;
+        item.numberOfRating=item.numberOfRating+1
+    }
+    await category.save();
+    return {status:200,message:"Rating updated"}
+})
+
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem,updateItemRating }

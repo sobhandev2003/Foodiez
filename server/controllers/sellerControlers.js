@@ -281,11 +281,11 @@ const getSellerOrder = asyncHandler(async (req, res) => {
     const orderTime = createdAt.toLocaleString();
     const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
     const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
-    res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime,Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime })
+    res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime, Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime })
   }
-  
+
   else {
-      //NOTE - gate all order item 
+    //NOTE - gate all order item 
     const orders = await Order.find({ Seller_Id })
     const orderItems = await Promise.all(orders.map(async ({
       _id,
@@ -328,21 +328,54 @@ const cancelOrderBySeller = asyncHandler(async (req, res) => {
     res.status(422);
     throw new Error("Request not valid")
   }
-  const order = await Order.findOne({ _id: Order_Id, Seller_Id, Order_Cancel: false });
+  const order = await Order.findOne({ _id: Order_Id, Seller_Id, Order_Cancel: false, Delivered: false });
   if (!order) {
     res.status(404);
     throw new Error("Order Not found")
   }
-  const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Seller_Id, Order_Cancel: false },
+  const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Seller_Id, Order_Cancel: false, Delivered: false },
     {
       Order_Cancel: true,
-      Order_Cancel_By:"Seller",
+      Order_Cancel_By: "Seller",
       Order_Cancel_Reason: reason,
     },
     { new: true }
   );
 
   res.status(200).json({ msg: "Order Cancel", updatedOrder })
+})
+
+const updateDeliveryStatus = asyncHandler(async (req, res) => {
+  const Seller_Id = req.seller.id;
+  const order_Id = req.params.id;
+  if (!Seller_Id) {
+    res.status(401);
+    throw new Error("Unauthorize")
+  }
+  if (!order_Id) {
+    res.status(422);
+    throw new Error("Request not valid")
+  }
+  const order = await Order.findOne({
+    _id: order_Id,
+    Order_Cancel: false,
+    Delivered: false
+  });
+  if (!order) {
+    res.status(404);
+    throw new Error("Order not found")
+  }
+  await Order.findOneAndUpdate({
+    _id: order_Id,
+    Order_Cancel: false,
+    Delivered: false
+  },
+    {
+      Delivered: true
+    },
+    { new: true })
+
+  res.status(200).json({ message: "Order Delivered" })
 })
 module.exports = {
   registerSeller,
@@ -353,5 +386,6 @@ module.exports = {
   deletetSeller,
   getAllSeller,
   getSellerOrder,
-  cancelOrderBySeller
+  cancelOrderBySeller,
+  updateDeliveryStatus
 }

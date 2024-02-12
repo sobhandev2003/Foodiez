@@ -197,37 +197,37 @@ export const savedNewAddress = (authToken, addressDetails) => async (dispatch) =
             Alert("success", <>{data.message}</>)
             dispatch(fetchBuyerSavedAddress(authToken))
 
-            
+
         }
-        else{
-            Alert("error",<>{data.message}</>)
-         
+        else {
+            Alert("error", <>{data.message}</>)
+
         }
     } catch (error) {
         console.error(error);
-        
+
     }
 }
 
 //NOTE - Place new order
-export const savePlaceOrderInDB=(authToken,orderDetails,navigate)=>async(dispatch)=>{
+export const savePlaceOrderInDB = (authToken, orderDetails, navigate) => async (dispatch) => {
     try {
-        const response=await fetch(`${baseUrl}/food/user/buyer/order`,{
-            method:"POST",
-            headers:{
+        const response = await fetch(`${baseUrl}/food/user/buyer/order`, {
+            method: "POST",
+            headers: {
                 "Authorization": "Bearer " + authToken,
                 "Content-Type": "application/json"
             },
-            body:JSON.stringify(orderDetails)
-        }   )
-        const data=await response.json();
+            body: JSON.stringify(orderDetails)
+        })
+        const data = await response.json();
         if (response.ok) {
-            Alert('success',<>{data.message}</>)
+            Alert('success', <>{data.message}</>)
             dispatch(fetchLoginBuyerDetails(authToken))
             navigate("/order")
         }
-        else{
-            Alert('error',<>{data.message}</>)
+        else {
+            Alert('error', <>{data.message}</>)
         }
 
     } catch (error) {
@@ -236,20 +236,20 @@ export const savePlaceOrderInDB=(authToken,orderDetails,navigate)=>async(dispatc
 }
 
 //NOTE - get buyer all order
-export const fetchOrderBuyerDetails=(authToken)=>async(dispatch)=>{
+export const fetchOrderBuyerDetails = (authToken) => async (dispatch) => {
     try {
-        const response=await fetch(`${baseUrl}/food/user/buyer/order`,{
-            method:"GET",
-            headers:{
-                "Authorization": "Bearer " + authToken, 
+        const response = await fetch(`${baseUrl}/food/user/buyer/order`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + authToken,
             }
         })
-        const data=await response.json();
-        if(response.ok){
+        const data = await response.json();
+        if (response.ok) {
             // console.log(data);
             dispatch(setOrders(data))
         }
-        else{
+        else {
             console.error(data.message);
         }
 
@@ -257,3 +257,4 @@ export const fetchOrderBuyerDetails=(authToken)=>async(dispatch)=>{
         console.error(error);
     }
 }
+

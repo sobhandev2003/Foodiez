@@ -24,6 +24,10 @@ const itemSchema=new mongoose.Schema(
         rating:{
             type:Number,
             default:0
+        },
+        numberOfRating:{
+            type:Number,
+            default:0,
         }
     },
     {
