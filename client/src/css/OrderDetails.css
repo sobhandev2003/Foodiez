@@ -72,7 +72,7 @@
     margin-left: 1rem;
     font-size: 1rem;
     font-weight: 500;
-    color: blue;
+    /* color: blue; */
     transition: .3s ease-in-out;
 }
 
@@ -108,7 +108,26 @@
     background-color: blue;
     box-shadow: 5px 10px 5px grey;
 }
+.order-details-page .order-details section:nth-child(2) div:nth-child(2) .order-cancel-detail{
+    display: flex;
+    gap: 10px;
+    height: max-content;
+    p{
 
+        display: flex;
+        gap: 5px
+
+    };
+   .order-cancel-reason{
+        padding-left: 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        padding-left: 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: blueviolet;
+    }
+}
 @media screen and (max-width:520px) {
     .order-details-page .order-details section:nth-child(2){
         height: 22rem;

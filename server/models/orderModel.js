@@ -68,6 +68,16 @@ const orderScheme = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        Order_Cancel_By:{
+            type: String,
+            default: null,
+            validate: {
+                validator: function () {
+                    return !this.Order_Cancel || (this.Order_Cancel && this.Order_Cancel_Reason);
+                },
+                message: "Order_Cancel_Reason is required when Order_Cancel is true"
+            } 
+        },
         Order_Cancel_Time: {
             type: Date,
             default: null,

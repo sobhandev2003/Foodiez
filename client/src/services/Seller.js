@@ -1,6 +1,6 @@
 import Alert from "../component/Alert";
 import { setLoginAccountDetails } from "../fetures/loginFrtures";
-import { createSller } from "../fetures/seller";
+import { createSller, setSellerOrder } from "../fetures/seller";
 
 import { fetchCurrentSellerCategory } from "./Catagory";
 import { baseUrl } from "./baseUrl";
@@ -8,7 +8,6 @@ import { baseUrl } from "./baseUrl";
 //NOTE - register a new Seller
 
 export const registerSeller = (sellerData) => async (dispatch) => {
-
 
     const { restaurantName, ownerName, address, email, mobile, photo, password, } = sellerData;
     try {
@@ -31,7 +30,7 @@ export const registerSeller = (sellerData) => async (dispatch) => {
         if (response.ok) {
             // Request was successful
             const data = await response.json();
-         
+
             Alert("success", <p>{data.message}</p>)
             dispatch(createSller({ success: true }))
 
@@ -83,7 +82,6 @@ export const loginSeller = async (sellerData) => {
 
 //NOTE - fetch current seller details
 
-
 export const fetchCurrentSeller = (authToken) => async (dispatch) => {
     try {
         const response = await fetch(`${baseUrl}/food/user/seller/current`, {
@@ -109,7 +107,9 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
 
     }
 }
+
 //NOTE - Forgot account password use email 
+
 export const forgotPassword = async (sellerData, setIsForgotPassword) => {
     try {
         const response = await fetch(`${baseUrl}/food/user/seller/forgotpassword`, {
@@ -134,31 +134,26 @@ export const forgotPassword = async (sellerData, setIsForgotPassword) => {
     }
 }
 
-//NOTE -  Update Profile Seller photo
-// export const updateProfilePhoto=(authToken,photo,setIsProfilePhotoUpdate)=>async(dispatch)=>{
-//     try {
-//         const formData=new FormData();
-//         formData.append("photo",photo);
-//         const response=await fetch(`${baseUrl}/food/user/seller/upload-profile-photo`,{
-//         method:"POST",
-//         headers: {
-//             'Authorization': 'Bearer ' + authToken,
+//NOTE - fetch seller all order item
 
-//         },
-//         body :formData
-
-//         })
-//         const data=await response.json();
-//         // console.log(data);
-//         if(response.ok){
-//             Alert('success',<p>{data.msg}</p>)
-//             dispatch(fetchCurrentSeller(authToken));
-//             setIsProfilePhotoUpdate(false);
-//         }
-//         else{
-//             Alert('error',<p>{data.message}</p>)
-//         }
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
+export const fetchAllOrder=(authToken)=>async(dispatch)=>{
+    try {
+        const response =await fetch(`${baseUrl}/food/user/seller/order`,{
+            method:"GET",
+            headers: {
+                'Authorization': 'Bearer ' + authToken,
+            }
+        })
+        const data=await response.json();
+        if(response.ok){
+            
+            dispatch(setSellerOrder(data))
+        }
+        else{
+            Alert("error",<>{data.message}</>)
+        }
+        
+    } catch (error) {
+        console.error(error);
+    }
+}

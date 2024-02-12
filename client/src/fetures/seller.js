@@ -16,6 +16,8 @@ const initialState = {
   allSeller: await fetchSeller(""),
   createSllerAccout:false,
   currentSellerCategory:null,
+  orders:null,
+  numberOfOrders:0
   
 
 };
@@ -34,12 +36,17 @@ export const SellerSlice = createSlice({
   
     currentSellerCategory:(state,action)=>{
       state.currentSellerCategory=action.payload
+    },
+    setSellerOrder:(state,action)=>{
+      state.orders=action.payload
+      state.numberOfOrders=action.payload.length
+      // console.log(state.sellerOrder);
     }
 
     
   }
 })
 
-export const {setSeller,createSller,currentSellerCategory}=SellerSlice.actions;
+export const {setSeller,createSller,currentSellerCategory,setSellerOrder}=SellerSlice.actions;
 
 export default SellerSlice.reducer;

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import '../css/OrderDetails.css'
 import { useLocation } from 'react-router-dom';
-import { CancelOrder, fetchOrderDetailsByOrderId } from '../services/Order';
+import { CancelOrder, CancelOrderBySeller, fetchOrderDetailsByOrderId, fetchSellerOrderDetailsByOrderId } from '../services/Order';
 import Model from '../component/Model'
 import loadingSpin from '../photo/loading-spinner.gif'
 import CircleIcon from '@mui/icons-material/Circle';
 import CloseIcon from '@mui/icons-material/Close';
 function OrderDetails() {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
     const location = useLocation();
     const orderId = new URLSearchParams(location.search).get('order_id');
-    const authToken = localStorage.getItem("buyerAuthToken")
+    const buyerAuthToken = localStorage.getItem("buyerAuthToken")
+    const sellerAuthToken = localStorage.getItem("sellerAuthToken")
+
     const [order, setOrder] = useState(null);
     const [orderItem, setOrderItem] = useState(null);
     const [deliveryAddress, setDeliveryAddress] = useState(null)
@@ -18,8 +20,15 @@ function OrderDetails() {
     const [orderCancelReason, setOrderCancelReason] = useState(null)
     //NOTE - get orderDetails from DB
     const getOrderDetailsByOrderId = async () => {
-        const data = await fetchOrderDetailsByOrderId(authToken, orderId);
-        if(data){
+        let data;
+        if (buyerAuthToken) {
+            data = await fetchOrderDetailsByOrderId(buyerAuthToken, orderId);
+        }
+        else if (sellerAuthToken) {
+            data = await fetchSellerOrderDetailsByOrderId(sellerAuthToken, orderId)
+        }
+        if (data) {
+            // console.log(data);
             setOrder(data)
             setOrderItem(data.item)
             setDeliveryAddress(data.address)
@@ -28,11 +37,18 @@ function OrderDetails() {
     //NOTE - handel cancel order
     const handelOrderCancel = async () => {
         // console.log(orderCancelReason);
-      await  CancelOrder(authToken, orderId, orderCancelReason)
-      getOrderDetailsByOrderId()
-      setIsCancelOrder(false)
+        if (buyerAuthToken) {
+            await CancelOrder(buyerAuthToken, orderId, orderCancelReason)
+            getOrderDetailsByOrderId()
+        }
+        else if (sellerAuthToken) {
+            await CancelOrderBySeller(sellerAuthToken, orderId, orderCancelReason);
+            getOrderDetailsByOrderId();
+        }
+
+        setIsCancelOrder(false)
     }
-  //NOTE - set order cancel reason 
+    //NOTE - set order cancel reason 
     const handelOrderCancelReasonInput = (e) => {
         setOrderCancelReason(e.target.value)
     }
@@ -50,7 +66,7 @@ function OrderDetails() {
         </Model>
     )
 
- 
+
     useEffect(() => {
         getOrderDetailsByOrderId()
         // eslint-disable-next-line
@@ -81,8 +97,12 @@ function OrderDetails() {
                         <div>
                             <p><CircleIcon style={{ color: "orange", fontSize: "1rem" }} /><span>Order confirmed on </span><span>{order.orderTime}</span></p>
                             {order.orderDeliverTime && <p><CircleIcon style={{ color: "green", fontSize: "1rem" }} /><span>Order delivered on </span><span>{order.orderDeliverTime}</span></p>}
-                            {order.orderCancelTime && <p><CircleIcon style={{ color: "red", fontSize: "1rem" }} /><span>Order cancel on </span><span>{order.orderCancelTime}</span></p>}
-                            {!order.orderDeliverTime && !order.Order_Cancel_Reason && <button onClick={() => setIsCancelOrder(true)}>Cancel order</button>}
+                            {order.orderCancelTime && <div className='order-cancel-detail'>
+                                <p><CircleIcon style={{ color: "red", fontSize: "1rem" }} /><span>Order cancel on </span><span>{order.orderCancelTime}</span></p>
+                                {((buyerAuthToken && order.Order_Cancel_By === "Seller") || (sellerAuthToken && order.Order_Cancel_By === "Buyer")) && <p><span>Reason :</span><span className='order-cancel-reason'>{order.Order_Cancel_Reason}</span></p>}
+                            </div>}
+                            {!order.orderDeliverTime && !order.Order_Cancel_Reason && <button style={{ color: "blue" }} onClick={() => setIsCancelOrder(true)} >Cancel order</button>}
+                            {sellerAuthToken && !order.orderDeliverTime && !order.Order_Cancel_Reason && <button style={{ color: "green" }}>Delivered Order</button>}
                         </div>
                     </section>
                 </div> : <div className='loading-container'>

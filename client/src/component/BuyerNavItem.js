@@ -48,7 +48,7 @@ function BuyerNavItem() {
             <MenuItem onClick={() => { navigate('/cart') }}>
                 <Typography textAlign="center" className='nav-hover' ><AddShoppingCartOutlinedIcon />Carts <RollInSpn className='cart-count' >{numberOfCartProduct}</RollInSpn></Typography>
             </MenuItem>
-            <MenuItem onClick={() => { navigate('/my-order') }}>
+            <MenuItem onClick={() => { navigate('/order') }}>
                 <Typography textAlign="center" className='nav-hover' ><FaBoxes className='icon order-ico' /> My Order </Typography>
             </MenuItem>
         </>

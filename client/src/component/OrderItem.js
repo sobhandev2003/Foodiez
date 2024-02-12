@@ -1,7 +1,7 @@
 import React from 'react'
 import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate } from 'react-router-dom';
-function BuyerOrderItem({ order }) {
+function OrderItem({ order }) {
     const { item, orderCancelTime, orderDeliverTime, orderTime, _id } = order;
     const { name, description, photo, photoType, price } = item;
     const navigate=useNavigate();
@@ -30,4 +30,4 @@ function BuyerOrderItem({ order }) {
     )
 }
 
-export default BuyerOrderItem
+export default OrderItem

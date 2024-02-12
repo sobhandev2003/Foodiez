@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import '../css/BuyerOrder.css'
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrderBuyerDetails } from '../services/Buyer';
 import loadingSpin from '../photo/loading-spinner.gif'
-import BuyerOrderItem from './BuyerOrderItem';
+import OrderItem from './OrderItem';
 import emptyOrderImg from '../photo/empty-order.webp'
 import { useNavigate } from 'react-router-dom';
 function BuyerOrder() {
@@ -26,7 +26,7 @@ function BuyerOrder() {
           <>
             {
               orders.map((order, index) => {
-                return <BuyerOrderItem key={index} order={order} />
+                return <OrderItem key={index} order={order} />
               })
             }
           </> :

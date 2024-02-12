@@ -92,3 +92,8 @@
     text-align: center;
     font-size: 1.3rem;
 }
+@media screen and (max-width:900px){
+    .modal-container .model-element{
+        width: 90vw;
+    }
+}

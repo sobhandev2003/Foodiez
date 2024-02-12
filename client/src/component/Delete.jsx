@@ -65,7 +65,7 @@ function Delete(props) {
             <form className='model-element' onSubmit={handeleDelete}>
                 <label className='delete-category-aller-p'>Are you sure?<br />You Want to delete <strong> {deleteData.name} </strong>{type} </label>
                 <label style={{ fontSize: "2rem" }}>Password:</label>
-                <input type='password' onChange={handelInputChange} name='password' placeholder='Enter your account password' required />
+                <input type='password' onChange={handelInputChange} name='password' placeholder='Enter password' required />
 
                 <button type="submit" className='delete-btn'>Delete</button>
             </form>

@@ -70,7 +70,7 @@ const registerSeller = asyncHandler(async (req, res) => {
       }
     )
 
-    res.status(200).json({message:"Successfully  register seller email"})
+    res.status(200).json({ message: "Successfully  register seller email" })
   } catch (error) {
     res.status(403).json(error)
   }
@@ -260,45 +260,59 @@ const getSellerOrder = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Unauthorize")
   }
-  const orders = await Order.find({ Seller_Id, Order_Cancel: false })
 
-  const orderItems = await Promise.all(orders.map(async ({
-    Seller_Id,
-    Category_Id,
-    Item_Id,
-    DeliveryAddress_id,
-    Contact_Number,
-    Buyer_Id,
-    Payment_methods,
-    Payment_Done,
-    Payment_Time,
-    createdAt }) => {
+  const { order_Id } = req.query;
+  //NOTE - gate full order details a specific order
+  if (order_Id) {
+    // console.log(order_Id);
+    const order = await Order.findById(order_Id);
+    if (!order) {
+      res.status(404);
+      throw new Error("Not found")
+    }
+    const { _id, Buyer_Id, Category_Id, Item_Id, DeliveryAddress_id, Delivered_Time, Order_Cancel_Time, createdAt,
+      Buyer_Name,
+      Contact_Number,
+      Order_Cancel_By,
+      Order_Cancel_Reason } = order
+    const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
     const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
     const item = await category.item.id(Item_Id);
-    const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
+    const orderTime = createdAt.toLocaleString();
+    const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
+    const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
+    res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime,Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime })
+  }
+  
+  else {
+      //NOTE - gate all order item 
+    const orders = await Order.find({ Seller_Id })
+    const orderItems = await Promise.all(orders.map(async ({
+      _id,
+      Seller_Id,
+      Category_Id,
+      Item_Id,
+      Delivered_Time,
+      Order_Cancel_Time,
+      createdAt }) => {
+      const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
+      const item = await category.item.id(Item_Id);
+      // const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
+      const orderTime = createdAt.toLocaleString();
+      const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
+      const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
+      return {
+        _id,
+        item,
+        orderTime,
+        orderCancelTime,
+        orderDeliverTime
+      };
+    }))
+    res.status(200).json(orderItems);
+  }
 
-    const orderTime = createdAt.toLocaleString()
-    const buyerDetails = await Buyer.findById(Buyer_Id);
 
-    //SECTION -  - Manage which data passed with frontend 
-    const { id: itemId, name: itemName, description, price, photoType, photo } = item;
-    const orderItem = { itemId, itemName, description, price, photoType, photo };
-
-    const { id: addressId, street, city, state, postalCode, country } = address;
-    const deliveryAddress = { addressId, street, city, state, postalCode, country };
-    const { name, email, mobileNumber } = buyerDetails;
-    const buyer = { Buyer_Id, name, email, mobileNumber }
-    const payment = { Payment_methods, Payment_Done, Payment_Time }
-    return {
-      orderItem,
-      deliveryAddress,
-      Contact_Number,
-      buyer,
-      orderTime,
-      payment
-    };
-  }))
-  res.status(200).json(orderItems);
 })
 
 //NOTE - cancel seller order item
@@ -322,6 +336,7 @@ const cancelOrderBySeller = asyncHandler(async (req, res) => {
   const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Seller_Id, Order_Cancel: false },
     {
       Order_Cancel: true,
+      Order_Cancel_By:"Seller",
       Order_Cancel_Reason: reason,
     },
     { new: true }

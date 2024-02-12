@@ -282,6 +282,7 @@ const getOrder = asyncHandler(async (req, res) => {
         const { _id, Seller_Id, Category_Id, Item_Id, DeliveryAddress_id, Delivered_Time, Order_Cancel_Time, createdAt,
             Buyer_Name,
             Contact_Number,
+            Order_Cancel_By,
             Order_Cancel_Reason } = order
         const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
         const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
@@ -289,7 +290,7 @@ const getOrder = asyncHandler(async (req, res) => {
         const orderTime = createdAt.toLocaleString();
         const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
         const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
-        res.status(200).json({id:_id,  Buyer_Name, Contact_Number,item, address, orderTime, orderCancelTime,Order_Cancel_Reason, orderDeliverTime })
+        res.status(200).json({id:_id,  Buyer_Name, Contact_Number,item, address, orderTime, orderCancelTime,Order_Cancel_By,Order_Cancel_Reason, orderDeliverTime })
     }
     else {
         const orders = await Order.find({ Buyer_Id })
@@ -341,6 +342,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
     const updatedOrder = await Order.findOneAndUpdate({ _id: Order_Id, Buyer_Id, Order_Cancel: false },
         {
             Order_Cancel: true,
+            Order_Cancel_By:"Buyer",
             Order_Cancel_Reason: reason,
         },
         { new: true }

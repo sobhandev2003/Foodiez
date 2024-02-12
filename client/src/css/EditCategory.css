@@ -95,3 +95,10 @@
     color: white;
     box-shadow: 5px 5px 5px gray;
 }
+
+@media screen and (max-width:900px) {
+    .item-div .shope-list-item .edit-item,
+    .item-div .delete-item{
+        display: block;
+    }
+}

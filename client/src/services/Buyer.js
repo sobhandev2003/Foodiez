@@ -222,7 +222,7 @@ export const savePlaceOrderInDB=(authToken,orderDetails,navigate)=>async(dispatc
         if (response.ok) {
             Alert('success',<>{data.message}</>)
             dispatch(fetchLoginBuyerDetails(authToken))
-            navigate("/my-order")
+            navigate("/order")
         }
         else{
             Alert('error',<>{data.message}</>)
