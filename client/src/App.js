@@ -1,8 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+
 import Navbar from './component/Navbar';
 import Home from './pages/Home';
 import Footer from './component/Footer';
@@ -15,29 +14,33 @@ import Order from './pages/Order';
 import PlaceOrder from './pages/PlaceOrder';
 import OrderDetails from './pages/OrderDetails';
 import Error from './component/Error';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Protected from './component/Protected';
 
 
 
 
 function App() {
+ 
+
   return (
     <div className="App">
 
       <Navbar />
 
       <section className='routes-component-section'>
-
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route exact path='/register' element={<Register />} />
           <Route exact path='/help' element={<Contact />} />
-          <Route exact path='/restaurant/:id' element={<Shope />} />
-          <Route exact path='/cart' element={<Cart />} />
-          <Route exact path='/edit-category' element={<EditCategory />} />
-          <Route exact path='/place-order' element={<PlaceOrder />} />
+          <Route exact path='/restaurant/:id' element={<Protected path={"/restaurant/:id"} component={<Shope />} />} />
+          <Route exact path='/cart' element={<Protected path={"/cart"} component={<Cart />} />} />
+          <Route exact path='/edit-category' element={<Protected path={"/edit-category"} component={<EditCategory/>} />} />
+          <Route exact path='/place-order' element={<Protected path={"/place-order"} component={<PlaceOrder />} />} />
           <Route exact path='/order' element={<Order />} />
-          <Route exact path="/order_details" element={<OrderDetails/>} />
-          <Route path="*" element={<Error navigateTo={"Go to Home"} navigatePath={"/"}/>} />
+          <Route exact path="/order_details" element={<OrderDetails />} />
+          <Route path="*" element={<Error navigateTo={"Go to Home"} navigatePath={"/"} />} />
         </Routes>
       </section>
 
