@@ -4,9 +4,28 @@ import { createSller, setSellerOrder } from "../fetures/seller";
 
 import { fetchCurrentSellerCategory } from "./Catagory";
 import { baseUrl } from "./baseUrl";
+//NOTE - fetch seller by id
+
+export const fetchSellerById=async(sellerId)=>{
+    try {
+        const response=await fetch(`${baseUrl}/food/user/seller/${sellerId}`,{
+            method:"GET"
+        })
+
+        const data=await response.json();
+        if(response.ok){
+            return data
+        }
+        else{
+            return null
+        }
+    } catch (error) {
+        console.error(error);
+        return null
+    }
+}
 
 //NOTE - register a new Seller
-
 export const registerSeller = (sellerData) => async (dispatch) => {
 
     const { restaurantName, ownerName, address, email, mobile, photo, password, } = sellerData;

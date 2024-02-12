@@ -5,6 +5,7 @@ import { searchSeller } from '../services/searchSellerReducers';
 import photo1 from '../photo/photo1.png';
 import ShopeList from '../component/ShopeList';
 import photo2 from '../photo/photo2.png';
+import { LuSearchX } from "react-icons/lu";
 function BuyerHomePage() {
     const dispatch = useDispatch()
     const [sellers, setSellers] = useState([]);
@@ -47,7 +48,9 @@ function BuyerHomePage() {
             //TODO - fixed not restaurant found style
             sellers && sellers.length > 0 ? sellers.map((seller) => {
               return <ShopeList key={seller.id} seller={seller} />
-            }) : <h2>No restaurant found</h2>
+            }) :<div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}> 
+              <LuSearchX style={{fontSize:"10rem"}}/>
+              <h2>No restaurant found</h2></div>
           }
         </div>
 

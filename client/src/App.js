@@ -14,6 +14,7 @@ import EditCategory from './pages/EditCategory';
 import Order from './pages/Order';
 import PlaceOrder from './pages/PlaceOrder';
 import OrderDetails from './pages/OrderDetails';
+import Error from './component/Error';
 
 
 
@@ -36,7 +37,7 @@ function App() {
           <Route exact path='/place-order' element={<PlaceOrder />} />
           <Route exact path='/order' element={<Order />} />
           <Route exact path="/order_details" element={<OrderDetails/>} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Error navigateTo={"Go to Home"} navigatePath={"/"}/>} />
         </Routes>
       </section>
 

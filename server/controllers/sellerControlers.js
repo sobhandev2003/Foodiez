@@ -252,6 +252,23 @@ const getAllSeller = asyncHandler(async (req, res) => {
   // //console.log(sellers);
   res.status(200).json(sellers);
 })
+
+//NOTE - Get a seller by id
+const getSellerById=asyncHandler(async(req,res)=>{
+  const seller_Id=req.params.id;
+  if(!seller_Id){
+    res.status(403);
+    throw new Error("Invalid request")
+  }
+const seller=await Seller.findById(seller_Id);
+if(!seller){
+  res.status(404);
+  throw new Error("Not found")
+}
+const {restaurantName,ownerName,address,rating}  =seller
+res.status(200).json({restaurantName,ownerName,address,rating})
+})
+
 //NOTE - get seller order item
 const getSellerOrder = asyncHandler(async (req, res) => {
   // Buyer_Id
@@ -385,6 +402,7 @@ module.exports = {
   currentSeller,
   deletetSeller,
   getAllSeller,
+  getSellerById,
   getSellerOrder,
   cancelOrderBySeller,
   updateDeliveryStatus

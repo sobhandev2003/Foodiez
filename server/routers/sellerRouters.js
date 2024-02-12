@@ -8,7 +8,8 @@ const { registerSeller,
     updateImage,
     getSellerOrder, 
     cancelOrderBySeller,
-    updateDeliveryStatus} = require('../controllers/sellerControlers');
+    updateDeliveryStatus,
+    getSellerById} = require('../controllers/sellerControlers');
 const validateSellerToken = require('../middilware/validateSellerJwtToken');
 const { upload } = require('../config/conectDb');
 
@@ -25,6 +26,8 @@ Router.get('/current', validateSellerToken, currentSeller)
 Router.delete('/delete', validateSellerToken, deletetSeller)
 //NOTE - get all seller 
 Router.get('/', getAllSeller)
+//NOTE - get a seller by id 
+Router.route('/:id').get(getSellerById)
 //NOTE - Get Order 
 Router.route("/order").get(validateSellerToken, getSellerOrder);
 Router.route("/order/cancel/:id").put(validateSellerToken, cancelOrderBySeller);
