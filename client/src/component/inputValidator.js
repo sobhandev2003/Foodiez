@@ -30,4 +30,11 @@ export const validateWords=(value,numberOfWord=2)=>{
   // Check if the address has exactly two words
   return words.length <= numberOfWord;
 }
+
+export const isValidMongoObjectId=(id)=> {
+  if (typeof id === 'string' && /^[0-9a-fA-F]{24}$/.test(id)) {
+    return true;
+  }
+  return false;
+}
 // module.exports={validateEmail,validatePhoneNumber,validatePassword,validateImgType}

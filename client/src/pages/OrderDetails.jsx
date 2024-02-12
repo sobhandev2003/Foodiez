@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import '../css/OrderDetails.css'
 import { useLocation } from 'react-router-dom';
-import { CancelOrder, CancelOrderBySeller, fetchOrderDetailsByOrderId, fetchSellerOrderDetailsByOrderId } from '../services/Order';
+import { CancelOrder, CancelOrderBySeller, fetchOrderDetailsByOrderId, fetchSellerOrderDetailsByOrderId, updateOrderDelivered } from '../services/Order';
 import Model from '../component/Model'
 import loadingSpin from '../photo/loading-spinner.gif'
 import CircleIcon from '@mui/icons-material/Circle';
 import CloseIcon from '@mui/icons-material/Close';
+import { isValidMongoObjectId } from '../component/inputValidator';
 function OrderDetails() {
     window.scrollTo(0, 0)
     const location = useLocation();
@@ -19,6 +20,7 @@ function OrderDetails() {
     const [isCancelOrder, setIsCancelOrder] = useState(false)
     const [orderCancelReason, setOrderCancelReason] = useState(null)
     //NOTE - get orderDetails from DB
+    
     const getOrderDetailsByOrderId = async () => {
         let data;
         if (buyerAuthToken) {
@@ -33,6 +35,11 @@ function OrderDetails() {
             setOrderItem(data.item)
             setDeliveryAddress(data.address)
         }
+    }
+    //NOTE - Handel order deliver
+    const handelDeliver=async()=>{
+       await updateOrderDelivered(sellerAuthToken,orderId);
+        getOrderDetailsByOrderId()
     }
     //NOTE - handel cancel order
     const handelOrderCancel = async () => {
@@ -52,6 +59,7 @@ function OrderDetails() {
     const handelOrderCancelReasonInput = (e) => {
         setOrderCancelReason(e.target.value)
     }
+    
     //NOTE - pop up Model for take reason of order cancel
     const cancelOrderTemple = (
         <Model>
@@ -68,11 +76,13 @@ function OrderDetails() {
 
 
     useEffect(() => {
-        getOrderDetailsByOrderId()
+        console.log(isValidMongoObjectId(orderId));
+        isValidMongoObjectId(orderId) && getOrderDetailsByOrderId()
+        //TODO - if orderId on valid then display something wrong
         // eslint-disable-next-line
     }, [])
     return (
-        <div className='order-details-page'>
+        <div className='order-details-page' >
             {
                 order ? <div className='order-details'>
                     <section>
@@ -102,7 +112,7 @@ function OrderDetails() {
                                 {((buyerAuthToken && order.Order_Cancel_By === "Seller") || (sellerAuthToken && order.Order_Cancel_By === "Buyer")) && <p><span>Reason :</span><span className='order-cancel-reason'>{order.Order_Cancel_Reason}</span></p>}
                             </div>}
                             {!order.orderDeliverTime && !order.Order_Cancel_Reason && <button style={{ color: "blue" }} onClick={() => setIsCancelOrder(true)} >Cancel order</button>}
-                            {sellerAuthToken && !order.orderDeliverTime && !order.Order_Cancel_Reason && <button style={{ color: "green" }}>Delivered Order</button>}
+                            {sellerAuthToken && !order.orderDeliverTime && !order.Order_Cancel_Reason && <button style={{ color: "green" }} onClick={handelDeliver}>Delivered Order</button>}
                         </div>
                     </section>
                 </div> : <div className='loading-container'>

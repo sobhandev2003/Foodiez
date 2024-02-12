@@ -136,6 +136,7 @@ export const getCartItem = async (authToken) => {
 //NOTE - Delete Cart item 
 export const deleteCartItem = (authToken, itemId) => async (dispatch) => {
     try {
+        console.log(itemId);
         const response = await fetch(`${baseUrl}/food/user/buyer/cart-item/${itemId}`, {
             method: "DELETE",
             headers: {
@@ -144,6 +145,7 @@ export const deleteCartItem = (authToken, itemId) => async (dispatch) => {
         })
         const data = await response.json();
         if (response.ok) {
+            console.log(data);
             Alert("success", <>{data.message}</>)
             dispatch(fetchLoginBuyerDetails(authToken))
         }

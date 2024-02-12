@@ -96,3 +96,28 @@ export const CancelOrderBySeller = async (authToken, orderId, reason) => {
         console.error(error);
     }
 }
+
+
+//NOTE - update order deliver
+export const updateOrderDelivered=async(authToken,orderId)=>{
+try {
+    const response = await fetch(`${baseUrl}/food/user/seller/order/deliver/${orderId}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": "Bearer " + authToken,
+        },
+    })
+    const data = await response.json()
+    if (response.ok) {
+        Alert("success", <>{data.message}</>)
+        // console.log(data);
+    }
+    else {
+        Alert("error", <>{data.message}</>)
+    }
+
+
+} catch (error) {
+    console.error(error);
+}
+}
