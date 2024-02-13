@@ -11,7 +11,6 @@ export const loginSlice=createSlice({
     reducers:{
         setIsLogin:(state,action)=>{
                 state.isLogin=action.payload;
-                console.log(state.isLogin);
         },
         setLoginAccountDetails:(state,action)=>{
             state.loginAccountDetails=action.payload

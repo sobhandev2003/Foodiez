@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { createSller } from '../fetures/seller';
 import registerPageGif from '../photo/register-page-gif.gif'
 import { registerBuyerAccount } from '../services/Buyer';
+import { setIsLogin } from '../fetures/loginFrtures';
 function Register() {
     window.scrollTo(0, 50)
     const dispatch = useDispatch();
@@ -70,7 +71,7 @@ function Register() {
     useEffect(() => {
         // console.log(createSllerAccout);
         if (createSllerAccout) {
-            navigate('/login')
+     dispatch(setIsLogin(true))
             dispatch(createSller({ success: false }))
         }
     }, [createSllerAccout, dispatch, navigate])

@@ -1,7 +1,8 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Navbar from './component/Navbar';
 import Home from './pages/Home';
 import Footer from './component/Footer';
@@ -14,16 +15,20 @@ import Order from './pages/Order';
 import PlaceOrder from './pages/PlaceOrder';
 import OrderDetails from './pages/OrderDetails';
 import Error from './component/Error';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+
 import Protected from './component/Protected';
 
 
 
 
 function App() {
- 
-
+  const navigate=useNavigate();
+  const isLogin = useSelector(state => state.Login.isLogin);
+  useEffect(() => {
+    if (isLogin) {
+     navigate("/")
+    }
+  }, [isLogin,navigate]);
   return (
     <div className="App">
 

@@ -1,5 +1,5 @@
 import Alert from "../component/Alert";
-import { setLoginAccountDetails } from "../fetures/loginFrtures";
+import {  setLoginAccountDetails } from "../fetures/loginFrtures";
 import { createSller, setSellerOrder } from "../fetures/seller";
 
 import { fetchCurrentSellerCategory } from "./Catagory";
@@ -102,6 +102,7 @@ export const loginSeller = async (sellerData) => {
 //NOTE - fetch current seller details
 
 export const fetchCurrentSeller = (authToken) => async (dispatch) => {
+    console.log("fetchCurrentSeller");
     try {
         const response = await fetch(`${baseUrl}/food/user/seller/current`, {
             method: "GET",
@@ -113,16 +114,24 @@ export const fetchCurrentSeller = (authToken) => async (dispatch) => {
         )
         if (response.ok) {
             const data = await response.json();
-            dispatch(fetchCurrentSellerCategory(data));
-            dispatch(setLoginAccountDetails(data))
+            
+            if(!data.user_role){
+               Alert("error",<>Oops! Something wrong.Re-login your account </>)
+            }
+            else{
+                
+                dispatch(fetchCurrentSellerCategory(data));
+                dispatch(setLoginAccountDetails(data))
+            }
         }
         else {
-            const errordata = response.json()
-            Alert("error", <p>{errordata.massage}</p>)
+            const errorData = response.json()
+            console.log("errorData",errorData);
+            Alert("error", <p>{errorData.massage}</p>)
         }
 
     } catch (error) {
-        console.error(error);
+        console.error("ch",error);
 
     }
 }

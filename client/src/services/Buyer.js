@@ -1,7 +1,7 @@
 import Alert from "../component/Alert";
 import { setAddresses, setOrders } from "../fetures/buyer";
 
-import { setLoginAccountDetails } from "../fetures/loginFrtures";
+import {  setLoginAccountDetails } from "../fetures/loginFrtures";
 import { baseUrl } from "./baseUrl";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 //NOTE - register a new buyer account
@@ -70,7 +70,13 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
         const data = await response.json();
 
         if (response.ok) {
-            dispatch(setLoginAccountDetails(data))
+            if(!data.user_role){
+                Alert("error",<>Oops! Something wrong.Re-login your account </>)
+            }
+            else{
+
+                dispatch(setLoginAccountDetails(data))
+            }
         }
         else {
 
