@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const Seller = require('../models/sellerModel');
 const Category = require('../models/categoryModel');
 const { validateImgType } = require('../validator');
+const { updateSellerRating } = require('./sellerControlers');
 
 //NOTE - Get all item
 //route('/:id/item')
@@ -167,7 +168,7 @@ const updateItem = asyncHandler(async (req, res) => {
 )
 
 //NOTE - update rating
-const updateItemRating =asyncHandler(async({categoryId,itemId,rating})=>{
+const updateItemRating =asyncHandler(async({Seller_Id,categoryId,itemId,rating})=>{
     if(rating<0 || rating>5){
         return {status:422,message:"Rating not valid"}
     }
@@ -190,6 +191,9 @@ const updateItemRating =asyncHandler(async({categoryId,itemId,rating})=>{
         item.numberOfRating=item.numberOfRating+1
     }
     await category.save();
+    console.log(Seller_Id);
+    updateSellerRating({Seller_Id})
+    // console.log("check");
     return {status:200,message:"Rating updated"}
 })
 

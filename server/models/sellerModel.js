@@ -61,6 +61,10 @@ const sellerSchema = mongoose.Schema(
             type:Number,
             default:0
         },
+        numberOfRating:{
+            type:Number,
+            default:0,
+        },
         offer:{
             type:Boolean,
             default:false

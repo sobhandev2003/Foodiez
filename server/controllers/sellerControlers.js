@@ -315,13 +315,13 @@ const getSellerOrder = asyncHandler(async (req, res) => {
     let orders;
     switch (status) {
       case 'pending':
-        orders = await Order.find({ Seller_Id, Delivered:false,Order_Cancel:false });
+        orders = await Order.find({ Seller_Id, Delivered: false, Order_Cancel: false });
         break;
       case 'canceled':
-        orders = await Order.find({ Seller_Id, Order_Cancel:true });
+        orders = await Order.find({ Seller_Id, Order_Cancel: true });
         break;
       case 'delivered':
-        orders = await Order.find({ Seller_Id, Delivered:true });
+        orders = await Order.find({ Seller_Id, Delivered: true });
         break;
       default:
         // If no status is specified, return all orders
@@ -403,7 +403,7 @@ const cancelOrderBySeller = asyncHandler(async (req, res) => {
 
   res.status(200).json({ msg: "Order Cancel", updatedOrder })
 })
-
+//NOTE - Update delivery status
 const updateDeliveryStatus = asyncHandler(async (req, res) => {
   const Seller_Id = req.seller.id;
   const order_Id = req.params.id;
@@ -436,6 +436,28 @@ const updateDeliveryStatus = asyncHandler(async (req, res) => {
 
   res.status(200).json({ message: "Order Delivered" })
 })
+
+//NOTE - Update seller rating
+
+const updateSellerRating = asyncHandler(async ({ Seller_Id }) => {
+  const seller = await Seller.findById(Seller_Id);
+  const categories = await Category.find({ seller_Id: Seller_Id });
+  let totalRating = 0;
+  let numberOfRating = 0;
+  categories.map((category) => {
+    category.item.map((item) => {
+      numberOfRating = numberOfRating + item.numberOfRating;
+      totalRating = totalRating + (item.rating * item.numberOfRating);
+    })
+  })
+  // console.log(totalRating,numberOfRating);
+  const rating = (totalRating / numberOfRating);
+
+  seller.rating = parseFloat(rating.toFixed(1));
+  await seller.save();
+  return;
+}
+)
 module.exports = {
   registerSeller,
   loginSeller,
@@ -448,5 +470,6 @@ module.exports = {
   getSellerOrder,
   getPendingOrder,
   cancelOrderBySeller,
-  updateDeliveryStatus
+  updateDeliveryStatus,
+  updateSellerRating
 }

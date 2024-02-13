@@ -434,8 +434,8 @@ const giveRating = asyncHandler(async (req, res) => {
         },
         { new: true }
     )
-    // console.log(order);
-    const message = updateItemRating({ categoryId: order.Category_Id, itemId: order.Item_Id, rating }).then(({ status, message }) => {
+    // console.log(order.Seller_Id);
+    const message = updateItemRating({Seller_Id:order.Seller_Id, categoryId: order.Category_Id, itemId: order.Item_Id, rating }).then(({ status, message }) => {
         if (status !== 200) {
             res.status(status)
             throw new Error(message)
