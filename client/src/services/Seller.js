@@ -8,7 +8,7 @@ import { baseUrl } from "./baseUrl";
 
 export const fetchSellerById=async(sellerId)=>{
     try {
-        const response=await fetch(`${baseUrl}/food/user/seller/${sellerId}`,{
+        const response=await fetch(`${baseUrl}/food/user/seller/restaurant/${sellerId}`,{
             method:"GET"
         })
 
@@ -155,9 +155,10 @@ export const forgotPassword = async (sellerData, setIsForgotPassword) => {
 
 //NOTE - fetch seller all order item
 
-export const fetchAllOrder=(authToken)=>async(dispatch)=>{
+export const fetchAllOrder=(authToken, status)=>async(dispatch)=>{
+
     try {
-        const response =await fetch(`${baseUrl}/food/user/seller/order`,{
+        const response =await fetch(`${baseUrl}/food/user/seller/order?status=${status}`,{
             method:"GET",
             headers: {
                 'Authorization': 'Bearer ' + authToken,

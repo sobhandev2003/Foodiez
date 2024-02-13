@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const mongoose =require('mongoose')
 const Buyer = require('../models/buyerModel');
 const { validateEmail, validatePhoneNumber, validatePassword, validateImgType, validateCountryName, validateState, validatePostalCode } = require('../validator');
 const bcrypt = require('bcrypt')
@@ -271,6 +272,11 @@ const getOrder = asyncHandler(async (req, res) => {
         throw new Error("Unauthorize")
     }
     const { order_Id } = req.query;
+     // Validate the format of order_Id
+  if (order_Id && !mongoose.isValidObjectId(order_Id)) {
+    res.status(400);
+    throw new Error("Invalid order ID");
+  }
     if (order_Id) {
         // console.log(order_Id);
         const order = await Order.findById(order_Id);
@@ -293,7 +299,24 @@ const getOrder = asyncHandler(async (req, res) => {
         res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime, Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime,Rating })
     }
     else {
-        const orders = await Order.find({ Buyer_Id })
+        // const orders = await Order.find({ Buyer_Id })
+        const { status } = req.query;
+    let orders;
+    switch (status) {
+      case 'pending':
+        orders = await Order.find({ Buyer_Id, Delivered:false,Order_Cancel:false });
+        break;
+      case 'canceled':
+        orders = await Order.find({ Buyer_Id, Order_Cancel:true });
+        break;
+      case 'delivered':
+        orders = await Order.find({ Buyer_Id, Delivered:true });
+        break;
+      default:
+        // If no status is specified, return all orders
+        orders = await Order.find({ Buyer_Id});
+        break;
+    }
         const orderItems = await Promise.all(orders.map(async ({
             _id,
             Seller_Id,

@@ -17,10 +17,10 @@ function Protected({component,path}) {
          if(loginAccountDetails && loginAccountDetails.user_role==="buyer"&& (path==="/place-order"||path==="/cart"||path==="/restaurant/:id")){
             setIsAuthenticated(true)
          }
-    })
+    },[loginAccountDetails,path])
     useEffect(() => {
        handelAuthentication()
-  }, [loginAccountDetails])
+  }, [loginAccountDetails,handelAuthentication])
   return (
     <>
       { isAuthenticated && component}

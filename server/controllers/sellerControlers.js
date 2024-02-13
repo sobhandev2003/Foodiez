@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose')
 const Seller = require('../models/sellerModel');
 const { validateEmail, validatePhoneNumber, validatePassword, validateImgType, wordsValidator } = require('../validator');
 const Category = require('../models/categoryModel');
@@ -8,6 +9,7 @@ const DeliveryAddress = require('../models/deliveryAddressModel');
 const Order = require('../models/orderModel')
 const Buyer = require('../models/buyerModel');
 const DeliveryAddressa = require('../models/deliveryAddressModel')
+
 //NOTE - for register a saller
 // Router.post('/register',)
 const registerSeller = asyncHandler(async (req, res) => {
@@ -97,8 +99,7 @@ const loginSeller = asyncHandler(async (req, res) => {
           ownerName: seller.ownerName,
           restaurantName: seller.restaurantName,
           email: seller.email,
-
-          id: seller.id
+          id: seller._id
         }
       },
       process.env.ACCESS_TOKE_SECRET
@@ -254,24 +255,25 @@ const getAllSeller = asyncHandler(async (req, res) => {
 })
 
 //NOTE - Get a seller by id
-const getSellerById=asyncHandler(async(req,res)=>{
-  const seller_Id=req.params.id;
-  if(!seller_Id){
+const getSellerById = asyncHandler(async (req, res) => {
+  const seller_Id = req.params.id;
+  if (!seller_Id) {
     res.status(403);
     throw new Error("Invalid request")
   }
-const seller=await Seller.findById(seller_Id);
-if(!seller){
-  res.status(404);
-  throw new Error("Not found")
-}
-const {restaurantName,ownerName,address,rating}  =seller
-res.status(200).json({restaurantName,ownerName,address,rating})
+  const seller = await Seller.findById(seller_Id);
+  if (!seller) {
+    res.status(404);
+    throw new Error("Not found")
+  }
+  const { restaurantName, ownerName, address, rating } = seller
+  res.status(200).json({ restaurantName, ownerName, address, rating })
 })
 
 //NOTE - get seller order item
 const getSellerOrder = asyncHandler(async (req, res) => {
   // Buyer_Id
+  // console.log(req.seller);
   const Seller_Id = req.seller.id;
   if (!Seller_Id) {
     res.status(401);
@@ -279,8 +281,13 @@ const getSellerOrder = asyncHandler(async (req, res) => {
   }
 
   const { order_Id } = req.query;
+  // Validate the format of order_Id
+  if (order_Id && !mongoose.isValidObjectId(order_Id)) {
+    res.status(400);
+    throw new Error("Invalid order ID");
+  }
   //NOTE - gate full order details a specific order
-  if (order_Id) {
+  if (order_Id && mongoose.isValidObjectId(order_Id)) {
     // console.log(order_Id);
     const order = await Order.findById(order_Id);
     if (!order) {
@@ -303,7 +310,27 @@ const getSellerOrder = asyncHandler(async (req, res) => {
 
   else {
     //NOTE - gate all order item 
-    const orders = await Order.find({ Seller_Id })
+    // const orders = await Order.find({ Seller_Id })
+    const { status } = req.query;
+    let orders;
+    switch (status) {
+      case 'pending':
+        orders = await Order.find({ Seller_Id, Delivered:false,Order_Cancel:false });
+        break;
+      case 'canceled':
+        orders = await Order.find({ Seller_Id, Order_Cancel:true });
+        break;
+      case 'delivered':
+        orders = await Order.find({ Seller_Id, Delivered:true });
+        break;
+      default:
+        // If no status is specified, return all orders
+        orders = await Order.find({ Seller_Id });
+        break;
+    }
+
+
+
     const orderItems = await Promise.all(orders.map(async ({
       _id,
       Seller_Id,
@@ -331,7 +358,22 @@ const getSellerOrder = asyncHandler(async (req, res) => {
 
 
 })
+//NOTE - gate Number of pending order
+const getPendingOrder = asyncHandler(async (req, res) => {
+  const Seller_Id = req.seller.id;
+  if (!Seller_Id) {
+    res.status(401);
+    throw new Error("Unauthorize")
+  }
+  const orders = await Order.find({ Seller_Id, Delivered: false, Order_Cancel: false });
+  if (!orders) {
+    res.status(404);
+    throw new Error("Not found")
+  }
+  res.status(200).json({ numberOfPendingOrder: orders.length })
+}
 
+)
 //NOTE - cancel seller order item
 const cancelOrderBySeller = asyncHandler(async (req, res) => {
   const Seller_Id = req.seller.id;
@@ -404,6 +446,7 @@ module.exports = {
   getAllSeller,
   getSellerById,
   getSellerOrder,
+  getPendingOrder,
   cancelOrderBySeller,
   updateDeliveryStatus
 }

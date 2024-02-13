@@ -11,8 +11,11 @@ import { isValidMongoObjectId } from '../component/inputValidator';
 import Error from '../component/Error';
 import { Rating } from '@mui/material';
 import Alert from '../component/Alert';
+import { useDispatch } from 'react-redux';
 function OrderDetails() {
+
     window.scrollTo(0, 0)
+    const dispatch=useDispatch()
     const location = useLocation();
     const foundOrderDivRef = useRef(null);
     const notFoundOrderDivRef = useRef(null);
@@ -30,6 +33,7 @@ function OrderDetails() {
     //NOTE - get orderDetails from DB
 
     const getOrderDetailsByOrderId = async () => {
+        
         let data;
         if (buyerAuthToken) {
             data = await fetchOrderDetailsByOrderId(buyerAuthToken, orderId);
@@ -53,7 +57,7 @@ function OrderDetails() {
     }
     //NOTE - Handel order deliver
     const handelDeliver = async () => {
-        await updateOrderDelivered(sellerAuthToken, orderId);
+        await updateOrderDelivered(sellerAuthToken, orderId,dispatch);
         getOrderDetailsByOrderId()
     }
     //NOTE - handel cancel order
@@ -64,7 +68,7 @@ function OrderDetails() {
             getOrderDetailsByOrderId()
         }
         else if (sellerAuthToken) {
-            await CancelOrderBySeller(sellerAuthToken, orderId, orderCancelReason);
+            await CancelOrderBySeller(sellerAuthToken, orderId, orderCancelReason,dispatch);
             getOrderDetailsByOrderId();
         }
 

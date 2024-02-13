@@ -22,7 +22,7 @@ const jwt=require('jsonwebtoken');
         }
         else{
             res.status(401);
-            throw new Error("Seller details no valid");
+            throw new Error("Seller details not valid");
         }
     }
  )

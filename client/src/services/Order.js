@@ -1,5 +1,6 @@
 import { baseUrl } from "./baseUrl";
 import Alert from "../component/Alert";
+import { setNumberOfPendingOrder } from "../fetures/seller";
 export const fetchOrderDetailsByOrderId = async (authToken, orderId) => {
 
     try {
@@ -80,6 +81,27 @@ export const giveRatingDeliveredItem = async(authToken, orderId, feedback,setIsF
 
 }
 //SECTION -  Seller
+//note fetch number of pending order
+export const fetchNumberOfPendingOrder=(authToken)=>async(dispatch)=>{
+    try {
+        const response = await fetch(`${baseUrl}/food/user/seller/order/pending-number`, {
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + authToken,
+            }
+        })
+        const data = await response.json();
+        if(response.ok){
+     
+            dispatch(setNumberOfPendingOrder(data.numberOfPendingOrder))
+        }
+        else{
+            console.error(data.message);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 //NOTE - fetch seller all order
 export const fetchSellerOrderDetailsByOrderId = async (authToken, orderId) => {
     // console.log(authToken,orderId);
@@ -106,7 +128,7 @@ export const fetchSellerOrderDetailsByOrderId = async (authToken, orderId) => {
     }
 }
 //NOTE - cancel order by Seller
-export const CancelOrderBySeller = async (authToken, orderId, reason) => {
+export const CancelOrderBySeller = async (authToken, orderId, reason,dispatch) => {
     try {
         const response = await fetch(`${baseUrl}/food/user/seller/order/cancel/${orderId}`, {
             method: "PUT",
@@ -118,7 +140,8 @@ export const CancelOrderBySeller = async (authToken, orderId, reason) => {
         })
         const data = await response.json()
         if (response.ok) {
-            Alert("success", <>{data.message}</>)
+            Alert("success", <>{data.message||"Order Cancel"}</>)
+            dispatch(fetchNumberOfPendingOrder(authToken))
             // console.log(data);
         }
         else {
@@ -132,7 +155,7 @@ export const CancelOrderBySeller = async (authToken, orderId, reason) => {
 
 
 //NOTE - update order deliver
-export const updateOrderDelivered=async(authToken,orderId)=>{
+export const updateOrderDelivered=async(authToken,orderId,dispatch)=>{
 try {
     const response = await fetch(`${baseUrl}/food/user/seller/order/deliver/${orderId}`, {
         method: "PUT",
@@ -143,6 +166,7 @@ try {
     const data = await response.json()
     if (response.ok) {
         Alert("success", <>{data.message}</>)
+        dispatch(fetchNumberOfPendingOrder(authToken))
         // console.log(data);
     }
     else {

@@ -17,7 +17,8 @@ const initialState = {
   createSllerAccout:false,
   currentSellerCategory:null,
   orders:null,
-  numberOfOrders:0
+  numberOfOrders:0,
+  numberOfPendingOrders:0
   
 
 };
@@ -37,6 +38,9 @@ export const SellerSlice = createSlice({
     currentSellerCategory:(state,action)=>{
       state.currentSellerCategory=action.payload
     },
+    setNumberOfPendingOrder:(state,action)=>{
+      state.numberOfPendingOrders=action.payload
+    },
     setSellerOrder:(state,action)=>{
       state.orders=action.payload
       state.numberOfOrders=action.payload.length
@@ -47,6 +51,6 @@ export const SellerSlice = createSlice({
   }
 })
 
-export const {setSeller,createSller,currentSellerCategory,setSellerOrder}=SellerSlice.actions;
+export const {setSeller,createSller,currentSellerCategory,setNumberOfPendingOrder,setSellerOrder}=SellerSlice.actions;
 
 export default SellerSlice.reducer;

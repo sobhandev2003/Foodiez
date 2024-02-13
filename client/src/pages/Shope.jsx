@@ -31,6 +31,7 @@ function Shope() {
 
   useEffect(() => {
     setCatagorys(allCatagory);
+    console.log(allCatagory);
   }, [allCatagory])
 
   useEffect(() => {

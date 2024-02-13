@@ -236,9 +236,10 @@ export const savePlaceOrderInDB = (authToken, orderDetails, navigate) => async (
 }
 
 //NOTE - get buyer all order
-export const fetchOrderBuyerDetails = (authToken) => async (dispatch) => {
+export const fetchAllBuyerOrders = (authToken,status) => async (dispatch) => {
+    console.log(status);
     try {
-        const response = await fetch(`${baseUrl}/food/user/buyer/order`, {
+        const response = await fetch(`${baseUrl}/food/user/buyer/order?status=${status}`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + authToken,

@@ -131,11 +131,17 @@
 }
 
 .menu-food .menu-item .right-div {
+    display: flex;
+    flex-direction: column;
     width: 65%;
     padding-left: 2px;
     padding-top: 10px;
-
+    gap: 5px;
     /* border: 2px solid rebeccapurple; */
+}
+.menu-food .menu-item .right-div p{
+    display: flex;
+    align-items: center;
 }
 
 .shope-rating {
