@@ -12,7 +12,8 @@ const { registerBuyerAccount,
     getCancelOrder, 
     deleteCartItem,
     gateDeliveryAddress,
-    giveRating} = require('../controllers/buyerControlers');
+    giveRating,
+    forgetPassword} = require('../controllers/buyerControlers');
 
 const { upload } = require('../config/conectDb');
 const validateBuyerToken = require('../middilware/validateBuyerJwtToken');
@@ -29,7 +30,8 @@ Router.route("/login").post(loginBuyerAccount);
 
 //NOTE - gate details loge in buyer account
 Router.route("/current").get(validateBuyerToken, currentBuyer);
-
+//NOTE - forget account password
+Router.route("/forget-password").put(forgetPassword)
 //NOTE - upload profile photo log in buyer account
 Router.route("/upload-profile-photo").post(validateBuyerToken, upload.single('photo'), uploadProfilePhoto)
 

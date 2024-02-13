@@ -5,7 +5,7 @@ import { validateEmail, validatePassword } from './inputValidator';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginSeller, fetchCurrentSeller, forgotPassword } from '../services/Seller';
-import { fetchLoginBuyerDetails, loginBuyerAccount } from '../services/Buyer';
+import { fetchLoginBuyerDetails, forgetBuyerAccountPassword, loginBuyerAccount } from '../services/Buyer';
 import { setIsLogin } from '../fetures/loginFrtures';
 function Login() {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ function Login() {
       }
       else {
         if (isForgotPassword) {
-          console.log("forgot password");
+         forgetBuyerAccountPassword(email,password,setIsForgotPassword)
         }
         else{
 
@@ -80,8 +80,8 @@ function Login() {
   }, [navigate])
   return (
     <>
-      {!isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px front-size-2rem height-40'>Login Account</h2>}
-      {isForgotPassword && <h2 className='overfllow-hiden letter-spacing-5px reset-password-h2 front-size-2rem'>Reset Account Password</h2>}
+      {!isForgotPassword && <h2 className='login-h2'>Login Account</h2>}
+      {isForgotPassword && <h2 className='reset-password-h2'>Reset Account Password</h2>}
       <form className='model-element login-form' onSubmit={handleSubmit}>
         <div className="wrapper">
           <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} defaultChecked />

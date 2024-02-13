@@ -10,7 +10,9 @@ import registerPageGif from '../photo/register-page-gif.gif'
 import { registerBuyerAccount } from '../services/Buyer';
 import { setIsLogin } from '../fetures/loginFrtures';
 function Register() {
-    window.scrollTo(0, 50)
+    window.onload = ()=> {
+        window.scrollTo(0, 50);
+    };
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const createSllerAccout = useSelector(state => state.Seller.createSllerAccout);
@@ -26,11 +28,13 @@ function Register() {
         password: "",
     });
 
+
     const handleInputChange = (e) => {
+        e.preventDefault();
         // console.log(e.target);
         // console.log(name);
         const { name, value, type, files } = e.target;
-       
+
         const inputValue = type === "file" ? files[0] : (type === "text" ? value.charAt(0).toUpperCase() + value.slice(1) : value);
         setFormData((prevData) => ({
             ...prevData,
@@ -63,7 +67,7 @@ function Register() {
             }
             else {
                 console.log("ch");
-                registerBuyerAccount({name,email,mobileNumber:mobile,password},navigate)
+                registerBuyerAccount({ name, email, mobileNumber: mobile, password }, navigate)
             }
 
         }
@@ -71,49 +75,53 @@ function Register() {
     useEffect(() => {
         // console.log(createSllerAccout);
         if (createSllerAccout) {
-     dispatch(setIsLogin(true))
+            dispatch(setIsLogin(true))
             dispatch(createSller({ success: false }))
         }
     }, [createSllerAccout, dispatch, navigate])
+
+    useEffect(()=>{
+        window.scrollTo(0, 50)
+    },[])
     return (
         <div className='register-page'>
             <div className='gif-div'>
-                <img src={registerPageGif} alt='GIF'/>
+                <img src={registerPageGif} alt='GIF' />
             </div>
             <div>
                 <h3>Create a new Account</h3>
-            <form className="account-register-form" onSubmit={handleSubmit}>
-                <div className="wrapper">
-                    <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} defaultChecked />
-                    <input type="radio" name="user_role" value="seller" id="option-2" onChange={handleInputChange} />
-                    <label htmlFor="option-1" className="option option-1">
-                        <div className="dot"></div>
-                        <span>Buyer</span>
-                    </label>
-                    <label htmlFor="option-2" className="option option-2">
-                        <div className="dot"></div>
-                        <span>Seller</span>
-                    </label>
-                </div>
-                {formData.user_role === "seller" ? <div>
-                    <input type="text" name="restaurantName" placeholder="Restaurant name" onChange={handleInputChange} value={formData.restaurantName} required />
-                    <input type="text" name="ownerName" placeholder="Owner name" onChange={handleInputChange} value={formData.ownerName} required />
-                    <input type="text" name="address" placeholder="Address" onChange={handleInputChange} value={formData.address} required />
-                    <input type="email"  name="email"  placeholder="Email" onChange={handleInputChange} value={formData.email} className={!validateEmail(formData.email)?'invalid-input':'valid-input'} required />
-                    <input type="tel" name="mobile" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile" onChange={handleInputChange} value={formData.mobile} className={!validatePhoneNumber(formData.mobile)?'invalid-input':'valid-input'} required />
-                    <input type="file" name="photo" accept="image/png, image/jpeg" onChange={handleInputChange} required />
-                    <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} className={!validatePassword(formData.password)?'invalid-input':'valid-input'} required />
-                </div> :
-                    <div>
-                        <input type="text" name="name" placeholder="enter your name name" onChange={handleInputChange} value={formData.name} required />
-                    
-                        <input type="email" name="email" placeholder="Email" onChange={handleInputChange} value={formData.email} className={!validateEmail(formData.email)?'invalid-input':'valid-input'} required />
-                        <input type="tel" name="mobile" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile" onChange={handleInputChange} value={formData.mobile} className={!validatePhoneNumber(formData.mobile)?'invalid-input':'valid-input'} required />
-                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} className={!validatePassword(formData.password)?'invalid-input':'valid-input'} required />
-                    
-                    </div>}
-                <button >Submit</button>
-            </form>
+                <form className="account-register-form" onSubmit={handleSubmit}>
+                    <div className="wrapper">
+                        <input type="radio" name="user_role" value="buyer" id="option-1" onChange={handleInputChange} defaultChecked />
+                        <input type="radio" name="user_role" value="seller" id="option-2" onChange={handleInputChange} />
+                        <label htmlFor="option-1" className="option option-1" >
+                            <div className="dot"></div>
+                            <span>Buyer</span>
+                        </label>
+                        <label htmlFor="option-2" className="option option-2">
+                            <div className="dot"></div>
+                            <span>Seller</span>
+                        </label>
+                    </div>
+                    {formData.user_role === "seller" ? <div>
+                        <input type="text" name="restaurantName" placeholder="Restaurant name" onChange={handleInputChange} value={formData.restaurantName} required />
+                        <input type="text" name="ownerName" placeholder="Owner name" onChange={handleInputChange} value={formData.ownerName} required />
+                        <input type="text" name="address" placeholder="Address" onChange={handleInputChange} value={formData.address} required />
+                        <input type="email" name="email" placeholder="Email" onChange={handleInputChange} value={formData.email} className={!validateEmail(formData.email) ? 'invalid-input' : 'valid-input'} required />
+                        <input type="tel" name="mobile" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile" onChange={handleInputChange} value={formData.mobile} className={!validatePhoneNumber(formData.mobile) ? 'invalid-input' : 'valid-input'} required />
+                        <input type="file" name="photo" accept="image/png, image/jpeg" onChange={handleInputChange} required />
+                        <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} className={!validatePassword(formData.password) ? 'invalid-input' : 'valid-input'} required />
+                    </div> :
+                        <div>
+                            <input type="text" name="name" placeholder="enter your name name" onChange={handleInputChange} value={formData.name} required />
+
+                            <input type="email" name="email" placeholder="Email" onChange={handleInputChange} value={formData.email} className={!validateEmail(formData.email) ? 'invalid-input' : 'valid-input'} required />
+                            <input type="tel" name="mobile" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile" onChange={handleInputChange} value={formData.mobile} className={!validatePhoneNumber(formData.mobile) ? 'invalid-input' : 'valid-input'} required />
+                            <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} className={!validatePassword(formData.password) ? 'invalid-input' : 'valid-input'} required />
+
+                        </div>}
+                    <button >Submit</button>
+                </form>
             </div>
         </div>
     )

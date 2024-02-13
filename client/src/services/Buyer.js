@@ -88,6 +88,31 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
         console.error(error);
     }
 }
+export const forgetBuyerAccountPassword=async(email,password,setIsForgotPassword)=>{
+    try {
+     
+        const response = await fetch(`${baseUrl}/food/user/buyer//forget-password`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email,password})
+        })
+        const data = await response.json();
+        
+        if (response.ok) {
+            Alert("success", <p>{data.massage}</p>)
+            setIsForgotPassword(false)
+
+        }
+        else {
+            Alert("error", <p>{data.message}</p>);
+
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
 //NOTE - Add Cart Items
 export const addCartItems = (cartItemDetails, authToken) => async (dispatch) => {
 

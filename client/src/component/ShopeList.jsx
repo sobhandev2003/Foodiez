@@ -2,17 +2,21 @@ import React from 'react';
 import '../css/ShopeList.css';
 import { useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCatagory } from '../services/Catagory';
+import { setIsLogin } from '../fetures/loginFrtures';
 
 function ShopeList(props) {
   const { id, restaurantName, img, imgType, rating,address } = props.seller;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const loginAccountDetails=useSelector(state=>state.Login.loginAccountDetails);
   //NOTE - navigate product page
   const navigateSallerProductPage = async () => {
     dispatch(fetchCatagory(id));
+    if(!loginAccountDetails){
+      dispatch(setIsLogin(true))
+    }
     navigate(`/restaurant/${id}`)
   }
 

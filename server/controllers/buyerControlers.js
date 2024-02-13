@@ -75,6 +75,27 @@ const currentBuyer = asyncHandler(async (req, res) => {
     res.status(200).json({ user_role, id, name, email, mobileNumber, profile_photo, profile_photo_type, cartItem })
 })
 
+//NOTE - Forget Buyer account password
+const forgetPassword=asyncHandler(async(req,res)=>{
+    const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(403);
+    throw new Error("email and password not valid");
+  }
+  const passwordWithSalt = password + process.env.PASSWORD_SALT;
+  const buyer = await Buyer.findOne({ email });
+  if (!buyer) {
+    res.status(403);
+    throw new Error("email  not valid");
+  }
+  // //console.log(seller);
+  const hashPassword = await bcrypt.hash(passwordWithSalt, 10)
+  buyer.password = hashPassword;
+  await buyer.save();
+  res.status(200).json({ massage: "password updated" })
+})
+
+
 //NOTE - upload profile photo
 // route "/upload-profile-photo
 const uploadProfilePhoto = asyncHandler(async (req, res) => {
@@ -450,6 +471,7 @@ module.exports = {
     registerBuyerAccount,
     loginBuyerAccount,
     currentBuyer,
+    forgetPassword,
     uploadProfilePhoto,
     addCartItem,
     getCartItem,

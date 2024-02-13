@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 function OrderDetails() {
 
     window.scrollTo(0, 0)
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const location = useLocation();
     const foundOrderDivRef = useRef(null);
     const notFoundOrderDivRef = useRef(null);
@@ -28,12 +28,12 @@ function OrderDetails() {
     const [deliveryAddress, setDeliveryAddress] = useState(null)
     const [isCancelOrder, setIsCancelOrder] = useState(false)
     const [orderCancelReason, setOrderCancelReason] = useState(null);
-    const [isFeedbackModelDisplay,setIsFeedbackModelDisplay]=useState(false);
-    const [feedbackData,setFeedbackData]=useState({rating:-1,feedback:""})
+    const [isFeedbackModelDisplay, setIsFeedbackModelDisplay] = useState(false);
+    const [feedbackData, setFeedbackData] = useState({ rating: -1, feedback: "" })
     //NOTE - get orderDetails from DB
 
     const getOrderDetailsByOrderId = async () => {
-        
+
         let data;
         if (buyerAuthToken) {
             data = await fetchOrderDetailsByOrderId(buyerAuthToken, orderId);
@@ -57,7 +57,7 @@ function OrderDetails() {
     }
     //NOTE - Handel order deliver
     const handelDeliver = async () => {
-        await updateOrderDelivered(sellerAuthToken, orderId,dispatch);
+        await updateOrderDelivered(sellerAuthToken, orderId, dispatch);
         getOrderDetailsByOrderId()
     }
     //NOTE - handel cancel order
@@ -68,19 +68,23 @@ function OrderDetails() {
             getOrderDetailsByOrderId()
         }
         else if (sellerAuthToken) {
-            await CancelOrderBySeller(sellerAuthToken, orderId, orderCancelReason,dispatch);
+            await CancelOrderBySeller(sellerAuthToken, orderId, orderCancelReason, dispatch);
             getOrderDetailsByOrderId();
         }
 
         setIsCancelOrder(false)
     }
-    const handelFeedback=(e)=>{
+    const handelFeedback = async (e) => {
         e.preventDefault()
-        if(feedbackData.rating===-1){
-            Alert("info",<>rating given mandatory</>)
+        if (feedbackData.rating === -1) {
+            Alert("info", <>rating given mandatory</>)
         }
-        else{
-            giveRatingDeliveredItem(buyerAuthToken,orderId,feedbackData,setIsFeedbackModelDisplay)
+        else {
+            const response = await giveRatingDeliveredItem(buyerAuthToken, orderId, feedbackData, setIsFeedbackModelDisplay);
+            if (response) {
+                setIsFeedbackModelDisplay(false)
+                getOrderDetailsByOrderId()
+            }
         }
     }
     //NOTE - set order cancel reason 
@@ -109,23 +113,23 @@ function OrderDetails() {
             </div>
         </Model>
     )
-//NOTE - Pop up model for feedback
-const feedbackTemplate=(
-    <Model>
-    <CloseIcon className='cancel-model' onClick={() => { setIsFeedbackModelDisplay(false) }} />
-   <form className='feedback-Model model-element'  onSubmit={handelFeedback}>
-    <Rating name="half-rating" defaultValue={0} precision={0.5} onChange={handleRatingChange} aria-required />
-    <textarea rows="10"  placeholder='Give your feedback' value={feedbackData.feedback} onChange={handleFeedbackChange}></textarea>
-    <button type='submit' >Submit</button>
-    </form>
-</Model>
-)
+    //NOTE - Pop up model for feedback
+    const feedbackTemplate = (
+        <Model>
+            <CloseIcon className='cancel-model' onClick={() => { setIsFeedbackModelDisplay(false) }} />
+            <form className='feedback-Model model-element' onSubmit={handelFeedback}>
+                <Rating name="half-rating" defaultValue={0} precision={0.5} onChange={handleRatingChange} aria-required />
+                <textarea rows="10" placeholder='Give your feedback' value={feedbackData.feedback} onChange={handleFeedbackChange}></textarea>
+                <button type='submit' >Submit</button>
+            </form>
+        </Model>
+    )
 
     useEffect(() => {
         // console.log(isValidMongoObjectId(orderId));
         const isValidOrderId = isValidMongoObjectId(orderId);
         isValidOrderId && getOrderDetailsByOrderId()
-        
+
         //TODO - if orderId on valid then display something wrong
         if (!isValidOrderId) {
             if (foundOrderDivRef && notFoundOrderDivRef) {
@@ -162,23 +166,23 @@ const feedbackTemplate=(
                             <div>
                                 {/*NOTE - display order time */}
                                 <p><CircleIcon style={{ color: "orange", fontSize: "1rem" }} /><span>Order confirmed on </span><span>{order.orderTime}</span></p>
-                          
+
                                 {/*NOTE - Display delivery time and rating button */}
                                 {order.orderDeliverTime && <div className='feedback-div'>
                                     <p><CircleIcon style={{ color: "green", fontSize: "1rem" }} /><span>Order delivered on </span><span>{order.orderDeliverTime}</span></p>
-                                    {buyerAuthToken && order.Rating <0 && <button onClick={()=>setIsFeedbackModelDisplay(true)}><MdStarRate />Rating & Feedback</button>}
+                                    {buyerAuthToken && order.Rating < 0 && <button onClick={() => setIsFeedbackModelDisplay(true)}><MdStarRate />Rating & Feedback</button>}
                                 </div>}
-                             
+
                                 {/*NOTE - Display Cancel time and reason */}
                                 {order.orderCancelTime && <div className='order-cancel-detail'>
                                     <p><CircleIcon style={{ color: "red", fontSize: "1rem" }} /><span>Order cancel on </span><span>{order.orderCancelTime}</span></p>
                                     {((buyerAuthToken && order.Order_Cancel_By === "Seller") || (sellerAuthToken && order.Order_Cancel_By === "Buyer")) && <p><span>Reason :</span><span className='order-cancel-reason'>{order.Order_Cancel_Reason}</span></p>}
                                 </div>}
-                              
+
                                 {/*NOTE - Display cancel and delivered status chang  button */}
                                 {!order.orderDeliverTime && !order.Order_Cancel_Reason && <button className='cancel-btn' style={{ color: "blue" }} onClick={() => setIsCancelOrder(true)} >Cancel order</button>}
                                 {sellerAuthToken && !order.orderDeliverTime && !order.Order_Cancel_Reason && <button style={{ color: "green" }} onClick={handelDeliver}>Delivered Order</button>}
-                            
+
                             </div>
                         </section>
                     </div> : <div className='loading-container'>

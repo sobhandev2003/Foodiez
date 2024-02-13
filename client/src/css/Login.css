@@ -31,3 +31,21 @@
     height: 30px;
     overflow: hidden;
   }
+  .login-h2,
+  .reset-password-h2{
+    overflow: hidden;
+    letter-spacing: 3px;
+    font-size: 1.6rem;
+    height: 40px;
+  }
+  @media screen and (max-width:450px) {
+    .reset-password-h2{
+      font-size: 1.2rem;
+    }
+  }
+  @media screen and (max-width:350px){
+    .reset-password-h2{
+      padding-top: 20px;
+      font-size: 1.2rem;
+    }
+  }

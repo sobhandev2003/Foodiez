@@ -81,18 +81,33 @@
 @media screen and (max-width:1000px){
     .register-page{
         flex-direction: column;
+        padding-bottom: 30px;
     }
     .register-page .gif-div{
         width: 80%;
-        /* height: 80%; */
+       
     }
-   
+    .register-page div:nth-child(2){
+        width: 80%;
+       align-items: center;
+    }
     .register-page .account-register-form{
         width: 60%;
     }
 }
-
+@media screen and (max-width:800px){
+    .register-page .account-register-form{
+        width: 70%;
+    }
+}
 @media screen and (max-width:580px){
+    .register-page .gif-div{
+        width: 90%;
+       
+    }
+    .register-page div:nth-child(2){
+        width: 90%;
+    }
     .register-page .account-register-form{
         width: 80%;
     }

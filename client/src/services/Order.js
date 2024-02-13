@@ -51,7 +51,7 @@ export const CancelOrder = async (authToken, orderId, reason) => {
 
 }
 //NOTE - Give rating order Item
-export const giveRatingDeliveredItem = async(authToken, orderId, feedback,setIsFeedbackModelDisplay) => {
+export const giveRatingDeliveredItem = async(authToken, orderId, feedback) => {
     if (feedback.rating < 0 || feedback.rating > 5) {
         Alert("warning", <>rating must be between <b>{"0 to 5"}</b> </>)
     }
@@ -68,18 +68,22 @@ export const giveRatingDeliveredItem = async(authToken, orderId, feedback,setIsF
             const data=await response.json();
             if(response.ok){
                 Alert("success",<>{data.message}</>)
-                setIsFeedbackModelDisplay(false)
+                return true;
             }
             else{
                 console.log(data);
-                Alert("error",<>{data.message}</>) 
+                Alert("error",<>{data.message}</>)
+                return false 
             }
         } catch (error) {
             console.error(error);
+            return false
         }
     }
 
 }
+
+
 //SECTION -  Seller
 //note fetch number of pending order
 export const fetchNumberOfPendingOrder=(authToken)=>async(dispatch)=>{

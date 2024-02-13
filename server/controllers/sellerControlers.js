@@ -439,21 +439,16 @@ const updateDeliveryStatus = asyncHandler(async (req, res) => {
 
 //NOTE - Update seller rating
 
-const updateSellerRating = asyncHandler(async ({ Seller_Id }) => {
+const updateSellerRating = asyncHandler(async ({ Seller_Id ,rating}) => {
   const seller = await Seller.findById(Seller_Id);
-  const categories = await Category.find({ seller_Id: Seller_Id });
-  let totalRating = 0;
-  let numberOfRating = 0;
-  categories.map((category) => {
-    category.item.map((item) => {
-      numberOfRating = numberOfRating + item.numberOfRating;
-      totalRating = totalRating + (item.rating * item.numberOfRating);
-    })
-  })
-  // console.log(totalRating,numberOfRating);
-  const rating = (totalRating / numberOfRating);
+  
+  let totalRating = (seller.rating*seller.numberOfRating)+rating;
+  let numberOfRating = seller.numberOfRating+1;
+  
+  seller.rating = parseFloat((totalRating / numberOfRating).toFixed(1));
 
-  seller.rating = parseFloat(rating.toFixed(1));
+  seller.numberOfRating=numberOfRating;
+
   await seller.save();
   return;
 }

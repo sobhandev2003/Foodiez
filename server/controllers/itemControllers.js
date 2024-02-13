@@ -191,8 +191,8 @@ const updateItemRating =asyncHandler(async({Seller_Id,categoryId,itemId,rating})
         item.numberOfRating=item.numberOfRating+1
     }
     await category.save();
-    console.log(Seller_Id);
-    updateSellerRating({Seller_Id})
+    // console.log(Seller_Id);
+    updateSellerRating({Seller_Id,rating})
     // console.log("check");
     return {status:200,message:"Rating updated"}
 })
