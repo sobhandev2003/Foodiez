@@ -175,8 +175,7 @@ export const fetchAllOrder=(authToken, status)=>async(dispatch)=>{
         })
         const data=await response.json();
         if(response.ok){
-            
-            dispatch(setSellerOrder(data))
+                dispatch(setSellerOrder(data))            
         }
         else{
             Alert("error",<>{data.message}</>)

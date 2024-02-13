@@ -23,8 +23,9 @@ function Order() {
    buyerAuthToken && dispatch(fetchAllBuyerOrders(buyerAuthToken,orderStatus))
   }, [dispatch,sellerAuthToken,buyerAuthToken,orderStatus])
 
-  // useEffect(() => {
-  // }, [orders])
+  useEffect(() => {
+    console.log(orders);
+  }, [orders])
 
   useEffect(() => {
     setLoginAccount(loginAccountDetails)
@@ -43,7 +44,8 @@ function Order() {
             </section>
             {
               <section>{
-                orders ? <div className='order-container'>
+               orders ? 
+                <div className='order-container'>
                   {numberOfOrders > 0 ?
                     <>
                       {

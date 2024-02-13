@@ -132,6 +132,7 @@ function EditCategory() {
     }, [])
 
     useEffect(() => {
+        // console.log(Items);
         setItems(Items);
     }, [Items])
 
@@ -143,7 +144,7 @@ function EditCategory() {
             <div className='item-div'>
                 {
                     items? <> {items.length!==0? <> {items.map((item) => {
-                        const { name, description, price, photo, photoType, rating } = item;
+                        const { name, description, price, photo, photoType, rating,numberOfRating} = item;
                         // console.log(item._id);
                         return <div key={item._id} className='shope-list-item'>
                             <Fab aria-label="edit" className='edit-item' onClick={() => { setEditItem(item) }}>
@@ -155,7 +156,7 @@ function EditCategory() {
                                 <h2 className='shope-name overflow-hidden'>{name} </h2>
                                 <h3>{price}</h3>
                                 <div className='ratting-div overflow-hidden'>
-                                    <p ><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></p>
+                                    <p className='display-rating'><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /><span>{`(${numberOfRating})`}</span></p>
                                 </div>
                                 <p className='food overflow-hidden'>{description}</p>
 

@@ -139,10 +139,7 @@
     gap: 5px;
     /* border: 2px solid rebeccapurple; */
 }
-.menu-food .menu-item .right-div p{
-    display: flex;
-    align-items: center;
-}
+
 
 .shope-rating {
     display: flex;

@@ -1,7 +1,7 @@
 import Alert from "../component/Alert";
 import { setAddresses, setOrders } from "../fetures/buyer";
 
-import {  setLoginAccountDetails } from "../fetures/loginFrtures";
+import { setLoginAccountDetails } from "../fetures/loginFrtures";
 import { baseUrl } from "./baseUrl";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 //NOTE - register a new buyer account
@@ -70,10 +70,10 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
         const data = await response.json();
 
         if (response.ok) {
-            if(!data.user_role){
-                Alert("error",<>Oops! Something wrong.Re-login your account </>)
+            if (!data.user_role) {
+                Alert("error", <>Oops! Something wrong.Re-login your account </>)
             }
-            else{
+            else {
 
                 dispatch(setLoginAccountDetails(data))
             }
@@ -88,18 +88,18 @@ export const fetchLoginBuyerDetails = (authToken) => async (dispatch) => {
         console.error(error);
     }
 }
-export const forgetBuyerAccountPassword=async(email,password,setIsForgotPassword)=>{
+export const forgetBuyerAccountPassword = async (email, password, setIsForgotPassword) => {
     try {
-     
+
         const response = await fetch(`${baseUrl}/food/user/buyer//forget-password`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({email,password})
+            body: JSON.stringify({ email, password })
         })
         const data = await response.json();
-        
+
         if (response.ok) {
             Alert("success", <p>{data.massage}</p>)
             setIsForgotPassword(false)
@@ -267,7 +267,7 @@ export const savePlaceOrderInDB = (authToken, orderDetails, navigate) => async (
 }
 
 //NOTE - get buyer all order
-export const fetchAllBuyerOrders = (authToken,status) => async (dispatch) => {
+export const fetchAllBuyerOrders = (authToken, status) => async (dispatch) => {
     console.log(status);
     try {
         const response = await fetch(`${baseUrl}/food/user/buyer/order?status=${status}`, {
@@ -278,8 +278,10 @@ export const fetchAllBuyerOrders = (authToken,status) => async (dispatch) => {
         })
         const data = await response.json();
         if (response.ok) {
-            // console.log(data);
-            dispatch(setOrders(data))
+
+                dispatch(setOrders(data))
+          
+            
         }
         else {
             console.error(data.message);

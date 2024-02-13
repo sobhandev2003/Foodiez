@@ -28,7 +28,9 @@ Router.get('/current', validateSellerToken, currentSeller)
 Router.delete('/delete', validateSellerToken, deletetSeller)
 //NOTE - Get Order 
 Router.get('/order', validateSellerToken, getSellerOrder)
+
 Router.route("/order/cancel/:id").put(validateSellerToken, cancelOrderBySeller);
+
 Router.route("/order/deliver/:id").put(validateSellerToken,updateDeliveryStatus)
 Router.route("/order/pending-number").get(validateSellerToken,getPendingOrder)
 //NOTE - get all seller 

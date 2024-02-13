@@ -15,7 +15,6 @@ export const buyerSlice=createSlice({
             state.addresses=action.payload
         },
         setOrders:(state,action)=>{
-            // console.log(action.payload);
             state.orders=action.payload
             state.numberOfOrders=action.payload.length;
             // console.log(state.numberOfOrders);

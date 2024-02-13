@@ -55,7 +55,7 @@ export const MenuItem = (props) => {
       </div>
       <div className='right-div'>
         <h2 >{name}</h2>
-        <p ><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /><span>{`(${numberOfRating})`}</span></p>
+        <p className='display-rating'><Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /><span>{`(${numberOfRating})`}</span></p>
         <h4 ><strong>&#8377; </strong>{price}</h4>
         <p >{description}</p>
       </div>
