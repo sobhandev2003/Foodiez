@@ -104,17 +104,16 @@ function Register() {
                         </label>
                     </div>
                     {formData.user_role === "seller" ? <div>
-                        <input type="text" name="restaurantName" placeholder="Restaurant name" onChange={handleInputChange} value={formData.restaurantName} required />
-                        <input type="text" name="ownerName" placeholder="Owner name" onChange={handleInputChange} value={formData.ownerName} required />
-                        <input type="text" name="address" placeholder="Address" onChange={handleInputChange} value={formData.address} required />
+                        <input type="text" name="restaurantName" minLength="2" maxLength="30" placeholder="Restaurant name" onChange={handleInputChange} value={formData.restaurantName} required />
+                        <input type="text" name="ownerName" minLength="2" maxLength="30" placeholder="Owner name" onChange={handleInputChange} value={formData.ownerName} required />
+                        <input type="text" name="address" placeholder="Address" minLength="2" maxLength="50" onChange={handleInputChange} value={formData.address} required />
                         <input type="email" name="email" placeholder="Email" onChange={handleInputChange} value={formData.email} className={!validateEmail(formData.email) ? 'invalid-input' : 'valid-input'} required />
                         <input type="tel" name="mobile" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile" onChange={handleInputChange} value={formData.mobile} className={!validatePhoneNumber(formData.mobile) ? 'invalid-input' : 'valid-input'} required />
                         <input type="file" name="photo" accept="image/png, image/jpeg" onChange={handleInputChange} required />
                         <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} className={!validatePassword(formData.password) ? 'invalid-input' : 'valid-input'} required />
                     </div> :
                         <div>
-                            <input type="text" name="name" placeholder="enter your name name" onChange={handleInputChange} value={formData.name} required />
-
+                            <input type="text" name="name" minLength="2" maxLength="30" placeholder="enter your name name" onChange={handleInputChange} value={formData.name} required />
                             <input type="email" name="email" placeholder="Email" onChange={handleInputChange} value={formData.email} className={!validateEmail(formData.email) ? 'invalid-input' : 'valid-input'} required />
                             <input type="tel" name="mobile" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile" onChange={handleInputChange} value={formData.mobile} className={!validatePhoneNumber(formData.mobile) ? 'invalid-input' : 'valid-input'} required />
                             <input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} className={!validatePassword(formData.password) ? 'invalid-input' : 'valid-input'} required />

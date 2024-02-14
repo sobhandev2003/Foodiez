@@ -175,32 +175,32 @@ function PlaceOrder() {
           <h3>Fill new address details</h3>
           <form className='new-address-details-from' onSubmit={handelNewAddressCreateFromSubmit} >
             <label className="custom-field one">
-              <input type="text" name='country' placeholder="" onChange={handelNewAdressInputChange} value={newAddress.country
+              <input type="text" name='country' minLength="2" maxLength="10" placeholder="" onChange={handelNewAdressInputChange} value={newAddress.country
               } required />
               <span className="placeholder"> Country</span>
             </label>
             <label className="custom-field one">
-              <input type="text" placeholder="" name='state' onChange={handelNewAdressInputChange} value={newAddress.state} required />
+              <input type="text" placeholder="" name='state' minLength="2" maxLength="10" onChange={handelNewAdressInputChange} value={newAddress.state} required />
               <span className="placeholder">State</span>
             </label>
             <label className="custom-field one">
-              <input type="text" placeholder="" name='district' onChange={handelNewAdressInputChange} value={newAddress.district} required />
+              <input type="text" placeholder="" name='district' minLength="2" maxLength="10" onChange={handelNewAdressInputChange} value={newAddress.district} required />
               <span className="placeholder">District</span>
             </label>
             <label className="custom-field one">
-              <input type="text" placeholder=" " name='city' onChange={handelNewAdressInputChange} value={newAddress.city} required />
+              <input type="text" placeholder=" " name='city' minLength="2" maxLength="10" onChange={handelNewAdressInputChange} value={newAddress.city} required />
               <span className="placeholder">City</span>
             </label>
             <label className="custom-field one">
-              <input type="number" placeholder=" " name='postCode' onChange={handelNewAdressInputChange} value={newAddress.postCode} required />
+              <input type="number" placeholder=" " name='postCode' minLength="4" maxLength="10" onChange={handelNewAdressInputChange} value={newAddress.postCode} required />
               <span className="placeholder">Postal Code</span>
             </label>
             <label className="custom-field one">
-              <input type="text" placeholder=" " name='street' onChange={handelNewAdressInputChange} value={newAddress.street} required />
+              <input type="text" placeholder=" " name='street' minLength="2" maxLength="10" onChange={handelNewAdressInputChange} value={newAddress.street} required />
               <span className="placeholder">Street name</span>
             </label>
             <label className="custom-field one">
-              <input type="text" placeholder=" " name='additionalInfo' onChange={handelNewAdressInputChange} value={newAddress.additionalInfo} />
+              <input type="text" placeholder=" " name='additionalInfo' minLength="2" maxLength="20" onChange={handelNewAdressInputChange} value={newAddress.additionalInfo} />
               <span className="placeholder">Additional Info</span>
             </label>
 

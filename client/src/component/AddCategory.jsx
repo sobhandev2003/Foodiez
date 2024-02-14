@@ -27,7 +27,7 @@ function AddCategory({ setIsCategoryAdd }) {
     return (
         <>
             <form className='model-element' onSubmit={handelSubmit}>
-                <input type="text" name="name" onChange={handelInputChage} placeholder='Enter Category name' />
+                <input type="text" name="name" minLength="2" maxLength="15" onChange={handelInputChage} placeholder='Enter Category name' />
                 <button type="submit">Submit</button>
             </form>
         </>

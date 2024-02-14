@@ -82,10 +82,10 @@ function EditCategory() {
             <CloseIcon className='cancel-model' onClick={() => { setIsAddIteam(false) }} />
             <form className='model-element' onSubmit={handelItemAdd}>
                 <label className='heading'>Add item in Category {category.name}</label>
-                <input type="text" name="name" onChange={handelInputChange} placeholder='Enter item name' required />
-                <input type="text" name="description" onChange={handelInputChange} placeholder='Enter some about item' required />
+                <input type="text" name="name" minLength="2" maxLength="20" onChange={handelInputChange}  placeholder='Enter item name' required />
+                <input type="text" name="description" minLength="5" maxLength="100" onChange={handelInputChange} placeholder='Enter some about item' required />
                 <input type="file" name="photo" accept="image/png, image/jpeg" onChange={handelInputChange} required />
-                <input type="number" name="price" onChange={handelInputChange} placeholder='Enter item Price' required />
+                <input type="number" name="price" minLength="2" maxLength="5" onChange={handelInputChange} placeholder='Enter item Price' required />
                 <button type="submit">Submit</button>
             </form>
         </Model>
@@ -98,7 +98,7 @@ function EditCategory() {
             <form className='model-element' onSubmit={handelUpdateItem}>
                 <label className='heading'>Edit item details </label>
                 <input type="text" name="name" value={editItem.name} onChange={handelEditItemInputChange} disabled />
-                <input type="text" name="description" value={editItem.description} onChange={handelEditItemInputChange} placeholder='Enter some about item' required />
+                <input type="text" name="description" maxLength="100" value={editItem.description} onChange={handelEditItemInputChange} placeholder='Enter some about item' required />
                 <input type="number" name="price" value={editItem.price} onChange={handelEditItemInputChange} placeholder='Enter item Price' required />
                 <button type="submit">Submit</button>
 

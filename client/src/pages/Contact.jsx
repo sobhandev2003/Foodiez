@@ -48,9 +48,9 @@ function Contact() {
             <div className='contact-page-right'>
 
                 <form action="#" method="post">
-                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="text" name="name" maxLength="20" placeholder="Your Name" required />
                     <input type="email" name="email" placeholder="Your Email" required />
-                    <input type="tel" name="phone" placeholder="Your Phone Number" required />
+                    <input type="tel" name="phone" pattern="[0-9]{10}" placeholder="Your Phone Number" required />
                     <textarea name="message" placeholder="Write your message here" rows="4" required></textarea>
                     <input type="submit" value="Send Message" onClick={()=>{Alert("success","Message sended")}} />
                 </form>

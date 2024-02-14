@@ -97,7 +97,7 @@ const PaymentForm = ({ isPaymentDone, setIsPaymentDone, paymentMethod }) => {
                                 {/* CVV */}
                                 <div className="inputBox">
                                     <label htmlFor="cvv">CVV :</label>
-                                    <input type="number" pattern="\d{4}" id="cvv" placeholder="1234" required />
+                                    <input type="number" pattern="\d{4}" maxLength="4" id="cvv" placeholder="1234" required />
 
                                 </div>
 

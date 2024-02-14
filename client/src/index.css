@@ -15,6 +15,10 @@ input:focus{
   border-color:dodgerBlue;
   box-shadow:0 0 8px 0 dodgerBlue;
 }
+input:invalid{
+  border-color:red;
+  box-shadow:0 0 8px 0 red;
+}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
