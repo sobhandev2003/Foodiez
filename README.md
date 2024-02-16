@@ -7,9 +7,13 @@ Sellers can register their restaurants on the platform and showcase their menu o
 Monitor incoming orders Update delivery status for pending orders Receive feedback and ratings from buyers
 
 ### Buyer
-Buyers can explore a variety of food options from registered restaurants and conveniently place orders. Key features for buyers include:
-
-Adding food items to their cart Selecting preferred payment methods Utilizing automatic address detection for delivery Cancelling orders when necessary Providing feedback and ratings for delivered orders
+Buyers can explore a variety of food options from registered restaurants and conveniently place orders. 
+Key features for buyers include:
+- Adding food items to their cart.
+-  Selecting preferred payment methods.
+-   Utilizing automatic address detection for delivery.
+-    Cancelling orders.
+-     Give feedback and ratings after delivered orders.
 
 
 ## Features
