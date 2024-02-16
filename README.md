@@ -17,15 +17,17 @@ Foodiez prioritizes user security through a robust authentication system. Users 
 - Order Management : 
 Efficiently handle the entire order process, from placement to tracking and cancellation. Both buyers and sellers benefit from a streamlined and user-friendly order management system.
 
+#### Seller Actions
+- Delivered Pending Order : Sellers can update the delivery status for pending orders to "delivered."
+- Cancel Order with Reason : Sellers can cancel orders and provide reasons, facilitating clear communication.
+- Update Delivered Status : Sellers can update the status of orders to reflect successful delivery.
+  
 #### Buyer Actions
 - Add to Cart : Conveniently add desired food items to the shopping cart.
 - Place Order : Easily place orders for selected items in the cart.
 - Cancel Order with Reason : Buyers can cancel orders and provide a reason for cancellation, improving transparency.
 - Rating and Feedback : Buyers have the ability to leave ratings and feedback for delivered orders.
-#### Seller Actions
-- Delivered Pending Order : Sellers can update the delivery status for pending orders to "delivered."
-- Cancel Order with Reason : Sellers can cancel orders and provide reasons, facilitating clear communication.
-- Update Delivered Status : Sellers can update the status of orders to reflect successful delivery.
+
 
 - Location Services : 
 Utilize automatic address detection based on the user's current location, enhancing the efficiency of the delivery process.
