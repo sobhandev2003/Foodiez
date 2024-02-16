@@ -54,5 +54,9 @@ Utilize automatic address detection based on the user's current location, enhanc
 
 <img src="https://seeklogo.com/images/J/json-web-tokens-jwt-io-logo-C003DEC47A-seeklogo.com.png" alt="project-screenshot" width="100" height="100/">
 
+## Snape
+[before-login.webm](https://github.com/sobhandev2003/Foodiez/assets/129223188/2093c2ac-40e1-4a9a-9040-e967668a8fd0)
+
+
 
 
