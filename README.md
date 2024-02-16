@@ -11,10 +11,10 @@ Buyers can explore a variety of food options from registered restaurants and con
 
 ## Features
 
-- User Authentication
+- User Authentication : 
 Foodiez prioritizes user security through a robust authentication system. Users must log in with valid credentials to access the platform, ensuring that only authorized actions are performed. The implementation of JSON Web Tokens (JWT) enhances authentication security.
 
-- Order Management
+- Order Management : 
 Efficiently handle the entire order process, from placement to tracking and cancellation. Both buyers and sellers benefit from a streamlined and user-friendly order management system.
 # 
 #### Buyer Actions
@@ -27,7 +27,7 @@ Efficiently handle the entire order process, from placement to tracking and canc
 - Cancel Order with Reason : Sellers can cancel orders and provide reasons, facilitating clear communication.
 - Update Delivered Status : Sellers can update the status of orders to reflect successful delivery.
 # 
-- Location Services
+- Location Services : 
 Utilize automatic address detection based on the user's current location, enhancing the efficiency of the delivery process.
 
 
