@@ -40,4 +40,4 @@ Utilize automatic address detection based on the user's current location, enhanc
 
 
 ## Foodiez Technology Stack
-![Image Alt Text]([URL](https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3AReact-icon.svg&psig=AOvVaw0AP0gJkIhCbS9fw3pPaqqv&ust=1708150542127000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCMDlhuSar4QDFQAAAAAdAAAAABAE)https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3AReact-icon.svg&psig=AOvVaw0AP0gJkIhCbS9fw3pPaqqv&ust=1708150542127000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCMDlhuSar4QDFQAAAAAdAAAAABAE)
+![]([URL](https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3AReact-icon.svg&psig=AOvVaw0AP0gJkIhCbS9fw3pPaqqv&ust=1708150542127000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCMDlhuSar4QDFQAAAAAdAAAAABAE)https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3AReact-icon.svg&psig=AOvVaw0AP0gJkIhCbS9fw3pPaqqv&ust=1708150542127000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCMDlhuSar4QDFQAAAAAdAAAAABAE)
