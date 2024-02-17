@@ -56,6 +56,12 @@ Utilize automatic address detection based on the user's current location, enhanc
 
 ## Snape
 
+##### before login any  account 
+https://github.com/sobhandev2003/Foodiez/assets/129223188/fe8200ec-15a6-42d2-81ed-13e233b4bdf6
+
+##### buyer account 
+https://github.com/sobhandev2003/Foodiez/assets/129223188/4275ecb6-1220-4d89-bd58-12dcae85cd5c
+
 
 ##### seller account 
 https://github.com/sobhandev2003/Foodiez/assets/129223188/34a28908-1123-4ab2-8c5a-47f173996ec4
