@@ -6,7 +6,6 @@ import { FiEdit } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { fetchItemByCategoryId } from '../services/item';
 import loadingSpinner from '../photo/loading-spinner.gif'
-import { fetchCurrentSeller } from '../services/Seller';
 function SellerHomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -20,14 +19,12 @@ function SellerHomePage() {
     localStorage.setItem("editCategory", JSON.stringify({ id: catagory.id, name: catagory.name }))
     navigate('/edit-category')
   }
-  // useEffect(() => {
-  //   dispatch(fetchCurrentSeller(authToken));
-  // }, [authToken,dispatch])
+
   useEffect(() => {
     //NOTE - fetch curent seller all catagory and
     setCategories(currentSellerCategory);
-    
-  },[loginAccountDetails , currentSellerCategory])
+
+  }, [loginAccountDetails, currentSellerCategory])
 
 
   return (

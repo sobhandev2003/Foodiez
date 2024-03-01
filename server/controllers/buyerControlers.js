@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const mongoose =require('mongoose')
+const mongoose = require('mongoose')
 const Buyer = require('../models/buyerModel');
 const { validateEmail, validatePhoneNumber, validatePassword, validateImgType, validateCountryName, validateState, validatePostalCode } = require('../validator');
 const bcrypt = require('bcrypt')
@@ -76,23 +76,23 @@ const currentBuyer = asyncHandler(async (req, res) => {
 })
 
 //NOTE - Forget Buyer account password
-const forgetPassword=asyncHandler(async(req,res)=>{
+const forgetPassword = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-  if (!email || !password) {
-    res.status(403);
-    throw new Error("email and password not valid");
-  }
-  const passwordWithSalt = password + process.env.PASSWORD_SALT;
-  const buyer = await Buyer.findOne({ email });
-  if (!buyer) {
-    res.status(403);
-    throw new Error("email  not valid");
-  }
-  // //console.log(seller);
-  const hashPassword = await bcrypt.hash(passwordWithSalt, 10)
-  buyer.password = hashPassword;
-  await buyer.save();
-  res.status(200).json({ massage: "password updated" })
+    if (!email || !password) {
+        res.status(403);
+        throw new Error("email and password not valid");
+    }
+    const passwordWithSalt = password + process.env.PASSWORD_SALT;
+    const buyer = await Buyer.findOne({ email });
+    if (!buyer) {
+        res.status(403);
+        throw new Error("email  not valid");
+    }
+    // //console.log(seller);
+    const hashPassword = await bcrypt.hash(passwordWithSalt, 10)
+    buyer.password = hashPassword;
+    await buyer.save();
+    res.status(200).json({ massage: "password updated" })
 })
 
 
@@ -293,11 +293,11 @@ const getOrder = asyncHandler(async (req, res) => {
         throw new Error("Unauthorize")
     }
     const { order_Id } = req.query;
-     // Validate the format of order_Id
-  if (order_Id && !mongoose.isValidObjectId(order_Id)) {
-    res.status(400);
-    throw new Error("Invalid order ID");
-  }
+    // Validate the format of order_Id
+    if (order_Id && !mongoose.isValidObjectId(order_Id)) {
+        res.status(400);
+        throw new Error("Invalid order ID");
+    }
     if (order_Id) {
         // console.log(order_Id);
         const order = await Order.findById(order_Id);
@@ -305,39 +305,46 @@ const getOrder = asyncHandler(async (req, res) => {
             res.status(404);
             throw new Error("Not found")
         }
-        const { _id, Seller_Id, Category_Id, Item_Id, DeliveryAddress_id, Delivered_Time, Order_Cancel_Time, createdAt,
+        const { _id,
+            Seller_Id,
+            Category_Id,
+            Item_Id,
+            DeliveryAddress_id,
+            Delivered_Time,
+            Order_Cancel_Time,
+            createdAt,
             Buyer_Name,
             Contact_Number,
             Order_Cancel_By,
             Order_Cancel_Reason,
-            Rating } = order
+            Rating,Feedback } = order
         const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
         const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
         const item = await category.item.id(Item_Id);
         const orderTime = createdAt.toLocaleString();
         const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
         const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
-        res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime, Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime,Rating })
+        res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime, Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime, Rating,Feedback })
     }
     else {
         // const orders = await Order.find({ Buyer_Id })
         const { status } = req.query;
-    let orders;
-    switch (status) {
-      case 'pending':
-        orders = await Order.find({ Buyer_Id, Delivered:false,Order_Cancel:false });
-        break;
-      case 'canceled':
-        orders = await Order.find({ Buyer_Id, Order_Cancel:true });
-        break;
-      case 'delivered':
-        orders = await Order.find({ Buyer_Id, Delivered:true });
-        break;
-      default:
-        // If no status is specified, return all orders
-        orders = await Order.find({ Buyer_Id});
-        break;
-    }
+        let orders;
+        switch (status) {
+            case 'pending':
+                orders = await Order.find({ Buyer_Id, Delivered: false, Order_Cancel: false });
+                break;
+            case 'canceled':
+                orders = await Order.find({ Buyer_Id, Order_Cancel: true });
+                break;
+            case 'delivered':
+                orders = await Order.find({ Buyer_Id, Delivered: true });
+                break;
+            default:
+                // If no status is specified, return all orders
+                orders = await Order.find({ Buyer_Id });
+                break;
+        }
         const orderItems = await Promise.all(orders.map(async ({
             _id,
             Seller_Id,
@@ -456,7 +463,7 @@ const giveRating = asyncHandler(async (req, res) => {
         { new: true }
     )
     // console.log(order.Seller_Id);
-    const message = updateItemRating({Seller_Id:order.Seller_Id, categoryId: order.Category_Id, itemId: order.Item_Id, rating }).then(({ status, message }) => {
+    const message = updateItemRating({ Seller_Id: order.Seller_Id, categoryId: order.Category_Id, itemId: order.Item_Id, rating }).then(({ status, message }) => {
         if (status !== 200) {
             res.status(status)
             throw new Error(message)

@@ -298,14 +298,29 @@ const getSellerOrder = asyncHandler(async (req, res) => {
       Buyer_Name,
       Contact_Number,
       Order_Cancel_By,
-      Order_Cancel_Reason } = order
+      Order_Cancel_Reason,
+      Rating,
+      Feedback } = order
     const address = await DeliveryAddress.findOne({ _id: DeliveryAddress_id, Buyer_Id });
     const category = await Category.findOne({ seller_Id: Seller_Id, _id: Category_Id })
     const item = await category.item.id(Item_Id);
     const orderTime = createdAt.toLocaleString();
     const orderCancelTime = Order_Cancel_Time && Order_Cancel_Time.toLocaleString()
     const orderDeliverTime = Delivered_Time && Delivered_Time.toLocaleString()
-    res.status(200).json({ id: _id, Buyer_Name, Contact_Number, item, address, orderTime, orderCancelTime, Order_Cancel_By, Order_Cancel_Reason, orderDeliverTime })
+    res.status(200).json({
+      id: _id,
+      Buyer_Name,
+      Contact_Number,
+      item,
+      address,
+      orderTime,
+      orderCancelTime,
+      Order_Cancel_By,
+      Order_Cancel_Reason,
+      orderDeliverTime,
+      Rating,
+      Feedback
+    })
   }
 
   else {
@@ -439,15 +454,15 @@ const updateDeliveryStatus = asyncHandler(async (req, res) => {
 
 //NOTE - Update seller rating
 
-const updateSellerRating = asyncHandler(async ({ Seller_Id ,rating}) => {
+const updateSellerRating = asyncHandler(async ({ Seller_Id, rating }) => {
   const seller = await Seller.findById(Seller_Id);
-  
-  let totalRating = (seller.rating*seller.numberOfRating)+rating;
-  let numberOfRating = seller.numberOfRating+1;
-  
+
+  let totalRating = (seller.rating * seller.numberOfRating) + rating;
+  let numberOfRating = seller.numberOfRating + 1;
+
   seller.rating = parseFloat((totalRating / numberOfRating).toFixed(1));
 
-  seller.numberOfRating=numberOfRating;
+  seller.numberOfRating = numberOfRating;
 
   await seller.save();
   return;

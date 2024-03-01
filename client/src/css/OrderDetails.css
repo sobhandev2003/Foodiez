@@ -42,6 +42,7 @@
     display: flex;
     justify-content: flex-start;
     gap: 3rem;
+    height: max-content;
 }
 
 .order-details-page .order-details section:nth-child(2) div:nth-child(1) {
@@ -65,7 +66,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1rem;
+    height: max-content;
 }
 
 .order-details-page .order-details section:nth-child(2) div:nth-child(2) button {
@@ -138,13 +140,22 @@
     .feedback-Model
 border: 1px solid;
 } */
-@media screen and (max-width:520px) {
+@media screen and (max-width:1100px){
     .order-details-page .order-details section:nth-child(2){
-        height: 22rem;
+        flex-direction: column;
+        height: max-content;
+        padding-bottom: 3rem;
     }
-    .order-details-page .order-details section:nth-child(2) {
+   
+}
+@media screen and (max-width:750px) {
+    .order-details-page .order-details section:nth-child(1){
+        height: max-content;
+    }
+    .order-details-page .order-details section:nth-child(2) div:nth-child(1){
         flex-direction: column;
     }
+   
 }
 
 

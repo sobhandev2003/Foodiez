@@ -87,7 +87,9 @@
     border: 1px solid white;
     outline: none;
     border-radius: 6px;
-    padding: 6px 5px 6px 5px;
+    padding: 8px 5px 8px 10px;
+    font-size: 1.2rem;
+    width: 20rem;
 }
 
 
@@ -178,7 +180,7 @@
 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
 
     .buyer-home-page .home-above-div h3,
     .home-above-div h3 {
@@ -217,5 +219,21 @@
     }
     .seller-category .edit-fab{
         display: block;
+    }
+}
+@media screen and (max-width:330px) {
+    .search-div {
+       
+        height: max-content;
+        gap: 20px;
+    }
+    .search-rating-div {
+        width: 50%;
+        height: max-content;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .search-rating-div .rating-search-btn {
+        height: 2rem;
     }
 }

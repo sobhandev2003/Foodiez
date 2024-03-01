@@ -103,5 +103,6 @@
     }
     .payment-from-div input[type=text], .payment-from-div input[type=number]{
         font-size: .8rem;
+        width: -webkit-fill-available;
     }
 }

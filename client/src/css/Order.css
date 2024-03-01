@@ -52,8 +52,9 @@
     display: flex;
     width: 40%;
     flex-direction: column;
-    height: 8rem;
+    height: max-content;
     padding-top: 1rem;
+    padding-bottom: 1rem;
     font-size: 1rem;
     /* border :1px solid red; */
     gap: .5rem;

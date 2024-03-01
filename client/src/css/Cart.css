@@ -187,7 +187,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:800px) {
     .add-cart {
         flex-direction: column;
     }
@@ -204,5 +204,19 @@
         width: 70vw;
         padding-right: 20px;
 
+    }
+}
+@media screen and (max-width:500px) {
+   .add-cart .cart-product{
+    width: 60vw;
+    flex-direction: column;
+    min-height: 20rem;
+    
+    padding-left: 2rem;
+   }
+}
+@media screen and (max-width:320px){
+    .add-cart .cart-product{
+        min-height: 25rem;
     }
 }

@@ -131,6 +131,7 @@ gap: 10px;
     background: none;
     border: 2px solid #ddd;
     transition: border-color 0.3s ease;
+    width: -webkit-fill-available;
 }
 
 .custom-field.one input+.placeholder {
@@ -417,7 +418,7 @@ gap: 10px;
 
     }
     .new-address-details-from label {
-        width: 60%;
+        width: 90%;
     }
 }
 @media screen and (max-width:700px) {
@@ -434,6 +435,8 @@ gap: 10px;
     .payment-method-div{
         width: 90%;
     }
-  
+    .new-address-details-from{
+        width: 95vw;
+    }
     
 }

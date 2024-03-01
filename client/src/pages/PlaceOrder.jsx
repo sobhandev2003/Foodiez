@@ -145,10 +145,10 @@ function PlaceOrder() {
       <div className='place-order-address-div' style={{ display: !isDeleverAddressSelected ? "block" : "none" }}>
         <div>
           <label htmlFor='buyer-name'><span>Name :</span>
-          <input type="text" id='buyer-name' name="name" placeholder='name' onChange={handelBuyerDetails} value={buyerDetails.name} />
+          <input type="text" id='buyer-name' name="name" minLength="2" maxLength="30" placeholder='name' onChange={handelBuyerDetails} value={buyerDetails.name} required/>
           </label>
           <label htmlFor='cont-number'><span>Contact Number :</span>
-          <input type="tel" id='cont-number' name="Contact_Number" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile number" onChange={handelBuyerDetails} value={buyerDetails.Contact_Number} />
+          <input type="number" id='cont-number' name="Contact_Number" maxLength="10" minLength="10" pattern="[0-9]{10}" title="Ten digits code" placeholder="Mobile number" onChange={handelBuyerDetails} value={buyerDetails.Contact_Number} required/>
           </label>
         </div>
         <div className='address-list-container'>

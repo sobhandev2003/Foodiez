@@ -42,7 +42,6 @@ function OrderDetails() {
             data = await fetchSellerOrderDetailsByOrderId(sellerAuthToken, orderId)
         }
         if (data) {
-            // console.log(data);
             setOrder(data)
             setOrderItem(data.item)
             setDeliveryAddress(data.address)
@@ -171,6 +170,7 @@ function OrderDetails() {
                                 {order.orderDeliverTime && <div className='feedback-div'>
                                     <p><CircleIcon style={{ color: "green", fontSize: "1rem" }} /><span>Order delivered on </span><span>{order.orderDeliverTime}</span></p>
                                     {buyerAuthToken && order.Rating < 0 && <button onClick={() => setIsFeedbackModelDisplay(true)}><MdStarRate />Rating & Feedback</button>}
+                                    { order.Rating >= 0 &&<label ><strong>Feedback : </strong><span>{order.Feedback}</span><br/> <Rating name="half-rating-read" defaultValue={order.Rating} precision={0.5} readOnly /></label>}
                                 </div>}
 
                                 {/*NOTE - Display Cancel time and reason */}
