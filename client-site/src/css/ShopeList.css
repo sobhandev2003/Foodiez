@@ -1,0 +1,65 @@
+
+.shope-list-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 350px;
+    height: 400px;
+    margin: 20px;
+    border-radius: 10px;
+    /* border: 1px solid; */
+}
+.shope-list{
+    position: static;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    display: flex;
+    background: rgb(246, 248, 252);
+    flex-direction: column;
+    justify-content: space-around;
+    /* cursor: pointer; */
+    transition: width  0.3s;
+    transition: hight  0.3s;
+}
+.shope-list-item:hover >.shope-list
+{
+    
+   
+    width: 80%;
+    height: 80%;
+    
+ 
+}
+.shope-list img{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    width: 95%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+
+.shope-list p{
+    font-size: 18px;
+    color: rgb(87 86 86);
+
+}
+.ratting-div{
+    display: flex;
+}
+.ratting-div h3{
+    font-size: 1.3rem;  
+    font-weight: 300;
+}
+.ratting-icon{
+color: orange;
+font-size: 1.5rem;
+
+}
+
+

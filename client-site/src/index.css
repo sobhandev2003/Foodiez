@@ -1,0 +1,71 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+input{
+  outline: none;
+}
+input:focus{
+  border-color:dodgerBlue;
+  box-shadow:0 0 8px 0 dodgerBlue;
+}
+input:invalid{
+  border-color:red;
+  box-shadow:0 0 8px 0 red;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=text]{
+  text-transform:capitalize;
+}
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+.vw-50{
+  width: 50vw;
+}
+.vh-10{
+  height:10vh ;
+}
+button{
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.overfllow-hiden{
+  overflow: hidden;
+  
+}
+.letter-spacing-5px{
+letter-spacing: 5px;
+}
+.front-size-2rem{
+  font-size: 2rem;
+}
+.height-40{
+height: 40px;
+}
+.text-center{
+  text-align: center;
+}
+.orange{
+  color: orange;
+}
+.display-flex{
+  display: flex;
+}
+

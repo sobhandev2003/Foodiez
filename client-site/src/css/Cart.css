@@ -1,0 +1,222 @@
+.crat-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crat-page .I {
+    border-bottom: 1px solid grey;
+    width: 80vw;
+    height: 40px;
+    padding-top: 40px;
+
+}
+
+.crat-page .II {
+    width: 80vw;
+}
+
+.crat-page .II .epmty-cart {
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.crat-page .II .epmty-cart img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 60%;
+    margin-bottom: 60px;
+
+}
+
+.crat-page .II .epmty-cart .txt-margin-bottom {
+    margin-bottom: 20px;
+}
+
+.crat-page .II .epmty-cart h2 {
+    font-size: 2rem;
+}
+
+.crat-page .II .epmty-cart p {
+    font-size: 1rem;
+}
+
+.crat-page .II .epmty-cart h2,
+.crat-page .II .epmty-cart p {
+    color: rgb(9 9 94);
+    font-weight: bold;
+}
+
+.crat-page .II .epmty-cart button {
+    width: 6rem;
+    height: 2.5rem;
+    color: white;
+    background-color: #1515d0;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #1515d0;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-cart {
+    width: 80vw;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.add-cart .cart-products {
+
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    margin-bottom: 70px;
+}
+
+.add-cart .cart-product {
+    margin: 5px 2px 5px 2px;
+    padding-right: 10px;
+    overflow: hidden;
+    border: 1px solid;
+    border-radius: 10px;
+    width: 55vw;
+    height: 150px;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+.add-cart .cart-product .left-div {
+    position: relative;
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* border: 1px solid blue; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-product .left-div button {
+    position: absolute;
+    z-index: 10;
+    bottom: -6px;
+    cursor: pointer;
+}
+
+.cart-product .left-div button .icon {
+    font-size: 2.2rem;
+    color: red;
+}
+
+.add-cart .cart-product img {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+
+}
+
+.add-cart .cart-product div {
+    height: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.add-cart .cart-product div h2,
+.add-cart .cart-product div p,
+.add-cart .cart-product div h3 {
+    margin-bottom: 10px;
+}
+
+.add-cart .cart-products-bill {
+    background-color: rgb(229 239 247);
+    margin-top: 20px;
+    padding: 10px;
+    width: 25vw;
+    height: 230px;
+    /* max-height: 500px; */
+    /* border: 1px solid; */
+    border-radius: 10px;
+    margin-bottom: 40px;
+
+}
+
+.add-cart .cart-products-bill p {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.add-cart .cart-products-bill input {
+
+    display: none;
+
+}
+
+.add-cart .cart-products-bill button {
+    width: 90%;
+    margin-top: 30px;
+    padding: 10px 5px 10px 5px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid navy;
+    border-radius: 10px;
+    background-color: navy;
+    color: white;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    cursor: pointer;
+}
+
+@media screen and (max-width:800px) {
+    .add-cart {
+        flex-direction: column;
+    }
+
+    .add-cart .cart-product {
+        width: 70vw;
+    }
+
+    .add-cart .cart-product .left-div {
+        width: 50%;
+    }
+
+    .add-cart .cart-products-bill {
+        width: 70vw;
+        padding-right: 20px;
+
+    }
+}
+@media screen and (max-width:500px) {
+   .add-cart .cart-product{
+    width: 60vw;
+    flex-direction: column;
+    min-height: 20rem;
+    
+    padding-left: 2rem;
+   }
+}
+@media screen and (max-width:320px){
+    .add-cart .cart-product{
+        min-height: 25rem;
+    }
+}

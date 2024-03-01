@@ -1,0 +1,169 @@
+.order-page {
+    background: #f1f3f6;
+    width: 100vw;
+}
+
+.order-container {
+    width: 100vw;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    background: #f1f3f6;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+/*NOTE - order item display template style */
+.order-item-template {
+    background: white;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1rem;
+    margin: 10px 5px 10px 5px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.order-item-template:hover {
+    box-shadow: 10px 5px 10px gray;
+}
+
+.order-item-template div:nth-child(1),
+.order-item-template div:nth-child(2) {
+    /* border :1px solid red; */
+    width: 45%;
+    min-height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.order-item-template div:nth-child(1) img {
+    height: 8rem;
+    width: 40%;
+    border-radius: .5rem;
+}
+
+.order-item-template div:nth-child(1) p {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    height: max-content;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+    /* border :1px solid red; */
+    gap: .5rem;
+}
+
+.order-item-template div:nth-child(2) p {
+    display: flex;
+    padding-top: 1rem;
+    height: 8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    gap: .5rem;
+}
+
+.empty-order {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+    align-items: center;
+}
+
+.empty-order img {
+    width: 20rem;
+    height: 20rem;
+}
+
+.empty-order button {
+    width: 6rem;
+    height: 2.5rem;
+    color: white;
+    background-color: #1515d0;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #1515d0;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    transition: .3s ease;
+}
+
+.empty-order button:hover {
+
+    box-shadow: 10px 5px 10px gray;
+}
+
+.seller-order-div section:nth-child(1) {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5rem;
+    padding-bottom: .5rem;
+}
+
+/*SECTION - Seller */
+.seller-order-div section:nth-child(1) button {
+    border: 1px solid #2ee7e5;
+    padding: 10px;
+    border-radius: .5rem;
+
+    color: #0ab8b6e0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.seller-order-div section:nth-child(1) button:hover {
+    background-color: #2ee7e5;
+    color: black;
+}
+
+@media screen and (max-width:1000px) {
+    .order-item-template {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:765px) {
+
+    .order-item-template {
+        width: 95%;
+    }
+
+    .order-item-template div:nth-child(1) {
+        width: 40%;
+    }
+
+    .order-item-template div:nth-child(2) {
+        width: 55%;
+    }
+
+    .order-item-template div:nth-child(1) p,
+    .order-item-template div:nth-child(2) p {
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .order-item-template div:nth-child(2) {
+        display: none;
+    }
+
+    .order-item-template div:nth-child(1) {
+        width: 90%;
+    }
+
+    /*SECTION -  */
+    .seller-order-div section:nth-child(1) {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,18 @@
+.add-category-page{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-category-page form{
+border: 1px solid red;
+width: 50%;
+height: 50%;
+}
+.add-category-page form input{
+    padding: 5px;
+    padding-top: 10px;
+    cursor: pointer;
+    
+}

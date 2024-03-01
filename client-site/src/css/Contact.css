@@ -1,0 +1,122 @@
+.contact-page{
+/* border: 1px solid red; */
+width: 100vw;
+display: flex;
+justify-content:space-evenly;
+
+}
+.contact-page-left{
+    /* border: 2px solid rgb(51, 235, 9); */
+width: 40%;
+margin: 50px 0px 100px 0px;
+padding: 30px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+color: rgb(10 10 82);
+}
+.contact-page-left h3{
+    margin-bottom:10px ;
+   
+}
+.contact-page-left h1{
+    margin-bottom: 30px;
+}
+.contact-page-left .contact-details{
+    /* border: 1px solid; */
+    width: 95%;
+    margin-top: 70px;
+}
+.contact-page-left  .contact-details .contact-details-I,
+.contact-page-left  .contact-details .contact-details-II,
+.contact-page-left  .contact-details .contact-details-III{
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    padding: 5px;
+}
+.contact-details .contact-details-icon{
+    /* border: 1px solid rgb(51, 255, 0); */
+   width: 20%;
+    margin-right: 20px;
+}
+.contact-details .text-div{
+    /* border: 1px solid rgb(51, 255, 0); */
+    width: 65%;
+}
+.contact-page-right{
+    /* border: 2px solid rgb(51, 235, 9); */
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+.contact-page-right form{
+    margin: 50px 0px 100px 0px;
+    background-color: rgb(213 249 237);
+    border-radius: 20px;
+    box-shadow: 5px 10px 5px #9e9c9c;
+   
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+    padding: 70px 0px 20px 0px;
+}
+.contact-page-right form input,
+.contact-page-right form textarea{
+    width: 80%;
+    margin-bottom: 20px;
+    border: 1px solid #0be99f;
+    border-radius: 7px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 1.2rem;
+
+}
+.contact-page-right form input{
+    height: 50px;
+    
+}
+.contact-page-right form input[type="submit"]{
+    cursor: pointer;
+    color: white;
+    background-color: blue;
+}
+ .contact-page-right form textarea {
+    padding-top: 10px;
+height: 150px;
+box-sizing: content-box;
+/* box-sizing: border-box; */
+resize: none;
+ }
+/*SECTION -  Small Lptop */
+@media screen and (max-width:1050px){
+    .contact-page-right{
+        width: 50%;
+    }
+}
+ /*SECTION -  *** CSS For TBLET            ****/
+ @media screen and (max-width: 1023px){
+    .contact-page{
+        flex-direction: column;
+    }
+    .contact-page-left,
+    .contact-page-right{
+        width: 80%;
+       padding-left: 60px;
+    }  
+
+ }
+ @media screen and (max-width: 767px) {
+    .contact-page-left, .contact-page-right {
+        
+        width: 95%;
+        padding-left:10px;
+    }
+    .contact-page-right form{
+        width: 99%;
+    }
+ }

@@ -1,0 +1,104 @@
+.edit-category-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-category-page h1 {
+    margin-top: 15px;
+    width: 60vw;
+    /* border: 1px solid red; */
+    height: 80px;
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 3rem;
+}
+
+.edit-category-page .add-item {
+    padding: 6px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    border: 1px solid green;
+    border-radius: 5px;
+    background: transparent;
+    color: green;
+    cursor: pointer;
+
+}
+
+.edit-category-page .add-item:hover {
+    border: 1px solid green;
+    background-color: green;
+    color: white;
+    box-shadow: 5px 5px 5px gray;
+}
+
+.item-div {
+    margin-top: 40px;
+    width: 95vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  
+}
+
+.item-div .edit-item {
+    background-color: deepskyblue;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    z-index: 4;
+}
+
+.item-div .delete-item {
+    position: absolute;
+    top: 229px;
+    right: 20px;
+    color: #f70707;
+    font-size: 1.7rem;
+    cursor: pointer;
+    display: none;
+
+}
+
+.item-div .shope-list-item:hover .edit-item,
+.item-div .edit-item:hover .edit-item,
+.item-div .shope-list-item:hover .delete-item,
+.item-div .delete-item:hover .delete-item {
+    display: block;
+
+}
+
+.item-div .edit-item:hover .edit-icon {
+    color: blue;
+}
+
+.item-div .edit-icon {
+    transition: color 0.3s;
+}
+
+
+.edit-category-page .delete-category-btn {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    padding: 8px;
+    font-size: 1.5rem;
+    border: 1px solid red;
+    border-radius: 6px;
+    color: red;
+    cursor: pointer;
+}
+
+.edit-category-page .delete-category-btn:hover{
+    background-color: red;
+    color: white;
+    box-shadow: 5px 5px 5px gray;
+}
+
+@media screen and (max-width:900px) {
+    .item-div .shope-list-item .edit-item,
+    .item-div .delete-item{
+        display: block;
+    }
+}

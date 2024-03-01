@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap'); 
+
+
+
+.payment-from-div { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 65vh;
+    padding: 25px;
+    background: #d6eef1;
+    border-radius: 20px;
+    width: 50vw;
+} 
+
+.payment-from-div form { 
+    width: 80%;
+    /* height: 20rem; */
+    border-radius: 20px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+} 
+
+.payment-from-div form .row { 
+	display: flex; 
+	flex-wrap: wrap; 
+	gap: 30px; 
+    height: 60%;
+} 
+
+.row .inputBox{
+    display: flex;
+    align-items: center;
+}
+
+.payment-from-div  .submit_btn { 
+	width: 50%; 
+	padding: 10px; 
+	font-size: 1.5rem; 
+	background: rgb(1, 143, 34); 
+	color: #fff; 
+	margin-top: 5px; 
+	cursor: pointer; 
+	letter-spacing: 1px; 
+    border-radius: 10px;
+    margin-top: 20px;
+} 
+
+.payment-from-div form .submit_btn:hover { 
+	background: #3d17fb; 
+} 
+
+.payment-from-div input[type=text],
+.payment-from-div input[type=number],
+.payment-from-div select{
+    padding: 5px;
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+.payment-from-div select{
+    max-height: 300px;
+    overflow-y: auto;
+}
+.after-payment-div{
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.after-payment-div img{
+    width: 50%;
+    height: 50%;
+}
+.after-payment-div h4{
+    color: green;
+    letter-spacing: 2px;
+}
+@media screen and (max-width:700px) {
+    .payment-from-div {
+        padding: 10px;
+        width: 80vw;
+    }
+    .row .inputBox{
+        width: 90%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+@media screen and (max-width:450px){
+    .payment-from-div {
+        padding: 2px;
+        width: 90vw;
+    }
+    .payment-from-div input[type=text], .payment-from-div input[type=number]{
+        font-size: .8rem;
+        width: -webkit-fill-available;
+    }
+}

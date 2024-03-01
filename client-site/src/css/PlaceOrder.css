@@ -1,0 +1,442 @@
+:root {
+    --bg: #232739;
+    --bgA: #577af3;
+    --cSize: 30px;
+    --cInactive: #232739;
+    --cActive: #577af3;
+    --particleSize: 0px;
+    --cEasing: ease;
+    --cTiming: 0.5s;
+    --innerPaddingSize: 30px;
+}
+.place-order {
+    min-height: 70vh;
+    padding: 20px;
+    
+    width: 100vw;
+    border: 1px solid red;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    background: #f1f3f6;
+}
+.place-order-address-div div:nth-child(1){
+    display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.place-order-address-div div:nth-child(1) label{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    gap: 5px;
+}
+.address-list-container {
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 20px; */
+}
+
+.address-list-container input[type="radio"] {
+    display: none;
+}
+
+.address-list-container label {
+    margin: 10px 5px 15px 5px;
+    height: max-content;
+    width: 50vw;
+}
+
+.address-list-container label p {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: .4s ease;
+}
+
+.address-list-container label input[type="radio"]:checked+p {
+    background-color: #e7dfdf;
+    border-color: rgb(12, 240, 12);
+}
+
+.new-address-details-from {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 50vw;
+    /* border: 1px solid red; */
+    padding-bottom: 5rem;
+    background: white;
+    border-radius: 1rem;
+}
+
+.new-address-details-from label {
+    width: 45%;
+    padding-top: 10px;
+}
+
+.custom-field {
+    position: relative;
+    margin-left: 10px;
+    font-size: 14px;
+    border-top: 20px solid transparent;
+    margin-bottom: 5px;
+    display: inline-block;
+    --field-padding: 12px;
+}
+
+.custom-field input {
+    border: none;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: var(--field-padding);
+    border-radius: 3px;
+    width: 88%;
+    outline: none;
+    font-size: 14px;
+}
+
+.custom-field .placeholder {
+    position: absolute;
+    font-size: 1.2rem;
+    left: var(--field-padding);
+    width: calc(100% - (var(--field-padding) * 2));
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 30px;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        color 0.3s ease,
+        font-size 0.3s ease;
+}
+
+
+
+/* ---------- */
+.custom-field.one input {
+    background: none;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+    width: -webkit-fill-available;
+}
+
+.custom-field.one input+.placeholder {
+    left: 8px;
+    padding: 0 5px;
+}
+
+.custom-field.one input.dirty,
+.custom-field.one input:not(:placeholder-shown),
+.custom-field.one input:focus {
+    border-color: #3ca3e8;
+    transition-delay: 0.1s
+}
+
+.custom-field.one input.dirty+.placeholder,
+.custom-field.one input:not(:placeholder-shown)+.placeholder,
+.custom-field.one input:focus+.placeholder {
+    top: 8px;
+    font-size: 1rem;
+    color: #3ca3e8;
+    background: #fff;
+    width: auto
+}
+
+.new-address-details-from .from-handel-btn {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+
+}
+
+.place-order-address-div .btn-div {
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.place-order-address-div div:nth-child(1){
+    margin-bottom: 40px;
+    width: 90%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-around;
+}
+.place-order-address-div div:nth-child(1) input{
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(1),
+.place-order-address-div .cancel-btn,
+.place-order-address-div .add-address-btn,
+.place-order-address-div .continue-btn,
+.payment-div .btn-div button {
+    min-width: max-content;
+    width: 40%;
+    padding: 7px;
+    border: 1px solid;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    cursor: pointer;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(3),
+.new-address-details-from .from-handel-btn button:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(3) span,
+.new-address-details-from .from-handel-btn button:nth-child(2) span {
+    font-size: .6rem;
+    font-weight: 500;
+}
+
+.place-order-address-div .continue-btn {
+    margin-left: 20px;
+    color: #1515ec;
+    border-color: #1515ec;
+}
+
+.place-order-address-div .continue-btn:hover {
+    color: white;
+    background-color: #1515ec;
+}
+
+.place-order-address-div .add-address-btn {
+    border-color: rgb(8, 170, 8);
+    color: green;
+    font-size: 1.1rem;
+}
+
+.place-order-address-div .add-address-btn:hover {
+    color: white;
+    background-color: rgb(8, 170, 8);
+}
+
+.place-order-address-div .cancel-btn {
+    border-color: red;
+    color: red;
+
+}
+
+.place-order-address-div .cancel-btn:hover {
+    color: white;
+    background-color: red;
+    box-shadow: 5px 10px 5px gray;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(1) {
+    color: green;
+    border-color: green;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(1):hover {
+    color: white;
+    background-color: green;
+
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(2) {
+    color: #2b9daa;
+    font-size: 2rem;
+}
+
+.new-address-details-from .from-handel-btn button:nth-child(3) {
+    color: #1515ec;
+    font-size: 2rem;
+
+}
+
+/*NOTE - Style for Payment Container */
+.payment-div {
+    width: 90%;
+    padding-left: 20px;
+}
+
+.payment-method-div {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.particles-checkbox {
+    height: var(--cSize);
+    width: var(--cSize);
+    display: inline-flex;
+    appearance: none;
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: all var(--cTiming) var(--cEasing);
+    margin: 2px;
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:checked {
+        background-color: var(--cActive);
+                border-color: var(--cActive);
+        &::after {
+            background-color: #ffffff;
+            height: calc(var(--cSize) * 0.3);
+            width: calc(var(--cSize) * 0.3);
+        }
+
+        +span {
+            border-color: var(--bgA);
+            color: var(--bg);
+        }
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: inherit;
+        height: 0px;
+        width: 0px;
+    }
+
+    &::after {
+        transition: all var(--cTiming) var(--cEasing);
+    }
+
+    &::before {
+        --particleSize: 4px;
+        height: var(--particleSize);
+        width: var(--particleSize);
+        z-index: 2;
+    }
+}
+
+
+.particles-checkbox-container {
+    background: white;
+    display: inline-flex;
+    margin: 20px;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all var(--cTiming) var(--cEasing);
+  
+
+    span {
+        border: 3px solid transparent;
+        border-radius: calc(var(--innerPaddingSize) * 0.5);
+        padding: 10px;
+        margin-left: 4px;
+        padding: var(--innerPaddingSize);
+        padding-left: calc(var(--cSize) + var(--innerPaddingSize) + 10px);
+        width: 100%;
+        color: var(--bg);
+        transition: all var(--cTiming) var(--cEasing);
+    }
+
+    .particles-checkbox {
+        position: absolute;
+        left: var(--innerPaddingSize);
+    }
+}
+
+.link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: auto;
+    display: inline-flex;
+    padding: 8px 16px;
+    color: #ffffff;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: red;
+}
+.payment-div div:nth-child(2){
+    display: flex;
+}
+.payment-div .btn-div{
+    /* border: 1px solid blue; */
+    width: 90%;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+.payment-div .btn-div button:nth-child(1){
+    color:#3ca3e8;
+    border-color: #3ca3e8;
+}
+.payment-div .btn-div button:nth-child(1):hover{
+    background-color: #3ca3e8;
+    color: white;
+}
+.payment-div .btn-div button:nth-child(2){
+    color: green;
+    border-color: green;
+}
+.payment-div .btn-div button:nth-child(2):hover{
+    background-color: green;
+  color:white;
+}
+@media screen and (max-width:999px) {
+   
+    .new-address-details-from {
+        width: 70vw;
+        flex-direction: column;
+
+    }
+    .new-address-details-from label {
+        width: 90%;
+    }
+}
+@media screen and (max-width:700px) {
+    .new-address-details-from .from-handel-btn button:nth-child(1),
+.place-order-address-div .cancel-btn,
+.place-order-address-div .add-address-btn,
+.place-order-address-div .continue-btn,
+.payment-div .btn-div button {
+    font-size: 1rem;
+}
+    .payment-div div:nth-child(2){
+        flex-direction: column;
+    }
+    .payment-method-div{
+        width: 90%;
+    }
+    .new-address-details-from{
+        width: 95vw;
+    }
+    
+}
