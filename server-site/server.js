@@ -13,7 +13,15 @@ const port = process.env.PORT || 5000;
 
 connectDb()
 
-app.use(cors());
+app.use(cors(
+    {
+        origin: [
+            'http://localhost:3000',
+            'https://sobhan-foodiez.netlify.app/',
+        ],
+       
+    }
+));
 
 app.use(express.json());
 
