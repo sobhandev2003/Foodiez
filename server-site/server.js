@@ -17,7 +17,7 @@ app.use(cors(
     {
         origin: [
             'http://localhost:3000',
-            'https://sobhan-foodiez.netlify.app/',
+            'https://sobhan-foodiez.netlify.app',
         ],
        
     }
